@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ShadowReservationPanel } from './shadow-reservation-panel';
+import {ShadowReservationPanel} from './shadow-reservation-panel';
 
 describe('ShadowReservationPanel', () => {
   let component: ShadowReservationPanel;

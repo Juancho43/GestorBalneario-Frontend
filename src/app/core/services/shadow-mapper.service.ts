@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import fabric from 'fabric';
-import {ShadowEntity} from './shadowEntity';
+import {ShadowEntity} from '../model/shadowEntity';
 
 @Injectable({
   providedIn: 'root',

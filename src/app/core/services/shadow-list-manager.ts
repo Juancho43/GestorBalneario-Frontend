@@ -1,5 +1,5 @@
 import {Injectable, signal} from '@angular/core';
-import {ShadowEntity} from './shadowEntity';
+import {ShadowEntity} from '../model/shadowEntity';
 
 @Injectable({
   providedIn: 'root',

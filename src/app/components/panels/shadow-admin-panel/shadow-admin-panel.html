@@ -1,14 +1,4 @@
-<app-shadow-list
-  (onDropped)="updateMap($event)"
+<app-tab-menu
+  [links]="links"
 />
-<app-shadow-map
-  initialState="editing"
-  [loadedShadows]="shadows()"
-  (newElement)="addShadow($event)"
-  (updateElement)="updateShadow($event)"
-  (currentElement)="show($event)"
-/>
-<app-shadow-form
-  [shadowToEdit]="currentShadow()"
-  (finalShadow)="updatedShadow($event)"
-/>
+<router-outlet/>

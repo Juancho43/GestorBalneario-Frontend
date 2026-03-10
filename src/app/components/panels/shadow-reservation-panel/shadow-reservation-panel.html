@@ -1,8 +1,4 @@
-<app-reservation-list/>
-<app-shadow-map
-  [loadedShadows]="shadows()"
-  (currentElement)="select($event)"
-  initialState="viewing"
+<app-tab-menu
+  [links]="links"
 />
-<a routerLink="/reservation/create">Crear</a>
 <router-outlet/>

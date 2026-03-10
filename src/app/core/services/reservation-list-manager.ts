@@ -1,5 +1,4 @@
 import {Injectable, signal} from '@angular/core';
-import {ShadowEntity} from './shadowEntity';
 import {ReservationEntity} from '../model/reservationEntity';
 
 @Injectable({

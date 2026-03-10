@@ -1,8 +1,6 @@
 <div class="app">
-  <div>
-    <a routerLink="/edit">Editar</a>
-    <a routerLink="/reservation">Reservas</a>
-    <a routerLink="/">Visualizar</a>
-  </div>
+  <app-tab-menu
+    [links]="links"
+  />
   <router-outlet/>
 </div>
