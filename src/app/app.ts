@@ -1,7 +1,7 @@
 import { Component, signal } from '@angular/core';
 import {RouterLink, RouterOutlet} from '@angular/router';
 import {ShadowMap} from './shadow-map/shadow-map';
-import {ShadowAdminPanel} from './shadow-admin-panel/shadow-admin-panel';
+import {ShadowAdminPanel} from './components/panels/shadow-admin-panel/shadow-admin-panel';
 
 @Component({
   selector: 'app-root',

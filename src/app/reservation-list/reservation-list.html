@@ -1,0 +1,10 @@
+<p>reservation-list works!</p>
+@let list = this.reservations();
+@for (reservation of list; track $index ) {
+<pre>
+  {{reservation | json}}
+</pre>
+  <a routerLink="/reservation/edit/{{reservation.id}}">Editar</a>
+} @empty {
+  <p>ninguna reserva</p>
+}

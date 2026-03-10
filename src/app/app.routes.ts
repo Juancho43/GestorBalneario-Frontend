@@ -1,7 +1,9 @@
 import { Routes } from '@angular/router';
-import {ShadowAdminPanel} from './shadow-admin-panel/shadow-admin-panel';
+import {ShadowAdminPanel} from './components/panels/shadow-admin-panel/shadow-admin-panel';
 import {ShadowViewer} from './shadow-viewer/shadow-viewer';
-import {ShadowReservationPanel} from './shadow-reservation-panel/shadow-reservation-panel';
+import {ShadowReservationPanel} from './components/panels/shadow-reservation-panel/shadow-reservation-panel';
+import {ReservationEdit} from './reservation-edit/reservation-edit';
+import {ReservationCreate} from './reservation-create/reservation-create';
 
 export const routes: Routes = [
   {
@@ -17,7 +19,19 @@ export const routes: Routes = [
   {
     title: 'Reservation',
     path: 'reservation',
-    component: ShadowReservationPanel
+    component: ShadowReservationPanel,
+    children : [
+      {
+        title: 'Edit Reservation',
+        path: 'edit/:id',
+        component: ReservationEdit
+      },
+      {
+        title: 'Create Reservation',
+        path: 'create',
+        component: ReservationCreate
+      }
+    ]
   }
 
 

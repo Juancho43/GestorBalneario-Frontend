@@ -52,7 +52,7 @@ export class ShadowMap implements AfterViewInit{
     });
     this.load();
     this.setUp();
-
+    this.setMapState();
 
   }
   setUp(){

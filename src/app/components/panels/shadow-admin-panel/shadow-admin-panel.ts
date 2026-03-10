@@ -1,11 +1,11 @@
 import {Component, computed, inject, signal, ViewChild} from '@angular/core';
 import {CdkDragEnd} from '@angular/cdk/drag-drop';
-import {ShadowMap} from '../shadow-map/shadow-map';
-import {ShadowList} from '../shadow-list/shadow-list';
-import {ShadowForm} from '../shawdow-form/shadow-form.component';
-import {ShadowListManager} from '../core/services/shadow-list-manager';
-import {ShadowMapper} from '../core/services/shadow-mapper.service';
-import {ShadowEntity} from '../core/services/shadowEntity';
+import {ShadowMap} from '../../../shadow-map/shadow-map';
+import {ShadowList} from '../../../shadow-list/shadow-list';
+import {ShadowForm} from '../../../shawdow-form/shadow-form.component';
+import {ShadowListManager} from '../../../core/services/shadow-list-manager';
+import {ShadowMapper} from '../../../core/services/shadow-mapper.service';
+import {ShadowEntity} from '../../../core/services/shadowEntity';
 @Component({
   selector: 'app-shadow-admin-panel',
   imports: [

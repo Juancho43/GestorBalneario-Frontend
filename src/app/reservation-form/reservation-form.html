@@ -1,0 +1,47 @@
+<p>reservation-form works!</p>
+<form (ngSubmit)="submitted()">
+  <label for="name">Cliente:</label>
+  <input type="text" [formField]="reservationForm.client.name"/><br><br>
+
+  <label for="email">Email:</label>
+  <input type="email" [formField]="reservationForm.client.email" /><br><br>
+
+  <label for="phone">Phone</label>
+  <input type="tel" [formField]="reservationForm.client.phone"/><br><br>
+
+
+  <fieldset>
+
+    <label>Fechas:</label>
+    <br>
+    <mat-form-field>
+      <mat-label>Enter a date range</mat-label>
+      <mat-date-range-input [rangePicker]="picker">
+        <input matStartDate [formField]="reservationForm.dates.start" placeholder="Start date">
+        <input matEndDate [formField]="reservationForm.dates.end" placeholder="End date">
+      </mat-date-range-input>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"/>
+      <mat-date-range-picker #picker/>
+
+<!--      @if (range.controls.start.hasError('matStartDateInvalid')) {-->
+<!--        <mat-error>Invalid start date</mat-error>-->
+<!--      }-->
+<!--      @if (range.controls.end.hasError('matEndDateInvalid')) {-->
+<!--        <mat-error>Invalid end date</mat-error>-->
+<!--      }-->
+    </mat-form-field>
+  </fieldset>
+  <fieldset>
+    <legend>Time:</legend>
+    <input type="time" [formField]="reservationForm.dates.checkIn"/>
+    <input type="time" [formField]="reservationForm.dates.checkOut"/>
+
+  </fieldset>
+
+
+  <input type="submit" value="Submit">
+  <pre>
+
+  <p>Selected range: {{reservation()| json}}</p>
+</pre>
+</form>
