@@ -1,8 +1,8 @@
 import {Component, computed, inject, signal, ViewChild} from '@angular/core';
-import {ShadowMapper} from '../core/services/shadow-mapper.service';
-import {ShadowListManager} from '../core/services/shadow-list-manager';
+import {ShadowMapper} from '../../../core/services/shadow-mapper.service';
+import {ShadowListManager} from '../../../core/services/shadow-list-manager';
 import {ShadowMap} from '../shadow-map/shadow-map';
-import {ShadowEntity} from '../core/model/shadowEntity';
+import {ShadowEntity} from '../../../core/model/shadowEntity';
 import {CdkDragEnd} from '@angular/cdk/drag-drop';
 import {ShadowList} from '../shadow-list/shadow-list';
 import {ShadowForm} from '../shawdow-form/shadow-form.component';

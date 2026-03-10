@@ -1,14 +1,14 @@
 import { Routes } from '@angular/router';
 import {ShadowAdminPanel} from './components/panels/shadow-admin-panel/shadow-admin-panel';
-import {ShadowViewer} from './shadow-viewer/shadow-viewer';
+import {ShadowViewer} from './components/shadows/shadow-viewer/shadow-viewer';
 import {ShadowReservationPanel} from './components/panels/shadow-reservation-panel/shadow-reservation-panel';
-import {ReservationEdit} from './reservation-edit/reservation-edit';
-import {ReservationCreate} from './reservation-create/reservation-create';
+import {ReservationEdit} from './components/reservations/reservation-edit/reservation-edit';
+import {ReservationCreate} from './components/reservations/reservation-create/reservation-create';
 import {MatMenuContent} from '@angular/material/menu';
 import {MainMenu} from './components/layout/main-menu/main-menu';
 import {AboutMenu} from './components/layout/about-menu/about-menu';
-import {ShadowEditor} from './shadow-editor/shadow-editor';
-import {ReservationViewer} from './reservation-viewer/reservation-viewer';
+import {ShadowEditor} from './components/shadows/shadow-editor/shadow-editor';
+import {ReservationViewer} from './components/reservations/reservation-viewer/reservation-viewer';
 
 export const routes: Routes = [
   {

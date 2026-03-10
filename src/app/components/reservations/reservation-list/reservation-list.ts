@@ -1,5 +1,5 @@
 import {Component, computed, inject} from '@angular/core';
-import {ReservationListManager} from '../core/services/reservation-list-manager';
+import {ReservationListManager} from '../../../core/services/reservation-list-manager';
 import {JsonPipe} from '@angular/common';
 import {RouterLink, RouterOutlet} from '@angular/router';
 

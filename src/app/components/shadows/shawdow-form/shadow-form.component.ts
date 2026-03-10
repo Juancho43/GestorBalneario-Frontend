@@ -1,7 +1,7 @@
 import {Component, inject, input, linkedSignal, output} from '@angular/core';
 import {form, FormField, required} from '@angular/forms/signals';
-import {ShadowEntity} from '../core/model/shadowEntity';
-import {ShadowListManager} from '../core/services/shadow-list-manager';
+import {ShadowEntity} from '../../../core/model/shadowEntity';
+import {ShadowListManager} from '../../../core/services/shadow-list-manager';
 
 @Component({
   selector: 'app-shadow-form',

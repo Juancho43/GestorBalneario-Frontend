@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { CdkDragEnd} from '@angular/cdk/drag-drop';
 import * as fabric from 'fabric';
-import {ShadowEntity} from '../core/model/shadowEntity';
+import {ShadowEntity} from '../../../core/model/shadowEntity';
 
 export type MapState = 'idle' | 'editing' | 'viewing';
 @Component({

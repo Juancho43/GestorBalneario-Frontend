@@ -5,8 +5,8 @@ import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {form, FormField} from '@angular/forms/signals';
-import {ReservationEntity} from '../core/model/reservationEntity';
-import {ClientEntity} from '../core/model/clientEntity';
+import {ReservationEntity} from '../../../core/model/reservationEntity';
+import {ClientEntity} from '../../../core/model/clientEntity';
 
 
 @Component({

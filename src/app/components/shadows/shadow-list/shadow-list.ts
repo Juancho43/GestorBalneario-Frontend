@@ -1,6 +1,6 @@
 import {Component,output} from '@angular/core';
 import {CdkDrag, CdkDragEnd, CdkDropList} from '@angular/cdk/drag-drop';
-import {ShadowEntity} from '../core/model/shadowEntity';
+import {ShadowEntity} from '../../../core/model/shadowEntity';
 
 @Component({
   selector: 'app-shadow-list',
