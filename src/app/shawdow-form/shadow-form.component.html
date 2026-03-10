@@ -1,0 +1,11 @@
+
+@let shadow = this.shadow();
+
+<form (submit)="submitted($event)">
+  <label>Identificador</label>
+  <input type="text" [formField]="shadowForm.identifier" />
+  <label>Coordenadas</label>
+  <p>X: {{shadow.coords.x}}</p>
+  <p>Y: {{shadow.coords.y}}</p>
+  <input type="submit" value="save">
+</form>
