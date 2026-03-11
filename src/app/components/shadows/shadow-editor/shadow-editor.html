@@ -7,8 +7,10 @@
   (newElement)="addShadow($event)"
   (updateElement)="updateShadow($event)"
   (currentElement)="show($event)"
+  (deletedElement)="deleteShadow($event)"
 />
 <app-shadow-form
+  [state]="formState()"
   [shadowToEdit]="currentShadow()"
   (finalShadow)="updatedShadow($event)"
 />

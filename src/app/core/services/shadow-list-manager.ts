@@ -1,14 +1,26 @@
-import {Injectable, signal} from '@angular/core';
+import {inject, Injectable, linkedSignal} from '@angular/core';
 import {ShadowEntity} from '../model/shadowEntity';
+import {CreateShadowHttp} from './ShadowHttp/create-shadow-http';
+import {UpdateShadowHttp} from './ShadowHttp/update-shadow-http';
+import {DeleteShadowHttp} from './ShadowHttp/delete-shadow-http';
+import {GetCurrentShadowsHttp} from './ShadowHttp/get-current-shadows-http';
+import {rxResource} from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ShadowListManager {
-  private shadows= signal<ShadowEntity[] >([]);
-
+  private shadowsHttp = inject(GetCurrentShadowsHttp);
+  private create = inject(CreateShadowHttp);
+  private update = inject(UpdateShadowHttp);
+  private delete = inject(DeleteShadowHttp);
+  private shadowsResource= rxResource({
+    stream:()=> this.shadowsHttp.getCurrent()
+  })
+  private shadows = linkedSignal(()=>
+  this.shadowsResource.isLoading() || this.shadowsResource.error() ? [] : this.shadowsResource.value()!)
   constructor() {
-    localStorage.getItem('shadows') && this.shadows.set(JSON.parse(localStorage.getItem('shadows')!));
+
   }
   getByIdentifier(identifier: string){
     return this.shadows().find(shadow => shadow.identifier === identifier);
@@ -17,20 +29,16 @@ export class ShadowListManager {
     return this.shadows().find(shadow => shadow.coords.x === coords.x && shadow.coords.y === coords.y);
   }
   addShadow(shadow:ShadowEntity) {
-    this.shadows.set([...this.shadows(), shadow]);
-    this.persist();
-  }
-  private persist(){
-    localStorage.setItem('shadows', JSON.stringify(this.shadows()));
+    this.create.create(shadow).subscribe();
   }
   updateShadow(updatedShadow: ShadowEntity) {
-    const updatedShadows = this.shadows().map(shadow =>
-      shadow.coords.y === updatedShadow.coords.y && shadow.coords.x === shadow.coords.x  ? updatedShadow : shadow
-    );
-    this.shadows.set(updatedShadows);
-    this.persist();
+    this.update.update(updatedShadow).subscribe();
+  }
+  deleteShadow(id: string) {
+    this.delete.delete(id).subscribe();
   }
   getList(){
+    console.log("get list", this.shadows());
     return this.shadows();
   }
 }

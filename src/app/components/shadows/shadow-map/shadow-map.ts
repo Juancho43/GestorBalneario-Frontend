@@ -1,6 +1,6 @@
 import {
   AfterViewInit,
-  Component,
+  Component, effect,
   ElementRef,
   HostListener,
   input,
@@ -28,9 +28,15 @@ export class ShadowMap implements AfterViewInit{
   saved = output<any>();
   newElement = output<any>();
   updateElement = output<any>();
-
+  deletedElement = output<any>();
   private canvas!: fabric.Canvas;
 
+  constructor() {
+    effect(() => {
+      this.loadedShadows()
+      this.load();
+    });
+  }
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
     if (event.code === 'KeyS') {
@@ -59,7 +65,7 @@ export class ShadowMap implements AfterViewInit{
     this.canvas.on('object:modified', (options) => {
       if (options.target) {
         console.log('Objeto modificado:', options.target);
-          // this.currentElement.emit(options.target);
+          // this.updateElement.emit(options.target);
       }
     })
     this.canvas.on('mouse:over', (options) => {
@@ -78,6 +84,7 @@ export class ShadowMap implements AfterViewInit{
   }
   load() {
     this.loadedShadows()?.forEach(shadow => {
+      console.log('Cargando sombra:', shadow);
       this.createShape(shadow.type, shadow.coords.x, shadow.coords.y, shadow.identifier);
     })
   }
@@ -88,7 +95,8 @@ export class ShadowMap implements AfterViewInit{
     const y = event.event.dropPoint.y - rect.top;
 
     if (x >= 0 && x <= canvasNative.width && y >= 0 && y <= canvasNative.height) {
-      const group = this.createShape(event.shadow.type, x, y);
+      const text = prompt('Ingrese un identificador para la sombra:');
+      const group = this.createShape(event.shadow.type, x, y, text!);
       this.newElement.emit(group);
 
     }
@@ -144,6 +152,7 @@ export class ShadowMap implements AfterViewInit{
       this.canvas.discardActiveObject(); // Limpia la selección
       activeObjects.forEach((obj) => {
         this.canvas.remove(obj);
+        this.deletedElement.emit(obj);
       });
       this.canvas.renderAll(); // Refresca el lienzo
     }
