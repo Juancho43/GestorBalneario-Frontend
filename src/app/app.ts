@@ -16,7 +16,8 @@ export class App {
     {label: 'Main Menu', url:''},
     {label: 'Shadows', url:'shadow'},
     {label: 'Reservations', url:'reservation'},
+    {label: 'Clients', url:'client'},
+    {label: 'Payments', url:'payment'},
     {label: 'About', url: 'about'},
-
   ]
 }

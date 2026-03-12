@@ -1,4 +1,5 @@
-<app-shadow-list
+<div class="panel">
+  <app-shadow-list
   (onDropped)="updateMap($event)"
 />
 <app-shadow-map
@@ -13,3 +14,4 @@
   [shadowToEdit]="currentShadow()"
   (finalShadow)="identifierChangedHandler($event)"
 />
+</div>
