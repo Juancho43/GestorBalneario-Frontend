@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ShadowMapper } from './shadow-mapper.service';
+import { GetReservationHttp } from './get-reservation-http';
 
-describe('ShadowApi', () => {
-  let service: ShadowMapper;
+describe('GetReservationHttp', () => {
+  let service: GetReservationHttp;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ShadowMapper);
+    service = TestBed.inject(GetReservationHttp);
   });
 
   it('should be created', () => {
