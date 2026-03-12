@@ -10,6 +10,6 @@ export class UpdateShadowHttp {
   private http = inject(HttpClient);
 
   update(shadow: ShadowEntity) {
-      return this.http.put(`${environment.apiUrl}/shadow/update`, {id: shadow.id, data:shadow});
+      return this.http.put<ShadowEntity>(`${environment.apiUrl}/shadow/update`, {id: shadow.id, data:shadow});
   }
 }

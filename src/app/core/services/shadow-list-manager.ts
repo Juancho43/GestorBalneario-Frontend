@@ -17,31 +17,61 @@ export class ShadowListManager {
   private shadowsResource= rxResource({
     stream:()=> this.shadowsHttp.getCurrent()
   })
-  private shadows = linkedSignal(()=>
-  this.shadowsResource.isLoading() || this.shadowsResource.error() ? [] : this.shadowsResource.value()!)
 
+  /*
+  * A list of the current shadows. It is updated when a shadow is added, updated or deleted.
+  * */
+  private shadows = linkedSignal(()=>
+    this.shadowsResource.isLoading() || this.shadowsResource.error() ? [] : this.shadowsResource.value()!
+  )
+
+  /**
+   * Gets a shadow by its identifier.
+   */
   getByIdentifier(identifier: string){
     return this.shadows().find(shadow => shadow.identifier === identifier);
   }
+  /**
+   * Gets a shadow by its coords.
+   */
   getByCoords(coords: {x: number, y: number}){
     return this.shadows().find(shadow => shadow.coords.x === coords.x && shadow.coords.y === coords.y);
   }
+
+  /**
+   * Calls http method to create a new shadow.
+   * Add a new shadow to the list.
+   **/
   addShadow(shadow:ShadowEntity) {
     this.create.create(shadow).subscribe(r=>{
       this.shadows.set([...this.shadows(),r])
     });
   }
+
+  /**
+   * Calls http method to update a shadow.
+   * Changes the shadow list with its new state.
+   * */
   updateShadow(updatedShadow: ShadowEntity) {
-    this.update.update(updatedShadow).subscribe();
+    this.update.update(updatedShadow).subscribe(r =>
+      this.shadows.set(this.shadows().map(s => s.identifier === r.identifier ? r : s))
+    );
   }
+  /**
+   * Calls http method to delete a shadow
+   * Removes the shadow from the list.
+   *
+   * */
+
   deleteShadow(id: string) {
     this.delete.delete(id).subscribe(r => {
-      console.log('god');
       this.shadows.set(this.shadows().filter(s => s.identifier !== id));
     });
   }
+  /*
+  * Get shadow list.
+  * */
   getList(){
-    console.log("get list", this.shadows());
     return this.shadows();
   }
 }
