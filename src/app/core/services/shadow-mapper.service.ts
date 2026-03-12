@@ -11,6 +11,7 @@ export class ShadowMapper {
     if (!fabricGroup || fabricGroup.type !== 'group') return null;
 
     return {
+      state: 'active',
       name: this.setName(fabricGroup._objects[0].type),
       identifier: (fabricGroup._objects[1] as fabric.Text).text,
       coords: {

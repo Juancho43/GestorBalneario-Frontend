@@ -20,18 +20,17 @@ import {ShadowForm} from '../shawdow-form/shadow-form.component';
 export class ShadowEditor {
   private shadowMapper= inject(ShadowMapper);
   private shadowList = inject(ShadowListManager);
-  formState = signal<'create' | 'edit'>('create');
   shadows = computed(() => this.shadowList.getList());
 
   @ViewChild(ShadowMap) shadowMap!: ShadowMap;
-  currentShadow = signal<ShadowEntity>({identifier: '', name: '', type: '', coords: {x: 0, y: 0}});
+  currentShadow = signal<ShadowEntity>({identifier: '',state:'active', name: '', type: '', coords: {x: 0, y: 0}});
 
   /**
    * new shadow dragged on map
    */
 
   updateMap(event: {event: CdkDragEnd, shadow: ShadowEntity}) {
-    this.shadowMap.addShape(event);
+    this.shadowMap.onShadowDropped(event);
   }
 
   /**
@@ -41,38 +40,35 @@ export class ShadowEditor {
 
   addShadow(event: any) {
     let etl = this.shadowMapper.createShadowFromFabric(event);
+    console.log(etl)
     this.shadowList.addShadow(etl!);
-    this.formState.set('create');
   }
 
   /**
    * Shadow moved
    * @param event
    */
-  updateShadow(event: ShadowEntity){
-    console.log('update shadow', event);
-    // this.shadowList.updateShadow(event);
-    this.currentShadow.set(event);
+  movedShadowHandler(event: any){
+    const shadow = this.shadowList.getByIdentifier(event._objects[1].text);
+    if(shadow){
+      shadow.coords = {x: event.left, y: event.top};
+      this.shadowList.updateShadow(shadow);
+      this.currentShadow.set(shadow);
+    }
   }
   /**
    * Shadow selected on map
    * */
-  show(event: any) {
-    let text = event._objects[1].text ?? '...';
-    this.currentShadow.set({identifier:text, coords:{
-          x: event.left,
-          y: event.top,
-        },
-        name: this.shadowMapper.setName(event._objects[0].type),
-        type: event._objects[0].type
-      }
-    );
+  selectShadowHandler(event: any) {
+    const selected = this.shadowList.getByIdentifier(event._objects[1].text);
+    this.currentShadow.set(selected!);
   };
 
   /**
    * Text changed
    * */
-  updatedShadow(event: any) {
+  identifierChangedHandler(event: any) {
+    console.log(event)
     this.shadowList.updateShadow(event);
     this.currentShadow.set(event);
     this.shadowMap.updateShapeText(event);
@@ -81,8 +77,11 @@ export class ShadowEditor {
   /**
    * Shadow deleted
    */
-  deleteShadow($event: any) {
-    //pulir
-    this.shadowList.deleteShadow($event.id);
+  deleteShadow(event: any) {
+    const selected = this.shadowList.getByIdentifier(event._objects[1].text);
+    if(selected){
+      this.currentShadow.set(selected);
+      this.shadowList.deleteShadow(selected.id!);
+    }
   }
 }

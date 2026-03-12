@@ -5,12 +5,11 @@
   initialState="editing"
   [loadedShadows]="shadows()"
   (newElement)="addShadow($event)"
-  (updateElement)="updateShadow($event)"
-  (currentElement)="show($event)"
+  (updateElement)="movedShadowHandler($event)"
+  (currentElement)="selectShadowHandler($event)"
   (deletedElement)="deleteShadow($event)"
 />
 <app-shadow-form
-  [state]="formState()"
   [shadowToEdit]="currentShadow()"
-  (finalShadow)="updatedShadow($event)"
+  (finalShadow)="identifierChangedHandler($event)"
 />

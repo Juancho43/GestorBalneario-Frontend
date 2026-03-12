@@ -9,6 +9,6 @@ export class DeleteShadowHttp {
   private http = inject(HttpClient);
 
   delete(id: string) {
-    return this.http.delete(`${environment.apiUrl}/shadow/${id}`);
+    return this.http.delete(`${environment.apiUrl}/shadow/delete/${id}`);
   }
 }

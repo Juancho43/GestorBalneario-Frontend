@@ -1,13 +1,15 @@
 import {
   AfterViewInit,
-  Component, effect,
+  Component,
+  effect,
   ElementRef,
   HostListener,
   input,
-  linkedSignal, output,
+  linkedSignal,
+  output,
   ViewChild
 } from '@angular/core';
-import { CdkDragEnd} from '@angular/cdk/drag-drop';
+import {CdkDragEnd} from '@angular/cdk/drag-drop';
 import * as fabric from 'fabric';
 import {ShadowEntity} from '../../../core/model/shadowEntity';
 
@@ -30,7 +32,6 @@ export class ShadowMap implements AfterViewInit{
   updateElement = output<any>();
   deletedElement = output<any>();
   private canvas!: fabric.Canvas;
-
   constructor() {
     effect(() => {
       this.loadedShadows()
@@ -39,68 +40,50 @@ export class ShadowMap implements AfterViewInit{
   }
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
-    if (event.code === 'KeyS') {
-      this.save();
-      return;
-    }
     if (event.key === 'Delete' || event.key === 'Backspace') {
       if (this.state() === 'editing') {
         this.deleteObject();
       }
     }
   }
-
-
-  ngAfterViewInit() {
+   ngAfterViewInit() {
     this.canvas = new fabric.Canvas(this.canvasElement.nativeElement, {
       hoverCursor : 'pointer',
-      backgroundColor: '#f0f0f0'
+      backgroundColor: '#f0f0f0',
+      height: 750,
+      width: 1080,
     });
     this.load();
     this.setUp();
     this.setMapState();
 
   }
-  setUp(){
-    this.canvas.on('object:modified', (options) => {
-      if (options.target) {
-        console.log('Objeto modificado:', options.target);
-          // this.updateElement.emit(options.target);
-      }
-    })
-    this.canvas.on('mouse:over', (options) => {
-      if (options.target) {
-        this.currentElement.emit(options.target);
-      }
-    });
+  private setUp(){
+    this.setUpZoom();
+    this.setUpPanning();
+    this.setUpMovingShape();
+    this.setUpSelectShape();
   }
-  save() {
-    if(this.state() === 'editing') {
-      const json = JSON.stringify(this.canvas.toJSON());
-      localStorage.setItem('myCanvasState', json);
-      this.saved.emit(this.canvas.getObjects());
-      console.log("Plano guardado con éxito.");
-    }
-  }
+
   load() {
     this.loadedShadows()?.forEach(shadow => {
-      console.log('Cargando sombra:', shadow);
-      this.createShape(shadow.type, shadow.coords.x, shadow.coords.y, shadow.identifier);
+      this.printShapesOnCanvas(this.createShape(shadow.type, shadow.coords.x, shadow.coords.y, shadow.identifier));
     })
   }
-  addShape(event: {event: CdkDragEnd, shadow: ShadowEntity}) {
-    const canvasNative = this.canvasElement.nativeElement;
-    const rect = canvasNative.getBoundingClientRect();
-    const x = event.event.dropPoint.x - rect.left;
-    const y = event.event.dropPoint.y - rect.top;
 
-    if (x >= 0 && x <= canvasNative.width && y >= 0 && y <= canvasNative.height) {
+
+
+  onShadowDropped(event: {event: CdkDragEnd, shadow: ShadowEntity}) {
+    if (this.validateCanvasBorder(event.event)) {
       const text = prompt('Ingrese un identificador para la sombra:');
+      const r = this.canvasElement.nativeElement.getBoundingClientRect();
+      const x = event.event.dropPoint.x - r.left;
+      const y = event.event.dropPoint.y - r.top;
       const group = this.createShape(event.shadow.type, x, y, text!);
       this.newElement.emit(group);
-
     }
   }
+
   updateShapeText(shadow: ShadowEntity) {
     this.canvas.getObjects().forEach((element) => {
       if (element.left === shadow.coords.x && element.top === shadow.coords.y) {
@@ -112,6 +95,14 @@ export class ShadowMap implements AfterViewInit{
         this.canvas.requestRenderAll();
       }
     })
+  }
+
+  private validateCanvasBorder(event: CdkDragEnd){
+    const canvasNative = this.canvasElement.nativeElement;
+    const rect = canvasNative.getBoundingClientRect();
+    const x = event.dropPoint.x - rect.left;
+    const y = event.dropPoint.y - rect.top;
+    return  (x >= 0 && x <= canvasNative.width && y >= 0 && y <= canvasNative.height)
   }
   private createShape(type: string, x: number, y: number, textContent: string = '...') {
     let shape: fabric.Object;
@@ -134,16 +125,17 @@ export class ShadowMap implements AfterViewInit{
       fontSize: 14,
       fill: 'white',
     });
-    let group = new fabric.Group([shape, text], {
+    return new fabric.Group([shape, text], {
       left: x,
       top: y,
       hasControls: true,
       hasBorders: true,
       lockRotation: true
     });
+  }
+  private printShapesOnCanvas(group: any){
     this.canvas.add(group);
     this.canvas.renderAll();
-    return group;
   }
 
   deleteObject(){
@@ -202,5 +194,80 @@ export class ShadowMap implements AfterViewInit{
     }
 
     }
+  private setUpZoom() {
+    window.addEventListener('keydown', (e: KeyboardEvent) => {
+      // Solo activamos si el canvas está enfocado o el estado es el correcto
 
+      const zoomStep = 0.1; // Incremento fijo
+      let zoom = this.canvas.getZoom();
+
+      if (e.key === '+') {
+        zoom += zoomStep;
+      } else if (e.key === '-') {
+        zoom -= zoomStep;
+      } else {
+        return; // No es ninguna de nuestras teclas
+      }
+
+      // Mantener dentro de límites
+      zoom = Math.min(Math.max(zoom, 0.5), 20);
+
+      // Zoom al centro del lienzo actual
+      const center = new fabric.Point(this.canvas.width! / 2, this.canvas.height! / 2);
+      this.canvas.zoomToPoint(center, zoom);
+
+      this.canvas.requestRenderAll();
+    });
+  }
+  private setUpPanning() {
+    let isDragging = false;
+    let lastPosX = 0;
+    let lastPosY = 0;
+
+    this.canvas.on('mouse:down', (opt) => {
+      const evt = opt.e as MouseEvent;
+
+      // Si NO hay un objeto bajo el cursor, activamos el panning
+      if (!opt.target) {
+        isDragging = true;
+        this.canvas.selection = false; // Desactivar selección de área
+        lastPosX = evt.clientX;
+        lastPosY = evt.clientY;
+      }
+    });
+
+    this.canvas.on('mouse:move', (opt) => {
+      if (isDragging) {
+        const evt = opt.e as MouseEvent;
+        const vpt = this.canvas.viewportTransform!;
+
+        vpt[4] += evt.clientX - lastPosX;
+        vpt[5] += evt.clientY - lastPosY;
+
+        this.canvas.requestRenderAll();
+
+        lastPosX = evt.clientX;
+        lastPosY = evt.clientY;
+      }
+    });
+
+    this.canvas.on('mouse:up', () => {
+      isDragging = false;
+      this.canvas.selection = true; // Reactivar selección
+    });
+  }
+  private setUpMovingShape(){
+    this.canvas.on('object:modified', (options) => {
+      if (options.target) {
+        this.updateElement.emit(options.target);
+      }
+    })
+  }
+  private setUpSelectShape() {
+    this.canvas.on('mouse:dblclick', (options) => {
+      if (options.target) {
+        this.currentElement.emit(options.target);
+      }
+    });
+  }
 }

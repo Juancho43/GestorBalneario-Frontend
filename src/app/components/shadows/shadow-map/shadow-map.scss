@@ -1,14 +1,5 @@
-.map-container{
-
-  position: relative; /* El lienzo es el punto de referencia */
+.map {
+  width: 60%;
+  height: 80%;
   border: aqua 1px solid;
-  width: 400px;
-  height: 400px;
-  .item{
-    position: relative; /* Permite moverlo libremente por coordenadas */
-    cursor: move;
-    padding: 10px;
-    background: white;
-    border: 1px solid #ccc;
-  }
 }

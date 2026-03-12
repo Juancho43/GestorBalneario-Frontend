@@ -14,8 +14,8 @@ import {ShadowEntity} from '../../../core/model/shadowEntity';
 export class ShadowList {
   onDropped = output<{event: CdkDragEnd, shadow: ShadowEntity}>();
   paleta: ShadowEntity[] = [
-    {identifier:'...',name: 'Carpa Estándar', coords: {x: 0, y: 0}, type: 'rect'},
-    {identifier:'...',name: 'Sombrilla VIP', coords: {x: 0, y: 0}, type : 'circle'},
+    {identifier:'...',name: 'Carpa Estándar', state:'active', coords: {x: 0, y: 0}, type: 'rect'},
+    {identifier:'...',name: 'Sombrilla VIP',state:"active", coords: {x: 0, y: 0}, type : 'circle'},
   ];
 
   dropped(event: CdkDragEnd, shadow: ShadowEntity) {

@@ -19,9 +19,7 @@ export class ShadowListManager {
   })
   private shadows = linkedSignal(()=>
   this.shadowsResource.isLoading() || this.shadowsResource.error() ? [] : this.shadowsResource.value()!)
-  constructor() {
 
-  }
   getByIdentifier(identifier: string){
     return this.shadows().find(shadow => shadow.identifier === identifier);
   }
@@ -29,13 +27,18 @@ export class ShadowListManager {
     return this.shadows().find(shadow => shadow.coords.x === coords.x && shadow.coords.y === coords.y);
   }
   addShadow(shadow:ShadowEntity) {
-    this.create.create(shadow).subscribe();
+    this.create.create(shadow).subscribe(r=>{
+      this.shadows.set([...this.shadows(),r])
+    });
   }
   updateShadow(updatedShadow: ShadowEntity) {
     this.update.update(updatedShadow).subscribe();
   }
   deleteShadow(id: string) {
-    this.delete.delete(id).subscribe();
+    this.delete.delete(id).subscribe(r => {
+      console.log('god');
+      this.shadows.set(this.shadows().filter(s => s.identifier !== id));
+    });
   }
   getList(){
     console.log("get list", this.shadows());
