@@ -1,0 +1,12 @@
+<form (ngSubmit)="submitted()">
+  <legend>Client Form</legend>
+  <label for="name">Cliente:</label>
+  <input type="text" [formField]="clientForm.name"/><br><br>
+
+  <label for="email">Email:</label>
+  <input type="email" [formField]="clientForm.email" /><br><br>
+
+  <label for="phone">Phone</label>
+  <input type="tel" [formField]="clientForm.phone"/><br><br>
+  <input type="submit" value="Submit">
+</form>

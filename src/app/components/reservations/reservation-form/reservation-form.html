@@ -1,14 +1,5 @@
 <p>reservation-form works!</p>
 <form (ngSubmit)="submitted()">
-  <label for="name">Cliente:</label>
-  <input type="text" [formField]="reservationForm.client.name"/><br><br>
-
-  <label for="email">Email:</label>
-  <input type="email" [formField]="reservationForm.client.email" /><br><br>
-
-  <label for="phone">Phone</label>
-  <input type="tel" [formField]="reservationForm.client.phone"/><br><br>
-
 
   <fieldset>
 
@@ -41,7 +32,8 @@
 
   <input type="submit" value="Submit">
   <pre>
-
-  <p>Selected range: {{reservation()| json}}</p>
+    <p>Client: {{client() | json}}</p>
+  <p>Shadow: {{shadow() | json}}</p>
+  <p>Reservation: {{reservation()| json}}</p>
 </pre>
 </form>

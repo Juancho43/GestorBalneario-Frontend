@@ -1,4 +1,17 @@
-<p>reservation-create works!</p>
-<app-reservation-form
-  (finalReservation)="handle($event)"
-/>
+<div class="panel">
+
+  <app-shadow-map
+    [loadedShadows]="shadows()"
+    (currentElement)="setShadow($event)"
+  />
+  <div>
+    <app-client-form/>
+
+    <app-reservation-form
+      [client]="client()"
+      [shadow]="shadow()"
+      (finalReservation)="handle($event)"
+    />
+  </div>
+
+</div>

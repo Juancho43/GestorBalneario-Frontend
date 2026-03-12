@@ -9,6 +9,9 @@ import {MainMenu} from './components/layout/main-menu/main-menu';
 import {AboutMenu} from './components/layout/about-menu/about-menu';
 import {ShadowEditor} from './components/shadows/shadow-editor/shadow-editor';
 import {ReservationViewer} from './components/reservations/reservation-viewer/reservation-viewer';
+import {ClientManager} from './components/panels/client-manager/client-manager';
+import {ClientViewer} from './components/clients/client-viewer/client-viewer';
+import {ClientEditator} from './components/clients/client-editator/client-editator';
 
 export const routes: Routes = [
   {
@@ -37,7 +40,7 @@ export const routes: Routes = [
     ]
   },
   {
-    title: 'Reservation',
+    title: 'ReservationManager',
     path: 'reservation',
     component: ShadowReservationPanel,
     children : [
@@ -55,6 +58,23 @@ export const routes: Routes = [
         title: 'Create Reservation',
         path: 'create',
         component: ReservationCreate
+      }
+    ]
+  },
+  {
+    title: 'ClientManager',
+    path: 'client',
+    component: ClientManager,
+    children: [
+      {
+        title: 'View',
+        path: 'view',
+        component: ClientViewer
+      },
+      {
+        title: 'Client manage',
+        path: 'create',
+        component: ClientEditator
       }
     ]
   }
