@@ -1,0 +1,9 @@
+<div class="panel">
+
+  <app-reservation-list/>
+  <app-shadow-map
+    [loadedShadows]="shadows()"
+    (currentElement)="select($event)"
+    initialState="viewing"
+  />
+</div>

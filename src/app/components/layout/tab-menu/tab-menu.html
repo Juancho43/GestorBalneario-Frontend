@@ -1,0 +1,11 @@
+<mat-tab-nav-panel #menu/>
+<nav mat-tab-nav-bar [tabPanel]='menu'>
+  @for (link of links(); track $index){
+    <a
+      mat-tab-link
+      [routerLink]="link.url"
+    >
+      {{link.label}}
+    </a>
+  }
+</nav>

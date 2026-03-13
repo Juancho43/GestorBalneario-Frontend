@@ -1,0 +1,77 @@
+import {inject, Injectable, linkedSignal} from '@angular/core';
+import {ShadowEntity} from '../../model/shadowEntity';
+import {CreateShadowHttp} from '../ShadowHttp/create-shadow-http';
+import {UpdateShadowHttp} from '../ShadowHttp/update-shadow-http';
+import {DeleteShadowHttp} from '../ShadowHttp/delete-shadow-http';
+import {GetCurrentShadowsHttp} from '../ShadowHttp/get-current-shadows-http';
+import {rxResource} from '@angular/core/rxjs-interop';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class ShadowListManager {
+  private shadowsHttp = inject(GetCurrentShadowsHttp);
+  private create = inject(CreateShadowHttp);
+  private update = inject(UpdateShadowHttp);
+  private delete = inject(DeleteShadowHttp);
+  private shadowsResource= rxResource({
+    stream:()=> this.shadowsHttp.getCurrent()
+  })
+
+  /*
+  * A list of the current shadows. It is updated when a shadow is added, updated or deleted.
+  * */
+  private shadows = linkedSignal(()=>
+    this.shadowsResource.isLoading() || this.shadowsResource.error() ? [] : this.shadowsResource.value()!
+  )
+
+  /**
+   * Gets a shadow by its identifier.
+   */
+  getByIdentifier(identifier: string){
+    return this.shadows().find(shadow => shadow.identifier === identifier);
+  }
+  /**
+   * Gets a shadow by its coords.
+   */
+  getByCoords(coords: {x: number, y: number}){
+    return this.shadows().find(shadow => shadow.coords.x === coords.x && shadow.coords.y === coords.y);
+  }
+
+  /**
+   * Calls http method to create a new shadow.
+   * Add a new shadow to the list.
+   **/
+  addShadow(shadow:ShadowEntity) {
+    this.create.create(shadow).subscribe(r=>{
+      this.shadows.set([...this.shadows(),r])
+    });
+  }
+
+  /**
+   * Calls http method to update a shadow.
+   * Changes the shadow list with its new state.
+   * */
+  updateShadow(updatedShadow: ShadowEntity) {
+    this.update.update(updatedShadow).subscribe(r =>
+      this.shadows.set(this.shadows().map(s => s.identifier === r.identifier ? r : s))
+    );
+  }
+  /**
+   * Calls http method to delete a shadow
+   * Removes the shadow from the list.
+   *
+   * */
+
+  deleteShadow(id: string) {
+    this.delete.delete(id).subscribe(r => {
+      this.shadows.set(this.shadows().filter(s => s.identifier !== id));
+    });
+  }
+  /*
+  * Get shadow list.
+  * */
+  getList(){
+    return this.shadows();
+  }
+}

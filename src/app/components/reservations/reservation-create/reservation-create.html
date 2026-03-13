@@ -1,0 +1,20 @@
+<div class="panel">
+
+  <app-shadow-map
+    [loadedShadows]="shadows()"
+    (currentElement)="setShadow($event)"
+  />
+  <div>
+    <app-client-card
+
+      [client]="client()"
+      (click)="openClientDialog()"
+    />
+    <app-reservation-form
+      [client]="client()"
+      [shadow]="shadow()"
+      (finalReservation)="handle($event)"
+    />
+  </div>
+
+</div>

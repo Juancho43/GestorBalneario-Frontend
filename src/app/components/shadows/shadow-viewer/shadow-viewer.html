@@ -1,0 +1,8 @@
+<div class="panel">
+  <app-shadow-map
+    (currentElement)="show($event)"
+    initialState="viewing"
+    [loadedShadows]="shadows()"
+  />
+  <app-shadow-detail [shadow]="currentShadow()"/>
+</div>
