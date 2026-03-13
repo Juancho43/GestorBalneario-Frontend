@@ -1,6 +1,6 @@
 import {Component, inject} from '@angular/core';
 import {ReservationForm} from '../reservation-form/reservation-form';
-import {ReservationListManager} from '../../../core/services/reservation-list-manager';
+import {ReservationListManager} from '../../../core/services/Managers/reservation-list-manager';
 
 @Component({
   selector: 'app-reservation-edit',

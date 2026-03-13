@@ -1,9 +1,9 @@
 import {inject, Injectable, linkedSignal} from '@angular/core';
-import {ShadowEntity} from '../model/shadowEntity';
-import {CreateShadowHttp} from './ShadowHttp/create-shadow-http';
-import {UpdateShadowHttp} from './ShadowHttp/update-shadow-http';
-import {DeleteShadowHttp} from './ShadowHttp/delete-shadow-http';
-import {GetCurrentShadowsHttp} from './ShadowHttp/get-current-shadows-http';
+import {ShadowEntity} from '../../model/shadowEntity';
+import {CreateShadowHttp} from '../ShadowHttp/create-shadow-http';
+import {UpdateShadowHttp} from '../ShadowHttp/update-shadow-http';
+import {DeleteShadowHttp} from '../ShadowHttp/delete-shadow-http';
+import {GetCurrentShadowsHttp} from '../ShadowHttp/get-current-shadows-http';
 import {rxResource} from '@angular/core/rxjs-interop';
 
 @Injectable({

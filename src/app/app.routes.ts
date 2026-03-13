@@ -11,7 +11,7 @@ import {ShadowEditor} from './components/shadows/shadow-editor/shadow-editor';
 import {ReservationViewer} from './components/reservations/reservation-viewer/reservation-viewer';
 import {ClientManager} from './components/panels/client-manager/client-manager';
 import {ClientViewer} from './components/clients/client-viewer/client-viewer';
-import {ClientEditator} from './components/clients/client-editator/client-editator';
+import {ClientEditor} from './components/clients/client-editor/client-editor.component';
 
 export const routes: Routes = [
   {
@@ -74,7 +74,7 @@ export const routes: Routes = [
       {
         title: 'Client manage',
         path: 'create',
-        component: ClientEditator
+        component: ClientEditor
       }
     ]
   }

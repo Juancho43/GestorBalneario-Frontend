@@ -1,6 +1,6 @@
 import {Component, computed, inject, signal} from '@angular/core';
-import {ShadowListManager} from '../../../core/services/shadow-list-manager';
-import {ReservationListManager} from '../../../core/services/reservation-list-manager';
+import {ShadowListManager} from '../../../core/services/Managers/shadow-list-manager';
+import {ReservationListManager} from '../../../core/services/Managers/reservation-list-manager';
 import {ShadowEntity} from '../../../core/model/shadowEntity';
 import {ShadowMap} from '../../shadows/shadow-map/shadow-map';
 import {ReservationList} from '../reservation-list/reservation-list';

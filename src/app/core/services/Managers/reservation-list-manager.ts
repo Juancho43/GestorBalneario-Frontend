@@ -1,5 +1,5 @@
 import {Injectable, signal} from '@angular/core';
-import {ReservationEntity} from '../model/reservationEntity';
+import {ReservationEntity} from '../../model/reservationEntity';
 
 @Injectable({
   providedIn: 'root',

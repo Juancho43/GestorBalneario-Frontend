@@ -1,7 +1,7 @@
 import {Component, inject, input, linkedSignal, output} from '@angular/core';
 import {form, FormField, required} from '@angular/forms/signals';
 import {ShadowEntity} from '../../../core/model/shadowEntity';
-import {ShadowListManager} from '../../../core/services/shadow-list-manager';
+import {ShadowListManager} from '../../../core/services/Managers/shadow-list-manager';
 import {JsonPipe} from '@angular/common';
 
 @Component({

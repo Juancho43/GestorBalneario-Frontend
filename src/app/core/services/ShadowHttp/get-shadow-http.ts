@@ -9,7 +9,7 @@ import {ShadowEntity} from '../../model/shadowEntity';
 export class GetShadowHttp {
   private http = inject(HttpClient);
 
-  getShadowHttp(id: string) {
+  get(id: string) {
     return this.http.get<ShadowEntity>(`${environment.apiUrl}/shadow/get/${id}`);
   }
 }

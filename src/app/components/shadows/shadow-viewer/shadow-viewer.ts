@@ -3,7 +3,7 @@ import {ShadowMap} from '../shadow-map/shadow-map';
 import {ShadowDetail} from '../shadow-detail/shadow-detail';
 import {ShadowMapper} from '../../../core/services/shadow-mapper.service';
 import {ShadowEntity} from '../../../core/model/shadowEntity';
-import {ShadowListManager} from '../../../core/services/shadow-list-manager';
+import {ShadowListManager} from '../../../core/services/Managers/shadow-list-manager';
 
 @Component({
   selector: 'app-shadow-viewer',

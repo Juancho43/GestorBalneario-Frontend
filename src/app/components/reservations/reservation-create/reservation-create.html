@@ -5,8 +5,11 @@
     (currentElement)="setShadow($event)"
   />
   <div>
-    <app-client-form/>
+    <app-client-card
 
+      [client]="client()"
+      (click)="openClientDialog()"
+    />
     <app-reservation-form
       [client]="client()"
       [shadow]="shadow()"

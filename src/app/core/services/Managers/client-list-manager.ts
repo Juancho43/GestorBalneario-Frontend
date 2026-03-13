@@ -19,7 +19,7 @@ export class ClientListManager {
     params: ()=>this.query(),
     stream:({params})=> this.clientsHttp.get(params)
   })
-
+  currentClient = signal<ClientEntity| null>(null);
   /*
   * A list of the current clients. It is updated when a shadow is added, updated or deleted.
   * */
@@ -36,19 +36,17 @@ export class ClientListManager {
 
   addClient(client: ClientEntity){
     this.create.create(client).subscribe(r=>{
-      this.clients.set([...this.clients(),r])
+      this.currentClient.set(r);
     });
   }
 
   updateClient(client: ClientEntity){
     this.update.update(client).subscribe(r => {
-      this.clients.set(this.clients().map(c => c.id === r.id ? r : c))
+      this.currentClient.set(r);
     })
   }
   deleteClient(client: ClientEntity){
-    this.delete.delete(client.id!).subscribe(()=>{
-      this.clients.set(this.clients().filter(c => c.id !== client.id))
-    });
+    this.delete.delete(client.id!).subscribe();
   }
 
 }
