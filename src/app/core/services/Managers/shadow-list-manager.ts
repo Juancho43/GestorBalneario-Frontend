@@ -44,7 +44,7 @@ export class ShadowListManager {
    **/
   addShadow(shadow:ShadowEntity) {
     this.create.create(shadow).subscribe(r=>{
-      this.shadows.set([...this.shadows(),r])
+      this.shadowsResource.reload();
     });
   }
 
@@ -54,7 +54,7 @@ export class ShadowListManager {
    * */
   updateShadow(updatedShadow: ShadowEntity) {
     this.update.update(updatedShadow).subscribe(r =>
-      this.shadows.set(this.shadows().map(s => s.identifier === r.identifier ? r : s))
+    this.shadowsResource.reload()
     );
   }
   /**
@@ -65,7 +65,7 @@ export class ShadowListManager {
 
   deleteShadow(id: string) {
     this.delete.delete(id).subscribe(r => {
-      this.shadows.set(this.shadows().filter(s => s.identifier !== id));
+      this.shadowsResource.reload();
     });
   }
   /*

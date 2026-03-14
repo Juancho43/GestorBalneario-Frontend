@@ -21,7 +21,7 @@ export type MapState = 'idle' | 'editing' | 'viewing';
   styleUrl: './shadow-map.scss',
 })
 export class ShadowMap implements AfterViewInit{
-  readonly loadedShadows = input<ShadowEntity[]>();
+  readonly loadedShadows = input.required<ShadowEntity[]>();
   @ViewChild('myCanvas') canvasElement!: ElementRef;
   initialState = input<MapState>('viewing');
   state = linkedSignal<MapState>(this.initialState);
@@ -33,10 +33,11 @@ export class ShadowMap implements AfterViewInit{
   deletedElement = output<any>();
   private canvas!: fabric.Canvas;
   constructor() {
-    effect(() => {
-      this.loadedShadows()
-      this.load();
-    });
+      effect(() => {
+        this.loadedShadows();
+          console.log('efect')
+          this.load();
+      });
   }
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -53,7 +54,6 @@ export class ShadowMap implements AfterViewInit{
       height: 750,
       width: 1080,
     });
-    this.load();
     this.setUp();
     this.setMapState();
 
@@ -66,10 +66,13 @@ export class ShadowMap implements AfterViewInit{
   }
 
   load() {
+    if(this.canvas && this.loadedShadows().length > 0){
+      this.canvas.clear();
+    console.log('sombras', this.loadedShadows());
     this.loadedShadows()?.forEach(shadow => {
-      this.printShapesOnCanvas(this.createShape(shadow.type, shadow.coords.x, shadow.coords.y, shadow.identifier));
+      this.printGroupOnCanvas(this.createShape(shadow.type, shadow.coords.x, shadow.coords.y, shadow.identifier));
     })
-  }
+  }}
 
 
 
@@ -84,18 +87,6 @@ export class ShadowMap implements AfterViewInit{
     }
   }
 
-  updateShapeText(shadow: ShadowEntity) {
-    this.canvas.getObjects().forEach((element) => {
-      if (element.left === shadow.coords.x && element.top === shadow.coords.y) {
-        const group = element as fabric.Group;
-         group.item(1).set({
-          text: shadow.identifier
-          }
-        )
-        this.canvas.requestRenderAll();
-      }
-    })
-  }
 
   private validateCanvasBorder(event: CdkDragEnd){
     const canvasNative = this.canvasElement.nativeElement;
@@ -104,6 +95,10 @@ export class ShadowMap implements AfterViewInit{
     const y = event.dropPoint.y - rect.top;
     return  (x >= 0 && x <= canvasNative.width && y >= 0 && y <= canvasNative.height)
   }
+  /**
+   * Creates a new group shape.
+   *
+   * */
   private createShape(type: string, x: number, y: number, textContent: string = '...') {
     let shape: fabric.Object;
     let text: fabric.IText;
@@ -133,7 +128,7 @@ export class ShadowMap implements AfterViewInit{
       lockRotation: true
     });
   }
-  private printShapesOnCanvas(group: any){
+  private printGroupOnCanvas(group: any){
     this.canvas.add(group);
     this.canvas.renderAll();
   }

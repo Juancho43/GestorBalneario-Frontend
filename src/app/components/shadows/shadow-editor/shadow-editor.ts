@@ -40,7 +40,6 @@ export class ShadowEditor {
 
   addShadow(event: any) {
     let etl = this.shadowMapper.createShadowFromFabric(event);
-    console.log(etl)
     this.shadowList.addShadow(etl!);
   }
 
@@ -68,10 +67,7 @@ export class ShadowEditor {
    * Text changed
    * */
   identifierChangedHandler(event: any) {
-    console.log(event)
     this.shadowList.updateShadow(event);
-    this.currentShadow.set(event);
-    this.shadowMap.updateShapeText(event);
   }
 
   /**
@@ -80,7 +76,6 @@ export class ShadowEditor {
   deleteShadow(event: any) {
     const selected = this.shadowList.getByIdentifier(event._objects[1].text);
     if(selected){
-      this.currentShadow.set(selected);
       this.shadowList.deleteShadow(selected.id!);
     }
   }
