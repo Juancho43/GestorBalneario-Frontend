@@ -1,6 +1,6 @@
 import {inject, Injectable, linkedSignal, signal} from '@angular/core';
 import {rxResource} from '@angular/core/rxjs-interop';
-import {GetClientsHttp, GetClientsQuery} from '../ClientHttp/get-clients-http';
+import {GetClientsHttp, PaginatedQuery} from '../ClientHttp/get-clients-http';
 import {CreateClientHttp} from '../ClientHttp/create-client-http';
 import {EditClientHttp} from '../ClientHttp/edit-client-http';
 import {DeleteClientHttp} from '../ClientHttp/delete-client-http';
@@ -14,7 +14,7 @@ export class ClientListManager {
   private create = inject(CreateClientHttp);
   private update = inject(EditClientHttp);
   private delete = inject(DeleteClientHttp);
-  private query = signal<GetClientsQuery>({ query:'',page:1,pageSize:10});
+  private query = signal<PaginatedQuery>({ query:'',page:1,pageSize:10});
   private clientsResource= rxResource({
     params: ()=>this.query(),
     stream:({params})=> this.clientsHttp.get(params)

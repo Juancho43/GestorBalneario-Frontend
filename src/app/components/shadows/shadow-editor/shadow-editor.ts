@@ -7,7 +7,7 @@ import {CdkDragEnd} from '@angular/cdk/drag-drop';
 import {ShadowList} from '../shadow-list/shadow-list';
 import {ShadowForm} from '../shawdow-form/shadow-form.component';
 import {Dialog} from '@angular/cdk/dialog';
-import {NewShadow} from '../../../new-shadow/new-shadow';
+import {NewShadow} from '../new-shadow/new-shadow';
 
 @Component({
   selector: 'app-shadow-editor',
