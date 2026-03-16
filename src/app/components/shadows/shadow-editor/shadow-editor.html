@@ -1,17 +1,17 @@
 <div class="panel">
   <app-shadow-list
-  (onDropped)="updateMap($event)"
-/>
-<app-shadow-map
-  initialState="editing"
-  [loadedShadows]="shadows()"
-  (newElement)="addShadow($event)"
-  (updateElement)="movedShadowHandler($event)"
-  (currentElement)="selectShadowHandler($event)"
-  (deletedElement)="deleteShadow($event)"
-/>
-<app-shadow-form
-  [shadowToEdit]="currentShadow()"
-  (finalShadow)="identifierChangedHandler($event)"
-/>
+    (onDropped)="updateMap($event)"
+  />
+  <app-shadow-map
+    initialState="editing"
+    [loadedShadows]="shadows()"
+    (newElement)="addShadow($event)"
+    (updateElement)="movedShadowHandler($event)"
+    (currentElement)="selectShadowHandler($event)"
+    (deletedElement)="deleteShadow($event)"
+  />
+  <app-shadow-form
+    (finalShadow)="identifierChangedHandler($event)"
+    [shadowToEdit]="currentShadow()"
+  />
 </div>

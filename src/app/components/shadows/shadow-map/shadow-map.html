@@ -1,3 +1,7 @@
+@if (this.deleteMode()) {
+  <div class="delete-indicator">Delete Mode Active</div>
+}
+<button (click)="activeDelete()">Delete</button>
 <canvas
   #myCanvas
   class="map"

@@ -53,6 +53,7 @@ export class ShadowListManager {
    * Changes the shadow list with its new state.
    * */
   updateShadow(updatedShadow: ShadowEntity) {
+    console.log('actualizando sombra', updatedShadow);
     this.update.update(updatedShadow).subscribe(r =>
     this.shadowsResource.reload()
     );
@@ -64,6 +65,7 @@ export class ShadowListManager {
    * */
 
   deleteShadow(id: string) {
+    console.log('delete', id);
     this.delete.delete(id).subscribe(r => {
       this.shadowsResource.reload();
     });

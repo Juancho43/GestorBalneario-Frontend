@@ -6,13 +6,17 @@ import {ShadowEntity} from '../../../core/model/shadowEntity';
 import {CdkDragEnd} from '@angular/cdk/drag-drop';
 import {ShadowList} from '../shadow-list/shadow-list';
 import {ShadowForm} from '../shawdow-form/shadow-form.component';
+import {Dialog} from '@angular/cdk/dialog';
+import {NewShadow} from '../../../new-shadow/new-shadow';
+import {EditShadow} from '../../../edit-shadow/edit-shadow';
 
 @Component({
   selector: 'app-shadow-editor',
   imports: [
     ShadowList,
     ShadowMap,
-    ShadowForm
+    ShadowForm,
+    EditShadow
   ],
   templateUrl: './shadow-editor.html',
   styleUrl: './shadow-editor.scss',
@@ -21,7 +25,7 @@ export class ShadowEditor {
   private shadowMapper= inject(ShadowMapper);
   private shadowList = inject(ShadowListManager);
   shadows = computed(() => this.shadowList.getList());
-
+  private dialog = inject(Dialog);
   @ViewChild(ShadowMap) shadowMap!: ShadowMap;
   currentShadow = signal<ShadowEntity>({identifier: '',state:'active', name: '', type: '', coords: {x: 0, y: 0}});
 
@@ -39,8 +43,12 @@ export class ShadowEditor {
    */
 
   addShadow(event: any) {
-    let etl = this.shadowMapper.createShadowFromFabric(event);
-    this.shadowList.addShadow(etl!);
+    const dialog = this.dialog.open<ShadowEntity,any>(NewShadow);
+    dialog.closed.subscribe(result => {
+      const newShadow = event.shadow;
+      newShadow.identifier = result!.identifier;
+      this.shadowList.addShadow(newShadow);
+    })
   }
 
   /**
