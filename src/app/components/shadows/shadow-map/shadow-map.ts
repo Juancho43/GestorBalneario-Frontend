@@ -6,7 +6,7 @@ import {
   HostListener,
   input,
   linkedSignal,
-  output,
+  output, signal,
   ViewChild
 } from '@angular/core';
 import {CdkDragEnd} from '@angular/cdk/drag-drop';
@@ -31,18 +31,18 @@ export class ShadowMap implements AfterViewInit{
   newElement = output<any>();
   updateElement = output<any>();
   deletedElement = output<any>();
+  deleteMode = signal<boolean>(false);
   private canvas!: fabric.Canvas;
   constructor() {
       effect(() => {
         this.loadedShadows();
-          console.log('efect')
           this.load();
       });
   }
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
     if (event.key === 'Delete' || event.key === 'Backspace') {
-      if (this.state() === 'editing') {
+      if (this.state() === 'editing' && this.deleteMode()) {
         this.deleteObject();
       }
     }
@@ -68,7 +68,6 @@ export class ShadowMap implements AfterViewInit{
   load() {
     if(this.canvas && this.loadedShadows().length > 0){
       this.canvas.clear();
-    console.log('sombras', this.loadedShadows());
     this.loadedShadows()?.forEach(shadow => {
       this.printGroupOnCanvas(this.createShape(shadow.type, shadow.coords.x, shadow.coords.y, shadow.identifier));
     })
@@ -78,12 +77,11 @@ export class ShadowMap implements AfterViewInit{
 
   onShadowDropped(event: {event: CdkDragEnd, shadow: ShadowEntity}) {
     if (this.validateCanvasBorder(event.event)) {
-      const text = prompt('Ingrese un identificador para la sombra:');
       const r = this.canvasElement.nativeElement.getBoundingClientRect();
       const x = event.event.dropPoint.x - r.left;
       const y = event.event.dropPoint.y - r.top;
-      const group = this.createShape(event.shadow.type, x, y, text!);
-      this.newElement.emit(group);
+      event.shadow.coords = {x:x,y:y};
+      this.newElement.emit(event);
     }
   }
 
@@ -138,10 +136,8 @@ export class ShadowMap implements AfterViewInit{
     if (activeObjects.length > 0) {
       this.canvas.discardActiveObject(); // Limpia la selección
       activeObjects.forEach((obj) => {
-        this.canvas.remove(obj);
         this.deletedElement.emit(obj);
       });
-      this.canvas.renderAll(); // Refresca el lienzo
     }
   }
   public setMapState() {
@@ -264,5 +260,9 @@ export class ShadowMap implements AfterViewInit{
         this.currentElement.emit(options.target);
       }
     });
+  }
+
+  protected activeDelete() {
+    this.deleteMode.update((v) => !v )
   }
 }

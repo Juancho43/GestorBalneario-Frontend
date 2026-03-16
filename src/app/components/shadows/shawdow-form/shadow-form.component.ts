@@ -20,11 +20,19 @@ export class ShadowForm {
   finalShadow = output<ShadowEntity>();
   shadowForm = form(this.shadow, (schemaPath) => {
     required(schemaPath.identifier); // Add validation
+
   });
+  error = false;
+
   submitted(event: SubmitEvent){
     event.preventDefault();
-    if(this.manager.getByIdentifier(this.shadow().identifier)) return;
-    this.finalShadow.emit(this.shadow())
+    const result = this.manager.getByIdentifier(this.shadow().identifier);
+    console.log('resultado:',result);
+    if (result) {
+      this.error = true;
+    }else{
+      this.finalShadow.emit(this.shadow())
+    }
   }
 
 }

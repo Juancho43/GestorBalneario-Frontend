@@ -7,5 +7,10 @@
 <pre>
   {{shadow | json}}
 </pre>
+  @if (error){
+    <p>
+      ERROR: El identificador ya existe, por favor elija otro.
+    </p>
+  }
   <input type="submit" value="save">
 </form>
