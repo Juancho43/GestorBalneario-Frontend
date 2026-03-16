@@ -1,12 +1,12 @@
 <div class="panel">
 
   <app-shadow-map
+    initialState="viewing"
     [loadedShadows]="shadows()"
     (currentElement)="setShadow($event)"
   />
   <div>
     <app-client-card
-
       [client]="client()"
       (click)="openClientDialog()"
     />

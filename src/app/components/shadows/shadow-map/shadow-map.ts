@@ -1,6 +1,6 @@
 import {
   AfterViewInit,
-  Component,
+  Component, computed,
   effect,
   ElementRef,
   HostListener,
@@ -24,7 +24,7 @@ export class ShadowMap implements AfterViewInit{
   readonly loadedShadows = input.required<ShadowEntity[]>();
   @ViewChild('myCanvas') canvasElement!: ElementRef;
   initialState = input<MapState>('viewing');
-  state = linkedSignal<MapState>(this.initialState);
+  state = computed<MapState>(()=>this.initialState());
   currentElement= output<any>();
   loaded = output<any>();
   saved = output<any>();
@@ -37,6 +37,7 @@ export class ShadowMap implements AfterViewInit{
         this.loadedShadows();
           console.log('efect')
           this.load();
+          this.setMapState();
       });
   }
   @HostListener('document:keydown', ['$event'])
@@ -55,7 +56,6 @@ export class ShadowMap implements AfterViewInit{
       width: 1080,
     });
     this.setUp();
-    this.setMapState();
 
   }
   private setUp(){
@@ -63,6 +63,7 @@ export class ShadowMap implements AfterViewInit{
     this.setUpPanning();
     this.setUpMovingShape();
     this.setUpSelectShape();
+    this.setMapState();
   }
 
   load() {
@@ -253,7 +254,7 @@ export class ShadowMap implements AfterViewInit{
   }
   private setUpMovingShape(){
     this.canvas.on('object:modified', (options) => {
-      if (options.target) {
+      if (options.target && this.state() === 'editing') {
         this.updateElement.emit(options.target);
       }
     })
