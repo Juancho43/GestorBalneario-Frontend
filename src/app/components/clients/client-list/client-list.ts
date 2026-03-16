@@ -1,4 +1,4 @@
-import {Component, input} from '@angular/core';
+import {Component, input, output} from '@angular/core';
 import {ClientCard} from '../client-card/client-card';
 import {ClientEntity} from '../../../core/model/clientEntity';
 
@@ -12,6 +12,6 @@ import {ClientEntity} from '../../../core/model/clientEntity';
 })
 export class ClientList {
   readonly list = input.required<ClientEntity[]>()
-
+  selected = output<ClientEntity>()
 
 }

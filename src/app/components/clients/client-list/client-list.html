@@ -1,6 +1,7 @@
 @let list = this.list();
 @for (client of list; track client.id) {
- <app-client-card [client]="client"/>
+ <app-client-card [client]="client" (click)="selected.emit(client)"/>
+  <br>
 } @empty {
   <p>No clients found.</p>
 }

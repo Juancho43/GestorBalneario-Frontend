@@ -22,14 +22,12 @@ export class ReservationForm {
   readonly client = input.required<ClientEntity>();
   readonly shadow = input.required<ShadowEntity>();
   reservation = linkedSignal<ReservationEntity>(()=> this.reservationToEdit() || {
-    shadowId: '',
+    shadow: this.shadow(),
     dates: {
       checkIn: '',
       checkOut: '',
-    start: new Date(),
-    end: new Date(),
     },
-    client: {name: '', email: '', phone:''} as ClientEntity
+    client: this.client()
   });
   reservationForm = form(this.reservation, (schemaPath) =>{
 

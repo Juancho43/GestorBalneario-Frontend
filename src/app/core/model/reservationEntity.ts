@@ -1,13 +1,13 @@
 import {Time} from '@angular/common';
 import {ClientEntity} from './clientEntity';
+import {ShadowEntity} from './shadowEntity';
 
 export interface ReservationEntity{
   id?: string;
-  shadowId: string;
+  shadow?: ShadowEntity;
+  shadowId?: string;
   dates: {
     checkIn: string;
-    start: Date;
-    end: Date;
     checkOut: string;
   }
   client: ClientEntity;

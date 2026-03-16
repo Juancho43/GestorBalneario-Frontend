@@ -8,7 +8,6 @@ import {ShadowList} from '../shadow-list/shadow-list';
 import {ShadowForm} from '../shawdow-form/shadow-form.component';
 import {Dialog} from '@angular/cdk/dialog';
 import {NewShadow} from '../../../new-shadow/new-shadow';
-import {EditShadow} from '../../../edit-shadow/edit-shadow';
 
 @Component({
   selector: 'app-shadow-editor',
@@ -16,7 +15,6 @@ import {EditShadow} from '../../../edit-shadow/edit-shadow';
     ShadowList,
     ShadowMap,
     ShadowForm,
-    EditShadow
   ],
   templateUrl: './shadow-editor.html',
   styleUrl: './shadow-editor.scss',

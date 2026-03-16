@@ -1,12 +1,18 @@
-@if (this.mode() === 'search') {
-  <app-client-searcher/>
-  <app-client-list [list]="list()"/>
-  <button (click)="this.mode.set('create')">Crear</button>
-}
+<div class="client-manager-dialog">
+  @if (this.mode() === 'search') {
+    <app-client-searcher/>
+    <app-client-list
+      [list]="list()"
+      (selected)="selectClient($event)"
+    />
+    <button (click)="this.mode.set('create')">Crear</button>
+  }
 
-@if (this.mode() === 'create') {
-  <app-client-form
-    (finalClient)="createClient($event)"
-  />
-  <button (click)="this.mode.set('search')">Buscar</button>
-}
+  @if (this.mode() === 'create') {
+    <app-client-form
+      (finalClient)="createClient($event)"
+    />
+    <button (click)="this.mode.set('search')">Buscar</button>
+  }
+
+</div>
