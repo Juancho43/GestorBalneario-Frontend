@@ -10,6 +10,7 @@ import {EditReservationHttp} from '../ReservationHttp/edit-reservation-http';
 import {DeleteReservationHttp} from '../ReservationHttp/delete-reservation-http';
 import {rxResource} from '@angular/core/rxjs-interop';
 import {ClientEntity} from '../../model/clientEntity';
+import {GetActiveReservationsHttp} from '../../../get-active-reservations-http';
 
 @Injectable({
   providedIn: 'root',
@@ -32,7 +33,6 @@ export class ReservationListManager {
   private reservations = linkedSignal(()=>
     this.reservationsResource.isLoading() || this.reservationsResource.error() ? [] : this.reservationsResource.value()!
   )
-
 
   getList(){
     return this.reservations();

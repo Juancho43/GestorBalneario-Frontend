@@ -1,7 +1,7 @@
 import {Component, input} from '@angular/core';
 import {JsonPipe} from '@angular/common';
 import {ShadowEntity} from '../../../core/model/shadowEntity';
-import {MatCard, MatCardContent, MatCardFooter, MatCardHeader, MatCardTitle} from '@angular/material/card';
+import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from '@angular/material/card';
 import {MatChip} from '@angular/material/chips';
 
 @Component({
@@ -12,7 +12,6 @@ import {MatChip} from '@angular/material/chips';
     MatCardHeader,
     MatCardTitle,
     MatCardContent,
-    MatCardFooter,
     MatChip
   ],
   templateUrl: './shadow-detail.html',
