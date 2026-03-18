@@ -1,5 +1,4 @@
-<p>reservation-list works!</p>
-@let list = this.reservations();
+@let list = this.list();
 @for (reservation of list; track $index ) {
 <pre>
   {{reservation | json}}

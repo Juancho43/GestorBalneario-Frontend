@@ -1,5 +1,4 @@
 <div class="panel">
-
   <app-shadow-map
     initialState="viewing"
     [loadedShadows]="shadows()"
@@ -13,8 +12,7 @@
     <app-reservation-form
       [client]="client()"
       [shadow]="shadow()"
-      (finalReservation)="handle($event)"
+      (finalReservation)="createReservation($event)"
     />
   </div>
-
 </div>

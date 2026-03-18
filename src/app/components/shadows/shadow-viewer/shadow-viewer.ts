@@ -1,7 +1,6 @@
 import {Component, computed, inject, signal} from '@angular/core';
 import {ShadowMap} from '../shadow-map/shadow-map';
 import {ShadowDetail} from '../shadow-detail/shadow-detail';
-import {ShadowMapper} from '../../../core/services/shadow-mapper.service';
 import {ShadowEntity} from '../../../core/model/shadowEntity';
 import {ShadowListManager} from '../../../core/services/Managers/shadow-list-manager';
 
@@ -14,12 +13,11 @@ import {ShadowListManager} from '../../../core/services/Managers/shadow-list-man
   templateUrl: './shadow-viewer.html',
   styleUrl: './shadow-viewer.scss',
 })
-export class ShadowViewer {
-  private shadowMapper = inject(ShadowMapper);
+export default class ShadowViewer {
   private shadowList = inject(ShadowListManager);
   shadows = computed(() => this.shadowList.getList());
-  currentShadow = signal<ShadowEntity>({} as ShadowEntity);
+  currentShadow = signal<ShadowEntity | undefined>({} as ShadowEntity);
   show($event: any) {
-    this.currentShadow.set(this.shadowMapper.createShadowFromFabric($event)!);
+    this.currentShadow.set(this.shadowList.getByCoords({x:$event.left,y:$event.top}));
   }
 }

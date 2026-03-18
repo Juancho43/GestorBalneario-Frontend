@@ -15,7 +15,7 @@ import {JsonPipe} from '@angular/common';
 })
 export class ShadowForm {
   private manager = inject(ShadowListManager);
-  readonly shadowToEdit = input<ShadowEntity>({coords: {x: 0, y: 0}, state:'active', identifier: '', name: '', type: ''});
+  readonly shadowToEdit = input<ShadowEntity>({coords: {x: 0, y: 0}, state:'available', identifier: '', name: '', type: 'carpa'});
   shadow = linkedSignal(this.shadowToEdit);
   finalShadow = output<ShadowEntity>();
   shadowForm = form(this.shadow, (schemaPath) => {

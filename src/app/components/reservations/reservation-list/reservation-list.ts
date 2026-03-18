@@ -1,7 +1,8 @@
-import {Component, computed, inject} from '@angular/core';
+import {Component, computed, inject, input} from '@angular/core';
 import {ReservationListManager} from '../../../core/services/Managers/reservation-list-manager';
 import {JsonPipe} from '@angular/common';
 import {RouterLink, RouterOutlet} from '@angular/router';
+import {ReservationEntity} from '../../../core/model/reservationEntity';
 
 @Component({
   selector: 'app-reservation-list',
@@ -13,6 +14,5 @@ import {RouterLink, RouterOutlet} from '@angular/router';
   styleUrl: './reservation-list.scss',
 })
 export class ReservationList {
-  private reservationListManager = inject(ReservationListManager);
-  reservations = computed(()=>this.reservationListManager.getList());
+  readonly list = input<ReservationEntity[]>();
 }

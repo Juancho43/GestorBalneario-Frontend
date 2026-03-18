@@ -8,6 +8,7 @@ import {ClientCard} from '../../clients/client-card/client-card';
 import {Dialog} from '@angular/cdk/dialog';
 import {ClientManagerDialog} from '../../clients/client-searcher-dialog/client-manager-dialog.component';
 import {ClientListManager} from '../../../core/services/Managers/client-list-manager';
+import {ReservationEntity} from '../../../core/model/reservationEntity';
 
 @Component({
   selector: 'app-reservation-create',
@@ -27,7 +28,7 @@ export class ReservationCreate {
   client = linkedSignal<ClientEntity>(()=>this.clientManager.currentClient() || {name: '', email: '', phone:''});
   shadow = signal(this.shadows()[0]);
   private reservationListManager = inject(ReservationListManager);
-  handle(reservation: any) {
+  createReservation(reservation: ReservationEntity) {
     this.reservationListManager.addReservation(reservation);
   }
   openClientDialog(): void {

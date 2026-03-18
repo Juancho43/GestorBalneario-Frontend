@@ -1,13 +1,12 @@
 import { Routes } from '@angular/router';
 import {ShadowAdminPanel} from './components/panels/shadow-admin-panel/shadow-admin-panel';
-import {ShadowViewer} from './components/shadows/shadow-viewer/shadow-viewer';
+import ShadowViewer from './components/shadows/shadow-viewer/shadow-viewer';
 import {ShadowReservationPanel} from './components/panels/shadow-reservation-panel/shadow-reservation-panel';
 import {ReservationEdit} from './components/reservations/reservation-edit/reservation-edit';
 import {ReservationCreate} from './components/reservations/reservation-create/reservation-create';
-import {MatMenuContent} from '@angular/material/menu';
 import {MainMenu} from './components/layout/main-menu/main-menu';
 import {AboutMenu} from './components/layout/about-menu/about-menu';
-import {ShadowEditor} from './components/shadows/shadow-editor/shadow-editor';
+import ShadowEditor from './components/shadows/shadow-editor/shadow-editor';
 import {ReservationViewer} from './components/reservations/reservation-viewer/reservation-viewer';
 import {ClientManager} from './components/panels/client-manager/client-manager';
 import {ClientViewer} from './components/clients/client-viewer/client-viewer';
@@ -31,11 +30,11 @@ export const routes: Routes = [
     children: [
       {
         path: 'view',
-        component: ShadowViewer
+        loadComponent: ()=> ShadowViewer
       },
       {
         path:'editor',
-        component: ShadowEditor
+        loadComponent: ()=> ShadowEditor
       },
     ]
   },

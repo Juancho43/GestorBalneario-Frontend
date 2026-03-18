@@ -1,5 +1,4 @@
 import {Component, computed, inject, signal, ViewChild} from '@angular/core';
-import {ShadowMapper} from '../../../core/services/shadow-mapper.service';
 import {ShadowListManager} from '../../../core/services/Managers/shadow-list-manager';
 import {ShadowMap} from '../shadow-map/shadow-map';
 import {ShadowEntity} from '../../../core/model/shadowEntity';
@@ -19,13 +18,12 @@ import {NewShadow} from '../new-shadow/new-shadow';
   templateUrl: './shadow-editor.html',
   styleUrl: './shadow-editor.scss',
 })
-export class ShadowEditor {
-  private shadowMapper= inject(ShadowMapper);
+export default class ShadowEditor {
   private shadowList = inject(ShadowListManager);
   shadows = computed(() => this.shadowList.getList());
   private dialog = inject(Dialog);
   @ViewChild(ShadowMap) shadowMap!: ShadowMap;
-  currentShadow = signal<ShadowEntity>({identifier: '',state:'active', name: '', type: '', coords: {x: 0, y: 0}});
+  currentShadow = signal<ShadowEntity>({identifier: '',state:'available', name: '', type: 'carpa', coords: {x: 0, y: 0}});
 
   /**
    * new shadow dragged on map

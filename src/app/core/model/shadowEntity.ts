@@ -1,8 +1,8 @@
 export interface ShadowEntity {
   id?: string;
   name: string;
-  state : 'active' | 'inactive' | 'maintenance ';
+  state : 'available' | 'unavailable';
   identifier: string;
-  type: string;
+  type: 'carpa' | 'sombrilla';
   coords: { x: number; y: number };
 }

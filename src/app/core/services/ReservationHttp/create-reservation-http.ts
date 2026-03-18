@@ -11,6 +11,12 @@ export class CreateReservationHttp {
 
   private http = inject(HttpClient);
   create(data: ReservationEntity) {
-    return this.http.post<ReservationEntity>(`${environment.apiUrl}/reservation/create`, data);
+    const payload = {
+      clientId: data.client.id,
+      shadowId: data.shadow!.id!,
+      checkIn: data.dates.checkIn.toString(),
+      checkOut: data.dates.checkOut.toString(),
+    }
+    return this.http.post<ReservationEntity>(`${environment.apiUrl}/reservation/create`, payload);
   }
 }

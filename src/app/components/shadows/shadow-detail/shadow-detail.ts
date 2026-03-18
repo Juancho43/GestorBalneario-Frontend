@@ -1,5 +1,6 @@
 import {Component, input} from '@angular/core';
 import {JsonPipe} from '@angular/common';
+import {ShadowEntity} from '../../../core/model/shadowEntity';
 
 @Component({
   selector: 'app-shadow-detail',
@@ -10,5 +11,5 @@ import {JsonPipe} from '@angular/common';
   styleUrl: './shadow-detail.scss',
 })
 export class ShadowDetail {
-  shadow = input<any>('');
+  shadow = input<ShadowEntity>();
 }
