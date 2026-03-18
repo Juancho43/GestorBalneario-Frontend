@@ -1,5 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
+$fondo: #F4F6F7;
+$fondo-2: #7F8C8D;
+$primario: #1B4F72;
+$primario-2: #AED6F1;
+$secundario: #F5F5DC;
+$secundario-2: #D4AC0D;
 .panel{
   display: flex;
   width: 90dvw;
+  margin: 50px auto;
+}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+}
+body{
+  background-color: $fondo;
+}
+
+form{
+  background-color: $secundario-2;
+  display: flex;
+  flex-direction: column;
 }

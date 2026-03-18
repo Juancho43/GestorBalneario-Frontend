@@ -1,0 +1,11 @@
+@import "../../../../styles";
+nav{
+  background-color: $secundario;
+  a{
+
+    color: $primario;
+  }
+  font-weight: bolder;
+  font-family: Cantarell;
+  border: none;
+}

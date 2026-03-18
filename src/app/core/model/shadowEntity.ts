@@ -1,3 +1,5 @@
+import {ReservationEntity} from './reservationEntity';
+
 export interface ShadowEntity {
   id?: string;
   name: string;
@@ -5,4 +7,5 @@ export interface ShadowEntity {
   identifier: string;
   type: 'carpa' | 'sombrilla';
   coords: { x: number; y: number };
+  currentReservation?: ReservationEntity
 }

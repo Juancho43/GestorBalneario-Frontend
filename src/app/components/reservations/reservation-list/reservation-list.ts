@@ -1,6 +1,6 @@
 import {Component, inject, input} from '@angular/core';
 import {ReservationListManager} from '../../../core/services/Managers/reservation-list-manager';
-import {JsonPipe} from '@angular/common';
+import {DatePipe, JsonPipe} from '@angular/common';
 import {RouterLink } from '@angular/router';
 import {ReservationEntity} from '../../../core/model/reservationEntity';
 import {Dialog} from '@angular/cdk/dialog';
@@ -11,6 +11,7 @@ import {ReservationDetail} from '../reservation-detail/reservation-detail';
   imports: [
     JsonPipe,
     RouterLink,
+    DatePipe,
   ],
   templateUrl: './reservation-list.html',
   styleUrl: './reservation-list.scss',

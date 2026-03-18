@@ -1,8 +1,13 @@
 @let list = this.list();
-@for (reservation of list; track $index ) {
-<pre (click)="openReservationDialog(reservation)">
-  {{reservation | json}}
-</pre>
-} @empty {
-  <p>ninguna reserva</p>
-}
+
+  @for (reservation of list; track $index ) {
+    <div (click)="openReservationDialog(reservation)">
+      <p>{{reservation.shadow?.type}} - {{reservation.shadow?.identifier}}</p>
+      <p>Desde:{{reservation.dates.checkIn | date}}</p>
+      <p>Hasta:{{reservation.dates.checkOut | date}}</p>
+      <p>Responsable: {{reservation.client.name}}</p>
+    </div>
+    <br>
+  } @empty {
+    <p>ninguna reserva</p>
+  }

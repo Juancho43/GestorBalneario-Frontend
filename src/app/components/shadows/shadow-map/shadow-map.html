@@ -1,14 +1,14 @@
+<canvas
+  #myCanvas
+  class="map"
+  [class.border-editing]="state() === 'editing' && !deleteMode()"
+  [class.border-delete]="state() === 'editing' && deleteMode()"
+  [class.border-view]="state() === 'viewing'"
+>
+</canvas>
 @if(this.state() === 'editing'){
   @if (this.deleteMode()) {
     <div class="delete-indicator">Delete Mode Active</div>
   }
   <button (click)="activeDelete()">Delete</button>
 }
-{{
-this.state()
-}}^^
-<canvas
-  #myCanvas
-  class="map"
->
-</canvas>

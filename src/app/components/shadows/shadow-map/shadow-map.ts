@@ -11,11 +11,14 @@ import {
 import {CdkDragEnd} from '@angular/cdk/drag-drop';
 import * as fabric from 'fabric';
 import {ShadowEntity} from '../../../core/model/shadowEntity';
+import {MatTooltip} from '@angular/material/tooltip';
 
 export type MapState = 'idle' | 'editing' | 'viewing';
 @Component({
   selector: 'app-shadow-map',
-  imports: [],
+  imports: [
+    MatTooltip
+  ],
   templateUrl: './shadow-map.html',
   styleUrl: './shadow-map.scss',
 })
