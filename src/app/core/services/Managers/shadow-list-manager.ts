@@ -5,6 +5,7 @@ import {UpdateShadowHttp} from '../ShadowHttp/update-shadow-http';
 import {DeleteShadowHttp} from '../ShadowHttp/delete-shadow-http';
 import {GetCurrentShadowsHttp} from '../ShadowHttp/get-current-shadows-http';
 import {rxResource} from '@angular/core/rxjs-interop';
+import {GetShadowHttp} from '../ShadowHttp/get-shadow-http';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +15,7 @@ export class ShadowListManager {
   private create = inject(CreateShadowHttp);
   private update = inject(UpdateShadowHttp);
   private delete = inject(DeleteShadowHttp);
+  private get = inject(GetShadowHttp)
   private shadowsResource= rxResource({
     stream:()=> this.shadowsHttp.getCurrent()
   })

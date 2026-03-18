@@ -1,9 +1,8 @@
 @let list = this.list();
 @for (reservation of list; track $index ) {
-<pre>
+<pre (click)="openReservationDialog(reservation)">
   {{reservation | json}}
 </pre>
-  <a routerLink="/reservation/edit/{{reservation.id}}">Editar</a>
 } @empty {
   <p>ninguna reserva</p>
 }
