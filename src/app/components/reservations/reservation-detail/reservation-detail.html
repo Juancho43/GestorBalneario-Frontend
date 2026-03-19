@@ -1,3 +1,12 @@
-<pre>
-  {{reservation() | json}}
-</pre>
+@let reservation = this.reservation();
+<div>
+  <app-reservation-card
+    [reservation]="reservation!"
+  />
+  <app-client-card
+    [client]="reservation?.client!"
+  />
+  <app-shadow-card
+    [shadow]="reservation?.shadow!"
+  />
+</div>

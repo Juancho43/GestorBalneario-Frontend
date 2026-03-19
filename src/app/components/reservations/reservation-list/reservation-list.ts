@@ -1,7 +1,5 @@
 import {Component, inject, input} from '@angular/core';
 import {ReservationListManager} from '../../../core/services/Managers/reservation-list-manager';
-import {DatePipe, JsonPipe} from '@angular/common';
-import {RouterLink } from '@angular/router';
 import {ReservationEntity} from '../../../core/model/reservationEntity';
 import {Dialog} from '@angular/cdk/dialog';
 import {ReservationDetail} from '../reservation-detail/reservation-detail';
@@ -10,9 +8,6 @@ import {ReservationCard} from '../reservation-card/reservation-card';
 @Component({
   selector: 'app-reservation-list',
   imports: [
-    JsonPipe,
-    RouterLink,
-    DatePipe,
     ReservationCard,
   ],
   templateUrl: './reservation-list.html',

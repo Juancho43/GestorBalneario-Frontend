@@ -12,7 +12,6 @@ import {ShadowCard} from '../shadow-card/shadow-card';
   selector: 'app-shadow-viewer',
   imports: [
     ShadowMap,
-    ShadowDetail,
     ShadowCard
   ],
   templateUrl: './shadow-viewer.html',
