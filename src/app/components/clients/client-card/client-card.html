@@ -1,3 +1,6 @@
-{{
-  client() | json
-}}
+@let client = this.client();
+<mat-card class="card">
+  <p>Nombre: {{client.name}}</p>
+  <p>Email: {{client.email}}</p>
+  <p>Telefono: {{client.phone}}</p>
+</mat-card>

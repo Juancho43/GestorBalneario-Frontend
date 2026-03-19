@@ -9,13 +9,15 @@ import {Dialog} from '@angular/cdk/dialog';
 import {ClientManagerDialog} from '../../clients/client-searcher-dialog/client-manager-dialog.component';
 import {ClientListManager} from '../../../core/services/Managers/client-list-manager';
 import {ReservationEntity} from '../../../core/model/reservationEntity';
+import {ShadowCard} from '../../shadows/shadow-card/shadow-card';
 
 @Component({
   selector: 'app-reservation-create',
   imports: [
     ReservationForm,
     ShadowMap,
-    ClientCard
+    ClientCard,
+    ShadowCard
   ],
   templateUrl: './reservation-create.html',
   styleUrl: './reservation-create.scss',

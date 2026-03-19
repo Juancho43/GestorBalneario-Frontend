@@ -6,12 +6,14 @@ import {ShadowListManager} from '../../../core/services/Managers/shadow-list-man
 import {Dialog} from '@angular/cdk/dialog';
 import {rxResource} from '@angular/core/rxjs-interop';
 import {GetShadowHttp} from '../../../core/services/ShadowHttp/get-shadow-http';
+import {ShadowCard} from '../shadow-card/shadow-card';
 
 @Component({
   selector: 'app-shadow-viewer',
   imports: [
     ShadowMap,
-    ShadowDetail
+    ShadowDetail,
+    ShadowCard
   ],
   templateUrl: './shadow-viewer.html',
   styleUrl: './shadow-viewer.scss',

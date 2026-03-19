@@ -5,6 +5,7 @@ import {RouterLink } from '@angular/router';
 import {ReservationEntity} from '../../../core/model/reservationEntity';
 import {Dialog} from '@angular/cdk/dialog';
 import {ReservationDetail} from '../reservation-detail/reservation-detail';
+import {ReservationCard} from '../reservation-card/reservation-card';
 
 @Component({
   selector: 'app-reservation-list',
@@ -12,6 +13,7 @@ import {ReservationDetail} from '../reservation-detail/reservation-detail';
     JsonPipe,
     RouterLink,
     DatePipe,
+    ReservationCard,
   ],
   templateUrl: './reservation-list.html',
   styleUrl: './reservation-list.scss',

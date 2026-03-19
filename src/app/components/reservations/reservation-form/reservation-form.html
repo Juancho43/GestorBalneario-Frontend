@@ -1,6 +1,4 @@
-<p>reservation-form works!</p>
 <form (ngSubmit)="submitted()">
-
   <fieldset>
     <legend>Fechas</legend>
     <label>CheckIn</label>
@@ -10,10 +8,7 @@
     <input type="datetime-local" [formField]="reservationForm.dates.checkOut"]>
     <br>
   </fieldset>
-
-
+  <p>Client: {{reservation().client.name}}</p>
+  <p>Shadow: {{reservation().shadow?.identifier}}</p>
   <input type="submit" value="Submit">
-  <pre>
-  <p>Reservation: {{reservation()| json}}</p>
-</pre>
 </form>

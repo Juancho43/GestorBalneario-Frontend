@@ -4,5 +4,7 @@
     initialState="viewing"
     [loadedShadows]="shadows()"
   />
-  <app-shadow-detail [shadow]="currentShadow()"/>
+  <app-shadow-card
+    [shadow]="currentShadow()!"
+  />
 </div>
