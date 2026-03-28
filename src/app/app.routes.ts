@@ -11,6 +11,9 @@ import {ReservationViewer} from './components/reservations/reservation-viewer/re
 import {ClientManager} from './components/panels/client-manager/client-manager';
 import {ClientViewer} from './components/clients/client-viewer/client-viewer';
 import {ClientEditor} from './components/clients/client-editor/client-editor.component';
+import {PaymentViewer} from './components/payments/payment-viewer/payment-viewer';
+import {PaymentManager} from './components/panels/payment-manager/payment-manager';
+import {PaymentEditor} from './components/payments/payment-editor/payment-editor';
 
 export const routes: Routes = [
   {
@@ -77,6 +80,23 @@ export const routes: Routes = [
       }
     ]
   }
-
+,
+  {
+    title:'PaymentManager',
+    path: 'payment',
+    component: PaymentManager,
+    children: [
+      {
+        title: 'Manage payments',
+        path: 'create',
+        component: PaymentEditor
+      },
+      {
+        title: 'View payments',
+        path: 'view',
+        component: PaymentViewer
+      }
+    ]
+  }
 
 ];

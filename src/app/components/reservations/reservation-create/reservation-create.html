@@ -5,17 +5,20 @@
     (currentElement)="setShadow($event)"
   />
   <div>
-    <app-client-card
-      [client]="client()"
-      (click)="openClientDialog()"
-    />
-    <app-shadow-card
-      [shadow]="shadow()"
-    />
+    <h3>Crear una reserva</h3>
     <app-reservation-form
       [client]="client()"
       [shadow]="shadow()"
       (finalReservation)="createReservation($event)"
+    />
+    <p>Cliente seleccionado</p>
+    <app-client-card
+      [client]="client()"
+      (click)="openClientDialog()"
+    />
+    <p>Carpa seleccionada</p>
+    <app-shadow-card
+      [shadow]="shadow()"
     />
   </div>
 </div>

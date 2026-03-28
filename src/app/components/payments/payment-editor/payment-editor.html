@@ -1,0 +1,13 @@
+<div class="panel">
+
+  @for (invoice of invoices(); track $index){
+    <app-invoice-card
+      (click)="selectedInvoice.set(invoice)"
+      [invoice]="invoice"
+    />
+  }
+  <app-payment-form
+    [invoice]="selectedInvoice()"
+    (finalPayment)="createPayment($event)"
+  />
+</div>

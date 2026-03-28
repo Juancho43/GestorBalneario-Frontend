@@ -1,12 +1,23 @@
-@let reservation = this.reservation();
-<div>
-  <app-reservation-card
-    [reservation]="reservation!"
-  />
-  <app-client-card
-    [client]="reservation?.client!"
-  />
-  <app-shadow-card
-    [shadow]="reservation?.shadow!"
-  />
-</div>
+@let details = this.details();
+@if (details){
+  <div>
+    <pre>
+      {{details.reservation | json}}
+    </pre>
+    <app-client-card
+      [client]="details.client"
+    />
+    <app-shadow-card
+      [shadow]="details.shadow"
+    />
+    <app-invoice-card
+      [invoice]="details.invoice"
+    />
+
+    @for (payment of details.payments; track $index){
+      <pre>
+        {{payment | json}}
+    </pre>
+    }
+  </div>
+}

@@ -1,0 +1,21 @@
+<form (ngSubmit)="submitPayment()">
+  <label>Monto</label>
+  <input type="number" [formField]="paymentForm.amount"/>
+  <label>Tipo de pago</label>
+  <select [formField]="paymentForm.type">
+    <option>CASH</option>
+    <option>USD_DOLLAR</option>
+    <option>TRANSFER</option>
+    <option>CREDIT_CARD</option>
+    <option>CHECK</option>
+    <option>CRYPTO</option>
+    <option>OTHER</option>
+  </select>
+  <label>Cambio</label>
+  <input type="number" [formField]="paymentForm.changeType"/>
+  <label>Descripcion</label>
+  <input type="text" [formField]="paymentForm.description!"/>
+  <label>Fecha</label>
+  <input type="date" [formField]="paymentForm.date"/>
+  <input type="submit">
+</form>

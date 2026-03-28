@@ -1,4 +1,3 @@
-import {Time} from '@angular/common';
 import {ClientEntity} from './clientEntity';
 import {ShadowEntity} from './shadowEntity';
 
@@ -10,6 +9,8 @@ export interface ReservationEntity{
     checkIn: string;
     checkOut: string;
   }
-  client: ClientEntity;
-
+  client?: ClientEntity;
+  duration?: number;
+  price: number;
+  serviceId?: string;
 }

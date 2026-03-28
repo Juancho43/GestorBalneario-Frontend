@@ -26,6 +26,7 @@ export class ReservationCreate {
   private shadowManager = inject(ShadowListManager);
   private clientManager = inject(ClientListManager);
   private matDialog = inject(Dialog);
+
   shadows = computed(() => this.shadowManager.getList());
   client = linkedSignal<ClientEntity>(()=>this.clientManager.currentClient() || {name: '', email: '', phone:''});
   shadow = signal(this.shadows()[0]);
