@@ -5,6 +5,7 @@
     [loadedShadows]="shadows()"
   />
   <app-shadow-card
+    (click)="openShadowDetailDialog()"
     [shadow]="currentShadow()!"
   />
 </div>

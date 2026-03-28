@@ -8,7 +8,9 @@
     <input type="datetime-local" [formField]="reservationForm.dates.checkOut"]>
     <br>
   </fieldset>
-  <p>Client: {{reservation().client.name}}</p>
+  <label>Precio</label>
+  <input type="number" [formField]="reservationForm.price">
+  <p>Client: {{reservation().client?.name}}</p>
   <p>Shadow: {{reservation().shadow?.identifier}}</p>
   <input type="submit" value="Submit">
 </form>

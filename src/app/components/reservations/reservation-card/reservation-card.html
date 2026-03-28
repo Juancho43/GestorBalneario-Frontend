@@ -1,7 +1,12 @@
 @let reservation = this.reservation();
 <mat-card class="card">
-  <p>{{reservation.shadow?.type}} - {{reservation.shadow?.identifier}}</p>
+  @if (reservation.shadow){
+    <p>{{reservation.shadow?.type}} - {{reservation.shadow?.identifier}}</p>
+  }
   <p>Desde:{{reservation.dates.checkIn | date}}</p>
   <p>Hasta:{{reservation.dates.checkOut | date}}</p>
-  <p>Responsable: {{reservation.client.name}}</p>
+  <p>Duracion: {{duration()}}</p>
+  @if (reservation.client) {
+    <p>Responsable: {{reservation.client!.name}}</p>
+  }
 </mat-card>

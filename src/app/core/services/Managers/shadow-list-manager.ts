@@ -1,4 +1,4 @@
-import {inject, Injectable, linkedSignal} from '@angular/core';
+import {inject, Injectable, linkedSignal, signal} from '@angular/core';
 import {ShadowEntity} from '../../model/shadowEntity';
 import {CreateShadowHttp} from '../ShadowHttp/create-shadow-http';
 import {UpdateShadowHttp} from '../ShadowHttp/update-shadow-http';
@@ -26,6 +26,7 @@ export class ShadowListManager {
   private shadows = linkedSignal(()=>
     this.shadowsResource.isLoading() || this.shadowsResource.error() ? [] : this.shadowsResource.value()!
   )
+  currentShadow = signal<ShadowEntity>(this.shadows()[0]);
 
   /**
    * Gets a shadow by its identifier.
@@ -77,5 +78,8 @@ export class ShadowListManager {
   * */
   getList(){
     return this.shadows();
+  }
+  setList(shadows: ShadowEntity[]){
+    this.shadows.set(shadows);
   }
 }

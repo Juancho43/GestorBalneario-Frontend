@@ -17,7 +17,6 @@ export type MapState = 'idle' | 'editing' | 'viewing';
 @Component({
   selector: 'app-shadow-map',
   imports: [
-    MatTooltip
   ],
   templateUrl: './shadow-map.html',
   styleUrl: './shadow-map.scss',
@@ -101,7 +100,7 @@ export class ShadowMap implements AfterViewInit{
     return  (x >= 0 && x <= canvasNative.width && y >= 0 && y <= canvasNative.height)
   }
   private color(state:string){
-    if (state === 'unavailable'){
+    if (state === 'occupied'){
       return 'red';
     }else if(state === 'available'){
       return 'green';
@@ -169,8 +168,10 @@ export class ShadowMap implements AfterViewInit{
     });
   }
   private printGroupOnCanvas(group: any){
-    this.canvas.add(group);
-    this.canvas.renderAll();
+    if(this.canvas){
+      this.canvas.add(group);
+      this.canvas.renderAll();
+    }
   }
 
   deleteObject(){

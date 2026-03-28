@@ -3,7 +3,9 @@
     [loadedShadows]="shadows()"
     initialState="viewing"
   />
-  <app-reservation-list
-    [list]="reservations()"
-  />
+  @for (item of mapResource.value()!.map;track $index){
+    <app-map-card
+      (click)="openReservationDetailDialog(item)"
+      [item]="item"/>
+  }
 </div>

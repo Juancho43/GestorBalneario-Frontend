@@ -1,17 +1,23 @@
-@if (shadow()!) {
-  @let shadow = this.shadow()!;
-
+@let details = this.detail();
+@if (details) {
+  @let shadow = details.shadow;
+  @let reservations = details.reservations;
   <mat-card>
     <mat-card-header>
       <mat-card-title>{{shadow?.type}} - {{shadow?.identifier}}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       {{shadow?.state}}
-    <mat-chip>x:{{shadow.coords.x}}</mat-chip>
-    <mat-chip>y:{{shadow.coords.y}}</mat-chip>
-      @if (shadow.currentReservation){
-        {{shadow.currentReservation | json}}
-      }
+      <mat-chip>x:{{shadow.coords.x}}</mat-chip>
+      <mat-chip>y:{{shadow.coords.y}}</mat-chip>
     </mat-card-content>
   </mat-card>
+  @for (reservation of reservations; track $index) {
+    <app-reservation-card
+      [reservation]="reservation"
+    />
+  } @empty {
+    <p>No reservations for this shadow.</p>
+  }
+
 }
