@@ -16,6 +16,6 @@ export class GetClientsHttp {
   private http = inject(HttpClient);
 
   get(query: PaginatedQuery){
-    return this.http.post<ClientEntity[]>(`${environment.apiUrl}/client/current`,query);
+    return this.http.get<ClientEntity[]>(`${environment.apiUrl}/client/current?page=${query.page}&size=${query.pageSize}`);
   }
 }

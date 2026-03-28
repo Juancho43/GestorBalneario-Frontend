@@ -20,6 +20,7 @@ import {NewShadow} from '../new-shadow/new-shadow';
 })
 export default class ShadowEditor {
   private shadowList = inject(ShadowListManager);
+
   shadows = computed(() => this.shadowList.getList());
   private dialog = inject(Dialog);
   @ViewChild(ShadowMap) shadowMap!: ShadowMap;
