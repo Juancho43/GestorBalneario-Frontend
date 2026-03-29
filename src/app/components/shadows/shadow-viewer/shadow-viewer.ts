@@ -22,7 +22,6 @@ export default class ShadowViewer {
   private mapHttp = inject(ShadowMapHttp);
   private shadowList = inject(ShadowListManager);
   private dialog = inject(Dialog);
-  private get = inject(GetShadowHttp);
   mapResource = rxResource({
     stream:() => this.mapHttp.get()
   })
@@ -40,7 +39,15 @@ export default class ShadowViewer {
       this.shadowList.setList(this.shadows());
     });
   }
-  currentShadow = linkedSignal(()=> this.shadows()[0] || {} as ShadowEntity);
+  currentShadow = linkedSignal(()=> this.shadows()[0] ||
+    {
+      id:'',
+      identifier:'',
+      coords:{
+        x:0,
+        y:0
+      }
+    } as ShadowEntity);
 
   protected show($event: any) {
    this.currentShadow.set(this.shadowList.getByCoords({x: $event.left, y: $event.top})!);

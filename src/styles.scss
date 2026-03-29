@@ -4,6 +4,40 @@ $primario: #1B4F72;
 $primario-2: #AED6F1;
 $secundario: #F5F5DC;
 $secundario-2: #D4AC0D;
+// Definición de colores base (opcional, para referencia)
+$blue-deep: #1B4F72;
+$blue-light: #AED6F1;
+$gold: #D4AC0D;
+$beige: #F5F5DC;
+
+:root {
+  /* Modo Claro (Default) */
+  --bg-color: #ffffff;
+  --text-color: #212121;
+
+  --bg-form: #{$gold};
+  --text-form: #000000;
+
+  --bg-card: #{$blue-light};
+  --bg-detail: #{$beige};
+}
+
+html.dark {
+  /* Modo Oscuro (Override) */
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+
+  --bg-form: #9A7D0A;
+  --text-form: #ffffff;
+
+  --bg-card: #1B4F72;
+  --bg-detail: #2C3E50;
+}
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease;
+}
 .panel{
   display: flex;
   width: 90dvw;
@@ -16,23 +50,27 @@ $secundario-2: #D4AC0D;
   box-sizing: border-box;
 
 }
-body{
-  background-color: $fondo;
-}
-
-form{
-  background-color: $secundario-2;
+form {
+  background-color: var(--bg-form);
+  color: var(--text-form);
   border-radius: 10px;
   padding: 10px;
-  color: black;
   font-size: 20px;
   display: flex;
   flex-direction: column;
+  transition: all 0.3s ease;
 }
 
-.card{
+.card {
   display: flex;
   flex-direction: column;
-  background-color: $primario-2;
+  background-color: var(--bg-card);
   border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.detail {
+  background-color: var(--bg-detail);
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
 }

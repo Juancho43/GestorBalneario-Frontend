@@ -5,7 +5,7 @@
   />
   @for (item of mapResource.value()!.map;track $index){
     <app-map-card
-      (click)="openReservationDetailDialog(item)"
+      (click)="selectReservation(item)"
       [item]="item"/>
   }
 </div>
