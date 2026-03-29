@@ -1,8 +1,7 @@
-import { Component, signal } from '@angular/core';
-import {RouterLink, RouterOutlet} from '@angular/router';
-import {ShadowMap} from './components/shadows/shadow-map/shadow-map';
-import {ShadowAdminPanel} from './components/panels/shadow-admin-panel/shadow-admin-panel';
+import {Component, inject, signal} from '@angular/core';
+import {RouterOutlet} from '@angular/router';
 import {TabMenu} from './components/layout/tab-menu/tab-menu';
+import {Theme} from './core/services/theme';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +10,7 @@ import {TabMenu} from './components/layout/tab-menu/tab-menu';
   styleUrl: './app.scss'
 })
 export class App {
+  private readonly theme = inject(Theme);
   protected readonly title = signal('Gestor Balneario');
   links = [
     {label: 'Main Menu', url:''},

@@ -1,0 +1,9 @@
+<form (ngSubmit)="submittedForm()">
+   <label>Fechas</label>
+    <input type="date" [formField]="queryForm.start">
+    <input type="date" [formField]="queryForm.end">
+  <label>Paginas</label>
+    <input type="number" [formField]="queryForm.page">
+    <input type="number" [formField]="queryForm.limit">
+    <button type="submit">Enviar</button>
+</form>

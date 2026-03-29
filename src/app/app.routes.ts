@@ -92,7 +92,7 @@ export const routes: Routes = [
         component: PaymentEditor
       },
       {
-        title: 'View payments',
+        title: 'Payments reports',
         path: 'view',
         component: PaymentViewer
       }

@@ -1,5 +1,8 @@
 @let reservation = this.reservation();
-<mat-card class="card">
+<mat-card
+  (click)="openDetailDialog()"
+  class="card"
+>
   @if (reservation.shadow){
     <p>{{reservation.shadow?.type}} - {{reservation.shadow?.identifier}}</p>
   }

@@ -1,1 +1,13 @@
-<p>payment-viewer works!</p>
+<app-report-form
+  (finalQuery)="query.set($event)"
+/>
+@if (report()) {
+  @let payments = report()!.payments;
+  @let total = report()!.total ;
+  @for (item of payments; track $index){
+    <pre (click)="openInvoiceDialog(item.invoiceId)">
+      {{item | json}}
+    </pre>
+  }
+  <p>Total:{{total}}</p>
+}

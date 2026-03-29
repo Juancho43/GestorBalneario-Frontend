@@ -4,8 +4,12 @@
     initialState="viewing"
     [loadedShadows]="shadows()"
   />
-  <app-shadow-card
-    (click)="openShadowDetailDialog()"
-    [shadow]="currentShadow()!"
-  />
+  @if (currentShadow() != null) {
+    <app-shadow-card
+      (click)="openShadowDetailDialog()"
+      [shadow]="currentShadow()"
+    />
+  } @else{
+    <p>Haga click en una sombra para verla</p>
+  }
 </div>
