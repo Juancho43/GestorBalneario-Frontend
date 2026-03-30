@@ -6,6 +6,7 @@ import {ReportForm} from '../report-form/report-form';
 import {JsonPipe} from '@angular/common';
 import {Dialog} from '@angular/cdk/dialog';
 import {InvoiceDetails} from '../../invoices/invoice-details/invoice-details';
+import {InvoiceListManager} from '../../../core/services/Managers/invoice-list-manager';
 
 @Component({
   selector: 'app-payment-viewer',
@@ -18,6 +19,7 @@ import {InvoiceDetails} from '../../invoices/invoice-details/invoice-details';
 })
 export class PaymentViewer {
   private reportsService = inject(PaymentsReportHttp);
+  private invoiceManager = inject(InvoiceListManager);
   private dialog = inject(Dialog);
   query = signal<ReportQuery>({
     page:0,
@@ -36,7 +38,8 @@ export class PaymentViewer {
   })
   report = computed(()=> this.reportResource.value())
 
-  protected openInvoiceDialog(invoiceId: string | undefined) {
+  protected openInvoiceDialog(invoiceId: string) {
+    this.invoiceManager.currentInvoice.set(invoiceId);
     this.dialog.open(InvoiceDetails)
   }
 }

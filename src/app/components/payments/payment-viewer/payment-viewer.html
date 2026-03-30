@@ -5,7 +5,7 @@
   @let payments = report()!.payments;
   @let total = report()!.total ;
   @for (item of payments; track $index){
-    <pre (click)="openInvoiceDialog(item.invoiceId)">
+    <pre (click)="openInvoiceDialog(item.invoiceId!)">
       {{item | json}}
     </pre>
   }
