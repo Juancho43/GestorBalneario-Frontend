@@ -1,0 +1,10 @@
+<div class="menu">
+  @for (link of links; track $index) {
+    <button matButton [matMenuTriggerFor]="menu">{{link.label}}</button>
+    <mat-menu #menu="matMenu" yPosition="below">
+        @for (sublink of link.subLinks; track $index) {
+          <button  [routerLink]="sublink.url">{{sublink.label}}</button>
+        }
+    </mat-menu>
+  }
+</div>

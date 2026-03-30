@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ClientManager } from './client-manager';
+import { Menu } from './menu';
 
-describe('ClientManager', () => {
-  let component: ClientManager;
-  let fixture: ComponentFixture<ClientManager>;
+describe('Menu', () => {
+  let component: Menu;
+  let fixture: ComponentFixture<Menu>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ClientManager],
+      imports: [Menu],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ClientManager);
+    fixture = TestBed.createComponent(Menu);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

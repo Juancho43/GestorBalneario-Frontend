@@ -1,102 +1,58 @@
 import { Routes } from '@angular/router';
-import {ShadowAdminPanel} from './components/panels/shadow-admin-panel/shadow-admin-panel';
 import ShadowViewer from './components/shadows/shadow-viewer/shadow-viewer';
-import {ShadowReservationPanel} from './components/panels/shadow-reservation-panel/shadow-reservation-panel';
-import {ReservationEdit} from './components/reservations/reservation-edit/reservation-edit';
 import {ReservationCreate} from './components/reservations/reservation-create/reservation-create';
-import {MainMenu} from './components/layout/main-menu/main-menu';
+import MainMenu from './components/layout/main-menu/main-menu';
 import {AboutMenu} from './components/layout/about-menu/about-menu';
 import ShadowEditor from './components/shadows/shadow-editor/shadow-editor';
 import {ReservationViewer} from './components/reservations/reservation-viewer/reservation-viewer';
-import {ClientManager} from './components/panels/client-manager/client-manager';
 import {ClientViewer} from './components/clients/client-viewer/client-viewer';
-import {ClientEditor} from './components/clients/client-editor/client-editor.component';
 import {PaymentViewer} from './components/payments/payment-viewer/payment-viewer';
-import {PaymentManager} from './components/panels/payment-manager/payment-manager';
-import {PaymentEditor} from './components/payments/payment-editor/payment-editor';
+import PaymentEditor from './components/payments/payment-editor/payment-editor';
 
 export const routes: Routes = [
   {
-    title: 'About',
-    path: 'about',
-    component: AboutMenu
-  },
-  {
     title: 'Main Menu',
     path: '',
-    component: MainMenu
+    loadComponent: () => MainMenu
+  },
+  {
+    title: 'About',
+    path: 'about',
+    loadComponent:  () => AboutMenu
   },
   {
     title: 'ShadowManager',
-    path: 'shadow',
-    component: ShadowAdminPanel,
-    children: [
-      {
-        path: 'view',
-        loadComponent: ()=> ShadowViewer
-      },
-      {
-        path:'editor',
-        loadComponent: ()=> ShadowEditor
-      },
-    ]
+    path: 'shadow-view',
+    loadComponent: ()=> ShadowViewer
   },
   {
-    title: 'ReservationManager',
-    path: 'reservation',
-    component: ShadowReservationPanel,
-    children : [
-      {
-        title: 'View Reservations',
-        path: 'view',
-        component:ReservationViewer
-      },
-      {
-        title: 'Edit Reservation',
-        path: 'edit/:id',
-        component: ReservationEdit
-      },
-      {
-        title: 'Create Reservation',
-        path: 'create',
-        component: ReservationCreate
-      }
-    ]
+    title: 'ShadowManager',
+    path:'shadow-editor',
+    loadComponent: ()=> ShadowEditor
   },
   {
-    title: 'ClientManager',
-    path: 'client',
-    component: ClientManager,
-    children: [
-      {
-        title: 'View',
-        path: 'view',
-        component: ClientViewer
-      },
-      {
-        title: 'Client manage',
-        path: 'create',
-        component: ClientEditor
-      }
-    ]
-  }
-,
+    title: 'View Reservations',
+    path: 'reservation-view',
+    loadComponent:()=>ReservationViewer
+  },
   {
-    title:'PaymentManager',
-    path: 'payment',
-    component: PaymentManager,
-    children: [
-      {
-        title: 'Manage payments',
-        path: 'create',
-        component: PaymentEditor
-      },
-      {
-        title: 'Payments reports',
-        path: 'view',
-        component: PaymentViewer
-      }
-    ]
+    title: 'Create Reservation',
+    path: 'reservation-create',
+    loadComponent:()=> ReservationCreate
+  },
+  {
+    title: 'View Client',
+    path: 'client-view',
+    loadComponent: ()=> ClientViewer
+  },
+  {
+    title: 'Manage payments',
+    path: 'payment-create',
+    loadComponent: ()=> PaymentEditor
+  },
+  {
+    title: 'Payments reports',
+    path: 'payment-view',
+    loadComponent: () => PaymentViewer
   }
-
 ];

@@ -14,7 +14,7 @@ import {CreatePaymentHttp} from '../../../core/services/PaymentHttp/create-payme
   templateUrl: './payment-editor.html',
   styleUrl: './payment-editor.scss',
 })
-export class PaymentEditor {
+export default class PaymentEditor {
   private createPaymentHttp = inject(CreatePaymentHttp);
   private invoiceManager= inject(InvoiceListManager);
   invoices = computed(()=>this.invoiceManager.getList())
