@@ -1,5 +1,9 @@
 <div class="app">
-  <h1>{{title()}}</h1>
+  <h1 routerLink="">{{title()}}</h1>
+  @if(this.season()!){
+    @let season = this.season();
+    <h2>{{season.name}}</h2>
+  }
   <div class="menu">
     <app-menu/>
   </div>

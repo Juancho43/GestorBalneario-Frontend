@@ -1,0 +1,12 @@
+@let list = this.seasons()!;
+@if(list) {
+  @for (season of list;track $index) {
+    <div (click)="setSeason(season)">
+
+      {{season.name | json}}:
+      {{season.startDate | date:'short'}} /
+      {{season.endDate | date: 'short'}}
+    </div>
+  }
+}
+<p (click)="openSeasonEditor()">Create season</p>

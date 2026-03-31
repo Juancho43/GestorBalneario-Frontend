@@ -1,6 +1,8 @@
 @import "../../../../styles";
 .map {
   border: 4px solid $primario; /* Grosor base */
+  background-color: #ffffff !important;
+  color: #000000 !important;
   transition: border-color 0.3s ease; /* Suavidad al cambiar */
 }
 

@@ -11,7 +11,6 @@ import {
 import {CdkDragEnd} from '@angular/cdk/drag-drop';
 import * as fabric from 'fabric';
 import {ShadowEntity} from '../../../core/model/shadowEntity';
-import {MatTooltip} from '@angular/material/tooltip';
 
 export type MapState = 'idle' | 'editing' | 'viewing';
 @Component({
@@ -74,10 +73,10 @@ export class ShadowMap implements AfterViewInit{
   load() {
     if(this.canvas && this.loadedShadows().length > 0){
       this.canvas.clear();
-    this.loadedShadows()?.forEach(shadow => {
-      this.printGroupOnCanvas(this.createShape(shadow.type, shadow.coords.x, shadow.coords.y, shadow.identifier,shadow.state));
-    })
-  }}
+      this.loadedShadows()?.forEach(shadow => {
+        this.printGroupOnCanvas(this.createShape(shadow.type, shadow.coords.x, shadow.coords.y, shadow.identifier,shadow.state));
+      })
+    }}
 
 
 
@@ -230,9 +229,7 @@ export class ShadowMap implements AfterViewInit{
     }
   private setUpZoom() {
     window.addEventListener('keydown', (e: KeyboardEvent) => {
-      // Solo activamos si el canvas está enfocado o el estado es el correcto
-
-      const zoomStep = 0.1; // Incremento fijo
+      const zoomStep = 0.1;
       let zoom = this.canvas.getZoom();
 
       if (e.key === '+') {
@@ -240,15 +237,24 @@ export class ShadowMap implements AfterViewInit{
       } else if (e.key === '-') {
         zoom -= zoomStep;
       } else {
-        return; // No es ninguna de nuestras teclas
+        return;
       }
 
-      // Mantener dentro de límites
+      // 1. Limitar el rango de zoom (0.5x a 20x)
       zoom = Math.min(Math.max(zoom, 0.5), 20);
 
-      // Zoom al centro del lienzo actual
+      // 2. Ejecutar el zoom hacia el centro del canvas
       const center = new fabric.Point(this.canvas.width! / 2, this.canvas.height! / 2);
       this.canvas.zoomToPoint(center, zoom);
+
+      // 3. RESTRICCIÓN DE COORDENADAS POSITIVAS
+      const vpt = this.canvas.viewportTransform!;
+
+      // vpt[4] es el desplazamiento en X, vpt[5] en Y.
+      // Al asegurar que sean <= 0, garantizamos que el (0,0) del mundo
+      // nunca se mueva a la derecha o hacia abajo de la esquina del canvas.
+      vpt[4] = Math.min(0, vpt[4]);
+      vpt[5] = Math.min(0, vpt[5]);
 
       this.canvas.requestRenderAll();
     });
@@ -260,11 +266,9 @@ export class ShadowMap implements AfterViewInit{
 
     this.canvas.on('mouse:down', (opt) => {
       const evt = opt.e as MouseEvent;
-
-      // Si NO hay un objeto bajo el cursor, activamos el panning
       if (!opt.target) {
         isDragging = true;
-        this.canvas.selection = false; // Desactivar selección de área
+        this.canvas.selection = false;
         lastPosX = evt.clientX;
         lastPosY = evt.clientY;
       }
@@ -275,8 +279,17 @@ export class ShadowMap implements AfterViewInit{
         const evt = opt.e as MouseEvent;
         const vpt = this.canvas.viewportTransform!;
 
-        vpt[4] += evt.clientX - lastPosX;
-        vpt[5] += evt.clientY - lastPosY;
+        // Calculamos el nuevo desplazamiento propuesto
+        let newX = vpt[4] + (evt.clientX - lastPosX);
+        let newY = vpt[5] + (evt.clientY - lastPosY);
+
+        /**
+         * LÓGICA DE RESTRICCIÓN:
+         * Math.min(0, valor) asegura que el desplazamiento nunca sea mayor a 0.
+         * Si intentas mover el canvas a la derecha (positivo), se clava en 0.
+         */
+        vpt[4] = Math.min(0, newX);
+        vpt[5] = Math.min(0, newY);
 
         this.canvas.requestRenderAll();
 
@@ -287,7 +300,7 @@ export class ShadowMap implements AfterViewInit{
 
     this.canvas.on('mouse:up', () => {
       isDragging = false;
-      this.canvas.selection = true; // Reactivar selección
+      this.canvas.selection = true;
     });
   }
   private setUpMovingShape(){

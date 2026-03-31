@@ -70,7 +70,22 @@ form {
 }
 
 .detail {
-  background-color: var(--bg-detail);
-  border-radius: 10px;
+  background:var(--bg-detail);
+  color:var(--text-color);
+  border-radius: 20px;
+  padding: 20px;
   transition: background-color 0.3s ease;
+}
+.enter-animation {
+  animation: slide-fade 1s;
+}
+@keyframes slide-fade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

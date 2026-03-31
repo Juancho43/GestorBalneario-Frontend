@@ -1,0 +1,8 @@
+<form (ngSubmit)="submitHandler()">
+  <label>Nombre</label>
+  <input type="text" [formField]="seasonForm.name">
+  <label>Fechas</label>
+  <input type="date" [formField]="seasonForm.startDate">
+  <input type="date" [formField]="seasonForm.endDate">
+  <input type="submit" value="Guardar">
+</form>

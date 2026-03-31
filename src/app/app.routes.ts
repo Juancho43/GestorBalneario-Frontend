@@ -8,6 +8,7 @@ import {ReservationViewer} from './components/reservations/reservation-viewer/re
 import {ClientViewer} from './components/clients/client-viewer/client-viewer';
 import {PaymentViewer} from './components/payments/payment-viewer/payment-viewer';
 import PaymentEditor from './components/payments/payment-editor/payment-editor';
+import SeasonSwitch from './components/seasons/season-switch/season-switch';
 
 export const routes: Routes = [
   {
@@ -21,12 +22,12 @@ export const routes: Routes = [
     loadComponent:  () => AboutMenu
   },
   {
-    title: 'ShadowManager',
+    title: 'Shadow map',
     path: 'shadow-view',
     loadComponent: ()=> ShadowViewer
   },
   {
-    title: 'ShadowManager',
+    title: 'Edit map',
     path:'shadow-editor',
     loadComponent: ()=> ShadowEditor
   },
@@ -54,5 +55,10 @@ export const routes: Routes = [
     title: 'Payments reports',
     path: 'payment-view',
     loadComponent: () => PaymentViewer
+  },
+  {
+    title: 'Seasons list',
+    path: 'season-view',
+    loadComponent: () => SeasonSwitch
   }
 ];
