@@ -1,11 +1,13 @@
 <div class="app">
-  <h1 routerLink="">{{title()}}</h1>
-  @if(this.season()!){
-    @let season = this.season();
-    <h2>{{season.name}}</h2>
-  }
-  <div class="menu">
+  <div class="nav">
+    <h1 routerLink="">{{title()}}</h1>
     <app-menu/>
+    @if(this.season()!){
+      @let season = this.season();
+      <h2>{{season.name}}</h2>
+    }
   </div>
-  <router-outlet/>
+  <div class="panel">
+    <router-outlet/>
+  </div>
 </div>

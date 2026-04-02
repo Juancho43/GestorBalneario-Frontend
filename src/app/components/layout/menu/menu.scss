@@ -1,0 +1,50 @@
+/* Horizontal bar layout */
+.menu-bar {
+  display: flex;
+  list-style: none;
+  padding: 8px;
+  gap: 5px;
+}
+
+.menu-bar-item {
+  color:var(--text-color);
+  background: transparent;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.menu-bar-item:hover {
+  background-color: var(--bg-detail);
+  color:var(--text-color);
+
+}
+
+/* Vertical dropdown styling */
+.sub-menu {
+  color:var(--text-color);
+  background: var(--bg-detail);
+  min-width: 180px;
+  padding: 8px 0;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  list-style: none;
+  border-radius: 4px;
+}
+
+.sub-menu-item {
+  display: block;
+  color:var(--text-color);
+  width: 100%;
+  text-align: left;
+  padding: 10px 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.sub-menu-item:hover {
+  background-color: var(--bg-card);
+  color:var(--text-color);
+}

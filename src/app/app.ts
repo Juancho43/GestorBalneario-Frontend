@@ -1,6 +1,6 @@
 import {Component, inject, signal} from '@angular/core';
 import {RouterLink, RouterOutlet} from '@angular/router';
-import {Theme} from './core/services/theme';
+import {Theme} from './core/services/other/theme';
 import {Menu} from './components/layout/menu/menu';
 import {SeasonManager} from './core/services/Managers/season-manager';
 

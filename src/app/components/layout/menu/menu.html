@@ -1,10 +1,28 @@
-<div class="menu">
-  @for (link of links; track $index) {
-    <button matButton [matMenuTriggerFor]="menu">{{link.label}}</button>
-    <mat-menu #menu="matMenu" yPosition="below">
-        @for (sublink of link.subLinks; track $index) {
-          <button  [routerLink]="sublink.url">{{sublink.label}}</button>
-        }
-    </mat-menu>
-  }
-</div>
+  <ul cdkMenuBar class="menu-bar">
+    @for (link of links; track $index) {
+      <li>
+        <button
+          class="menu-bar-item"
+          [cdkMenuTriggerFor]="subMenu"
+          cdkMenuItem>
+          {{ link.label }}
+        </button>
+
+        <ng-template #subMenu>
+          <ul cdkMenu class="sub-menu">
+            @for (item of link.subLinks; track $index) {
+              <li>
+                <button
+                  [routerLink]="item.url"
+                  class="sub-menu-item"
+                  cdkMenuItem
+                >
+                  {{ item.label }}
+                </button>
+              </li>
+            }
+          </ul>
+        </ng-template>
+      </li>
+    }
+  </ul>

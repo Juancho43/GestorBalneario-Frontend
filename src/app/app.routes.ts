@@ -9,6 +9,7 @@ import {ClientViewer} from './components/clients/client-viewer/client-viewer';
 import {PaymentViewer} from './components/payments/payment-viewer/payment-viewer';
 import PaymentEditor from './components/payments/payment-editor/payment-editor';
 import SeasonSwitch from './components/seasons/season-switch/season-switch';
+import {ServiceEditor} from './components/services/service-editor/service-editor';
 
 export const routes: Routes = [
   {
@@ -60,5 +61,10 @@ export const routes: Routes = [
     title: 'Seasons list',
     path: 'season-view',
     loadComponent: () => SeasonSwitch
+  },
+  {
+    title: 'Services management',
+    path: 'service-manager',
+    loadComponent: ()=> ServiceEditor
   }
 ];

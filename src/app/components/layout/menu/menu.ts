@@ -1,21 +1,30 @@
 import { Component } from '@angular/core';
-import {MatButton} from '@angular/material/button';
-import {MatMenu, MatMenuTrigger} from '@angular/material/menu';
+import {MatMenu} from '@angular/material/menu';
 import {RouterLink} from '@angular/router';
+import {CdkMenu, CdkMenuBar, CdkMenuItem, CdkMenuTrigger} from '@angular/cdk/menu';
 
 @Component({
   selector: 'app-menu',
   imports: [
-    MatButton,
+    CdkMenuTrigger,
+    CdkMenu,
+    CdkMenuItem,
     MatMenu,
-    MatMenuTrigger,
-    RouterLink
+    RouterLink,
+    CdkMenuBar,
   ],
   templateUrl: './menu.html',
   styleUrl: './menu.scss',
 })
 export class Menu {
   links = [
+    {
+      label: 'Seasons',
+      subLinks: [
+        {label : 'View seasons', url:'season-view'},
+        {label: 'Create season', url:'season-create'},
+      ]
+    },
     {
       label: 'Shadows',
       subLinks :[
@@ -44,14 +53,12 @@ export class Menu {
       ]
     },
     {
-      label: 'Seasons',
+      label: 'Services',
       subLinks: [
-        {label : 'View seasons', url:'season-view'},
-        {label: 'Create season', url:'season-create'},
+        {
+          label: 'Manage Services', url: 'service-manager'
+        }
       ]
     }
-    // {label: 'Reservations', url:'reservation'},
-    // {label: 'Clients', url:'client'},
-    // {label: 'Payments', url:'payment'},
   ]
 }
