@@ -43,6 +43,9 @@ html.dark {
   width: 100dvw;
   align-items: center;
 }
+.active{
+  background-color: red;
+}
 .nav{
   align-self: flex-start;
   display: flex;

@@ -3,5 +3,5 @@ export interface SeasonEntity{
   name: string;
   startDate: Date;
   endDate: Date;
-
+  isActive:boolean;
 }
