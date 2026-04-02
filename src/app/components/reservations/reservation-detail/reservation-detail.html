@@ -1,15 +1,19 @@
 @let details = this.details();
 @if (details){
-  <div class="detail">
-    <pre>
-      {{details.reservation | json}}
-    </pre>
+  <div class="detail" animate.enter="enter-animation">
+    <h3>Detalle de la reserva</h3>
+    <h4>Fechas</h4>
+    <p>{{details.reservation.dates.checkIn | date:'short'}}</p>
+    <p>{{details.reservation.dates.checkOut | date:'short'}}</p>
+    <h4>Cliente</h4>
     <app-client-card
       [client]="details.client"
     />
+    <h4>Sombra</h4>
     <app-shadow-card
       [shadow]="details.shadow"
     />
+    ////
     <app-invoice-card
       [invoice]="details.invoice"
     />

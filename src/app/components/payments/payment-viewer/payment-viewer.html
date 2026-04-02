@@ -1,13 +1,17 @@
-<app-report-form
-  (finalQuery)="query.set($event)"
-/>
-@if (report()) {
-  @let payments = report()!.payments;
-  @let total = report()!.total ;
-  @for (item of payments; track $index){
-    <pre (click)="openInvoiceDialog(item.invoiceId!)">
+<div class="component">
+  <h3>Generar reporte de pagos</h3>
+  <app-report-form
+    (finalQuery)="query.set($event)"
+  />
+  @if (report()) {
+    @let payments = report()!.payments;
+    @let total = report()!.total ;
+    @for (item of payments; track $index){
+      <pre (click)="openInvoiceDialog(item.invoiceId!)">
       {{item | json}}
     </pre>
+    }
+    <p>Total:{{total}}</p>
   }
-  <p>Total:{{total}}</p>
-}
+
+</div>

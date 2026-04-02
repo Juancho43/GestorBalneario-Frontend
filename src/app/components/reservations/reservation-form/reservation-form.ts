@@ -20,18 +20,18 @@ import {ServiceListManager} from '../../../core/services/Managers/service-list-m
 export class ReservationForm {
   private serviceManager= inject(ServiceListManager);
   services = this.serviceManager.serviceList;
-  service = computed(()=> this.services()[0]);
+  service = computed(()=> this.services().services[0]);
   readonly reservationToEdit = input<ReservationEntity>();
-  readonly client = input.required<ClientEntity>();
-  readonly shadow = input.required<ShadowEntity>();
+  readonly client = input<ClientEntity>();
+  readonly shadow = input<ShadowEntity>();
   reservation = linkedSignal<ReservationEntity>(()=> this.reservationToEdit() || {
-    shadow: this.shadow(),
+    shadow: this.shadow()!,
     dates: {
       checkIn: '',
       checkOut: '',
     },
-    price:this.service().price,
-    client: this.client(),
+    price:this.service().price?? 10,
+    client: this.client()!,
     serviceId: this.service().id
   });
   reservationForm = form(this.reservation, (schemaPath) =>{

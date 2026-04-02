@@ -1,4 +1,7 @@
-<div class="panel">
+<div class="component">
+  <h3>Ver reservas activas</h3>
+  <div class="row">
+
   <app-shadow-map
     [loadedShadows]="shadows()"
     initialState="viewing"
@@ -8,4 +11,5 @@
       (click)="selectReservation(item)"
       [item]="item"/>
   }
+  </div>
 </div>

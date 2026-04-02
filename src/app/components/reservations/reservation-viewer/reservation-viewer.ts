@@ -1,7 +1,7 @@
 import {Component, computed, inject} from '@angular/core';
 import {ReservationListManager} from '../../../core/services/Managers/reservation-list-manager';
 import {ShadowMap} from '../../shadows/shadow-map/shadow-map';
-import {GetActiveReservationsHttp} from '../../../get-active-reservations-http';
+import {GetActiveReservationsHttp} from '../../../core/services/ReservationHttp/get-active-reservations-http';
 import {rxResource} from '@angular/core/rxjs-interop';
 import {ShadowMapHttp} from '../../../core/services/ShadowHttp/shadow-map-http';
 import {ShadowEntity} from '../../../core/model/shadowEntity';

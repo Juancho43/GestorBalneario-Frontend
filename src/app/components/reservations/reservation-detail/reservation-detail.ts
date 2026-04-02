@@ -1,6 +1,6 @@
 import {Component, computed, inject} from '@angular/core';
 import {ReservationListManager} from '../../../core/services/Managers/reservation-list-manager';
-import {JsonPipe} from '@angular/common';
+import {DatePipe, JsonPipe} from '@angular/common';
 import {ClientCard} from '../../clients/client-card/client-card';
 import {ShadowCard} from '../../shadows/shadow-card/shadow-card';
 import {GetReservationDetailsHttp} from '../../../core/services/ReservationHttp/get-reservation-details-http';
@@ -13,7 +13,8 @@ import {InvoiceCard} from '../../invoices/invoice-card/invoice-card';
     JsonPipe,
     ClientCard,
     ShadowCard,
-    InvoiceCard
+    InvoiceCard,
+    DatePipe
   ],
   templateUrl: './reservation-detail.html',
   styleUrl: './reservation-detail.scss',
