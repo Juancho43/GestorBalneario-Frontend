@@ -1,5 +1,5 @@
 import {Component, computed, inject, linkedSignal, signal} from '@angular/core';
-import {ReservationForm} from '../reservation-form/reservation-form';
+import {ReservationForm} from '../../reservations/reservation-form/reservation-form';
 import {ReservationListManager} from '../../../core/services/Managers/reservation-list-manager';
 import {ShadowMap} from '../../shadows/shadow-map/shadow-map';
 import {ShadowListManager} from '../../../core/services/Managers/shadow-list-manager';

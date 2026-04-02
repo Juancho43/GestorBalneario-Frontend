@@ -1,15 +1,16 @@
 import { Routes } from '@angular/router';
-import ShadowViewer from './components/shadows/shadow-viewer/shadow-viewer';
-import {ReservationCreate} from './components/reservations/reservation-create/reservation-create';
+import ShadowViewer from './components/views/shadow-viewer/shadow-viewer';
+import {ReservationCreate} from './components/views/reservation-create/reservation-create';
 import MainMenu from './components/layout/main-menu/main-menu';
 import {AboutMenu} from './components/layout/about-menu/about-menu';
-import ShadowEditor from './components/shadows/shadow-editor/shadow-editor';
-import {ReservationViewer} from './components/reservations/reservation-viewer/reservation-viewer';
+import ShadowEditor from './components/views/shadow-editor/shadow-editor';
+import {ReservationViewer} from './components/views/reservation-viewer/reservation-viewer';
 import {ClientViewer} from './components/clients/client-viewer/client-viewer';
-import {PaymentViewer} from './components/payments/payment-viewer/payment-viewer';
+import {PaymentViewer} from './components/views/payment-viewer/payment-viewer';
 import PaymentEditor from './components/payments/payment-editor/payment-editor';
 import SeasonSwitch from './components/seasons/season-switch/season-switch';
 import {ServiceEditor} from './components/services/service-editor/service-editor';
+import {currentSeasonGuard} from './current-season-guard';
 
 export const routes: Routes = [
   {
@@ -29,6 +30,7 @@ export const routes: Routes = [
   },
   {
     title: 'Edit map',
+    canActivate: [currentSeasonGuard],
     path:'shadow-editor',
     loadComponent: ()=> ShadowEditor
   },
@@ -39,6 +41,7 @@ export const routes: Routes = [
   },
   {
     title: 'Create Reservation',
+    canActivate: [currentSeasonGuard],
     path: 'reservation-create',
     loadComponent:()=> ReservationCreate
   },
@@ -49,6 +52,7 @@ export const routes: Routes = [
   },
   {
     title: 'Manage payments',
+    canActivate: [currentSeasonGuard],
     path: 'payment-create',
     loadComponent: ()=> PaymentEditor
   },
@@ -64,6 +68,7 @@ export const routes: Routes = [
   },
   {
     title: 'Services management',
+    canActivate: [currentSeasonGuard],
     path: 'service-manager',
     loadComponent: ()=> ServiceEditor
   }

@@ -1,12 +1,13 @@
 import {Component, computed, inject, signal, ViewChild} from '@angular/core';
 import {ShadowListManager} from '../../../core/services/Managers/shadow-list-manager';
-import {ShadowMap} from '../shadow-map/shadow-map';
+import {ShadowMap} from '../../shadows/shadow-map/shadow-map';
 import {ShadowEntity} from '../../../core/model/shadowEntity';
 import {CdkDragEnd} from '@angular/cdk/drag-drop';
-import {ShadowList} from '../shadow-list/shadow-list';
-import {ShadowForm} from '../shawdow-form/shadow-form.component';
+import {ShadowList} from '../../shadows/shadow-list/shadow-list';
+import {ShadowForm} from '../../shadows/shawdow-form/shadow-form.component';
 import {Dialog} from '@angular/cdk/dialog';
-import {NewShadow} from '../new-shadow/new-shadow';
+import {NewShadow} from '../../shadows/new-shadow/new-shadow';
+import {SeasonManager} from '../../../core/services/Managers/season-manager';
 
 @Component({
   selector: 'app-shadow-editor',
@@ -20,7 +21,8 @@ import {NewShadow} from '../new-shadow/new-shadow';
 })
 export default class ShadowEditor {
   private shadowList = inject(ShadowListManager);
-
+  private currentSeason = inject(SeasonManager);
+  season = this.currentSeason.currentSeason;
   shadows = computed(() => this.shadowList.getList());
   private dialog = inject(Dialog);
   @ViewChild(ShadowMap) shadowMap!: ShadowMap;

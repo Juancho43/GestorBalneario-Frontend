@@ -1,11 +1,11 @@
 import {Component, computed, effect, inject, linkedSignal} from '@angular/core';
-import {ShadowMap} from '../shadow-map/shadow-map';
-import {ShadowDetail} from '../shadow-detail/shadow-detail';
+import {ShadowMap} from '../../shadows/shadow-map/shadow-map';
+import {ShadowDetail} from '../../shadows/shadow-detail/shadow-detail';
 import {ShadowEntity} from '../../../core/model/shadowEntity';
 import {ShadowListManager} from '../../../core/services/Managers/shadow-list-manager';
 import {Dialog} from '@angular/cdk/dialog';
 import {rxResource} from '@angular/core/rxjs-interop';
-import {ShadowCard} from '../shadow-card/shadow-card';
+import {ShadowCard} from '../../shadows/shadow-card/shadow-card';
 import {ShadowMapHttp} from '../../../core/services/ShadowHttp/shadow-map-http';
 
 @Component({

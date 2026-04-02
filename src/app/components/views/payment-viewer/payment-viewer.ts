@@ -2,7 +2,7 @@ import {Component, computed, inject, signal} from '@angular/core';
 import {PaymentsReportHttp} from '../../../core/services/PaymentHttp/payments-report-http';
 import {rxResource} from '@angular/core/rxjs-interop';
 import {ReportQuery} from '../../../core/DTO/ReportQuery';
-import {ReportForm} from '../report-form/report-form';
+import {ReportForm} from '../../payments/report-form/report-form';
 import {JsonPipe} from '@angular/common';
 import {Dialog} from '@angular/cdk/dialog';
 import {InvoiceDetails} from '../../invoices/invoice-details/invoice-details';
