@@ -1,0 +1,13 @@
+<div class="component">
+  <h3>Configurar servicios</h3>
+  <div class="row">
+
+    @for (service of services().services; track $index) {
+      <pre>
+
+      {{service | json}}
+      </pre>
+    }
+    <app-service-form (finalService)="createService($event)"/>
+  </div>
+</div>

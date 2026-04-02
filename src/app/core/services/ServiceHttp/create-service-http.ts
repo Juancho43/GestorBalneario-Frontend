@@ -1,15 +1,14 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../../environments/environment.development';
 import {ServiceEntity} from '../../model/serviceEntity';
+import {environment} from '../../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
-export class GetServicesHttp {
+export class CreateServiceHttp {
   private http = inject(HttpClient);
-
-  get(){
-    return this.http.get<ServiceEntity[]>(`${environment.apiUrl}/service/current`);
+  execute(payload: ServiceEntity) {
+    return this.http.post(`${environment.apiUrl}/service/create`, payload);
   }
 }
