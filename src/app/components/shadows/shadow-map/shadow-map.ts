@@ -53,11 +53,12 @@ export class ShadowMap implements AfterViewInit{
     }
   }
    ngAfterViewInit() {
+    const container = this.canvasElement.nativeElement.parentElement;
     this.canvas = new fabric.Canvas(this.canvasElement.nativeElement, {
       hoverCursor : 'pointer',
       backgroundColor: '#f0f0f0',
-      height: 750,
-      width: 1080,
+      width: container.clientWidth,
+      height: container.clientHeight || 600,
     });
      this.load();
      this.setUp();

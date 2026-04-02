@@ -1,15 +1,18 @@
-<div class="panel">
-  <app-shadow-map
-    (currentElement)="show($event)"
-    initialState="viewing"
-    [loadedShadows]="shadows()"
-  />
-  @if (currentShadow() != null) {
-    <app-shadow-card
-      (click)="openShadowDetailDialog()"
-      [shadow]="currentShadow()"
+<div class="component">
+  <h3>Mapa de carpas/sombrillas</h3>
+  <div class="row">
+    <app-shadow-map
+      (currentElement)="show($event)"
+      initialState="viewing"
+      [loadedShadows]="shadows()"
     />
-  } @else{
-    <p>Haga click en una sombra para verla</p>
-  }
+    @if (currentShadow() != null) {
+      <app-shadow-card
+        (click)="openShadowDetailDialog()"
+        [shadow]="currentShadow()"
+      />
+    } @else{
+      <p>Haga click en una sombra para verla</p>
+    }
+  </div>
 </div>

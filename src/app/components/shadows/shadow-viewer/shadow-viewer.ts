@@ -5,7 +5,6 @@ import {ShadowEntity} from '../../../core/model/shadowEntity';
 import {ShadowListManager} from '../../../core/services/Managers/shadow-list-manager';
 import {Dialog} from '@angular/cdk/dialog';
 import {rxResource} from '@angular/core/rxjs-interop';
-import {GetShadowHttp} from '../../../core/services/ShadowHttp/get-shadow-http';
 import {ShadowCard} from '../shadow-card/shadow-card';
 import {ShadowMapHttp} from '../../../core/services/ShadowHttp/shadow-map-http';
 
@@ -19,9 +18,9 @@ import {ShadowMapHttp} from '../../../core/services/ShadowHttp/shadow-map-http';
   styleUrl: './shadow-viewer.scss',
 })
 export default class ShadowViewer {
-  private mapHttp = inject(ShadowMapHttp);
   private shadowList = inject(ShadowListManager);
   private dialog = inject(Dialog);
+  private mapHttp = inject(ShadowMapHttp);
   mapResource = rxResource({
     stream:() => this.mapHttp.get()
   })

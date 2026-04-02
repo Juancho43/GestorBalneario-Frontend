@@ -1,9 +1,12 @@
 @import "../../../../styles";
 .map {
-  border: 4px solid $primario; /* Grosor base */
+  border: 4px solid $primario;
   background-color: #ffffff !important;
   color: #000000 !important;
-  transition: border-color 0.3s ease; /* Suavidad al cambiar */
+  transition: border-color 0.3s ease;
+  height: 60dvh;
+  width: 70dvw;
+
 }
 
 .border-editing {
