@@ -1,12 +1,20 @@
-@let list = this.seasons()!;
-@if(list) {
-  @for (season of list;track $index) {
-    <div (click)="setSeason(season)">
+<div class="component">
+  <h3>Temporadas historicas</h3>
+  @let list = this.seasons()!;
+  <div class="row">
+    <div>
+      @if(list) {
+        @for (season of list;track $index) {
+          <div (click)="setSeason(season)">
 
-      {{season.name | json}}:
-      {{season.startDate | date:'short'}} /
-      {{season.endDate | date: 'short'}}
+            {{season.name | json}}:
+            {{season.startDate | date:'short'}} /
+            {{season.endDate | date: 'short'}}
+          </div>
+          <button (click)="setActive(season)">Marcar como active</button>
+        }
+      }
     </div>
-  }
-}
-<p (click)="openSeasonEditor()">Create season</p>
+    <p (click)="openSeasonEditor()">Create season</p>
+  </div>
+</div>

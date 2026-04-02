@@ -32,4 +32,8 @@ export default class SeasonSwitch {
   protected setSeason(season: SeasonEntity) {
    this.seasonManager.currentSeason.set(season);
   }
+
+  protected setActive(season: SeasonEntity) {
+    this.seasonManager.setActive(season);
+  }
 }
