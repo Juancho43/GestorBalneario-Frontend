@@ -1,7 +1,8 @@
 import {inject, Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpContext} from '@angular/common/http';
 import {ServiceEntity} from '../../model/serviceEntity';
 import {environment} from '../../../../environments/environment.development';
+import {USE_SEASON_HEADER} from '../../../current-season/UseSeasonHeader';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +10,10 @@ import {environment} from '../../../../environments/environment.development';
 export class CreateServiceHttp {
   private http = inject(HttpClient);
   execute(payload: ServiceEntity) {
-    return this.http.post(`${environment.apiUrl}/service/create`, payload);
+    return this.http.post(`${environment.apiUrl}/service/create`, payload,
+    {
+      context: new HttpContext().set(USE_SEASON_HEADER,true)
+    }
+    );
   }
 }

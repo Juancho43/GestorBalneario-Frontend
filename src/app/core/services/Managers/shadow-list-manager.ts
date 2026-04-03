@@ -1,4 +1,4 @@
-import {inject, Injectable, linkedSignal, signal} from '@angular/core';
+import {computed, inject, Injectable, linkedSignal, signal} from '@angular/core';
 import {ShadowEntity} from '../../model/shadowEntity';
 import {CreateShadowHttp} from '../ShadowHttp/create-shadow-http';
 import {UpdateShadowHttp} from '../ShadowHttp/update-shadow-http';
@@ -6,6 +6,7 @@ import {DeleteShadowHttp} from '../ShadowHttp/delete-shadow-http';
 import {GetCurrentShadowsHttp} from '../ShadowHttp/get-current-shadows-http';
 import {rxResource} from '@angular/core/rxjs-interop';
 import {GetShadowHttp} from '../ShadowHttp/get-shadow-http';
+import {ShadowMapHttp} from '../ShadowHttp/shadow-map-http';
 
 @Injectable({
   providedIn: 'root',
@@ -16,17 +17,26 @@ export class ShadowListManager {
   private update = inject(UpdateShadowHttp);
   private delete = inject(DeleteShadowHttp);
   private get = inject(GetShadowHttp)
+  private shadowMap = inject(ShadowMapHttp);
   private shadowsResource= rxResource({
-    stream:()=> this.shadowsHttp.getCurrent()
+    stream:()=> this.shadowMap.get()
   })
 
   /*
   * A list of the current shadows. It is updated when a shadow is added, updated or deleted.
   * */
-  private shadows = linkedSignal(()=>
-    this.shadowsResource.isLoading() || this.shadowsResource.error() ? [] : this.shadowsResource.value()!
-  )
-  currentShadow = signal<ShadowEntity>(this.shadows()[0]);
+
+
+
+  shadows = computed(() =>{
+    let list: ShadowEntity[] = [];
+    if(this.shadowsResource.value()){
+      this.shadowsResource.value()?.map.forEach(row =>
+        list.push(row.shadow)
+      )
+    }
+    return list
+  } );  currentShadow = signal<ShadowEntity>(this.shadows()[0]);
 
   /**
    * Gets a shadow by its identifier.
@@ -80,6 +90,6 @@ export class ShadowListManager {
     return this.shadows();
   }
   setList(shadows: ShadowEntity[]){
-    this.shadows.set(shadows);
+    // this.shadows.set(shadows);
   }
 }
