@@ -8,6 +8,7 @@ import {ReservationEntity} from '../../../core/model/reservationEntity';
 import {ClientEntity} from '../../../core/model/clientEntity';
 import {ShadowEntity} from '../../../core/model/shadowEntity';
 import {ServiceListManager} from '../../../core/services/Managers/service-list-manager';
+import {ServiceEntity} from '../../../core/model/serviceEntity';
 
 
 @Component({
@@ -20,7 +21,16 @@ import {ServiceListManager} from '../../../core/services/Managers/service-list-m
 export class ReservationForm {
   private serviceManager= inject(ServiceListManager);
   services = this.serviceManager.serviceList;
-  service = computed(()=> this.services().services[0]);
+  service = computed(()=> {
+    if (this.services()! && this.services().services.length > 0) {
+      return this.services().services[0];
+    }
+    return {
+      price:10,
+      id:'service-123',
+      name:'Booking-false'
+    } as ServiceEntity;
+  });
   readonly reservationToEdit = input<ReservationEntity>();
   readonly client = input<ClientEntity>();
   readonly shadow = input<ShadowEntity>();
@@ -32,7 +42,7 @@ export class ReservationForm {
     },
     price:this.service().price?? 10,
     client: this.client()!,
-    serviceId: this.service().id
+    serviceId: this.service().id!
   });
   reservationForm = form(this.reservation, (schemaPath) =>{
 

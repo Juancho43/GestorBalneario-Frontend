@@ -13,7 +13,12 @@ export class SeasonManager {
   seasonResource = rxResource({
     stream: () => this.getSeason.get()
   })
-  season = computed(()=>this.seasonResource.value()!);
+  season = computed(()=> {
+    if (!this.seasonResource.isLoading() && !this.seasonResource.error()) {
+      return this.seasonResource.value()!
+    }
+    return {} as SeasonEntity;
+  });
   currentSeason = linkedSignal<SeasonEntity>(()=>this.season())
 
   setActive(season: SeasonEntity) {

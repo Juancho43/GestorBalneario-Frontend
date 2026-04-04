@@ -8,7 +8,7 @@ import {ReservationViewer} from './components/views/reservation-viewer/reservati
 import {ClientViewer} from './components/clients/client-viewer/client-viewer';
 import {PaymentViewer} from './components/views/payment-viewer/payment-viewer';
 import PaymentEditor from './components/payments/payment-editor/payment-editor';
-import SeasonSwitch from './components/seasons/season-switch/season-switch';
+import SeasonSwitch from './components/views/season-switch/season-switch';
 import {ServiceEditor} from './components/services/service-editor/service-editor';
 import {currentSeasonGuard} from './current-season-guard';
 

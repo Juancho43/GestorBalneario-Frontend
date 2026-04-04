@@ -36,7 +36,8 @@ export class ShadowListManager {
       )
     }
     return list
-  } );  currentShadow = signal<ShadowEntity>(this.shadows()[0]);
+  } );
+  currentShadow = signal<ShadowEntity>(this.shadows()[0]);
 
   /**
    * Gets a shadow by its identifier.

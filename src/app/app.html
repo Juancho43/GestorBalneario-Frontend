@@ -1,16 +1,16 @@
-<div class="app" [class.active]="!season().isActive">
-  <div class="nav">
-    <h1 routerLink="">{{title()}}</h1>
-    <app-menu/>
-    @if(this.season()!){
-      @let season = this.season();
-      <h2>{{season.name}}</h2>
-      @if (!this.season().isActive){
-        Temporada historica
+  <div class="app" [class.active]="!season()!.isActive">
+    <div class="nav">
+      <h1 routerLink="">{{title()}}</h1>
+      <app-menu/>
+      @if(this.season()!){
+        @let season = this.season();
+        <h2>{{season.name}}</h2>
+        @if (!this.season().isActive){
+          Temporada historica
+        }
       }
-    }
+    </div>
+    <div class="panel">
+      <router-outlet/>
+    </div>
   </div>
-  <div class="panel">
-    <router-outlet/>
-  </div>
-</div>

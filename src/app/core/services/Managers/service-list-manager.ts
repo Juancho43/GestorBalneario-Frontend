@@ -13,5 +13,10 @@ export class ServiceListManager {
     stream:()=>  this.getList.get()
   });
 
-  serviceList = computed(() => !this.servicesResource.isLoading() || !this.servicesResource.error()  ?  this.servicesResource.value()! : {services: []}as SeasonServicesDTO )
+  serviceList = computed(() =>{
+    if(!this.servicesResource.isLoading() || !this.servicesResource.error()){
+      return this.servicesResource.value()!;
+    }
+    return {services:[]}as SeasonServicesDTO;
+  })
 }
