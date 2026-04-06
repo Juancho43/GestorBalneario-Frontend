@@ -3,15 +3,13 @@
   <app-report-form
     (finalQuery)="query.set($event)"
   />
-  @if (report()) {
-    @let payments = report()!.payments;
-    @let total = report()!.total ;
-    @for (item of payments; track $index){
-      <pre (click)="openInvoiceDialog(item.invoiceId!)">
-      {{item | json}}
-    </pre>
-    }
-    <p>Total:{{total}}</p>
-  }
 
+  @if (report() !== null) {
+    <app-payments-table
+      [payments]="report()!.payments"
+    />
+<!--      (openInvoice)="openInvoiceDialog($event)"-->
+<!--    />-->
+
+  }
 </div>

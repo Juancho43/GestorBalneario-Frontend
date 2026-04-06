@@ -1,1 +1,4 @@
-<p>client-searcher works!</p>
+<form (ngSubmit)="submitHandler()">
+  <input type="text" name='seachTerm' [(ngModel)]="searchTerm" placeholder="Buscar por nombre o correo"/>
+  <input type="submit" value="Buscar"/>
+</form>

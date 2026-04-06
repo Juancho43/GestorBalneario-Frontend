@@ -3,8 +3,8 @@
   (click)="openDetailDialog()"
   class="card"
 >
-  @if (reservation.shadow){
-    <p>{{reservation.shadow?.type}} - {{reservation.shadow?.identifier}}</p>
+  @if (reservation.shadow!){
+    <p>{{reservation.shadow!.type}} - {{reservation.shadow!.identifier}}</p>
   }
   <p>Desde:{{reservation.dates.checkIn | date}}</p>
   <p>Hasta:{{reservation.dates.checkOut | date}}</p>

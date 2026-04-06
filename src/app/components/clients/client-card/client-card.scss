@@ -1,1 +1,9 @@
 @import "../../../../styles";
+.client-card {
+  flex-direction: row;
+  align-items: center;
+  div{
+    display: flex;
+    flex-direction: column;
+  }
+}

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {MatMenu} from '@angular/material/menu';
 import {RouterLink} from '@angular/router';
 import {CdkMenu, CdkMenuBar, CdkMenuItem, CdkMenuTrigger} from '@angular/cdk/menu';
 
@@ -9,7 +8,6 @@ import {CdkMenu, CdkMenuBar, CdkMenuItem, CdkMenuTrigger} from '@angular/cdk/men
     CdkMenuTrigger,
     CdkMenu,
     CdkMenuItem,
-    MatMenu,
     RouterLink,
     CdkMenuBar,
   ],

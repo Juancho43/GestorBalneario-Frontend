@@ -1,6 +1,9 @@
 @let client = this.client();
-<mat-card class="card">
-  <p>Nombre: {{client.name}}</p>
-  <p>Email: {{client.email}}</p>
-  <p>Telefono: {{client.phone}}</p>
+<mat-card class="card client-card">
+  <mat-icon aria-hidden="false" fontIcon="person"/>
+  <div>
+    <p>Nombre: {{client.name}}</p>
+    <p>Email: {{client.email}}</p>
+    <p>Telefono: {{client.phone}}</p>
+  </div>
 </mat-card>

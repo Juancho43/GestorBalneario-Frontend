@@ -1,1 +1,5 @@
-@import "../styles";
+// 1. Cargamos las herramientas de Sass (variables, mixins)
+@use "../styles" as *;
+
+// 2. Definimos el orden de las capas
+@layer base, components, utilities;

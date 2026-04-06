@@ -1,0 +1,39 @@
+@if(invoice() !== null){
+  @let items = this.invoice()!.items!;
+  @let invoice = this.invoice()!.invoice!;
+
+  <table>
+    <caption>Items</caption>
+    <thead>
+    <tr>
+      <th>Resumen</th>
+      <th>Cantidad</th>
+      <th>Precio</th>
+    </tr>
+    </thead>
+    <tbody>
+      @for (item of items; track $index){
+        <tr>
+          <td>
+            @if (item.aggregate === 'Reservations'){
+              {{item.aggregateObject.shadow.type}} -
+              {{item.aggregateObject.shadow.identifier}} (
+              {{item.aggregateObject.dates.checkIn | date:'short'}} -
+              {{item.aggregateObject.dates.checkOut | date:'short'}})
+            } @else {
+              <td>{{item.aggregate}}</td>
+            }
+          </td>
+          <td>{{item.quantity}}</td>
+          <td>{{item.price | currency}}</td>
+        </tr>
+      }
+    </tbody>
+    <tfoot>
+    <tr>
+      <td colspan="2" >Total:</td>
+      <td>{{invoice.amount | currency}}</td>
+    </tr>
+    </tfoot>
+  </table>
+}

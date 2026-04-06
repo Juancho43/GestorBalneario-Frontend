@@ -1,16 +1,18 @@
 import {Component, input} from '@angular/core';
 import {InvoiceEntity} from '../../../core/model/InvoiceEntity';
-import {JsonPipe} from '@angular/common';
+import {CurrencyPipe, DatePipe} from '@angular/common';
+import {MatCard} from '@angular/material/card';
 
 @Component({
   selector: 'app-invoice-card',
   imports: [
-    JsonPipe
+    MatCard,
+    DatePipe,
+    CurrencyPipe
   ],
   templateUrl: './invoice-card.html',
   styleUrl: './invoice-card.scss',
 })
 export class InvoiceCard {
   readonly invoice = input.required<InvoiceEntity>();
-
 }

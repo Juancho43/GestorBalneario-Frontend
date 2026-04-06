@@ -1,11 +1,13 @@
 import {Component, input} from '@angular/core';
 import {ClientEntity} from '../../../core/model/clientEntity';
 import {MatCard} from '@angular/material/card';
+import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'app-client-card',
   imports: [
-    MatCard
+    MatCard,
+    MatIcon
   ],
   templateUrl: './client-card.html',
   styleUrl: './client-card.scss',

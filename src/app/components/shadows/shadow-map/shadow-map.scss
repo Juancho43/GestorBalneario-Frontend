@@ -1,13 +1,12 @@
-@import "../../../../styles";
+@use "../../../../styles";
 .map {
-  border: 4px solid $primario;
+  border: 4px solid white ;
   background-color: #ffffff !important;
   color: #000000 !important;
   transition: border-color 0.3s ease;
   height: 70dvh;
   width: 70dvw;
   border-radius: 5px;
-
 }
 
 .border-editing {

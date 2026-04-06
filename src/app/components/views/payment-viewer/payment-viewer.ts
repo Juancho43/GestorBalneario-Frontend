@@ -3,16 +3,16 @@ import {PaymentsReportHttp} from '../../../core/services/PaymentHttp/payments-re
 import {rxResource} from '@angular/core/rxjs-interop';
 import {ReportQuery} from '../../../core/DTO/ReportQuery';
 import {ReportForm} from '../../payments/report-form/report-form';
-import {JsonPipe} from '@angular/common';
 import {Dialog} from '@angular/cdk/dialog';
 import {InvoiceDetails} from '../../invoices/invoice-details/invoice-details';
 import {InvoiceListManager} from '../../../core/services/Managers/invoice-list-manager';
+import {PaymentsTable} from '../../payments/payments-table/payments-table';
 
 @Component({
   selector: 'app-payment-viewer',
   imports: [
     ReportForm,
-    JsonPipe,
+    PaymentsTable,
   ],
   templateUrl: './payment-viewer.html',
   styleUrl: './payment-viewer.scss',

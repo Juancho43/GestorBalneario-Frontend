@@ -1,6 +1,6 @@
 <div class="client-manager-dialog">
   @if (this.mode() === 'search') {
-    <app-client-searcher/>
+    <app-client-searcher (requestSearch)="searchHandler($event)"/>
     <app-client-list
       [list]="list()"
       (selected)="selectClient($event)"

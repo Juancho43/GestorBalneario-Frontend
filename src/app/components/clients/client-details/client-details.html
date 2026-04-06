@@ -1,0 +1,18 @@
+<div class="detail-container">
+  @if (this.client()!){
+    @let client = this.client().client!;
+    @let invoices = this.client().invoices;
+    <div class="client detail" animate.enter="enter-animation">
+      <p>{{client.name}}</p>
+      <p>Email: {{client.email}}</p>
+      <p>Telefono: {{client.phone}}</p>
+      <h4>Facturas</h4>
+      @for (invoice of invoices; track $index){
+        <app-invoice-card
+          (click)="selectInvoice(invoice)"
+          [invoice]="invoice"/>
+      }
+    </div>
+  }
+  <app-invoice-details/>
+</div>

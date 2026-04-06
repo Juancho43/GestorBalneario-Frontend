@@ -10,6 +10,7 @@ $blue-light: #AED6F1;
 $gold: #D4AC0D;
 $beige: #F5F5DC;
 
+@import "picnic/picnic.min.css";
 :root {
   /* Modo Claro (Default) */
   --bg-color: #ffffff;
@@ -109,8 +110,13 @@ form {
   background-color: var(--bg-card);
   border-radius: 10px;
   transition: background-color 0.3s ease;
+  padding: 5px;
 }
-
+.detail-container{
+  display: flex;
+  padding: 20px;
+  gap: 20px;
+}
 .detail {
   background:var(--bg-detail);
   color:var(--text-color);

@@ -5,7 +5,7 @@ import MainMenu from './components/layout/main-menu/main-menu';
 import {AboutMenu} from './components/layout/about-menu/about-menu';
 import ShadowEditor from './components/views/shadow-editor/shadow-editor';
 import {ReservationViewer} from './components/views/reservation-viewer/reservation-viewer';
-import {ClientViewer} from './components/clients/client-viewer/client-viewer';
+import {ClientViewer} from './components/views/client-viewer/client-viewer';
 import {PaymentViewer} from './components/views/payment-viewer/payment-viewer';
 import PaymentEditor from './components/payments/payment-editor/payment-editor';
 import SeasonSwitch from './components/views/season-switch/season-switch';

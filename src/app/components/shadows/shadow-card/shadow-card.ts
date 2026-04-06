@@ -1,12 +1,10 @@
 import {Component, input} from '@angular/core';
 import {ShadowEntity} from '../../../core/model/shadowEntity';
-import {JsonPipe} from '@angular/common';
 import {MatCard} from '@angular/material/card';
 
 @Component({
   selector: 'app-shadow-card',
   imports: [
-    JsonPipe,
     MatCard
   ],
   templateUrl: './shadow-card.html',

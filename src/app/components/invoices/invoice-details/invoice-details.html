@@ -1,46 +1,27 @@
 @if (this.invoice()){
-  @let items = this.invoice()?.items!;
   @let invoice = this.invoice()?.invoice!;
   @let client = this.invoice()?.client!;
  <div class="invoice detail" animate.enter="enter-animation">
+   <h3>Detalle factura</h3>
+   <div>
+     <p>{{invoice.state | invoiceState}}</p>
+     <p>Fecha: {{invoice.date | date}}</p>
+   </div>
    <div class="client">
+     <h4>Cliente</h4>
      <p>{{client.name}}</p>
      <p>Email: {{client.email}}</p>
      <p>Telefono: {{client.phone}}</p>
    </div>
    <div>
-     <p>Fecha: {{invoice.date | date}}</p>
-   </div>
-   <div>
-     <p>Detalle:</p>
-      <table>
-        <thead>
-        <th>Resumen</th>
-        <th>Precio</th>
-        <th>Cantidad</th>
-        </thead>
-        <tbody>
-          @for (item of items; track $index){
-            <tr>
-              <td>
-                @if (item.aggregate === 'Reservations'){
-                {{item.aggregateObject.shadow.type}} -
-                  {{item.aggregateObject.shadow.identifier}} (
-                  {{item.aggregateObject.dates.checkIn | date:'short'}} -
-                  {{item.aggregateObject.dates.checkOut | date:'short'}})
-                } @else {
-                  <td>{{item.aggregate}}</td>
-                }
-              </td>
-              <td>{{item.price}}</td>
-              <td>{{item.quantity}}</td>
-            </tr>
-          }
-        </tbody>
-        <tfoot>{{invoice.amount | currency}}</tfoot>
-      </table>
+     <app-items-table [invoice]="this.invoice()"/>
+     @if(this.invoice()!.payments[0].id){
+       <app-payments-table [payments]="this.invoice()!.payments"/>
+     }@else{
+       <br>
+       <p>No hay pagos registrados para esta factura.</p>
+     }
    </div>
  </div>
-
 }
 

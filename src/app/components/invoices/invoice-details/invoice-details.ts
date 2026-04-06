@@ -2,14 +2,18 @@ import {Component, computed, inject} from '@angular/core';
 import {InvoiceDetailHttp} from '../../../core/services/InvoiceHttp/invoice-detail-http';
 import {rxResource} from '@angular/core/rxjs-interop';
 import {InvoiceListManager} from '../../../core/services/Managers/invoice-list-manager';
-import {CurrencyPipe, DatePipe, JsonPipe} from '@angular/common';
+import {DatePipe} from '@angular/common';
+import {ItemsTable} from '../items-table/items-table';
+import {PaymentsTable} from '../../payments/payments-table/payments-table';
+import {InvoiceStatePipe} from '../../../invoice-state-pipe';
 
 @Component({
   selector: 'app-invoice-details',
   imports: [
-    JsonPipe,
-    CurrencyPipe,
-    DatePipe
+    DatePipe,
+    ItemsTable,
+    InvoiceStatePipe,
+    PaymentsTable
   ],
   templateUrl: './invoice-details.html',
   styleUrl: './invoice-details.scss',

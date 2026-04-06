@@ -3,4 +3,5 @@ export interface InvoiceEntity{
   amount: number;
   date: Date;
   item: any[];
+  state?:string;
 }

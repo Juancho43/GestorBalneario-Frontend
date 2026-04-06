@@ -1,0 +1,35 @@
+@if(this.payments() !== null){
+  @let payments = this.payments()!;
+  <table>
+    <caption>Pagos</caption>
+    <thead>
+    <tr>
+      <th>Fecha</th>
+      <th>Descripcion</th>
+      <th>Monto</th>
+      <th>Tipo de pago</th>
+      <th>Cambio</th>
+      <th>Total</th>
+    </tr>
+    </thead>
+    <tbody>
+
+      @for (item of payments; track $index){
+        <tr>
+          <td>{{item.date | date:'short'}}</td>
+          <td>{{item.description!}}</td>
+          <td>{{item.amount | currency}}</td>
+          <td>{{item.type}}</td>
+          <td>{{item.changeType}}</td>
+          <td>{{item.finalAmout | currency}}</td>
+        </tr>
+      }
+    </tbody>
+    <tfoot>
+    <tr>
+      <td colspan="4" >Total:</td>
+      <td>{{total() | currency}}</td>
+    </tr>
+    </tfoot>
+  </table>
+}
