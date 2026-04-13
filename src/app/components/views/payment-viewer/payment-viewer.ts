@@ -7,6 +7,7 @@ import {Dialog} from '@angular/cdk/dialog';
 import {InvoiceDetails} from '../../invoices/invoice-details/invoice-details';
 import {InvoiceListManager} from '../../../core/services/Managers/invoice-list-manager';
 import {PaymentsTable} from '../../payments/payments-table/payments-table';
+import {ReportResponse} from '../../../core/DTO/ReportResponse';
 
 @Component({
   selector: 'app-payment-viewer',
@@ -36,8 +37,17 @@ export class PaymentViewer {
     },
     stream: ({params}) => this.reportsService.generate(params.query)
   })
-  report = computed(()=> this.reportResource.value())
-
+  report = computed(()=> {
+      if(!this.reportResource.error() && !this.reportResource.isLoading()){
+         return this.reportResource.value()!;
+      }else{
+        return {
+          payments : [],
+          total : 0,
+        } as ReportResponse
+      }
+    }
+  )
   protected openInvoiceDialog(invoiceId: string) {
     this.invoiceManager.currentInvoice.set(invoiceId);
     this.dialog.open(InvoiceDetails)

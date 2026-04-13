@@ -5,8 +5,9 @@
   />
 
   @if (report() !== null) {
+
     <app-payments-table
-      [payments]="report()!.payments"
+      [payments]="report()!.payments!"
     />
 <!--      (openInvoice)="openInvoiceDialog($event)"-->
 <!--    />-->

@@ -13,6 +13,7 @@ import {ShadowCard} from '../../shadows/shadow-card/shadow-card';
 import {ShadowMapHttp} from '../../../core/services/ShadowHttp/shadow-map-http';
 import {rxResource} from '@angular/core/rxjs-interop';
 import {ShadowEntity} from '../../../core/model/shadowEntity';
+import {ShadowMapDTO} from '../../../core/DTO/ShadowMapDTO';
 
 @Component({
   selector: 'app-reservation-create',
@@ -34,6 +35,8 @@ export class ReservationCreate {
   mapResource = rxResource({
     stream:() => this.mapHttp.get()
   })
+
+
   shadows = computed(() =>{
     let list: ShadowEntity[] = [];
     if(this.mapResource.value() && !this.mapResource.error()){
@@ -44,13 +47,13 @@ export class ReservationCreate {
     return list
   } );
   client = linkedSignal<ClientEntity>(()=>this.clientManager.currentClient() || {name: '', email: '', phone:''});
-  shadow = signal(this.shadows()[0] || {
-  coords: {
-    x:0,
-    y:0
-  }
-
-  }as ShadowEntity);
+  shadow = signal(this.shadows()[0] ||
+    {
+      coords: {
+        x:0,
+        y:0
+      }
+    }as ShadowEntity);
   private reservationListManager = inject(ReservationListManager);
   createReservation(reservation: ReservationEntity) {
     this.reservationListManager.addReservation(reservation);

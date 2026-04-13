@@ -6,7 +6,7 @@ import {rxResource} from '@angular/core/rxjs-interop';
 import {ShadowMapHttp} from '../../../core/services/ShadowHttp/shadow-map-http';
 import {ShadowEntity} from '../../../core/model/shadowEntity';
 import {MapCard} from '../../map/map-card/map-card';
-import {MapItem} from '../../../core/DTO/ShadowMapDTO';
+import {MapItem, ShadowMapDTO} from '../../../core/DTO/ShadowMapDTO';
 
 @Component({
   selector: 'app-reservation-viewer',
@@ -33,6 +33,13 @@ export class ReservationViewer {
     }
     return list
   } );
+  mapItems = computed(()=>{
+    if(!this.mapResource.isLoading() || !this.mapResource.error){
+      return this.mapResource.value()!;
+    }else{
+      return {map:[]} as ShadowMapDTO;
+    }
+  })
   reservationResource = rxResource({
     stream: () => this.getActive.get()
   })

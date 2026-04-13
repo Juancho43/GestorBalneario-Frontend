@@ -9,6 +9,6 @@ import {SeasonEntity} from '../../model/SeasonEntity';
 export class GetSeasonsHttp {
   private http = inject(HttpClient);
   get(){
-    return this.http.get<SeasonEntity[]>(`${environment.apiUrl}/season/current`);
+    return this.http.get<SeasonEntity[]>(`${environment.apiUrl}/season/history`);
   }
 }

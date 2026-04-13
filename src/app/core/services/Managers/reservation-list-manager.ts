@@ -17,25 +17,24 @@ import {GetActiveReservationsHttp} from '../ReservationHttp/get-active-reservati
 })
 export class ReservationListManager {
 
-  private allReservationsHttp = inject(GetAllReservationsHttp);
   private create = inject(CreateReservationHttp);
   private update = inject(EditReservationHttp)
   private delete = inject(DeleteReservationHttp);
   private query = signal<PaginatedQuery>({ query:'',page:1,pageSize:10});
-  private reservationsResource= rxResource({
-    params: ()=>this.query(),
-    stream:({params})=> this.allReservationsHttp.get(params)
-  })
+  // private reservationsResource= rxResource({
+  //   params: ()=>this.query(),
+  //   stream:({params})=> this.allReservationsHttp.get(params)
+  // })
   currentReservation = signal<ReservationEntity| null>(null);
   /*
   * A list of the current reservations. It is updated when a shadow is added, updated or deleted.
   * */
-  private reservations = linkedSignal(()=>
-    this.reservationsResource.isLoading() || this.reservationsResource.error() ? [] : this.reservationsResource.value()!
-  )
+  // private reservations = linkedSignal(()=>
+  //   // this.reservationsResource.isLoading() || this.reservationsResource.error() ? [] : this.reservationsResource.value()!
+  // )
 
   getList(){
-    return this.reservations();
+    // return this.reservations();
   }
 
   addReservation(reservation:ReservationEntity) {

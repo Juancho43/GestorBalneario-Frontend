@@ -1,15 +1,17 @@
 <div class="component">
   <h3>Ver reservas activas</h3>
   <div class="row">
-
-  <app-shadow-map
-    [loadedShadows]="shadows()"
-    initialState="viewing"
-  />
-  @for (item of mapResource.value()!.map;track $index){
-    <app-map-card
-      (click)="selectReservation(item)"
-      [item]="item"/>
-  }
+    <app-shadow-map
+      [loadedShadows]="shadows()"
+      initialState="viewing"
+    />
+    @let map =this.mapItems();
+    @if(map){
+      @for (item of map.map;track $index){
+        <app-map-card
+          (click)="selectReservation(item)"
+          [item]="item"/>
+      }
+    }
   </div>
 </div>
