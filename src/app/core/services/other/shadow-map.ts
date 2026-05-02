@@ -18,7 +18,7 @@ export class ShadowMap {
   shadows = computed(() =>{
     let list: ShadowEntity[] = [];
     if(this.mapResource.value()){
-      this.mapResource.value()?.map.forEach(row =>
+      this.mapResource.value()?.data!.map.forEach(row =>
         list.push(row.shadow)
       )
     }
@@ -27,7 +27,7 @@ export class ShadowMap {
   reservations = computed(() =>{
     let list: ReservationEntity[] = [];
     if (this.mapResource.value()){
-      this.mapResource.value()?.map.forEach(row =>{
+      this.mapResource.value()?.data!.map.forEach(row =>{
         list.push(row.reservation!)
       })
     }

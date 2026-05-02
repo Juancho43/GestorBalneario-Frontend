@@ -14,9 +14,47 @@
 }
 
 .border-delete {
-  border-color: #E74C3C; /* Rojo: Alerta / Modo borrado */
+  border-color: #f80447; /* Rojo: Alerta / Modo borrado */
 }
 
 .border-view {
   border-color: #27AE60; /* Verde: Todo en orden / Vista */
+}
+
+.shadowMap {
+  position: relative;
+  // Ensure the container matches the canvas size to keep buttons bound to it
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.buttons {
+  position: absolute;
+  z-index: 20;
+  display: flex;
+  gap: 8px; // Give your actions room to breathe
+
+  /* The Secret to "Inside" Positioning */
+  bottom: 20px;
+  left: 20px;
+
+  /* Aesthetic Excellence: Make them look like a floating toolbar */
+  background: rgba(0, 0, 0, 0.6);
+  padding: 10px;
+  border-radius: 8px;
+  backdrop-filter: blur(4px); // A touch of modern professionalism
+}
+
+.buttons button {
+  cursor: pointer;
+  padding: 5px 12px;
+  border: 1px solid #fff;
+  background: transparent;
+  color: white;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: white;
+    color: #000;
+  }
 }

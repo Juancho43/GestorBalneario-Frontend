@@ -3,7 +3,7 @@ import {
   Component, computed,
   effect,
   ElementRef,
-  HostListener,
+  HostListener, inject,
   input,
   output, signal,
   ViewChild
@@ -11,7 +11,17 @@ import {
 import {CdkDragEnd} from '@angular/cdk/drag-drop';
 import * as fabric from 'fabric';
 import {ShadowEntity} from '../../../core/model/shadowEntity';
-
+import {ShadowMapHelpers} from '../../../core/utils/shadow-map-helpers';
+interface MapElement extends fabric.Object {
+  _history?: { left: number; top: number };
+}
+declare module 'fabric' {
+  namespace fabric {
+    interface Object {
+      _history?: { left: number; top: number };
+    }
+  }
+}
 export type MapState = 'idle' | 'editing' | 'viewing';
 @Component({
   selector: 'app-shadow-map',
@@ -22,6 +32,7 @@ export type MapState = 'idle' | 'editing' | 'viewing';
 })
 export class ShadowMap implements AfterViewInit{
   readonly loadedShadows = input.required<ShadowEntity[]>();
+  private helpers = inject(ShadowMapHelpers);
   @ViewChild('myCanvas') canvasElement!: ElementRef;
   initialState = input<MapState>('viewing');
   state = computed<MapState>(()=>this.initialState());
@@ -69,6 +80,7 @@ export class ShadowMap implements AfterViewInit{
     this.setUpMovingShape();
     this.setUpSelectShape();
     this.setMapState();
+    this.setupInteractionRules()
   }
 
   load() {
@@ -183,9 +195,8 @@ export class ShadowMap implements AfterViewInit{
       });
     }
   }
+
   public setMapState() {
-
-
     switch (this.state()) {
       case 'editing':
         // Modo Edición: Usuario tiene control total
@@ -230,34 +241,11 @@ export class ShadowMap implements AfterViewInit{
     }
   private setUpZoom() {
     window.addEventListener('keydown', (e: KeyboardEvent) => {
-      const zoomStep = 0.1;
-      let zoom = this.canvas.getZoom();
-
       if (e.key === '+') {
-        zoom += zoomStep;
+        this.zoomIn();
       } else if (e.key === '-') {
-        zoom -= zoomStep;
-      } else {
-        return;
+        this.zoomOut();
       }
-
-      // 1. Limitar el rango de zoom (0.5x a 20x)
-      zoom = Math.min(Math.max(zoom, 0.5), 20);
-
-      // 2. Ejecutar el zoom hacia el centro del canvas
-      const center = new fabric.Point(this.canvas.width! / 2, this.canvas.height! / 2);
-      this.canvas.zoomToPoint(center, zoom);
-
-      // 3. RESTRICCIÓN DE COORDENADAS POSITIVAS
-      const vpt = this.canvas.viewportTransform!;
-
-      // vpt[4] es el desplazamiento en X, vpt[5] en Y.
-      // Al asegurar que sean <= 0, garantizamos que el (0,0) del mundo
-      // nunca se mueva a la derecha o hacia abajo de la esquina del canvas.
-      vpt[4] = Math.min(0, vpt[4]);
-      vpt[5] = Math.min(0, vpt[5]);
-
-      this.canvas.requestRenderAll();
     });
   }
   private setUpPanning() {
@@ -318,8 +306,94 @@ export class ShadowMap implements AfterViewInit{
       }
     });
   }
+// Constants for consistent discipline
+  private readonly ZOOM_STEP = 0.1;
+  private readonly MIN_ZOOM = 0.5;
+  private readonly MAX_ZOOM = 20;
 
+  /**
+   * The core engine for all zoom operations
+   */
+  private applyZoom(newZoom: number) {
+    // 1. Clamp the zoom level
+    const zoom = Math.min(Math.max(newZoom, this.MIN_ZOOM), this.MAX_ZOOM);
+
+    // 2. Zoom to center
+    const center = new fabric.Point(
+      this.canvas.getWidth() / 2,
+      this.canvas.getHeight() / 2
+    );
+    this.canvas.zoomToPoint(center, zoom);
+
+    // 3. Enforce Coordinate Restrictions
+    this.constrainViewport();
+
+    this.canvas.requestRenderAll();
+  }
+
+  /**
+   * Keeps the world within positive boundaries
+   */
+  private constrainViewport() {
+    const vpt = this.canvas.viewportTransform;
+    if (!vpt) return;
+
+    vpt[4] = Math.min(0, vpt[4]); // X displacement
+    vpt[5] = Math.min(0, vpt[5]); // Y displacement
+  }
+  protected zoomIn() {
+    this.applyZoom(this.canvas.getZoom() + this.ZOOM_STEP);
+  }
+
+  protected zoomOut() {
+    this.applyZoom(this.canvas.getZoom() - this.ZOOM_STEP);
+  }
+
+  protected resetView() {
+    this.canvas.setViewportTransform([1, 0, 0, 1, 0, 0]);
+    this.applyZoom(1);
+  }
   protected activeDelete() {
     this.deleteMode.update((v) => !v )
   }
+
+  private setupInteractionRules() {
+    this.canvas.on('object:modified', (options) => {
+      // Cast the target to your MapElement interface
+      const movedObj = options.target as MapElement;
+      if (!movedObj) return;
+
+      this.snapToGrid(movedObj);
+
+      const isOccupied = this.canvas.getObjects().some(otherObj => {
+        const other = otherObj as MapElement;
+        if (other === movedObj) return false;
+        return other.left === movedObj.left && other.top === movedObj.top;
+      });
+
+      if (isOccupied) {
+        // TypeScript now understands _history!
+        movedObj.set({
+          left: movedObj._history?.left ?? 0,
+          top: movedObj._history?.top ?? 0
+        });
+      } else {
+        movedObj._history = { left: movedObj.left!, top: movedObj.top! };
+      }
+
+      this.canvas.requestRenderAll();
+    });
+  }
+  private readonly TILE_SIZE = 50; // Define your territory size
+
+  /**
+   * Force an object to align with the grid discipline
+   */
+  private snapToGrid(obj: fabric.Object) {
+    obj.set({
+      left: Math.round(obj.left! / this.TILE_SIZE) * this.TILE_SIZE,
+      top: Math.round(obj.top! / this.TILE_SIZE) * this.TILE_SIZE
+    });
+  }
+
 }

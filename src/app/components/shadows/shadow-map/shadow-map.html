@@ -1,14 +1,19 @@
-<canvas
-  #myCanvas
-  class="map"
-  [class.border-editing]="state() === 'editing' && !deleteMode()"
-  [class.border-delete]="state() === 'editing' && deleteMode()"
-  [class.border-view]="state() === 'viewing'"
->
-</canvas>
-@if(this.state() === 'editing'){
-  @if (this.deleteMode()) {
-    <div class="delete-indicator">Delete Mode Active</div>
-  }
-  <button (click)="activeDelete()">Delete</button>
-}
+<div class="shadowMap">
+  <canvas
+    #myCanvas
+    class="map"
+    [class.border-editing]="state() === 'editing' && !deleteMode()"
+    [class.border-delete]="state() === 'editing' && deleteMode()"
+    [class.border-view]="state() === 'viewing'"
+  >
+  </canvas>
+  <div class="buttons">
+    <button (click)="zoomIn()">Zoom in</button>
+    <button (click)="zoomOut()">Zoom out</button>
+    <button (click)="resetView()">Reset</button>
+    @if(this.state() === 'editing'){
+      <button (click)="activeDelete()">Delete</button>
+    }
+  </div>
+
+</div>
