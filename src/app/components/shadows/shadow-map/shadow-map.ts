@@ -51,13 +51,13 @@ export class ShadowMap implements AfterViewInit{
     this.canvas = new fabric.Canvas(this.canvasElement.nativeElement, {
       hoverCursor : 'pointer',
       backgroundColor: '#f0f0f0',
-      width: container.clientWidth,
-      height: container.clientHeight || 600,
+      width:container.clientWidth,
+      height:container.clientHeight
     });
     this.load();
     this.setUp();
-  }
 
+  }
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
     if (event.key === 'Delete' || event.key === 'Backspace') {
@@ -66,6 +66,25 @@ export class ShadowMap implements AfterViewInit{
       }
     }
   }
+
+  private alignMovedItems(){
+    const gridSize = 50; // Define your unit of measurement
+
+    this.canvas.on('object:moving', function(options) {
+      // Snap the top and left coordinates to the nearest multiple of your grid size
+      options.target.set({
+        left: Math.round(options.target.left / gridSize) * gridSize,
+        top: Math.round(options.target.top / gridSize) * gridSize
+      });
+    })
+  }
+  //
+  // @HostListener('window:resize')
+  // onWindowResize() {
+  //
+  // }
+  ;
+
 
   load() {
     if(this.canvas && this.loadedShadows().length > 0){
@@ -133,6 +152,7 @@ export class ShadowMap implements AfterViewInit{
     this.setUpMovingShape();
     this.setUpSelectShape();
     this.setMapState();
+    this.alignMovedItems()
   }
   private setUpZoom() {
     window.addEventListener('keydown', (e: KeyboardEvent) => {
@@ -207,4 +227,6 @@ export class ShadowMap implements AfterViewInit{
       this.canvas.renderAll();
     }
   }
+
+
 }

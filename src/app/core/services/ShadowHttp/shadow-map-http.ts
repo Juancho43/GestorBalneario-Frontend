@@ -4,7 +4,6 @@ import {environment} from '../../../../environments/environment.development';
 import {ShadowMapDTO} from '../../DTO/ShadowMapDTO';
 import {SeasonManager} from '../Managers/season-manager';
 import {ApiResponse} from '../../DTO/ApiResponse';
-import {NotificationHelper} from '../other/notification-helper';
 
 @Injectable({
   providedIn: 'root',
