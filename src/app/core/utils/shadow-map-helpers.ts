@@ -5,17 +5,37 @@ import {CdkDragEnd} from '@angular/cdk/drag-drop';
   providedIn: 'root',
 })
 export class ShadowMapHelpers {
+  /**
+   * The minimum zoom level allowed for the canvas.
+   */
   private readonly MIN_ZOOM = 0.5;
+  /**
+   * The maximum zoom level allowed for the canvas.
+   */
   private readonly MAX_ZOOM = 20;
+    /**
+   * Resizes a fabric.js object to a desired height, maintaining its aspect ratio.
+   * @param object The fabric.Object to resize.
+   * @param desiredHeight The desired height for the object.
+   */
   fixSize(object:fabric.Object, desiredHeight:number) {
+    if (!object.width) return;
     let number = desiredHeight / object.width;
     object.set({
       scaleX: number,
       scaleY: number
     });
   }
-  createShape(type: string, x: number, y: number, textContent: string, state:string) {
-    let svg: any;
+  /**
+   * Creates a fabric.js group containing an SVG shape and text.
+   * @param type The type of shape to create ('carpa' or 'sombrilla').
+   * @param x The initial x-coordinate of the group.
+   * @param y The initial y-coordinate of the group.
+   * @param textContent The text to display within the group.
+   * @param state The state of the shape, which determines its color.
+   * @returns A fabric.Group object or undefined if the type is invalid.
+   */
+  createShape(type: string, x: number, y: number, textContent: string, state:string): fabric.Group | undefined {    let svg: any;
     let text: fabric.IText;
     switch (type) {
       case 'carpa':
@@ -48,7 +68,6 @@ export class ShadowMapHelpers {
 
     }
     this.fixSize(svg,30)
-    // Agregamos un ID único para la sincronización futura
     text = new fabric.IText( textContent ,{
       fontSize: 20,
       top: 40,
@@ -65,15 +84,11 @@ export class ShadowMapHelpers {
   }
 
   /**
-   * Keeps the world within positive boundaries
+   * Applies a new zoom level to the canvas, centered on the canvas's center.
+   * The zoom level is clamped between MIN_ZOOM and MAX_ZOOM.
+   * @param canvas The fabric canvas instance.
+   * @param newZoom The desired new zoom level.
    */
-  constrainViewport(canvas: fabric.Canvas) {
-    const vpt =canvas.viewportTransform;
-    if (!vpt) return;
-
-    vpt[4] = Math.min(0, vpt[4]); // X displacement
-    vpt[5] = Math.min(0, vpt[5]); // Y displacement
-  }
   applyZoom(canvas: fabric.Canvas,newZoom: number) {
     // 1. Clamp the zoom level
     const zoom = Math.min(Math.max(newZoom, this.MIN_ZOOM), this.MAX_ZOOM);
@@ -90,6 +105,10 @@ export class ShadowMapHelpers {
 
     canvas.requestRenderAll();
   }
+  /**
+   * Sets the canvas to edit mode, allowing objects to be selected and moved.
+   * @param canvas The fabric canvas instance.
+   */
   setCanvasToEditMode(canvas: fabric.Canvas){
     canvas.selection = true;
     canvas.forEachObject((obj) => {
@@ -100,6 +119,10 @@ export class ShadowMapHelpers {
     });
     console.log("Canvas on edit mode");
   }
+  /**
+   * Sets the canvas to view mode, preventing objects from being selected or moved.
+   * @param canvas The fabric canvas instance.
+   */
   setCanvasToViewMode(canvas: fabric.Canvas){
     canvas.selection = true;
     canvas.forEachObject((obj) => {
@@ -113,12 +136,52 @@ export class ShadowMapHelpers {
     });
     console.log("Canvas on view mode");
   }
-  validateCanvasBorder(canvas:any,event: CdkDragEnd){
+
+  /**
+   * Validates if the drop point of a drag event is within the canvas boundaries.
+   * @param canvas The canvas element.
+   * @param event The drag end event.
+   * @returns True if the drop point is inside the canvas, false otherwise.
+   */
+  validateCanvasBorder(canvas: any, event: CdkDragEnd) {
     const rect = canvas.getBoundingClientRect();
     const x = event.dropPoint.x - rect.left;
     const y = event.dropPoint.y - rect.top;
-    return  (x >= 0 && x <= canvas.width && y >= 0 && y <= canvas.height)
+    return (x >= 0 && x <= canvas.width && y >= 0 && y <= canvas.height);
   }
+
+  /**
+   * Changes the size of the fabric.js canvas.
+   * @param canvas The fabric canvas instance to resize.
+   * @param newWidth The new width for the canvas.
+   * @param newHeight The new height for the canvas.
+   */
+  changeCanvasSize(canvas: fabric.Canvas,newWidth: number, newHeight: number): void {
+    canvas.setDimensions({
+      width: newWidth,
+      height: newHeight
+    });
+
+    canvas.calcOffset();
+    canvas.renderAll();
+  }
+  /**
+   * Constrains the canvas viewport to prevent panning into positive coordinates,
+   * ensuring the top-left corner of the viewport does not go past the (0,0) origin.
+   * @param canvas The fabric canvas instance.
+   */
+  private constrainViewport(canvas: fabric.Canvas) {
+    const vpt = canvas.viewportTransform;
+    if (!vpt) return;
+
+    vpt[4] = Math.min(0, vpt[4]); // X displacement
+    vpt[5] = Math.min(0, vpt[5]); // Y displacement
+  }
+  /**
+   * Returns a color based on the provided state.
+   * @param state The state to get the color for. Can be 'occupied', 'available', or another value.
+   * @returns 'red' for 'occupied', 'green' for 'available', and 'blue' for other states.
+   */
   private color(state:string){
     if (state === 'occupied'){
       return 'red';
