@@ -1,0 +1,8 @@
+<app-client-searcher (requestSearch)="searchHandler($event)"/>
+<app-client-list
+  [list]="list()"
+  (selected)="selectClient($event)"
+/>
+<app-paginator
+  (pageChange)="changePage($event)"
+/>

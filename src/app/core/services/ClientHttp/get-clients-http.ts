@@ -2,6 +2,7 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment.development';
 import {ClientEntity} from '../../model/clientEntity';
+import {ApiResponse} from '../../DTO/ApiResponse';
 
 export interface PaginatedQuery {
   page: number;
@@ -16,6 +17,6 @@ export class GetClientsHttp {
   private http = inject(HttpClient);
 
   get(query: PaginatedQuery){
-    return this.http.get<ClientEntity[]>(`${environment.apiUrl}/client/history?page=${query.page}&size=${query.pageSize}`);
+    return this.http.get<ApiResponse<ClientEntity[]>>(`${environment.apiUrl}/client/history?page=${query.page}&size=${query.pageSize}`);
   }
 }

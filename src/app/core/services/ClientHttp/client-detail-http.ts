@@ -2,6 +2,7 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment.development';
 import {ClientDetailDTO} from '../../DTO/ClientDetailDTO';
+import {ApiResponse} from '../../DTO/ApiResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +10,8 @@ import {ClientDetailDTO} from '../../DTO/ClientDetailDTO';
 
 export class ClientDetailHttp {
   private http = inject(HttpClient);
-  get(id:string, page:number, limit:number){
-    return this.http.get<ClientDetailDTO>(`${environment.apiUrl}/client/detail/${id}?page=${page}&limit=${limit}`);
+
+    get(id:string, page:number, limit:number){
+    return this.http.get<ApiResponse<ClientDetailDTO>>(`${environment.apiUrl}/client/detail/${id}?page=${page}&pageSize=${limit}`);
   }
 }

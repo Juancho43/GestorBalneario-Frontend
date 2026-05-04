@@ -1,34 +1,33 @@
-import {Component, computed, inject, input, signal} from '@angular/core';
+import {Component, computed, inject, signal} from '@angular/core';
 import {ClientSearcher} from '../client-searcher/client-searcher';
 import {ClientList} from '../client-list/client-list';
 import {ClientForm} from '../client-form/client-form';
 import {ClientEntity} from '../../../core/model/clientEntity';
-import {ClientListManager} from '../../../core/services/Managers/client-list-manager';
-import {MatDialogRef} from '@angular/material/dialog';
+import {ClientManager} from '../../../core/services/Managers/client-manager.service';
 import {DialogRef} from '@angular/cdk/dialog';
 import {ClientSearchHttp} from '../../../core/services/ClientHttp/client-search-http';
 import {rxResource} from '@angular/core/rxjs-interop';
+import {ClientListManagerComponent} from '../client-list-manager/client-list-manager.component';
 
 @Component({
   selector: 'app-client-searcher-dialog',
   imports: [
-    ClientSearcher,
-    ClientList,
-    ClientForm
+    ClientForm,
+    ClientListManagerComponent
   ],
   templateUrl: './client-manager-dialog.component.html',
   styleUrl: './client-manager-dialog.component.scss',
 })
 export class ClientManagerDialog {
   private searched = signal(false);
-  private clientManager = inject(ClientListManager);
+  private clientManager = inject(ClientManager);
   private searcherHttp = inject(ClientSearchHttp);
   private query = signal<{query:string,limit:number, page:number}>({query:'',limit:10,page:0})
   protected searchResource = rxResource({
     params : () => {return {query:this.query()}},
     stream: ({params}) => this.searcherHttp.execute(params.query.query, params.query.page, params.query.limit)
   })
-  protected searchResults = computed(()=> this.searchResource.value())
+  protected searchResults = computed(()=> this.searchResource.value()?.data!)
   private ref = inject(DialogRef<ClientManagerDialog>);
   readonly mode = signal<'search'|'create'>('search')
   protected list = computed(()=> {
@@ -51,8 +50,4 @@ export class ClientManagerDialog {
     this.ref.close();
   }
 
-  protected searchHandler($event: any) {
-    this.searched.set(true);
-    this.query.set({query:$event.query, limit:$event.limit, page:0})
-  }
 }

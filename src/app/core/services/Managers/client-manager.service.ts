@@ -9,7 +9,7 @@ import {ClientEntity} from '../../model/clientEntity';
 @Injectable({
   providedIn: 'root',
 })
-export class ClientListManager {
+export class ClientManager {
   private clientsHttp = inject(GetClientsHttp);
   private create = inject(CreateClientHttp);
   private update = inject(EditClientHttp);
@@ -24,16 +24,11 @@ export class ClientListManager {
   * A list of the current clients. It is updated when a shadow is added, updated or deleted.
   * */
   private clients = linkedSignal(()=>
-    this.clientsResource.isLoading() || this.clientsResource.error() ? [] : this.clientsResource.value()!
+    this.clientsResource.isLoading() || this.clientsResource.error() ? [] : this.clientsResource.value()!.data!
   )
   getList(){
     return this.clients();
   }
-
-  getById(id: string){
-    return this.clients().find(client => client.id === id);
-  }
-
   addClient(client: ClientEntity){
     this.create.create(client).subscribe(r=>{
       this.currentClient.set(r);

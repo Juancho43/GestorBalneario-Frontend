@@ -1,0 +1,35 @@
+.paginator-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  font-family: inherit;
+
+  .page-info {
+    font-size: 0.9rem;
+    color: #555;
+    min-width: 100px;
+    text-align: center;
+  }
+
+  .page-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    &:hover:not(:disabled) {
+      background-color: #f0f0f0;
+      border-color: #999;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      background-color: #f9f9f9;
+    }
+  }
+}

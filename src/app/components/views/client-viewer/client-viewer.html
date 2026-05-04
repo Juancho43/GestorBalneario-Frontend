@@ -1,9 +1,5 @@
 <div class="component">
-  <h3>Clientes</h3>
-  @for (client of clientList(); track client.id) {
-    <app-client-card
-      (click)="openClientDetail(client)"
-      [client]="client"
-    />
-  }
+  <app-client-list-manager
+    (selectedClient)="openClientDetail($event)"
+  />
 </div>

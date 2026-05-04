@@ -1,10 +1,9 @@
 <div class="client-manager-dialog">
   @if (this.mode() === 'search') {
-    <app-client-searcher (requestSearch)="searchHandler($event)"/>
-    <app-client-list
-      [list]="list()"
-      (selected)="selectClient($event)"
+    <app-client-list-manager
+      (selectedClient)="selectClient($event)"
     />
+
     <button (click)="this.mode.set('create')">Crear</button>
   }
 

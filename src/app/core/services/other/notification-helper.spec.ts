@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ClientManager } from './client-manager.service';
+import { NotificationHelper } from './notification-helper';
 
-describe('ClientListManager', () => {
-  let service: ClientManager;
+describe('NotificationHelper', () => {
+  let service: NotificationHelper;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ClientManager);
+    service = TestBed.inject(NotificationHelper);
   });
 
   it('should be created', () => {
