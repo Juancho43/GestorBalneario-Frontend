@@ -1,3 +1,4 @@
+@use '@angular/material' as mat;
 $fondo: #F4F6F7;
 $fondo-2: #7F8C8D;
 $primario: #1B4F72;
@@ -10,7 +11,7 @@ $blue-light: #AED6F1;
 $gold: #D4AC0D;
 $beige: #F5F5DC;
 
-@import "picnic/picnic.min.css";
+//@import "picnic/picnic.min.css";
 :root {
   /* Modo Claro (Default) */
   --bg-color: #ffffff;
@@ -21,6 +22,8 @@ $beige: #F5F5DC;
 
   --bg-card: #{$blue-light};
   --bg-detail: #{$beige};
+
+
 }
 
 html.dark {
@@ -136,4 +139,20 @@ form {
     opacity: 1;
     transform: translateY(0);
   }
+}
+.toast-error {
+
+  @include mat.snack-bar-overrides((
+    container-color: #e74c3c,
+    supporting-text-color: #fff,
+    button-color: #fff
+  ));
+}
+
+.toast-success {
+  @include mat.snack-bar-overrides((
+    container-color: #00C853,
+    supporting-text-color: #ffffff,
+    button-color: #fff
+  ));
 }
