@@ -47,9 +47,9 @@ export class ReservationForm {
     serviceId: this.service().id!
   });
   reservationForm = form(this.reservation, (schemaPath) =>{
-    required(schemaPath.dates.checkIn, {message:'Check-in date is required'});
-    required(schemaPath.dates.checkOut, {message:'Check-out date is required'});
-    min(schemaPath.price,0, {message:'Price must be positive'})
+    required(schemaPath.dates.checkIn, {message:'La fecha y hora del Check-in es requerida'});
+    required(schemaPath.dates.checkOut, {message:'La fecha y hora del Check-out es requerida '});
+    min(schemaPath.price,0, {message:'El precio debe ser positivo'})
     validate(schemaPath.dates.checkOut,minDateValidator(schemaPath.dates.checkIn));
   });
   finalReservation = output<ReservationEntity>();

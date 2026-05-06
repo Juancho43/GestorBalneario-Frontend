@@ -1,12 +1,17 @@
 <form (ngSubmit)="submitted()">
   <legend>Client Form</legend>
   <label for="name">Cliente:</label>
-  <input type="text" [formField]="clientForm.name"/><br><br>
+  <input type="text" [formField]="clientForm.name"/>
 
   <label for="email">Email:</label>
-  <input type="email" [formField]="clientForm.email" /><br><br>
-
+  <input type="email" [formField]="clientForm.email" />
   <label for="phone">Phone</label>
-  <input type="tel" [formField]="clientForm.phone"/><br><br>
+  <input type="tel" [formField]="clientForm.phone"/>
+
+  @if(clientForm().touched()){
+    @for(error of allFormErrors(); track $index){
+      <p class="error">{{error.message}}</p>
+    }
+  }
   <input type="submit" value="Submit">
 </form>

@@ -39,7 +39,8 @@ export class SeasonForm {
   });
   finalSeason = output<SeasonEntity>()
   protected submitHandler() {
-    console.log(this.season());
-    this.finalSeason.emit(this.season());
+    if(!this.seasonForm().invalid()){
+      this.finalSeason.emit(this.season());
+    }
   }
 }

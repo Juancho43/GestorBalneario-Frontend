@@ -39,7 +39,8 @@ export class ShadowForm {
     return [...root, ...price];
   });
   submitted(){
-
+    if(!this.shadowForm().invalid()){
       this.finalShadow.emit(this.shadow())
+    }
   }
 }

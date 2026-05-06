@@ -47,6 +47,8 @@ export class PaymentForm {
   finalPayment = output<PaymentEntity>();
 
   protected submitPayment() {
-    this.finalPayment.emit(this.payment());
+    if(!this.paymentForm().invalid){
+      this.finalPayment.emit(this.payment());
+    }
   }
 }

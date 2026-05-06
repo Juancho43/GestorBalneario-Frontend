@@ -31,6 +31,8 @@ export class ServiceForm {
   })
   finalService = output<ServiceEntity>()
   protected onSubmit() {
-    this.finalService.emit(this.service())
+   if(!this.serviceForm().invalid()){
+     this.finalService.emit(this.service())
+   }
   }
 }
