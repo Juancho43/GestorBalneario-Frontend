@@ -2,15 +2,21 @@
   <fieldset>
     <legend>Fechas</legend>
     <label>CheckIn</label>
-    <input type="datetime-local" [formField]="reservationForm.dates.checkIn"]>
+    <input type="datetime-local" [formField]="reservationForm.dates.checkIn">
     <br>
     <label>CheckOut</label>
-    <input type="datetime-local" [formField]="reservationForm.dates.checkOut"]>
+    <input type="datetime-local" [formField]="reservationForm.dates.checkOut">
     <br>
   </fieldset>
   <label>Precio</label>
   <input type="number" [formField]="reservationForm.price">
   <p>Client: {{reservation().client?.name}}</p>
   <p>Shadow: {{reservation().shadow?.identifier}}</p>
+  @if(reservationForm().touched()){
+
+    @for(error of allFormErrors(); track $index){
+      <p class="error">{{error.message}}</p>
+    }
+  }
   <input type="submit" value="Submit">
 </form>

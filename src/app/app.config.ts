@@ -2,12 +2,13 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/
 import {provideRouter, withViewTransitions} from '@angular/router';
 import { routes } from './app.routes';
 import {provideHttpClient, withInterceptors} from '@angular/common/http';
-import {currentSeasonInterceptor} from './current-season/current-season-interceptor';
+import {currentSeasonInterceptor} from './core/utils/current-season/current-season-interceptor';
+import {notificationInterceptor} from './core/utils/notification-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideHttpClient(withInterceptors([currentSeasonInterceptor])),
+    provideHttpClient(withInterceptors([currentSeasonInterceptor,notificationInterceptor])),
     provideRouter(routes,withViewTransitions()),
   ]
 };

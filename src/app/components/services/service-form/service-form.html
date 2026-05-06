@@ -4,5 +4,11 @@
   <input type="text" [formField]="serviceForm.name">
   <label>Precio</label>
   <input type="number" [formField]="serviceForm.price">
+
+  @if(serviceForm().touched()){
+    @for(error of allFormErrors(); track $index){
+      <p class="error">{{error.message}}</p>
+    }
+  }
   <button type="submit">Guardar</button>
 </form>

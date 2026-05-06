@@ -4,5 +4,12 @@
   <label>Fechas</label>
   <input type="date" [formField]="seasonForm.startDate">
   <input type="date" [formField]="seasonForm.endDate">
+
+  @if(seasonForm().touched()){
+
+    @for(error of allFormErrors(); track $index){
+      <p class="error">{{error.message}}</p>
+    }
+  }
   <input type="submit" value="Guardar">
 </form>

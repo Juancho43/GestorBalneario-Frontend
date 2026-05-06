@@ -1,14 +1,9 @@
-  <div class="app" [class.active]="!season()!.isActive">
+  <div class="app">
     <div class="nav">
       <h1 routerLink="">{{title()}}</h1>
       <app-menu/>
-      @if(this.season()!){
-        @let season = this.season();
-        <h2>{{season.name}}</h2>
-        @if (!this.season().isActive){
-          Temporada historica
-        }
-      }
+
+      <app-current-season-display/>
     </div>
     <div class="panel">
       <router-outlet/>

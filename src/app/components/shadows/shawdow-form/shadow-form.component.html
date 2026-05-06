@@ -1,10 +1,10 @@
-<form (submit)="submitted($event)">
+<form (ngSubmit)="submitted()">
   <label>Identificador</label>
   <input type="text" [formField]="shadowForm.identifier" />
-  @if (error){
-    <p>
-      ERROR: El identificador ya existe, por favor elija otro.
-    </p>
+  @if(shadowForm().touched()){
+    @for(error of allFormErrors(); track $index){
+      <p class="error">{{error.message}}</p>
+    }
   }
-  <input type="submit" value="save">
+  <input type="submit" value="Guardar">
 </form>
