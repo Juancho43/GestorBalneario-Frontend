@@ -1,7 +1,7 @@
 import {Component, inject} from '@angular/core';
 import {ShadowForm} from '../shawdow-form/shadow-form.component';
 import {ShadowEntity} from '../../../core/model/shadowEntity';
-import {ShadowListManager} from '../../../core/services/Managers/shadow-list-manager';
+import {ShadowManager} from '../../../core/services/Managers/shadow-manager.service';
 import {MatDialogRef} from '@angular/material/dialog';
 import {DialogRef} from '@angular/cdk/dialog';
 

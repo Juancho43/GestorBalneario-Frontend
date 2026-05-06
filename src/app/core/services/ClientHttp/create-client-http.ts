@@ -2,6 +2,7 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment.development';
 import {ClientEntity} from '../../model/clientEntity';
+import {ApiResponse} from '../../DTO/ApiResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +10,6 @@ import {ClientEntity} from '../../model/clientEntity';
 export class CreateClientHttp {
   private http = inject(HttpClient);
   create(data: ClientEntity) {
-    return this.http.post<ClientEntity>(`${environment.apiUrl}/client/create`, data);
+    return this.http.post<ApiResponse<ClientEntity>>(`${environment.apiUrl}/client/create`, data);
   }
 }

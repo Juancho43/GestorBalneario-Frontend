@@ -1,7 +1,7 @@
 import {Component, computed, inject} from '@angular/core';
 import {GetShadowHistoryHttp} from '../../../core/services/ShadowHttp/get-shadow-history-http';
 import {rxResource} from '@angular/core/rxjs-interop';
-import {ShadowListManager} from '../../../core/services/Managers/shadow-list-manager';
+import {ShadowManager} from '../../../core/services/Managers/shadow-manager.service';
 import {ReservationCard} from '../../reservations/reservation-card/reservation-card';
 
 @Component({
@@ -14,12 +14,12 @@ import {ReservationCard} from '../../reservations/reservation-card/reservation-c
 })
 export class ShadowDetail {
   private getHistory = inject(GetShadowHistoryHttp);
-  private manager = inject(ShadowListManager);
+  private manager = inject(ShadowManager);
 
   shadowResource = rxResource({
     params:()=> {return{id:this.manager.currentShadow().id!}},
     stream:({params}) => this.getHistory.get(params.id)
   })
-  detail = computed(()=>this.shadowResource.value());
+  detail = computed(()=>this.shadowResource.value()?.data!);
 
 }

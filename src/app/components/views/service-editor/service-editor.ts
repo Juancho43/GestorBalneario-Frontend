@@ -2,7 +2,7 @@ import {Component, computed, inject} from '@angular/core';
 import {ServiceManager} from '../../../core/Managers/service-manager';
 import {rxResource} from '@angular/core/rxjs-interop';
 import {JsonPipe} from '@angular/common';
-import {ServiceForm} from '../service-form/service-form';
+import {ServiceForm} from '../../services/service-form/service-form';
 import {ServiceEntity} from '../../../core/model/serviceEntity';
 import {SeasonServicesDTO} from '../../../core/DTO/SeasonServicesDTO';
 
@@ -21,7 +21,7 @@ export class ServiceEditor {
     stream : () => this.serviceManager.getList.get()
   })
   services = computed(() => {
-    if(!this.serviceResource.error()) return this.serviceResource.value()!
+    if(!this.serviceResource.error()) return this.serviceResource.value()!.data!
     return {services: []} as SeasonServicesDTO;
   })
 

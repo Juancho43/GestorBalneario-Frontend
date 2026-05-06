@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment.development';
 import {SeasonManager} from '../Managers/season-manager';
 import {SeasonServicesDTO} from '../../DTO/SeasonServicesDTO';
+import {ApiResponse} from '../../DTO/ApiResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +17,6 @@ export class GetServicesHttp {
     let id = this.season().id!;
     let page = 0;
     let size = 10;
-    return this.http.get<SeasonServicesDTO>(`${environment.apiUrl}/service/season/${id}?page=${page}&size=${size}`);
+    return this.http.get<ApiResponse<SeasonServicesDTO>>(`${environment.apiUrl}/service/season/${id}?page=${page}&size=${size}`);
   }
 }

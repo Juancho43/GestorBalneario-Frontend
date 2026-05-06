@@ -15,7 +15,7 @@ export class ServiceListManager {
 
   serviceList = computed(() =>{
     if(!this.servicesResource.isLoading() || !this.servicesResource.error()){
-      return this.servicesResource.value()!;
+      return this.servicesResource.value()?.data!;
     }
     return {services:[]}as SeasonServicesDTO;
   })

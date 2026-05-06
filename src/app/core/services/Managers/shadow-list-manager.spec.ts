@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ShadowListManager } from './shadow-list-manager';
+import { ShadowManager } from './shadow-manager.service';
 
 describe('ShadowListManager', () => {
-  let service: ShadowListManager;
+  let service: ShadowManager;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ShadowListManager);
+    service = TestBed.inject(ShadowManager);
   });
 
   it('should be created', () => {

@@ -2,6 +2,7 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {InvoiceDetail} from '../../DTO/InvoiceDetailDTO';
 import {environment} from '../../../../environments/environment.development';
+import {ApiResponse} from '../../DTO/ApiResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +10,7 @@ import {environment} from '../../../../environments/environment.development';
 export class InvoiceDetailHttp {
   private http = inject(HttpClient);
   get(id:string){
-    return this.http.get<InvoiceDetail>(`${environment.apiUrl}/invoice/detail/${id}`);
+    return this.http.get<ApiResponse<InvoiceDetail>>(`${environment.apiUrl}/invoice/detail/${id}`);
   }
 }
 

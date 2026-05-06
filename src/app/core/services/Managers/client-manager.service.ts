@@ -31,13 +31,13 @@ export class ClientManager {
   }
   addClient(client: ClientEntity){
     this.create.create(client).subscribe(r=>{
-      this.currentClient.set(r);
+      this.currentClient.set(r.data!);
     });
   }
 
   updateClient(client: ClientEntity){
     this.update.update(client).subscribe(r => {
-      this.currentClient.set(r);
+      this.currentClient.set(r.data!);
     })
   }
   deleteClient(client: ClientEntity){

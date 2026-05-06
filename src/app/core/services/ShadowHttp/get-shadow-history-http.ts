@@ -2,6 +2,7 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment.development';
 import {ShadowHistory} from '../../DTO/ShadowHistory';
+import {ApiResponse} from '../../DTO/ApiResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +11,6 @@ export class GetShadowHistoryHttp {
   private http = inject(HttpClient);
 
   get(id:string){
-    return this.http.get<ShadowHistory>(`${environment.apiUrl}/shadow/history/${id}`);
+    return this.http.get<ApiResponse<ShadowHistory>>(`${environment.apiUrl}/shadow/history/${id}`);
   }
 }

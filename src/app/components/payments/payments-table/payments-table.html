@@ -13,9 +13,9 @@
     </tr>
     </thead>
     <tbody>
-
       @for (item of payments; track $index){
         <tr>
+
           <td>{{item.date | date:'short'}}</td>
           <td>{{item.description!}}</td>
           <td>{{item.amount | currency}}</td>

@@ -19,15 +19,15 @@ import {SeasonManager} from '../../../core/services/Managers/season-manager';
 export default class SeasonSwitch {
   private getList = inject(GetSeasonsHttp);
   private seasonManager = inject(SeasonManager);
-  private dialog = inject(Dialog);
   seasonsResource = rxResource({
     stream: () => this.getList.get()
   });
-  seasons = computed(()=>this.seasonsResource.value());
-
-  protected openSeasonEditor() {
-    this.dialog.open(SeasonsEditor);
-  }
+  seasons = computed(()=> {
+    if (!this.seasonsResource.isLoading() && !this.seasonsResource.error()) {
+      return this.seasonsResource.value()!.data!;
+    }
+    return [];
+  });
 
   protected setSeason(season: SeasonEntity) {
    this.seasonManager.currentSeason.set(season);

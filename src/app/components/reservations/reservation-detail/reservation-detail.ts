@@ -25,7 +25,7 @@ export class ReservationDetail {
     params:() =>{return{id:this.reservation()?.id!}},
     stream:({params}) => this.getDetails.get(params.id)
   })
-  details = computed(()=>this.reservationResource.value())
+  details = computed(()=>this.reservationResource.value()!.data!)
   constructor() {
     effect(() => {
       if(this.details()){

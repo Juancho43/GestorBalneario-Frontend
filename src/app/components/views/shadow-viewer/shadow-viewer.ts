@@ -1,41 +1,26 @@
-import {Component, computed, effect, inject, linkedSignal} from '@angular/core';
+import {Component, effect, inject, linkedSignal} from '@angular/core';
 import {ShadowMap} from '../../shadows/shadow-map/shadow-map';
 import {ShadowDetail} from '../../shadows/shadow-detail/shadow-detail';
 import {ShadowEntity} from '../../../core/model/shadowEntity';
-import {ShadowListManager} from '../../../core/services/Managers/shadow-list-manager';
+import {ShadowManager} from '../../../core/services/Managers/shadow-manager.service';
 import {Dialog} from '@angular/cdk/dialog';
-import {rxResource} from '@angular/core/rxjs-interop';
-import {ShadowCard} from '../../shadows/shadow-card/shadow-card';
-import {ShadowMapHttp} from '../../../core/services/ShadowHttp/shadow-map-http';
 
 @Component({
   selector: 'app-shadow-viewer',
   imports: [
     ShadowMap,
-    ShadowCard
   ],
   templateUrl: './shadow-viewer.html',
   styleUrl: './shadow-viewer.scss',
 })
 export default class ShadowViewer {
-  private shadowList = inject(ShadowListManager);
+  private shadowList = inject(ShadowManager);
   private dialog = inject(Dialog);
-  private mapHttp = inject(ShadowMapHttp);
-  mapResource = rxResource({
-    stream:() => this.mapHttp.get()
-  })
-  shadows = computed(() =>{
-    let list: ShadowEntity[] = [];
-    if(this.mapResource.value()){
-      this.mapResource.value()?.map.forEach(row =>
-        list.push(row.shadow)
-      )
-    }
-    return list
-  } );
+
+  shadows = linkedSignal(() => this.shadowList.shadows());
   constructor() {
     effect(() => {
-      this.shadowList.setList(this.shadows());
+      this.shadowList.shadowsResource.reload();
     });
   }
   currentShadow = linkedSignal(()=> this.shadows()[0] ||
@@ -50,6 +35,7 @@ export default class ShadowViewer {
 
   protected show($event: any) {
    this.currentShadow.set(this.shadowList.getByCoords({x: $event.left, y: $event.top})!);
+   this.openShadowDetailDialog()
   }
 
   protected openShadowDetailDialog() {

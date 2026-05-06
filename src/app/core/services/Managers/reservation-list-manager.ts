@@ -39,13 +39,13 @@ export class ReservationListManager {
 
   addReservation(reservation:ReservationEntity) {
     this.create.create(reservation).subscribe(r=>{
-      this.currentReservation.set(r);
+      this.currentReservation.set(r.data!);
     });
   }
 
   updateClient(entity: ReservationEntity){
     this.update.update(entity).subscribe(r => {
-      this.currentReservation.set(r);
+      this.currentReservation.set(r.data!);
     })
   }
 

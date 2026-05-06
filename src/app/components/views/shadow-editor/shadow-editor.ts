@@ -1,5 +1,5 @@
-import {Component, computed, inject, signal, ViewChild} from '@angular/core';
-import {ShadowListManager} from '../../../core/services/Managers/shadow-list-manager';
+import {Component, computed, effect, inject, linkedSignal, signal, ViewChild} from '@angular/core';
+import {ShadowManager} from '../../../core/services/Managers/shadow-manager.service';
 import {ShadowMap} from '../../shadows/shadow-map/shadow-map';
 import {ShadowEntity} from '../../../core/model/shadowEntity';
 import {CdkDragEnd} from '@angular/cdk/drag-drop';
@@ -20,14 +20,22 @@ import {SeasonManager} from '../../../core/services/Managers/season-manager';
   styleUrl: './shadow-editor.scss',
 })
 export default class ShadowEditor {
-  private shadowList = inject(ShadowListManager);
-  private currentSeason = inject(SeasonManager);
-  season = this.currentSeason.currentSeason;
-  shadows = computed(() => this.shadowList.getList());
   private dialog = inject(Dialog);
+  private currentSeason = inject(SeasonManager);
+  private shadowList = inject(ShadowManager);
+
+  season = this.currentSeason.currentSeason;
+
+  shadows = linkedSignal(() => this.shadowList.shadows());
   @ViewChild(ShadowMap) shadowMap!: ShadowMap;
   currentShadow = signal<ShadowEntity>({identifier: '',state:'available', name: '', type: 'carpa', coords: {x: 0, y: 0}});
 
+  constructor() {
+    effect(() => {
+      this.season()
+      this.shadowList.shadowsResource.reload();
+    });
+  }
   /**
    * new shadow dragged on map
    */

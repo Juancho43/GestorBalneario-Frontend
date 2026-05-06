@@ -1,6 +1,6 @@
-@if (this.invoice()){
-  @let invoice = this.invoice()?.invoice!;
-  @let client = this.invoice()?.client!;
+@if (this.invoice()!){
+  @let invoice = this.invoice().invoice!;
+  @let client = this.invoice().client!;
  <div class="invoice detail" animate.enter="enter-animation">
    <h3>Detalle factura</h3>
    <div>

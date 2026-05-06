@@ -25,7 +25,7 @@ export default class PaymentEditor {
   constructor() {
     effect(() => {
       if (this.invoices()) {
-        this.selectedInvoice.set(this.invoiceManager.getList()[0] || {} as InvoiceEntity);
+        this.selectedInvoice.set(this.invoiceManager.getList()![0] || {} as InvoiceEntity);
       }
     });
   }

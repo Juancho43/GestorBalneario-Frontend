@@ -39,7 +39,7 @@ export class PaymentViewer {
   })
   report = computed(()=> {
       if(!this.reportResource.error() && !this.reportResource.isLoading()){
-         return this.reportResource.value()!;
+         return this.reportResource.value()!.data;
       }else{
         return {
           payments : [],

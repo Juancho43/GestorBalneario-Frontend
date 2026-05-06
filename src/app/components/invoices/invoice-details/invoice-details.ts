@@ -5,7 +5,8 @@ import {InvoiceListManager} from '../../../core/services/Managers/invoice-list-m
 import {DatePipe} from '@angular/common';
 import {ItemsTable} from '../items-table/items-table';
 import {PaymentsTable} from '../../payments/payments-table/payments-table';
-import {InvoiceStatePipe} from '../../../invoice-state-pipe';
+import {InvoiceStatePipe} from '../../../core/utils/invoice-state-pipe';
+import {InvoiceDetail} from '../../../core/DTO/InvoiceDetailDTO';
 
 @Component({
   selector: 'app-invoice-details',
@@ -25,5 +26,8 @@ export class InvoiceDetails {
     params : () => {return {id:this.manager.currentInvoice()}},
     stream : ({params}) => this.query.get(params.id)
   })
-  invoice = computed(()=>this.invoiceResource.value())
+  invoice = computed(()=>
+  {
+      return this.invoiceResource.value()?.data!;
+  })
 }

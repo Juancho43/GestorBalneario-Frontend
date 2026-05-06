@@ -1,4 +1,4 @@
-import {computed, inject, Injectable, linkedSignal} from '@angular/core';
+import {computed, inject, Injectable, linkedSignal, signal} from '@angular/core';
 import {SeasonEntity} from '../../model/SeasonEntity';
 import {GetCurrentSeason} from '../SeasonHttp/get-current-season';
 import {rxResource} from '@angular/core/rxjs-interop';
@@ -15,7 +15,7 @@ export class SeasonManager {
   })
   season = computed(()=> {
     if (!this.seasonResource.isLoading() && !this.seasonResource.error()) {
-      return this.seasonResource.value()!
+      return this.seasonResource.value()?.data!
     }
     return {} as SeasonEntity;
   });
