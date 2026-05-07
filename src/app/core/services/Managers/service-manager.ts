@@ -1,7 +1,7 @@
 import {inject, Injectable} from '@angular/core';
-import {GetServicesHttp} from '../services/ServiceHttp/get-services-http';
-import {GetServiceHttp} from '../services/ServiceHttp/get-service-http';
-import {CreateServiceHttp} from '../services/ServiceHttp/create-service-http';
+import {GetServicesHttp} from '../ServiceHttp/get-services-http';
+import {GetServiceHttp} from '../ServiceHttp/get-service-http';
+import {CreateServiceHttp} from '../ServiceHttp/create-service-http';
 
 @Injectable({
   providedIn: 'root',

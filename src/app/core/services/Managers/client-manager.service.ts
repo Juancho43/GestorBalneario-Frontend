@@ -15,7 +15,7 @@ export class ClientManager {
   private update = inject(EditClientHttp);
   private delete = inject(DeleteClientHttp);
   private query = signal<PaginatedQuery>({ query:'',page:1,pageSize:10});
-  private clientsResource= rxResource({
+   clientsResource= rxResource({
     params: ()=>this.query(),
     stream:({params})=> this.clientsHttp.get(params)
   })
@@ -23,7 +23,7 @@ export class ClientManager {
   /*
   * A list of the current clients. It is updated when a shadow is added, updated or deleted.
   * */
-  private clients = linkedSignal(()=>
+   clients = linkedSignal(()=>
     this.clientsResource.isLoading() || this.clientsResource.error() ? [] : this.clientsResource.value()!.data!
   )
   getList(){
@@ -32,16 +32,22 @@ export class ClientManager {
   addClient(client: ClientEntity){
     this.create.create(client).subscribe(r=>{
       this.currentClient.set(r.data!);
+
     });
   }
 
   updateClient(client: ClientEntity){
     this.update.update(client).subscribe(r => {
       this.currentClient.set(r.data!);
+      this.clientsResource.reload();
     })
   }
   deleteClient(client: ClientEntity){
-    this.delete.delete(client.id!).subscribe();
+    this.delete.delete(client.id!).subscribe(
+      r =>{
+        this.clientsResource.reload()
+      }
+    );
   }
 
 }

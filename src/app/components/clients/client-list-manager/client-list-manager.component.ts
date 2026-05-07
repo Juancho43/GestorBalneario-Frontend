@@ -22,7 +22,6 @@ export class ClientListManagerComponent {
   private searcherHttp = inject(ClientSearchHttp);
   private clientManager = inject(ClientManager);
 
-  private clientsHttp = inject(GetClientsHttp);
   private searched = signal(false);
   private query = signal<PaginatedQuery>({query:'',pageSize:10,page:0})
 
@@ -32,24 +31,27 @@ export class ClientListManagerComponent {
   })
 
 
-  private clientsResource= rxResource({
-    params: ()=>{return{query:this.query()}},
-    stream:({params})=> this.clientsHttp.get(params.query)
-  })
   protected searchResults = computed(()=> this.searchResource.value()?.data!)
-  protected clients= computed(()=> this.clientsResource.value()?.data!)
   protected list = computed(()=> {
     if(this.searched()){
       return this.searchResults() || []
     }else{
-      return this.clients() || []
+      return this.clientManager.getList() || []
     }
   })
 
   selectedClient = output<ClientEntity>()
+  edit = output<ClientEntity>()
+  delete = output<ClientEntity>()
   protected selectClient($event: ClientEntity) {
     this.clientManager.currentClient.set($event);
     this.selectedClient.emit($event);
+  }
+  protected deleteClient($event: ClientEntity) {
+    this.delete.emit($event);
+  }
+  protected editClient($event: ClientEntity) {
+    this.edit.emit($event);
   }
   changePage($event: number){
     this.query.update(prev => ({...prev, page: prev.page - $event}))

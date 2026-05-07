@@ -7,12 +7,14 @@ import {InvoiceDetails} from '../../invoices/invoice-details/invoice-details';
 import {InvoiceListManager} from '../../../core/services/Managers/invoice-list-manager';
 import {ClientDetailDTO} from '../../../core/DTO/ClientDetailDTO';
 import {ClientEntity} from '../../../core/model/clientEntity';
+import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'app-client-details',
   imports: [
     InvoiceCard,
     InvoiceDetails,
+    MatIcon,
   ],
   templateUrl: './client-details.html',
   styleUrl: './client-details.scss',

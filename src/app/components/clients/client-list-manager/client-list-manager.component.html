@@ -2,6 +2,8 @@
 <app-client-list
   [list]="list()"
   (selected)="selectClient($event)"
+  (edit)="editClient($event)"
+  (delete)="deleteClient($event)"
 />
 <app-paginator
   (pageChange)="changePage($event)"

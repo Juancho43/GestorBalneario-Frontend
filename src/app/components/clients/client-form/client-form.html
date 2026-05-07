@@ -1,8 +1,11 @@
 <form (ngSubmit)="submitted()">
-  <legend>Client Form</legend>
+  @if (!editMode()){
+    <legend>Crear cliente</legend>
+  } @else {
+    <legend>Editando cliente</legend>
+  }
   <label for="name">Cliente:</label>
   <input type="text" [formField]="clientForm.name"/>
-
   <label for="email">Email:</label>
   <input type="email" [formField]="clientForm.email" />
   <label for="phone">Phone</label>
@@ -13,5 +16,10 @@
       <p class="error">{{error.message}}</p>
     }
   }
-  <input type="submit" value="Submit">
+  @if (!editMode()){
+    <input type="submit" value="Crear cliente" />
+  } @else {
+    <input type="submit" value="Actualizar cliente" />
+  }
+  <input type="reset" (click)="editMode.set(false)" value="Cancelar" />
 </form>

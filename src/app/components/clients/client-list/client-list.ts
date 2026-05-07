@@ -5,7 +5,7 @@ import {ClientEntity} from '../../../core/model/clientEntity';
 @Component({
   selector: 'app-client-list',
   imports: [
-    ClientCard
+    ClientCard,
   ],
   templateUrl: './client-list.html',
   styleUrl: './client-list.scss',
@@ -13,5 +13,6 @@ import {ClientEntity} from '../../../core/model/clientEntity';
 export class ClientList {
   readonly list = input.required<ClientEntity[]>()
   selected = output<ClientEntity>()
-
+  edit = output<ClientEntity>()
+  delete = output<ClientEntity>()
 }

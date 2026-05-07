@@ -1,9 +1,14 @@
 @let client = this.client();
 <mat-card class="card client-card">
   <mat-icon aria-hidden="false" fontIcon="person"/>
-  <div>
+  <div (click)="selected.emit(client)">
     <p>Nombre: {{client.name}}</p>
     <p>Email: {{client.email}}</p>
     <p>Telefono: {{client.phone}}</p>
+  </div>
+  <div>
+    <h4>Acciones</h4>
+    <mat-icon aria-hidden="false" fontIcon="edit" (click)="edit.emit(client)"/>
+    <mat-icon aria-hidden="false" fontIcon="delete" (click)="delete.emit(client)"/>
   </div>
 </mat-card>

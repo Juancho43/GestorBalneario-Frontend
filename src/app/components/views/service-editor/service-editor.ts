@@ -1,5 +1,5 @@
 import {Component, computed, inject} from '@angular/core';
-import {ServiceManager} from '../../../core/Managers/service-manager';
+import {ServiceManager} from '../../../core/services/Managers/service-manager';
 import {rxResource} from '@angular/core/rxjs-interop';
 import {JsonPipe} from '@angular/common';
 import {ServiceForm} from '../../services/service-form/service-form';
