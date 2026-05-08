@@ -6,9 +6,12 @@
     <p>Email: {{client.email}}</p>
     <p>Telefono: {{client.phone}}</p>
   </div>
-  <div>
-    <h4>Acciones</h4>
-    <mat-icon aria-hidden="false" fontIcon="edit" (click)="edit.emit(client)"/>
-    <mat-icon aria-hidden="false" fontIcon="delete" (click)="delete.emit(client)"/>
-  </div>
+  @if (this.actions()) {
+    <div>
+      <h4>Acciones</h4>
+      <mat-icon aria-hidden="false" fontIcon="edit" (click)="edit.emit(client)"/>
+      <mat-icon aria-hidden="false" fontIcon="delete" (click)="delete.emit(client)"/>
+    </div>
+
+  }
 </mat-card>

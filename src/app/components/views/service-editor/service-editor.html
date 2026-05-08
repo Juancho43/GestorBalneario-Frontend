@@ -1,13 +1,17 @@
 <div class="component">
   <h3>Configurar servicios</h3>
   <div class="row">
-
-    @for (service of services().services; track $index) {
-      <pre>
-
-      {{service | json}}
-      </pre>
+    @for (service of services(); track $index) {
+      <app-service-card
+        [service]="service"
+        (edit)="editHandler($event)"
+        (delete)="deleteHandler($event)"
+      />
     }
-    <app-service-form (finalService)="createService($event)"/>
+    <app-service-form
+      #serviceForm
+      [serviceToEdit]="currentService()"
+      (finalService)="handleFormSubmit($event)"
+    />
   </div>
 </div>

@@ -1,4 +1,4 @@
-import {Component, computed, inject, output, signal} from '@angular/core';
+import {Component, computed, inject, input, output, signal} from '@angular/core';
 import {ClientList} from "../client-list/client-list";
 import {ClientSearcher} from "../client-searcher/client-searcher";
 import {rxResource} from '@angular/core/rxjs-interop';
@@ -21,7 +21,7 @@ import {GetClientsHttp, PaginatedQuery} from '../../../core/services/ClientHttp/
 export class ClientListManagerComponent {
   private searcherHttp = inject(ClientSearchHttp);
   private clientManager = inject(ClientManager);
-
+  readonly actions = input<boolean>(false)
   private searched = signal(false);
   private query = signal<PaginatedQuery>({query:'',pageSize:10,page:0})
 

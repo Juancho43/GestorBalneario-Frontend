@@ -2,6 +2,7 @@
 @for (client of list; track client.id) {
   <div class="client-card">
     <app-client-card
+      [actions]="this.actions()"
       (delete)="delete.emit(client)"
       (edit)="edit.emit(client)"
       [client]="client"

@@ -1,6 +1,6 @@
 import {Component, computed, inject, linkedSignal, signal} from '@angular/core';
 import {ReservationForm} from '../../reservations/reservation-form/reservation-form';
-import {ReservationListManager} from '../../../core/services/Managers/reservation-list-manager';
+import {ReservationManager} from '../../../core/services/Managers/reservation-manager.service';
 import {ShadowMap} from '../../shadows/shadow-map/shadow-map';
 import {ShadowManager} from '../../../core/services/Managers/shadow-manager.service';
 import {ClientEntity} from '../../../core/model/clientEntity';
@@ -40,7 +40,7 @@ export class ReservationCreate {
         y:0
       }
     }as ShadowEntity);
-  private reservationListManager = inject(ReservationListManager);
+  private reservationListManager = inject(ReservationManager);
   createReservation(reservation: ReservationEntity) {
     this.reservationListManager.addReservation(reservation);
   }

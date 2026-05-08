@@ -4,7 +4,7 @@ import {ReservationEntity} from '../../../core/model/reservationEntity';
 import {MatCard} from '@angular/material/card';
 import {Dialog} from '@angular/cdk/dialog';
 import {ReservationDetail} from '../reservation-detail/reservation-detail';
-import {ReservationListManager} from '../../../core/services/Managers/reservation-list-manager';
+import {ReservationManager} from '../../../core/services/Managers/reservation-manager.service';
 
 @Component({
   selector: 'app-reservation-card',
@@ -13,7 +13,7 @@ import {ReservationListManager} from '../../../core/services/Managers/reservatio
   styleUrl: './reservation-card.scss',
 })
 export class ReservationCard {
-  private reservationListManager = inject(ReservationListManager);
+  private reservationListManager = inject(ReservationManager);
   readonly reservation = input.required<ReservationEntity>();
   duration = computed(()=> (new Date(this.reservation().dates.checkOut)).getDate() -(new Date(this.reservation().dates.checkIn)).getDate());
   dialog = inject(Dialog);

@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {ReservationListManager} from '../../../core/services/Managers/reservation-list-manager';
+import {ReservationManager} from '../../../core/services/Managers/reservation-manager.service';
 
 @Component({
   selector: 'app-reservation-edit',
@@ -9,7 +9,7 @@ import {ReservationListManager} from '../../../core/services/Managers/reservatio
   styleUrl: './reservation-edit.scss',
 })
 export class ReservationEdit {
-  private reservationListManager = inject(ReservationListManager);
+  private reservationListManager = inject(ReservationManager);
   handle(reservation: any) {
     this.reservationListManager.addReservation(reservation);
   }

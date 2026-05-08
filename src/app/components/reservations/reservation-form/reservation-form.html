@@ -1,22 +1,27 @@
 <form (ngSubmit)="submitted()">
-  <fieldset>
-    <legend>Fechas</legend>
-    <label>CheckIn</label>
-    <input type="datetime-local" [formField]="reservationForm.dates.checkIn">
-    <br>
-    <label>CheckOut</label>
-    <input type="datetime-local" [formField]="reservationForm.dates.checkOut">
-    <br>
-  </fieldset>
+  @if (editMode()){
+    <legend>Editar Reserva</legend>
+  } @else {
+    <legend>Crear Reserva</legend>
+  }
+  <legend>Fechas</legend>
+  <label>CheckIn</label>
+  <input type="datetime-local" [formField]="reservationForm.dates.checkIn">
+  <label>CheckOut</label>
+  <input type="datetime-local" [formField]="reservationForm.dates.checkOut">
   <label>Precio</label>
   <input type="number" [formField]="reservationForm.price">
-  <p>Client: {{reservation().client?.name}}</p>
-  <p>Shadow: {{reservation().shadow?.identifier}}</p>
+  <p>Cliente: {{reservation().client?.name}}</p>
+  <p>Carpa: {{reservation().shadow?.identifier}}</p>
   @if(reservationForm().touched()){
-
     @for(error of allFormErrors(); track $index){
       <p class="error">{{error.message}}</p>
     }
   }
-  <input type="submit" value="Submit">
+  <input type="reset" (click)="editMode.set(false)">
+  @if (editMode()){
+    <input type="submit" value="Actualizar">
+  }@else{
+    <input type="submit" value="Crear">
+  }
 </form>

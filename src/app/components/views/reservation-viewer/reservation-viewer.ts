@@ -1,39 +1,44 @@
-import {Component, computed, inject} from '@angular/core';
-import {ReservationListManager} from '../../../core/services/Managers/reservation-list-manager';
+import {Component, computed, inject, signal} from '@angular/core';
+import {ReservationManager} from '../../../core/services/Managers/reservation-manager.service';
 import {GetActiveReservationsHttp} from '../../../core/services/ReservationHttp/get-active-reservations-http';
 import {rxResource} from '@angular/core/rxjs-interop';
 import {MapItem} from '../../../core/DTO/ShadowMapDTO';
 import {ReservationCard} from '../../reservations/reservation-card/reservation-card';
 import {ReservationSearcher} from '../../reservations/reservation-searcher/reservation-searcher';
+import {ReservationForm} from '../../reservations/reservation-form/reservation-form';
+import {ReservationEntity} from '../../../core/model/reservationEntity';
 
 @Component({
   selector: 'app-reservation-viewer',
   imports: [
     ReservationCard,
-    ReservationSearcher
+    ReservationSearcher,
+    ReservationForm
   ],
   templateUrl: './reservation-viewer.html',
   styleUrl: './reservation-viewer.scss',
 })
 export class ReservationViewer {
-  private getActive = inject(GetActiveReservationsHttp);
-  private reservationListManager = inject(ReservationListManager);
-
-
-  reservationResource = rxResource({
-    stream: () => this.getActive.get()
-  })
-
+  private manager = inject(ReservationManager);
+  active = signal<boolean>(false);
   reservations = computed(()=>
   {
-    if (!this.reservationResource.isLoading() && !this.reservationResource.error()){
-      return this.reservationResource.value()?.data!
+    if(this.active()){
+      return this.manager.getActive();
     }else{
-      return [];
+      return this.manager.getList();
     }
   });
 
   protected selectReservation(item: MapItem) {
-    this.reservationListManager.currentReservation.set(item.reservation!);
+    this.manager.currentReservation.set(item.reservation!);
+  }
+
+  protected handleSubmit($event: ReservationEntity) {
+
+  }
+
+  protected currentReservation() {
+
   }
 }

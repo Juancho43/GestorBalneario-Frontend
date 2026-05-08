@@ -1,5 +1,6 @@
 <app-client-searcher (requestSearch)="searchHandler($event)"/>
 <app-client-list
+  [actions]="actions()"
   [list]="list()"
   (selected)="selectClient($event)"
   (edit)="editClient($event)"

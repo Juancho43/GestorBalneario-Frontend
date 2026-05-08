@@ -1,12 +1,26 @@
 <div class="component">
   <h3>Ver reservas</h3>
-  <app-reservation-searcher/>
   <div class="row">
-  @let reservations = this.reservations();
-    @for(reservation of reservations; track $index) {
-        <app-reservation-card
-          [reservation]="reservation"
-        />
-    }
+    <div>
+
+      <app-reservation-searcher
+        (activeSelect)="active.set($event)"
+      />
+      <div class="row">
+        @let reservations = this.reservations();
+        @for(reservation of reservations; track $index) {
+          <app-reservation-card
+            [reservation]="reservation"
+          />
+        }
+      </div>
     </div>
+    <div>
+      <app-reservation-form
+        #reservationForm
+        (finalReservation)="handleSubmit($event)"
+        [reservationToEdit]="currentReservation()!"
+      />
+    </div>
+  </div>
 </div>

@@ -4,13 +4,20 @@ import {environment} from '../../../../environments/environment.development';
 import {PaginatedQuery} from '../ClientHttp/get-clients-http';
 import {ReservationEntity} from '../../model/reservationEntity';
 import {ApiResponse} from '../../DTO/ApiResponse';
+import {SeasonManager} from '../Managers/season-manager';
 
 @Injectable({
   providedIn: 'root',
 })
-export class GetAllReservationsHttp {
+export class GetAllReservationsHttp{
   private http = inject(HttpClient);
+  private currentSeason = inject(SeasonManager);
+  private season = this.currentSeason.currentSeason;
   get(query: PaginatedQuery){
-    return this.http.get<ApiResponse<ReservationEntity[]>>(`${environment.apiUrl}/reservation/current?page=${query.page}&size=${query.pageSize}`);
+    let id = this.season().id!;
+    let page = query.page;
+    let size = query.pageSize;
+    return this.http.get<ApiResponse<ReservationEntity[]>>(`${environment.apiUrl}/reservation/season/${id}?page=${page}&size=${size}`);
   }
+
 }

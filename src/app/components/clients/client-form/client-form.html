@@ -4,11 +4,11 @@
   } @else {
     <legend>Editando cliente</legend>
   }
-  <label for="name">Cliente:</label>
+  <label for="name">Nombre:</label>
   <input type="text" [formField]="clientForm.name"/>
   <label for="email">Email:</label>
   <input type="email" [formField]="clientForm.email" />
-  <label for="phone">Phone</label>
+  <label for="phone">Télefono:</label>
   <input type="tel" [formField]="clientForm.phone"/>
 
   @if(clientForm().touched()){

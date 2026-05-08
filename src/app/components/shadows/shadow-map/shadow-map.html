@@ -8,11 +8,11 @@
   >
   </canvas>
   <div class="buttons">
-    <button (click)="zoomIn()">Zoom in</button>
-    <button (click)="zoomOut()">Zoom out</button>
-    <button (click)="resetView()">Reset</button>
+    <button (click)="zoomIn()">+</button>
+    <button (click)="zoomOut()">-</button>
+    <button (click)="resetView()">Resetear</button>
   @if(this.state() === 'editing'){
-      <button (click)="activeDelete()">Delete</button>
+      <button (click)="activeDelete()">Modo eliminar</button>
   }
   </div>
 

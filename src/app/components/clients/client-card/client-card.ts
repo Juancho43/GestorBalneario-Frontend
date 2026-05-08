@@ -14,6 +14,7 @@ import {MatIcon} from '@angular/material/icon';
 })
 export class ClientCard {
   readonly client = input.required<ClientEntity>();
+  readonly actions = input<boolean>(true);
   selected = output<ClientEntity>()
   edit = output<ClientEntity>()
   delete = output<ClientEntity>()

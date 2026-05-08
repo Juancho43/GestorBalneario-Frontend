@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ReservationManager } from './reservation-manager.service';
+import { EditServiceHttp } from './edit-service-http';
 
-describe('ReservationListManager', () => {
-  let service: ReservationManager;
+describe('EditServiceHttp', () => {
+  let service: EditServiceHttp;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ReservationManager);
+    service = TestBed.inject(EditServiceHttp);
   });
 
   it('should be created', () => {

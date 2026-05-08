@@ -12,6 +12,7 @@ import {ClientEntity} from '../../../core/model/clientEntity';
 })
 export class ClientList {
   readonly list = input.required<ClientEntity[]>()
+  readonly actions = input<boolean>(false)
   selected = output<ClientEntity>()
   edit = output<ClientEntity>()
   delete = output<ClientEntity>()

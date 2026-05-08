@@ -14,7 +14,6 @@ import {MatIcon} from '@angular/material/icon';
   imports: [
     InvoiceCard,
     InvoiceDetails,
-    MatIcon,
   ],
   templateUrl: './client-details.html',
   styleUrl: './client-details.scss',

@@ -33,9 +33,14 @@ export class ReservationForm {
       } as ServiceEntity;
     }
   });
+
   readonly reservationToEdit = input<ReservationEntity>();
   readonly client = input<ClientEntity>();
   readonly shadow = input<ShadowEntity>();
+  editMode = linkedSignal(()=>{
+    if(this.reservationToEdit()) return true
+    return false;
+  })
   reservation = linkedSignal<ReservationEntity>(()=> this.reservationToEdit() || {
     shadow: this.shadow(),
     dates: {
@@ -53,7 +58,6 @@ export class ReservationForm {
     validate(schemaPath.dates.checkOut,minDateValidator(schemaPath.dates.checkIn));
   });
   finalReservation = output<ReservationEntity>();
-  // Gathers root errors and field-specific errors into one powerful signal
   allFormErrors = computed(() => {
     const root = this.reservationForm().errors() || [];
 

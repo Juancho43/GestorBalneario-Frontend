@@ -15,8 +15,12 @@ import {FormsModule} from '@angular/forms';
 })
 export class ShadowForm {
   private manager = inject(ShadowManager);
-  readonly shadowToEdit = input<ShadowEntity>({coords: {x: 0, y: 0}, state:'available', identifier: '', name: '', type: 'carpa'});
-  shadow = linkedSignal(this.shadowToEdit);
+  readonly shadowToEdit = input<ShadowEntity>();
+  editMode = linkedSignal(()=>{
+    if(this.shadowToEdit()) return true
+    return false;
+  })
+  shadow = linkedSignal(()=>this.shadowToEdit() || {coords: {x: 0, y: 0}, state:'available', identifier: '', name: '', type: 'carpa'} as ShadowEntity);
   finalShadow = output<ShadowEntity>();
   shadowForm = form(this.shadow, (schemaPath) => {
     required(schemaPath.identifier,{message:'El identificador es requerido'});
@@ -33,10 +37,8 @@ export class ShadowForm {
 
   allFormErrors = computed(() => {
     const root = this.shadowForm().errors() || [];
-
-    const price = this.shadowForm.identifier().errors() || [];
-
-    return [...root, ...price];
+    const indentifier = this.shadowForm.identifier().errors() || [];
+    return [...root, ...indentifier];
   });
   submitted(){
     if(!this.shadowForm().invalid()){

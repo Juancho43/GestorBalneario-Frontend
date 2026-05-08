@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ReservationManager } from './reservation-manager.service';
+import { DeleteServiceHttp } from './delete-service-http';
 
-describe('ReservationListManager', () => {
-  let service: ReservationManager;
+describe('DeleteServiceHttp', () => {
+  let service: DeleteServiceHttp;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ReservationManager);
+    service = TestBed.inject(DeleteServiceHttp);
   });
 
   it('should be created', () => {

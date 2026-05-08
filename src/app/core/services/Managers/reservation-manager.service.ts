@@ -15,26 +15,36 @@ import {GetActiveReservationsHttp} from '../ReservationHttp/get-active-reservati
 @Injectable({
   providedIn: 'root',
 })
-export class ReservationListManager {
+export class ReservationManager {
 
   private create = inject(CreateReservationHttp);
   private update = inject(EditReservationHttp)
   private delete = inject(DeleteReservationHttp);
+ private  getActiveHttp = inject(GetActiveReservationsHttp);
+  private allReservationsHttp = inject(GetAllReservationsHttp);
+  private activeResouce = rxResource({
+    stream:() => this.getActiveHttp.get()
+  })
   private query = signal<PaginatedQuery>({ query:'',page:1,pageSize:10});
-  // private reservationsResource= rxResource({
-  //   params: ()=>this.query(),
-  //   stream:({params})=> this.allReservationsHttp.get(params)
-  // })
+  private reservationsResource= rxResource({
+    params: ()=>this.query(),
+    stream:({params})=> this.allReservationsHttp.get(params)
+  })
   currentReservation = signal<ReservationEntity| null>(null);
   /*
   * A list of the current reservations. It is updated when a shadow is added, updated or deleted.
   * */
-  // private reservations = linkedSignal(()=>
-  //   // this.reservationsResource.isLoading() || this.reservationsResource.error() ? [] : this.reservationsResource.value()!
-  // )
-
+  private reservations = linkedSignal(()=>
+    this.reservationsResource.isLoading() || this.reservationsResource.error() ? [] : this.reservationsResource.value()!.data!
+  )
+  private activeReservations = linkedSignal(()=>
+    this.activeResouce.isLoading() || this.activeResouce.error() ? [] : this.activeResouce.value()!.data!
+  )
+  getActive(){
+    return this.activeReservations();
+  }
   getList(){
-    // return this.reservations();
+    return this.reservations();
   }
 
   addReservation(reservation:ReservationEntity) {

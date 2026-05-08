@@ -1,4 +1,9 @@
 <form (ngSubmit)="submitted()">
+  @if (this.editMode()) {
+    <legend>Editar Carpa</legend>
+  } @else {
+    <legend>Crear Carpa</legend>
+  }
   <label>Identificador</label>
   <input type="text" [formField]="shadowForm.identifier" />
   @if(shadowForm().touched()){
@@ -6,5 +11,10 @@
       <p class="error">{{error.message}}</p>
     }
   }
+  @if (editMode()) {
+    <input type="submit" value="Actualizar">
+  } @else {
   <input type="submit" value="Guardar">
+  }
+  <input type="reset" (click)="editMode.set(false)" value="Cancelar">
 </form>

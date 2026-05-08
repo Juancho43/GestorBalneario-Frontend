@@ -18,6 +18,7 @@ export class ServiceForm {
     name:'',
     price:1,
   }as ServiceEntity);
+  editMode = linkedSignal(()=>!!this.serviceToEdit());
   serviceForm = form(this.service,s =>{
     required(s.name,{message: 'El nombre es requerido'});
     required(s.price,{message: 'El precio es requerido'});
@@ -33,6 +34,7 @@ export class ServiceForm {
   protected onSubmit() {
    if(!this.serviceForm().invalid()){
      this.finalService.emit(this.service())
+     this.editMode.set(false)
    }
   }
 }

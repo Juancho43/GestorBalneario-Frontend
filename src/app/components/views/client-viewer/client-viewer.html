@@ -2,6 +2,7 @@
   <div class="row">
 
   <app-client-list-manager
+    [actions]="true"
     (selectedClient)="openClientDetail($event)"
     (edit)="setCurrentClient($event)"
     (delete)="deleteClient($event)"

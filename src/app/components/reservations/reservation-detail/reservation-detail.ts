@@ -1,5 +1,5 @@
 import {Component, computed, effect, inject} from '@angular/core';
-import {ReservationListManager} from '../../../core/services/Managers/reservation-list-manager';
+import {ReservationManager} from '../../../core/services/Managers/reservation-manager.service';
 import {DatePipe} from '@angular/common';
 import {GetReservationDetailsHttp} from '../../../core/services/ReservationHttp/get-reservation-details-http';
 import {rxResource} from '@angular/core/rxjs-interop';
@@ -18,7 +18,7 @@ import {InvoiceListManager} from '../../../core/services/Managers/invoice-list-m
 export class ReservationDetail {
 
   private invoiceManager = inject(InvoiceListManager);
-  private reservationListManager = inject(ReservationListManager);
+  private reservationListManager = inject(ReservationManager);
   private getDetails = inject(GetReservationDetailsHttp);
   reservation = computed(() => this.reservationListManager.currentReservation());
   reservationResource = rxResource({

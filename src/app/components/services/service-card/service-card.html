@@ -1,0 +1,15 @@
+@let service = this.service();
+<mat-card class="card ">
+  <mat-icon aria-hidden="false" fontIcon="info"/>
+  <div (click)="selected.emit(service)">
+    <p>Nombre: {{service.name}}</p>
+    <p>Email: {{service.price | currency}}</p>
+  </div>
+  @if (this.actions()) {
+    <div>
+      <h4>Acciones</h4>
+      <mat-icon aria-hidden="false" fontIcon="edit" (click)="edit.emit(service)"/>
+      <mat-icon aria-hidden="false" fontIcon="delete" (click)="delete.emit(service)"/>
+    </div>
+  }
+</mat-card>

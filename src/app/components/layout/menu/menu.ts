@@ -17,44 +17,44 @@ import {CdkMenu, CdkMenuBar, CdkMenuItem, CdkMenuTrigger} from '@angular/cdk/men
 export class Menu {
   links = [
     {
-      label: 'Seasons',
+      label: 'Temporadas',
       subLinks: [
-        {label : 'View seasons', url:'season-view'},
-        {label: 'Create season', url:'season-create'},
+        {label : 'Ver temporadas', url:'season-view'},
+        {label: 'Editar temporadas', url:'season-create'},
       ]
     },
     {
-      label: 'Shadows',
+      label: 'Carpas',
       subLinks :[
-        {label: 'Shadow Map', url:'shadow-view'},
-        {label: 'Shadow Editor', url:'shadow-editor'},
+        {label: 'Mapa de carpas', url:'shadow-view'},
+        {label: 'Editor del mapa', url:'shadow-editor'},
       ]
     },
     {
-      label: 'Reservations',
+      label: 'Reservas',
       subLinks: [
-        {label: 'View reservations', url:'reservation-view'},
-        {label: 'Create Reservation', url:'reservation-create'},
+        {label: 'Ver reservas', url:'reservation-view'},
+        {label: 'Crear reservas', url:'reservation-create'},
       ]
     },
     {
-      label:'Payments',
+      label:'Pagos',
       subLinks: [
-        {label: 'View payments', url:'payment-view'},
-        {label: 'Create payments', url:'payment-create'},
+        {label: 'Ver pagos', url:'payment-view'},
+        {label: 'Crear pagos', url:'payment-create'},
       ]
     },
     {
-      label: 'Clients',
+      label: 'Clientes',
       subLinks: [
-        {label: 'View clients', url:'client-view'},
+        {label: 'Ver clientes', url:'client-view'},
       ]
     },
     {
-      label: 'Services',
+      label: 'Servicios',
       subLinks: [
         {
-          label: 'Manage Services', url: 'service-manager'
+          label: 'Editar Servicios', url: 'service-manager'
         }
       ]
     }

@@ -6,7 +6,6 @@ import {IDeleteDialogData} from '../../../core/DTO/DeleteDialogData';
 @Component({
   selector: 'app-delete-confirmation',
   imports: [
-    JsonPipe,
     MatDialogContent,
     MatDialogActions
   ],

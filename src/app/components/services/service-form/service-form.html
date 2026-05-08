@@ -1,5 +1,9 @@
 <form (ngSubmit)="onSubmit()">
-  <legend>Crear servicio</legend>
+  @if(editMode()){
+    <legend>Editar servicio</legend>
+  } @else {
+    <legend>Crear servicio</legend>
+  }
   <label>Nombre:</label>
   <input type="text" [formField]="serviceForm.name">
   <label>Precio</label>
@@ -10,5 +14,11 @@
       <p class="error">{{error.message}}</p>
     }
   }
-  <button type="submit">Guardar</button>
+  @if (editMode()) {
+    <input type="submit" value="Actualizar">
+  } @else {
+    <input type="submit" value="Crear">
+
+  }
+  <input type="reset" (click)="editMode.set(false)">
 </form>
