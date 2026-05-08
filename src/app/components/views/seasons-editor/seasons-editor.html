@@ -1,0 +1,15 @@
+<div class="component">
+  <h3>Configurar temporadas</h3>
+  <div class="row">
+    <app-season-list
+      [list]="seasonList()"
+      (edit)="handleEdit($event)"
+      (delete)="handleDelete($event)"
+    />
+    <app-season-form
+      #seasonForm
+      [seasonToEdit]="formattedSeason()"
+      (finalSeason)="handleSubmit($event)"
+    />
+  </div>
+</div>

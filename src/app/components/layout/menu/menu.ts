@@ -19,8 +19,7 @@ export class Menu {
     {
       label: 'Temporadas',
       subLinks: [
-        {label : 'Ver temporadas', url:'season-view'},
-        {label: 'Editar temporadas', url:'season-create'},
+        {label : 'Configurar temporadas', url:'season-manager'},
       ]
     },
     {

@@ -1,0 +1,9 @@
+@for (season of this.list(); track $index){
+  <app-season-card
+    [season]="season"
+    (edit)="this.edit.emit(season)"
+    (delete)="this.delete.emit(season)"
+  />
+} @empty {
+  <p>Sin temporadas por el momento</p>
+}

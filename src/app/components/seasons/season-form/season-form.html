@@ -1,4 +1,9 @@
 <form (ngSubmit)="submitHandler()">
+  @if (this.editMode()){
+    <legend>Editar temporada</legend>
+  }@else{
+    <legend>Crear temporada</legend>
+  }
   <label>Nombre</label>
   <input type="text" [formField]="seasonForm.name">
   <label>Fechas</label>
@@ -6,10 +11,20 @@
   <input type="date" [formField]="seasonForm.endDate">
 
   @if(seasonForm().touched()){
-
     @for(error of allFormErrors(); track $index){
       <p class="error">{{error.message}}</p>
     }
   }
-  <input type="submit" value="Guardar">
+  @if (this.editMode()){
+    <input type="submit" value="Actualizar">
+  }@else{
+    <mat-checkbox
+      [(ngModel)]="cloneSeason"
+      [ngModelOptions]="{standalone: true}"
+    >
+      Clonar carpas y servicios actuales
+    </mat-checkbox>
+    <input type="submit" value="Guardar">
+  }
+  <input type="reset" value="Cancelar" (click)="editMode.set(false)">
 </form>

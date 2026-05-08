@@ -1,6 +1,6 @@
 import {Component, inject} from '@angular/core';
 import {SeasonManager} from '../../../core/services/Managers/season-manager';
-import SeasonSwitch from '../../views/season-switch/season-switch';
+import SeasonSwitch from '../season-switch/season-switch';
 import {Dialog} from '@angular/cdk/dialog';
 @Component({
   selector: 'app-current-season-display',

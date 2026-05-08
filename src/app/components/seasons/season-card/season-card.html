@@ -1,0 +1,16 @@
+@let season = this.season();
+<mat-card class="card">
+  <mat-icon aria-hidden="false" fontIcon="summer"/>
+  <div>
+    <p> {{season.name}}</p>
+    <p>Inicio: {{season.startDate | date}}</p>
+    <p>Fin: {{season.endDate | date}}</p>
+  </div>
+  @if (this.actions()) {
+    <div>
+      <h4>Acciones</h4>
+      <mat-icon aria-hidden="false" fontIcon="edit" (click)="edit.emit(season)"/>
+      <mat-icon aria-hidden="false" fontIcon="delete" (click)="delete.emit(season)"/>
+    </div>
+  }
+</mat-card>

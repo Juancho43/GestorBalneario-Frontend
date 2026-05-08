@@ -8,10 +8,9 @@ import {ReservationViewer} from './components/views/reservation-viewer/reservati
 import {ClientViewer} from './components/views/client-viewer/client-viewer';
 import {PaymentViewer} from './components/views/payment-viewer/payment-viewer';
 import PaymentEditor from './components/payments/payment-editor/payment-editor';
-import SeasonSwitch from './components/views/season-switch/season-switch';
 import {ServiceEditor} from './components/views/service-editor/service-editor';
 import {currentSeasonGuard} from './core/utils/current-season-guard';
-import {SeasonsEditor} from './components/seasons/seasons-editor/seasons-editor';
+import {SeasonsEditor} from './components/views/seasons-editor/seasons-editor';
 
 export const routes: Routes = [
   {
@@ -25,50 +24,51 @@ export const routes: Routes = [
     loadComponent:  () => AboutMenu
   },
   {
-    title: 'Shadow map',
+    title: 'Mapa de sombras',
     path: 'shadow-view',
     loadComponent: ()=> ShadowViewer
   },
   {
-    title: 'Edit map',
+    title: 'Editar mapa',
     canActivate: [currentSeasonGuard],
     path:'shadow-editor',
     loadComponent: ()=> ShadowEditor
   },
   {
-    title: 'View Reservations',
+    title: 'Ver reservas',
     path: 'reservation-view',
     loadComponent:()=>ReservationViewer
   },
   {
-    title: 'Create Reservation',
+    title: 'Crear reservas',
     canActivate: [currentSeasonGuard],
     path: 'reservation-create',
     loadComponent:()=> ReservationCreate
   },
   {
-    title: 'View Client',
+    title: 'Ver clientes',
     path: 'client-view',
     loadComponent: ()=> ClientViewer
   },
   {
-    title: 'Manage payments',
+    title: 'Crear pago',
     canActivate: [currentSeasonGuard],
     path: 'payment-create',
     loadComponent: ()=> PaymentEditor
   },
   {
-    title: 'Payments reports',
+    title: 'Reportes de pagos',
     path: 'payment-view',
     loadComponent: () => PaymentViewer
   },
   {
-    title: 'Seasons management',
-    path: 'season-view',
+    title: 'Configurar temporadas',
+    canActivate: [currentSeasonGuard],
+    path: 'season-manager',
     loadComponent: () => SeasonsEditor
   },
   {
-    title: 'Services management',
+    title: 'Configurar servicios',
     canActivate: [currentSeasonGuard],
     path: 'service-manager',
     loadComponent: ()=> ServiceEditor

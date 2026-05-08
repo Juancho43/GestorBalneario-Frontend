@@ -3,24 +3,28 @@ import {FormsModule} from '@angular/forms';
 import {form, FormField, required, validate} from '@angular/forms/signals';
 import {SeasonEntity} from '../../../core/model/SeasonEntity';
 import {minDateValidator} from '../../../core/utils/validator/dateValidator';
+import {MatCheckbox} from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-season-form',
   imports: [
     FormsModule,
-    FormField
+    FormField,
+    MatCheckbox
   ],
   templateUrl: './season-form.html',
   styleUrl: './season-form.scss',
 })
 export class SeasonForm {
   seasonToEdit = input<SeasonEntity>();
+  editMode=linkedSignal(()=> !!this.seasonToEdit());
   season = linkedSignal(()=> this.seasonToEdit() ?? {
     id:'',
-    name:'season...',
-    startDate: new Date(new Date().setHours(0, 0, 0, 0)),
-    endDate: new Date(new Date().setHours(23, 59, 59, 999))
+    name:'',
+    startDate: new Date(new Date().setHours(0, 0, 0, 0)).toISOString().split('T')[0],
+    endDate: new Date(new Date().setHours(23, 59, 59, 999)).toISOString().split('T')[0],
   } as SeasonEntity);
+  cloneSeason = false;
   seasonForm = form(this.season,(s) =>{
     required(s.startDate,{message:'La fecha de inicio es requerida'})
     required(s.endDate,{message:'La fehca de cierre es requerida'})
@@ -41,6 +45,7 @@ export class SeasonForm {
   protected submitHandler() {
     if(!this.seasonForm().invalid()){
       this.finalSeason.emit(this.season());
+      this.editMode.set(false);
     }
   }
 }
