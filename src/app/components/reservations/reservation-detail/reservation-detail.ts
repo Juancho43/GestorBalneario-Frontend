@@ -4,7 +4,7 @@ import {DatePipe} from '@angular/common';
 import {GetReservationDetailsHttp} from '../../../core/services/ReservationHttp/get-reservation-details-http';
 import {rxResource} from '@angular/core/rxjs-interop';
 import {InvoiceDetails} from '../../invoices/invoice-details/invoice-details';
-import {InvoiceListManager} from '../../../core/services/Managers/invoice-list-manager';
+import {InvoiceManager} from '../../../core/services/Managers/invoice-manager.service';
 
 @Component({
   selector: 'app-reservation-detail',
@@ -17,7 +17,7 @@ import {InvoiceListManager} from '../../../core/services/Managers/invoice-list-m
 })
 export class ReservationDetail {
 
-  private invoiceManager = inject(InvoiceListManager);
+  private invoiceManager = inject(InvoiceManager);
   private reservationListManager = inject(ReservationManager);
   private getDetails = inject(GetReservationDetailsHttp);
   reservation = computed(() => this.reservationListManager.currentReservation());

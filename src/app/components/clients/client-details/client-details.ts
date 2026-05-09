@@ -4,7 +4,7 @@ import {ClientManager} from '../../../core/services/Managers/client-manager.serv
 import {rxResource} from '@angular/core/rxjs-interop';
 import {InvoiceCard} from '../../invoices/invoice-card/invoice-card';
 import {InvoiceDetails} from '../../invoices/invoice-details/invoice-details';
-import {InvoiceListManager} from '../../../core/services/Managers/invoice-list-manager';
+import {InvoiceManager} from '../../../core/services/Managers/invoice-manager.service';
 import {ClientDetailDTO} from '../../../core/DTO/ClientDetailDTO';
 import {ClientEntity} from '../../../core/model/clientEntity';
 import {MatIcon} from '@angular/material/icon';
@@ -20,7 +20,7 @@ import {MatIcon} from '@angular/material/icon';
 })
 export class ClientDetails{
   private manager = inject(ClientManager);
-  private invoiceManager = inject(InvoiceListManager);
+  private invoiceManager = inject(InvoiceManager);
   private query = inject(ClientDetailHttp);
   clientResource = rxResource({
     params: () => {

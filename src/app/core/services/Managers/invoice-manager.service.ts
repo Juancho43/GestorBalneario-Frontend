@@ -6,7 +6,7 @@ import {InvoiceEntity} from '../../model/InvoiceEntity';
 @Injectable({
   providedIn: 'root',
 })
-export class InvoiceListManager {
+export class InvoiceManager {
 
   private listHttp = inject(GetInvoicesHttp);
 
@@ -18,8 +18,9 @@ export class InvoiceListManager {
   * A list of the current shadows. It is updated when a shadow is added, updated or deleted.
   * */
   private invoices = linkedSignal(()=>
-    this.invoicesResource.isLoading() || this.invoicesResource.error() ? [] : this.invoicesResource.value()!.data
+    this.invoicesResource.isLoading() || this.invoicesResource.error() ? [] : this.invoicesResource.value()!.data!
   )
+
   currentInvoice = signal<string>('')
 
   getList(){

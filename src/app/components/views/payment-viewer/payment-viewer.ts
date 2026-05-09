@@ -5,7 +5,7 @@ import {ReportQuery} from '../../../core/DTO/ReportQuery';
 import {ReportForm} from '../../payments/report-form/report-form';
 import {Dialog} from '@angular/cdk/dialog';
 import {InvoiceDetails} from '../../invoices/invoice-details/invoice-details';
-import {InvoiceListManager} from '../../../core/services/Managers/invoice-list-manager';
+import {InvoiceManager} from '../../../core/services/Managers/invoice-manager.service';
 import {PaymentsTable} from '../../payments/payments-table/payments-table';
 import {ReportResponse} from '../../../core/DTO/ReportResponse';
 
@@ -20,7 +20,7 @@ import {ReportResponse} from '../../../core/DTO/ReportResponse';
 })
 export class PaymentViewer {
   private reportsService = inject(PaymentsReportHttp);
-  private invoiceManager = inject(InvoiceListManager);
+  private invoiceManager = inject(InvoiceManager);
   private dialog = inject(Dialog);
   query = signal<ReportQuery>({
     page:0,

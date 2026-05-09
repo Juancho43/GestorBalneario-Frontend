@@ -1,5 +1,5 @@
 import {Component, computed, effect, inject, linkedSignal} from '@angular/core';
-import {InvoiceListManager} from '../../../core/services/Managers/invoice-list-manager';
+import {InvoiceManager} from '../../../core/services/Managers/invoice-manager.service';
 import {InvoiceCard} from '../../invoices/invoice-card/invoice-card';
 import {PaymentForm} from '../payment-form/payment-form';
 import {PaymentEntity} from '../../../core/model/paymentEntity';
@@ -17,7 +17,7 @@ import {InvoiceEntity} from '../../../core/model/InvoiceEntity';
 })
 export default class PaymentEditor {
   private createPaymentHttp = inject(CreatePaymentHttp);
-  private invoiceManager= inject(InvoiceListManager);
+  private invoiceManager= inject(InvoiceManager);
   invoices = computed(()=>this.invoiceManager.getList())
   selectedInvoice = linkedSignal(()=>{return {}as InvoiceEntity})
 
