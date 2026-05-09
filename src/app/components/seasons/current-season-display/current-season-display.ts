@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, computed, inject} from '@angular/core';
 import {SeasonManager} from '../../../core/services/Managers/season-manager';
 import SeasonSwitch from '../season-switch/season-switch';
 import {Dialog} from '@angular/cdk/dialog';
@@ -12,8 +12,8 @@ import {Dialog} from '@angular/cdk/dialog';
 export class CurrentSeasonDisplay {
 
   private seasonManager = inject(SeasonManager);
-  season = this.seasonManager.currentSeason;
   dialog = inject(Dialog);
+  season = computed(()=>this.seasonManager.currentSeason());
   openDialog() {
     this.dialog.open(SeasonSwitch);
   }

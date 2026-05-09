@@ -28,7 +28,7 @@ export class SeasonManager {
     return this.seasonsResource.isLoading() && this.seasonsResource.error() ? [] : this.seasonsResource.value()!.data!;
   });
   season = computed(()=> {
-   return  this.seasonResource.isLoading() && this.seasonResource.error() ? {} as SeasonEntity : this.seasonResource.value()!.data!;
+   return  this.seasonResource.isLoading() && this.seasonResource.error() ? {} as SeasonEntity : this.seasonResource.value()?.data!;
   });
   getList(){
     return this.seasons();

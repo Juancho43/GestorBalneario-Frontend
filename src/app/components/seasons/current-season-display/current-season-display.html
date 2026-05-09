@@ -1,12 +1,16 @@
-<div
-  [class.active]="!season()!.isActive"
-  (click)="openDialog()"
->
-  @if(this.season()!){
-    @let season = this.season();
-    <h2>{{season.name}}</h2>
-    @if (!this.season().isActive){
-      Temporada historica
+@if(this.season()){
+  @let season = this.season();
+  <div
+    [class.active]="!season.isActive"
+    (click)="openDialog()"
+  >
+    @if(this.season()!){
+      @let season = this.season();
+      <h2>{{season.name}}</h2>
+      @if (!this.season().isActive){
+        Temporada historica
+      }
     }
-  }
-</div>
+  </div>
+
+}
