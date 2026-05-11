@@ -11,6 +11,7 @@
       }
     </div>
     <app-payment-form
+      [paymentMethods]="paymentMethods()"
       [invoice]="selectedInvoice()"
       (finalPayment)="createPayment($event)"
     />

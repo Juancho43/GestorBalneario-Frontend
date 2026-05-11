@@ -5,6 +5,7 @@ import {PaymentForm} from '../../payments/payment-form/payment-form';
 import {PaymentEntity} from '../../../core/model/paymentEntity';
 import {CreatePaymentHttp} from '../../../core/services/PaymentHttp/create-payment-http';
 import {InvoiceEntity} from '../../../core/model/InvoiceEntity';
+import {PaymentManager} from '../../../core/services/Managers/payment-manager';
 
 @Component({
   selector: 'app-payment-editor',
@@ -18,7 +19,8 @@ import {InvoiceEntity} from '../../../core/model/InvoiceEntity';
 export default class PaymentEditor {
   private createPaymentHttp = inject(CreatePaymentHttp);
   private invoiceManager= inject(InvoiceManager);
-
+  private paymentManager = inject(PaymentManager);
+  paymentMethods = computed(()=>this.paymentManager.paymentMethods())
   invoices = computed(()=>this.invoiceManager.getList())
   selectedInvoice = linkedSignal(()=>{return {}as InvoiceEntity})
 

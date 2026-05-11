@@ -4,7 +4,7 @@ export interface PaymentEntity{
   type:string,
   amount:number,
   changeType:number,
-  finalAmout?:number,
+  finalAmount?:number,
   description?:string,
   invoiceId?:string,
 }

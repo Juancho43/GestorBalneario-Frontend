@@ -4,4 +4,5 @@ export interface InvoiceEntity{
   date: Date;
   item: any[];
   state?:string;
+  clientName?:string;
 }

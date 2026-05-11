@@ -1,6 +1,8 @@
 @if(this.payments() !== null){
   @let payments = this.payments()!;
-  <table>
+  <div class="table-container">
+
+  <table class="modern-table">
     <caption>Pagos</caption>
     <thead>
     <tr>
@@ -14,22 +16,22 @@
     </thead>
     <tbody>
       @for (item of payments; track $index){
-        <tr>
-
+        <tr (click)="this.clickedPayment.emit(item)">
           <td>{{item.date | date:'short'}}</td>
           <td>{{item.description!}}</td>
           <td>{{item.amount | currency}}</td>
-          <td>{{item.type}}</td>
-          <td>{{item.changeType}}</td>
-          <td>{{item.finalAmout | currency}}</td>
+          <td>{{item.type | paymentType}}</td>
+          <td>{{item.changeType | currency}}</td>
+          <td>{{item.finalAmount! | currency}}</td>
         </tr>
       }
     </tbody>
     <tfoot>
     <tr>
-      <td colspan="4" >Total:</td>
+      <td colspan="5" >Total:</td>
       <td>{{total() | currency}}</td>
     </tr>
     </tfoot>
   </table>
+  </div>
 }

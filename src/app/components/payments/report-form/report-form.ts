@@ -1,20 +1,22 @@
-import {Component, OnInit, output, signal} from '@angular/core';
+import {Component, input, OnInit, output, signal} from '@angular/core';
 import {ReportQuery} from '../../../core/DTO/ReportQuery';
 import {form, FormField} from '@angular/forms/signals';
 import {FormsModule} from '@angular/forms';
+import {PaymentTypePipe} from '../../../core/utils/pipes/payment-type-pipe';
 
 @Component({
   selector: 'app-report-form',
   imports: [
     FormsModule,
-    FormField
+    FormField,
+    PaymentTypePipe
   ],
   templateUrl: './report-form.html',
   styleUrl: './report-form.scss',
 })
 export class ReportForm implements OnInit {
 
-
+  readonly paymentMethods = input.required<string[]>()
   query = signal<ReportQuery>({
     page:0,
     limit:10,
@@ -22,6 +24,7 @@ export class ReportForm implements OnInit {
     start: '',
     end:''
   });
+
   queryForm = form(this.query);
 
   finalQuery = output<ReportQuery>();
@@ -37,6 +40,7 @@ export class ReportForm implements OnInit {
   }
 
   submittedForm(){
+    console.log(this.query());
     this.finalQuery.emit(this.query());
   }
 }

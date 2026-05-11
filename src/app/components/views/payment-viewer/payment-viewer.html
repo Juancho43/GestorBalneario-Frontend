@@ -1,6 +1,7 @@
 <div class="component">
   <h3>Generar reporte de pagos</h3>
   <app-report-form
+    [paymentMethods]="paymentMethods()"
     (finalQuery)="query.set($event)"
   />
 
@@ -8,9 +9,8 @@
 
     <app-payments-table
       [payments]="report()!.payments!"
+      (clickedPayment)="openInvoiceDialog($event)"
     />
-<!--      (openInvoice)="openInvoiceDialog($event)"-->
-<!--    />-->
-
   }
+  <app-paginator/>
 </div>

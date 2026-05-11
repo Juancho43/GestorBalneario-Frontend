@@ -2,7 +2,7 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient, HttpContext} from '@angular/common/http';
 import {ServiceEntity} from '../../model/serviceEntity';
 import {environment} from '../../../../environments/environment.development';
-import {USE_SEASON_HEADER} from '../../utils/current-season/UseSeasonHeader';
+import {USE_SEASON_HEADER} from '../../utils/interceptors/UseSeasonHeader';
 import {ApiResponse} from '../../DTO/ApiResponse';
 
 @Injectable({

@@ -12,18 +12,16 @@
   <input type="text" [formField]="paymentForm.description!"/>
   <label>Tipo de pago</label>
   <select [formField]="paymentForm.type">
-    <option>CASH</option>
-    <option>USD_DOLLAR</option>
-    <option>TRANSFER</option>
-    <option>CREDIT_CARD</option>
-    <option>CHECK</option>
-    <option>CRYPTO</option>
-    <option>OTHER</option>
+    @for (method of paymentMethods();track $index){
+      <option [value]="method"> {{method|paymentType}}</option>
+    }
   </select>
   <label>Cambio</label>
   <input type="number" [formField]="paymentForm.changeType"/>
   <label>Factura</label>
   <input type="text" [value]="payment().invoiceId!" readonly/>
+  <label>Total:</label>
+  <p>{{total() | currency}}</p>
   @if(paymentForm().touched()){
     @for(error of allFormErrors(); track $index){
       <p class="error">{{error.message}}</p>

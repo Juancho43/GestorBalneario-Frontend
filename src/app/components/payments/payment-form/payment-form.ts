@@ -3,17 +3,22 @@ import {PaymentEntity} from '../../../core/model/paymentEntity';
 import {form, FormField, min, required} from '@angular/forms/signals';
 import {InvoiceEntity} from '../../../core/model/InvoiceEntity';
 import {FormsModule} from '@angular/forms';
+import {PaymentTypePipe} from '../../../core/utils/pipes/payment-type-pipe';
+import {CurrencyPipe} from '@angular/common';
 
 @Component({
   selector: 'app-payment-form',
   imports: [
     FormField,
-    FormsModule
+    FormsModule,
+    PaymentTypePipe,
+    CurrencyPipe
   ],
   templateUrl: './payment-form.html',
   styleUrl: './payment-form.scss',
 })
 export class PaymentForm {
+  readonly paymentMethods = input.required<string[]>()
   readonly paymentToEdit = input<PaymentEntity>();
   invoice = input.required<InvoiceEntity>()
   payment = linkedSignal(() => this.paymentToEdit() || {
@@ -25,6 +30,7 @@ export class PaymentForm {
     date: new Date(),
     invoiceId: this.invoice()?.id ?? ''
   } as PaymentEntity);
+  protected  total = computed(()=>this.payment().amount * this.payment().changeType)
   editMode = linkedSignal(() => !!this.paymentToEdit());
   paymentForm = form(this.payment, (schemaPath)=>{
     min(schemaPath.amount,1,{message:'El monto debe ser mayor a 0'})

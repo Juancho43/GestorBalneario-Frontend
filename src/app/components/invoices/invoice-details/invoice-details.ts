@@ -5,7 +5,7 @@ import {InvoiceManager} from '../../../core/services/Managers/invoice-manager.se
 import {DatePipe} from '@angular/common';
 import {ItemsTable} from '../items-table/items-table';
 import {PaymentsTable} from '../../payments/payments-table/payments-table';
-import {InvoiceStatePipe} from '../../../core/utils/invoice-state-pipe';
+import {InvoiceStatePipe} from '../../../core/utils/pipes/invoice-state-pipe';
 import {InvoiceDetail} from '../../../core/DTO/InvoiceDetailDTO';
 
 @Component({
