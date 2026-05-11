@@ -1,0 +1,6 @@
+@if(this.invoiceToAdjust()){
+  @let invoice = this.invoiceToAdjust()!;
+
+  <app-items-table [invoice]="invoice"/>
+}
+

@@ -10,7 +10,8 @@
     }
     <app-service-form
       #serviceForm
-      [serviceToEdit]="currentService()"
+      [types]="types()"
+      [serviceToEdit]="currentService()!"
       (finalService)="handleFormSubmit($event)"
     />
   </div>

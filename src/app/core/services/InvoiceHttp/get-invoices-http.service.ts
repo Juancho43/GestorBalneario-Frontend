@@ -12,8 +12,9 @@ import {ApiResponse} from '../../DTO/ApiResponse';
 export class GetInvoicesHttp {
   private http = inject(HttpClient);
   private currentSeason = inject(SeasonManager);
+  private season = this.currentSeason.currentSeason;
   get(query: PaginatedQuery) {
-    let id = this.currentSeason.season().id!;
-    return this.http.get<ApiResponse<InvoiceEntity[]>>(`${environment.apiUrl}/invoice/season/${id}?page=${query.page}&size=${query.pageSize}&state=${query.query}`);
+
+    return this.http.get<ApiResponse<InvoiceEntity[]>>(`${environment.apiUrl}/invoice/season/${this.season().id!}?page=${query.page}&size=${query.pageSize}&state=${query.query}`);
   }
 }

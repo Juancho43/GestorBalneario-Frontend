@@ -1,0 +1,14 @@
+<p>invoice-adjustment-form works!</p>
+<form>
+  <label>Concepto</label>
+  <select>
+    @for (service of services(); track $index){
+      <option value="{{service.id}}">{{service.name}}</option>
+    }
+  </select>
+
+  <label>Cantidad</label>
+  <input type="number" min="1" value="1" />
+  <label>Monto</label>
+  <input type="number">
+</form>

@@ -3,7 +3,8 @@
   <mat-icon aria-hidden="false" fontIcon="info"/>
   <div (click)="selected.emit(service)">
     <p>Nombre: {{service.name}}</p>
-    <p>Email: {{service.price | currency}}</p>
+    <p>Precio: {{service.price | currency}}</p>
+    <p>Tipo: {{service.type | serviceType}}</p>
   </div>
   @if (this.actions()) {
     <div>

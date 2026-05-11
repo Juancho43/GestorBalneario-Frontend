@@ -1,4 +1,4 @@
-import {Component, inject, linkedSignal, ViewChild} from '@angular/core';
+import {Component, computed, inject, linkedSignal, ViewChild} from '@angular/core';
 import {ServiceManager} from '../../../core/services/Managers/service-manager';
 import {ServiceForm} from '../../services/service-form/service-form';
 import {ServiceEntity} from '../../../core/model/serviceEntity';
@@ -19,7 +19,7 @@ import {DeleteConfirmation} from '../../layout/delete-confirmation/delete-confir
 export class ServiceEditor {
   private manager = inject(ServiceManager);
   private dialog = inject(MatDialog);
-
+  protected types = computed(()=>this.manager.getTypes())
   @ViewChild('serviceForm') form!: ServiceForm;
   services =  linkedSignal(()=> this.manager.getList());
   currentService = this.manager.currentService

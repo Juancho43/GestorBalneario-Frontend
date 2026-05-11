@@ -6,9 +6,14 @@
   }
   <label>Nombre:</label>
   <input type="text" [formField]="serviceForm.name">
-  <label>Precio</label>
+  <label>Precio:</label>
   <input type="number" [formField]="serviceForm.price">
-
+  <label>Tipo:</label>
+  <select [formField]="serviceForm.type">
+    @for(type of types();track $index){
+      <option [value]="type">{{type | serviceType}}</option>
+    }
+  </select>
   @if(serviceForm().touched()){
     @for(error of allFormErrors(); track $index){
       <p class="error">{{error.message}}</p>

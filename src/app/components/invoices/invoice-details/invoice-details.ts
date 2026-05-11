@@ -6,7 +6,6 @@ import {DatePipe} from '@angular/common';
 import {ItemsTable} from '../items-table/items-table';
 import {PaymentsTable} from '../../payments/payments-table/payments-table';
 import {InvoiceStatePipe} from '../../../core/utils/pipes/invoice-state-pipe';
-import {InvoiceDetail} from '../../../core/DTO/InvoiceDetailDTO';
 
 @Component({
   selector: 'app-invoice-details',
@@ -20,14 +19,7 @@ import {InvoiceDetail} from '../../../core/DTO/InvoiceDetailDTO';
   styleUrl: './invoice-details.scss',
 })
 export class InvoiceDetails {
-  private query = inject(InvoiceDetailHttp);
   private manager = inject(InvoiceManager);
-  invoiceResource = rxResource({
-    params : () => {return {id:this.manager.currentInvoice()}},
-    stream : ({params}) => this.query.get(params.id)
-  })
-  invoice = computed(()=>
-  {
-      return this.invoiceResource.value()?.data!;
-  })
+  invoice = computed(()=>this.manager.invoice())
+
 }
