@@ -7,7 +7,6 @@ import {InvoiceDetails} from '../../invoices/invoice-details/invoice-details';
 import {InvoiceManager} from '../../../core/services/Managers/invoice-manager.service';
 import {ClientDetailDTO} from '../../../core/DTO/ClientDetailDTO';
 import {ClientEntity} from '../../../core/model/clientEntity';
-import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'app-client-details',

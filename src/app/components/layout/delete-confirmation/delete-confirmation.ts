@@ -1,6 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogActions, MatDialogContent, MatDialogRef} from '@angular/material/dialog';
-import {JsonPipe} from '@angular/common';
+import {MAT_DIALOG_DATA, MatDialogActions, MatDialogContent, MatDialogRef} from '@angular/material/dialog';
 import {IDeleteDialogData} from '../../../core/DTO/DeleteDialogData';
 
 @Component({

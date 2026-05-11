@@ -1,7 +1,7 @@
 import {Component, computed, effect, inject, linkedSignal} from '@angular/core';
 import {InvoiceManager} from '../../../core/services/Managers/invoice-manager.service';
 import {InvoiceCard} from '../../invoices/invoice-card/invoice-card';
-import {PaymentForm} from '../payment-form/payment-form';
+import {PaymentForm} from '../../payments/payment-form/payment-form';
 import {PaymentEntity} from '../../../core/model/paymentEntity';
 import {CreatePaymentHttp} from '../../../core/services/PaymentHttp/create-payment-http';
 import {InvoiceEntity} from '../../../core/model/InvoiceEntity';
@@ -18,11 +18,13 @@ import {InvoiceEntity} from '../../../core/model/InvoiceEntity';
 export default class PaymentEditor {
   private createPaymentHttp = inject(CreatePaymentHttp);
   private invoiceManager= inject(InvoiceManager);
+
   invoices = computed(()=>this.invoiceManager.getList())
   selectedInvoice = linkedSignal(()=>{return {}as InvoiceEntity})
 
 
   constructor() {
+    this.invoiceManager.setQuery({query:'IssuedState',page:0,pageSize:10})
     effect(() => {
       if (this.invoices()) {
         this.selectedInvoice.set(this.invoiceManager.getList()![0] || {} as InvoiceEntity);
@@ -31,7 +33,6 @@ export default class PaymentEditor {
   }
 
   protected createPayment($event: PaymentEntity) {
-    console.log($event)
     this.createPaymentHttp.create($event).subscribe();
   }
 }

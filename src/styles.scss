@@ -22,7 +22,10 @@ $beige: #F5F5DC;
 
   --bg-card: #{$blue-light};
   --bg-detail: #{$beige};
-
+    @include mat.dialog-overrides((
+      container-color: none,
+      subhead-color: red,
+    ));
 
 }
 
@@ -123,6 +126,7 @@ form {
   padding: 5px;
 }
 .detail-container{
+  background: none;
   display: flex;
   padding: 20px;
   gap: 20px;

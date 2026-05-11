@@ -25,6 +25,7 @@ export class PaymentForm {
     date: new Date(),
     invoiceId: this.invoice()?.id ?? ''
   } as PaymentEntity);
+  editMode = linkedSignal(() => !!this.paymentToEdit());
   paymentForm = form(this.payment, (schemaPath)=>{
     min(schemaPath.amount,1,{message:'El monto debe ser mayor a 0'})
     min(schemaPath.changeType,1,{message:'El monto del tipo de cambio debe ser mayor a 0'})
@@ -47,8 +48,9 @@ export class PaymentForm {
   finalPayment = output<PaymentEntity>();
 
   protected submitPayment() {
-    if(!this.paymentForm().invalid){
+    if(!this.paymentForm().invalid()){
       this.finalPayment.emit(this.payment());
+      this.editMode.set(false)
     }
   }
 }

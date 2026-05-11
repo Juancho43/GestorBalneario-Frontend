@@ -14,6 +14,6 @@ export class GetInvoicesHttp {
   private currentSeason = inject(SeasonManager);
   get(query: PaginatedQuery) {
     let id = this.currentSeason.season().id!;
-    return this.http.get<ApiResponse<InvoiceEntity[]>>(`${environment.apiUrl}/invoice/season/${id}?page=${query.page}&size=${query.pageSize}`);
+    return this.http.get<ApiResponse<InvoiceEntity[]>>(`${environment.apiUrl}/invoice/season/${id}?page=${query.page}&size=${query.pageSize}&state=${query.query}`);
   }
 }

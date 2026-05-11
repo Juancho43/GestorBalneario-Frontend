@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PaymentCreator } from './payment-creator';
+import { InvoiceListManager } from './invoice-list-manager';
 
-describe('PaymentCreator', () => {
-  let component: PaymentCreator;
-  let fixture: ComponentFixture<PaymentCreator>;
+describe('InvoiceListManager', () => {
+  let component: InvoiceListManager;
+  let fixture: ComponentFixture<InvoiceListManager>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PaymentCreator],
+      imports: [InvoiceListManager],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(PaymentCreator);
+    fixture = TestBed.createComponent(InvoiceListManager);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
