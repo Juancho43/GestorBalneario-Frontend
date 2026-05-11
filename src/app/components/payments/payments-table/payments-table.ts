@@ -1,5 +1,5 @@
 import {Component, computed, input, output} from '@angular/core';
-import {CurrencyPipe, DatePipe, JsonPipe} from "@angular/common";
+import {CurrencyPipe, DatePipe} from "@angular/common";
 import {PaymentEntity} from '../../../core/model/paymentEntity';
 import {PaymentTypePipe} from '../../../core/utils/pipes/payment-type-pipe';
 
@@ -9,7 +9,6 @@ import {PaymentTypePipe} from '../../../core/utils/pipes/payment-type-pipe';
     CurrencyPipe,
     DatePipe,
     PaymentTypePipe,
-    JsonPipe
   ],
   templateUrl: './payments-table.html',
   styleUrl: './payments-table.scss',

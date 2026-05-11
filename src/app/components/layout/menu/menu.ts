@@ -56,6 +56,17 @@ export class Menu {
           label: 'Editar Servicios', url: 'service-manager'
         }
       ]
+    },
+    {
+      label: 'Facturas',
+      subLinks: [
+        {
+          label: 'Ver facturas', url : 'invoice-viewer'
+        },
+        {
+          label: 'Editar facturas', url :'invoice-editor'
+        }
+      ]
     }
   ]
 }

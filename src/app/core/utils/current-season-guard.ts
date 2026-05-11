@@ -4,5 +4,6 @@ import {inject} from '@angular/core';
 
 export const currentSeasonGuard: CanActivateFn = (route, state) => {
   const currentSeason = inject(SeasonManager);
-  return (currentSeason.currentSeason()).isActive;
+  const current = currentSeason.currentSeason();
+  return current?.isActive ?? false;
 };

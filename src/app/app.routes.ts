@@ -11,6 +11,8 @@ import PaymentEditor from './components/views/payment-editor/payment-editor';
 import {ServiceEditor} from './components/views/service-editor/service-editor';
 import {currentSeasonGuard} from './core/utils/current-season-guard';
 import {SeasonsEditor} from './components/views/seasons-editor/seasons-editor';
+import {InvoiceEditor} from './components/views/invoice-editor/invoice-editor';
+import {InvoiceViewer} from './components/views/invoice-viewer/invoice-viewer';
 
 export const routes: Routes = [
   {
@@ -72,5 +74,17 @@ export const routes: Routes = [
     canActivate: [currentSeasonGuard],
     path: 'service-manager',
     loadComponent: ()=> ServiceEditor
+  },
+  {
+    title:'Ver facturas',
+    path: 'invoice-viewer',
+    loadComponent: () => InvoiceViewer
+  },
+  {
+    title: 'Editar facturas',
+    path:'invoice-editor',
+    canActivate: [currentSeasonGuard],
+    loadComponent: ()=>InvoiceEditor
   }
+
 ];
