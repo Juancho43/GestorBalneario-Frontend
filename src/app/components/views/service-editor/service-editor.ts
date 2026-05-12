@@ -6,12 +6,14 @@ import {ServiceCard} from '../../services/service-card/service-card';
 import {MatDialog} from '@angular/material/dialog';
 import {IDeleteDialogData} from '../../../core/DTO/DeleteDialogData';
 import {DeleteConfirmation} from '../../layout/delete-confirmation/delete-confirmation';
+import {ServiceListManager} from '../../services/service-list-manager/service-list-manager';
 
 @Component({
   selector: 'app-service-editor',
   imports: [
     ServiceForm,
-    ServiceCard
+    ServiceCard,
+    ServiceListManager
   ],
   templateUrl: './service-editor.html',
   styleUrl: './service-editor.scss',

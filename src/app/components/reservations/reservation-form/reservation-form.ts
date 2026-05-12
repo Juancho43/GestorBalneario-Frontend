@@ -1,16 +1,14 @@
 import {Component, computed, inject, input, linkedSignal, output} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {form, FormField, min, required, validate} from '@angular/forms/signals';
 import {ReservationEntity} from '../../../core/model/reservationEntity';
 import {ClientEntity} from '../../../core/model/clientEntity';
 import {ShadowEntity} from '../../../core/model/shadowEntity';
-import {ServiceListManager} from '../../../core/services/Managers/service-list-manager';
 import {ServiceEntity} from '../../../core/model/serviceEntity';
-import {JsonPipe} from '@angular/common';
 import {minDateValidator} from '../../../core/utils/validator/dateValidator';
+import {ServiceManager} from '../../../core/services/Managers/service-manager';
 
 
 @Component({
@@ -20,18 +18,14 @@ import {minDateValidator} from '../../../core/utils/validator/dateValidator';
   styleUrl: './reservation-form.scss',
 })
 export class ReservationForm {
-  private serviceManager= inject(ServiceListManager);
-  services = this.serviceManager.serviceList;
-  service = computed(()=> {
-    if (this.services()! && this.services().services.length > 0) {
-      return this.services().services[0];
-    }else{
-      return {
-        price:10,
-        id:'service-123',
-        name:'Booking-false'
-      } as ServiceEntity;
-    }
+  private serviceManager= inject(ServiceManager);
+  services = computed(() => this.serviceManager.getList());
+  service = linkedSignal(()=> {
+    return this.services()![0] || {
+      price:10,
+      id:'service-123',
+      name:'Booking-false'
+    } as ServiceEntity;
   });
 
   readonly reservationToEdit = input<ReservationEntity>();
@@ -70,6 +64,9 @@ export class ReservationForm {
     return [...root, ...price, ...checkIn, ...checkOut,...client,...shadow];
   });
 
+  constructor() {
+    this.serviceManager.currentType.set('BOOKING');
+  }
   submitted(){
     if(!this.reservationForm().invalid()) {
       this.finalReservation.emit(this.reservation());

@@ -11,6 +11,12 @@
   <input type="datetime-local" [formField]="reservationForm.dates.checkOut">
   <label>Precio</label>
   <input type="number" [formField]="reservationForm.price">
+  <label>Servicio</label>
+  <select>
+    @for (service of services(); track $index){
+      <option [value]="service.id">{{service.name}}</option>
+    }
+  </select>
   <p>Cliente: {{reservation().client?.name}}</p>
   <p>Carpa: {{reservation().shadow?.identifier}}</p>
   @if(reservationForm().touched()){

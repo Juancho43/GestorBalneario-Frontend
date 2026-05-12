@@ -3,7 +3,7 @@ import {InvoiceCard} from "../../invoices/invoice-card/invoice-card";
 import {Dialog} from '@angular/cdk/dialog';
 import {InvoiceManager} from '../../../core/services/Managers/invoice-manager.service';
 import {InvoiceAdjustment} from '../../invoices/invoice-adjustment/invoice-adjustment';
-import {InvoiceAdjustmentForm} from '../../Invoices/invoice-adjustment-form/invoice-adjustment-form';
+import {InvoiceAdjustmentForm} from '../../invoices/invoice-adjustment-form/invoice-adjustment-form';
 
 @Component({
   selector: 'app-invoice-editor',

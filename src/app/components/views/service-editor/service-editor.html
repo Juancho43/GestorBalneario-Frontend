@@ -1,13 +1,9 @@
 <div class="component">
   <h3>Configurar servicios</h3>
   <div class="row">
-    @for (service of services(); track $index) {
-      <app-service-card
-        [service]="service"
-        (edit)="editHandler($event)"
-        (delete)="deleteHandler($event)"
-      />
-    }
+    <app-service-list-manager
+
+    />
     <app-service-form
       #serviceForm
       [types]="types()"

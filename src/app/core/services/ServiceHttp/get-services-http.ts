@@ -13,10 +13,10 @@ export class GetServicesHttp {
 
   private currentSeason = inject(SeasonManager);
   private season = this.currentSeason.currentSeason;
-  get(){
+  get(type:string = 'ALL'){
     let id = this.season().id!;
     let page = 0;
     let size = 10;
-    return this.http.get<ApiResponse<SeasonServicesDTO>>(`${environment.apiUrl}/service/season/${id}?page=${page}&size=${size}`);
+    return this.http.get<ApiResponse<SeasonServicesDTO>>(`${environment.apiUrl}/service/season/${id}?page=${page}&size=${size}&type=${type}`);
   }
 }

@@ -1,0 +1,18 @@
+<form (ngSubmit)="handleSubmit()">
+  <label>Nombre</label>
+  <input
+    type="text"
+    [ngModelOptions]="{standalone: true}"
+    [(ngModel)]="searchQuery().name"
+  >
+  <label>Tipo</label>
+  <select
+    [ngModelOptions]="{standalone: true}"
+    [(ngModel)]="searchQuery().type" >
+    <option value="ALL">Todos</option>
+    @for (serviceType of serviceTypes(); track $index){
+      <option [value]="serviceType">{{serviceType| serviceType}}</option>
+    }
+  </select>
+  <input type="submit" value="Buscar">
+</form>

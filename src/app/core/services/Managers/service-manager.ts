@@ -1,4 +1,4 @@
-import {computed, inject, Injectable, linkedSignal} from '@angular/core';
+import {computed, inject, Injectable, linkedSignal, signal} from '@angular/core';
 import {GetServicesHttp} from '../ServiceHttp/get-services-http';
 import {GetServiceHttp} from '../ServiceHttp/get-service-http';
 import {CreateServiceHttp} from '../ServiceHttp/create-service-http';
@@ -21,8 +21,10 @@ export class ServiceManager {
   private serviceTypesResource = rxResource({
     stream: () => this.serviceTypeHttp.execute()
   })
+  currentType = signal('ALL')
   private serviceResource = rxResource({
-    stream : () => this.getServicesHttp.get()
+    params : () => this.currentType(),
+    stream : ({params}) => this.getServicesHttp.get(params)
   })
   private serviceTypes = computed(()=>
     this.serviceTypesResource.isLoading() && this.serviceTypesResource.error() ? [] : this.serviceTypesResource.value()?.data!
