@@ -1,0 +1,40 @@
+<form class="inline-row-form" (ngSubmit)="handleSubmit()">
+  <div class="form-cell">
+    <label>Tipo</label>
+    <select #typeSelect (change)="onTypeChange(typeSelect.value)">
+      @for (type of types; track $index){
+        <option [value]="type">{{type | serviceType}}</option>
+      }
+    </select>
+  </div>
+  <div class="form-cell">
+    <label>Concepto</label>
+    <select #serviceSelect (change)="onServiceChange(serviceSelect.value)" [formField]="invoiceItemForm.serviceId">
+      @for (service of services(); track $index){
+        <option value="{{service.id}}">{{service.name}}</option>
+      }
+    </select>
+  </div>
+
+  <input type="hidden" [formField]="invoiceItemForm.description">
+  @if (this.currentType() === 'OTHER'){
+    <div class="form-cell">
+      <label>Cantidad</label>
+      <input type="number" [formField]="invoiceItemForm.quantity">
+    </div>
+  }
+  <div class="form-cell">
+    <label>Monto</label>
+    <input type="number" [formField]="invoiceItemForm.price">
+  </div>
+  @if (!this.editMode()){
+    <div class="form-action-cell">
+      <input type="submit" value="Agregar" class="btn-submit">
+    </div>
+  }@else{
+    <div class="form-action-cell">
+      <input type="submit" value="Editar" class="btn-submit">
+    </div>
+  }
+
+</form>

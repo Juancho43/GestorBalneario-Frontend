@@ -1,6 +1,6 @@
 import {Component, input, output, signal} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {ServiceTypePipe} from '../../../service-type-pipe';
+import {ServiceTypePipe} from '../../../core/utils/pipes/service-type-pipe';
 export interface serviceSearch{
   name: string
   type: string

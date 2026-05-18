@@ -3,7 +3,7 @@ import {ServiceEntity} from '../../../core/model/serviceEntity';
 import {CurrencyPipe} from '@angular/common';
 import {MatIcon} from '@angular/material/icon';
 import {MatCard} from '@angular/material/card';
-import {ServiceTypePipe} from '../../../service-type-pipe';
+import {ServiceTypePipe} from '../../../core/utils/pipes/service-type-pipe';
 
 @Component({
   selector: 'app-service-card',

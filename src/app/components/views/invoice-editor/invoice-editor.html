@@ -9,10 +9,16 @@
     }
   </div>
   @if (this.invoice()){
-
-  <app-invoice-adjustment
-    [invoiceToAdjust]="invoice()"
-  />
-  <button (click)="openAdjustmentDialog()">Add item</button>
+    <app-invoice-adjustment-form
+      #editItemForm
+      [itemToEdit]="currentItem()"
+      (finalInvoiceItem)="handleSubmitEvent($event)"
+    />
+    <app-invoice-adjustment
+      (editItem)="this.currentItem.set($event)"
+      (deleteItem)="handleDeleteInvoiceItem($event)"
+      [items]="editingItems()"
+    />
   }
+
 </div>

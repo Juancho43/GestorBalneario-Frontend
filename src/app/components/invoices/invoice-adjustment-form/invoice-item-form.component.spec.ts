@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InvoiceAdjustmentForm } from './invoice-adjustment-form';
+import { InvoiceItemForm } from './invoice-item-form.component';
 
 describe('InvoiceAdjustmentForm', () => {
-  let component: InvoiceAdjustmentForm;
-  let fixture: ComponentFixture<InvoiceAdjustmentForm>;
+  let component: InvoiceItemForm;
+  let fixture: ComponentFixture<InvoiceItemForm>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InvoiceAdjustmentForm],
+      imports: [InvoiceItemForm],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(InvoiceAdjustmentForm);
+    fixture = TestBed.createComponent(InvoiceItemForm);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

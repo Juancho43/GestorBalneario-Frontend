@@ -2,7 +2,6 @@ import {Component, computed, inject, linkedSignal, ViewChild} from '@angular/cor
 import {ServiceManager} from '../../../core/services/Managers/service-manager';
 import {ServiceForm} from '../../services/service-form/service-form';
 import {ServiceEntity} from '../../../core/model/serviceEntity';
-import {ServiceCard} from '../../services/service-card/service-card';
 import {MatDialog} from '@angular/material/dialog';
 import {IDeleteDialogData} from '../../../core/DTO/DeleteDialogData';
 import {DeleteConfirmation} from '../../layout/delete-confirmation/delete-confirmation';
@@ -12,7 +11,6 @@ import {ServiceListManager} from '../../services/service-list-manager/service-li
   selector: 'app-service-editor',
   imports: [
     ServiceForm,
-    ServiceCard,
     ServiceListManager
   ],
   templateUrl: './service-editor.html',

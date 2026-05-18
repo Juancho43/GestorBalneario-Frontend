@@ -14,7 +14,7 @@
      <p>Telefono: {{client.phone}}</p>
    </div>
    <div>
-     <app-items-table [invoice]="this.invoice()"/>
+     <app-items-table [items]="this.invoice().items"/>
      @if(this.invoice()!.payments[0].id){
        <app-payments-table [payments]="this.invoice()!.payments"/>
      }@else{

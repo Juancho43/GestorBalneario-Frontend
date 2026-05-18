@@ -30,7 +30,7 @@ export class InvoiceManager {
   }
   currentInvoice = signal<string>('')
 
-  private invoiceResource = rxResource({
+  public invoiceResource = rxResource({
     params: () => {
       const id = this.currentInvoice();
       return id ? { id } : undefined;

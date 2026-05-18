@@ -1,0 +1,52 @@
+.inline-row-form {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end; /* Forces inputs to align at the bottom */
+  gap: 15px; /* The exact spacing between your "columns" */
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.form-cell {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* Ensures each cell shares the available space evenly */
+
+  label {
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #1c293b; /* Matches your existing table header color */
+    text-transform: uppercase;
+  }
+
+  select, input[type="number"] {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: inherit;
+  }
+}
+
+.form-action-cell {
+  /* This prevents the button from stretching and aligns it with the inputs */
+  margin-bottom: 2px;
+
+  .btn-submit {
+    padding: 8px 16px;
+    background-color: #1c293b;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: #2a3d57;
+    }
+  }
+}

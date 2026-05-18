@@ -1,6 +1,5 @@
-@if(invoice() !== null){
-  @let items = this.invoice()!.items!;
-  @let invoice = this.invoice()!.invoice!;
+@if(items() !== null){
+  @let items = this.items();
 
   <table class="modern-table">
     <caption>Items</caption>
@@ -21,7 +20,7 @@
               {{item.aggregateObject.dates.checkIn | date:'short'}} -
               {{item.aggregateObject.dates.checkOut | date:'short'}})
             } @else {
-              <td>{{item.aggregate}}</td>
+              <td>{{item.description}}</td>
             }
           </td>
           <td>{{item.quantity}}</td>
@@ -32,7 +31,7 @@
     <tfoot>
     <tr>
       <td colspan="2" >Total:</td>
-      <td>{{invoice.amount | currency}}</td>
+      <td>{{this.total()| currency}}</td>
     </tr>
     </tfoot>
   </table>

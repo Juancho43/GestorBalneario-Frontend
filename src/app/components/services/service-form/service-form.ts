@@ -2,7 +2,7 @@ import {Component, computed, input, linkedSignal, output} from '@angular/core';
 import {ServiceEntity} from '../../../core/model/serviceEntity';
 import {form, FormField, min, required} from '@angular/forms/signals';
 import {FormsModule} from '@angular/forms';
-import {ServiceTypePipe} from '../../../service-type-pipe';
+import {ServiceTypePipe} from '../../../core/utils/pipes/service-type-pipe';
 
 @Component({
   selector: 'app-service-form',

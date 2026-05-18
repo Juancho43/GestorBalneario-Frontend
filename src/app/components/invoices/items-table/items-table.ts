@@ -1,4 +1,4 @@
-import {Component, input} from '@angular/core';
+import {Component, computed, input} from '@angular/core';
 import {CurrencyPipe, DatePipe} from "@angular/common";
 import {InvoiceDetail} from '../../../core/DTO/InvoiceDetailDTO';
 
@@ -12,5 +12,8 @@ import {InvoiceDetail} from '../../../core/DTO/InvoiceDetailDTO';
   styleUrl: './items-table.scss',
 })
 export class ItemsTable {
-  readonly invoice = input<InvoiceDetail>();
+  readonly items = input<any[]>([]);
+  protected total = computed(()=>{
+    return this.items().reduce((acc, item) => acc + item.price, 0);
+  })
 }
