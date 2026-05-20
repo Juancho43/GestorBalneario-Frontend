@@ -21,16 +21,17 @@ export class ServiceManager {
   private serviceTypesResource = rxResource({
     stream: () => this.serviceTypeHttp.execute()
   })
-  currentType = signal('ALL')
+  currentType = signal('ALL');
   private serviceResource = rxResource({
     params : () => this.currentType(),
     stream : ({params}) => this.getServicesHttp.get(params)
   })
+
   private serviceTypes = computed(()=>
     this.serviceTypesResource.isLoading() && this.serviceTypesResource.error() ? [] : this.serviceTypesResource.value()?.data!
   )
   private services = computed(()=>
-    this.serviceResource.isLoading() && this.serviceResource.error() ? [] : this.serviceResource.value()?.data!.services
+    this.serviceResource.isLoading() && this.serviceResource.error() ? [] : this.serviceResource.value()?.data!.services!
   )
   currentService = linkedSignal<ServiceEntity | null>(() => this.services()?.[0] ?? null);
   getList(){

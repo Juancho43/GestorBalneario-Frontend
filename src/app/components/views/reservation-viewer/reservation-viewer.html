@@ -1,26 +1,38 @@
 <div class="component">
   <h3>Ver reservas</h3>
   <div class="row">
-    <div>
+
+    <div class="list">
 
       <app-reservation-searcher
         (activeSelect)="active.set($event)"
       />
-      <div class="row">
+      <div>
         @let reservations = this.reservations();
         @for(reservation of reservations; track $index) {
           <app-reservation-card
             [reservation]="reservation"
+            (edit)="this.editForm.set($event)"
           />
         }
       </div>
-    </div>
-    <div>
-      <app-reservation-form
-        #reservationForm
-        (finalReservation)="handleSubmit($event)"
-        [reservationToEdit]="currentReservation()!"
+      <app-paginator
+        [query]="query()"
+        (pageChange)="handlePageChanged($event)"
       />
     </div>
+    @if(editForm()) {
+      <div>
+        <app-reservation-form
+          (finalReservation)="handleSubmit($event)"
+          [reservationToEdit]="currentReservation()!"
+          (reset)="handleReset()"
+        />
+      </div>
+    }@else{
+      <div>
+        <p>Selecciona una reserva para editarla</p>
+      </div>
+    }
   </div>
 </div>

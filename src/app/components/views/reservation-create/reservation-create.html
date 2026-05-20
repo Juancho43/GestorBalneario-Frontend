@@ -8,9 +8,10 @@
     />
       <div>
         <app-reservation-form
+          #reservationForm
           [client]="client()"
           [shadow]="shadow()"
-          (finalReservation)="createReservation($event)"
+          (finalReservation)="handleSubmit($event)"
         />
         <p>Cliente seleccionado</p>
         <app-client-card

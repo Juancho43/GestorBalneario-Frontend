@@ -13,4 +13,5 @@ export interface ReservationEntity{
   duration?: number;
   price: number;
   serviceId?: string;
+  state?: string;
 }

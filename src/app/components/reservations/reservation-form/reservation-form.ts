@@ -1,4 +1,4 @@
-import {Component, computed, inject, input, linkedSignal, output} from '@angular/core';
+import {Component, computed, effect, inject, input, linkedSignal, output} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -9,7 +9,14 @@ import {ShadowEntity} from '../../../core/model/shadowEntity';
 import {ServiceEntity} from '../../../core/model/serviceEntity';
 import {minDateValidator} from '../../../core/utils/validator/dateValidator';
 import {ServiceManager} from '../../../core/services/Managers/service-manager';
-
+export function requireValidSelection(errorKind: string, errorMessage: string) {
+  return (context: any) => {
+    if (context.value?.id === 'none') {
+      return { kind: errorKind, message: errorMessage };
+    }
+    return null;
+  };
+}
 
 @Component({
   selector: 'app-reservation-form',
@@ -18,39 +25,61 @@ import {ServiceManager} from '../../../core/services/Managers/service-manager';
   styleUrl: './reservation-form.scss',
 })
 export class ReservationForm {
-  private serviceManager= inject(ServiceManager);
-  services = computed(() => this.serviceManager.getList());
-  service = linkedSignal(()=> {
-    return this.services()![0] || {
-      price:10,
-      id:'service-123',
-      name:'Booking-false'
+  private serviceManager = inject(ServiceManager);
+  services = computed(() => this.serviceManager.getList() || []);
+  service = linkedSignal(() => {
+    return this.services()?.[0] || {
+      price: 10,
+      id: 'service-123',
+      name: 'Booking-false'
     } as ServiceEntity;
   });
 
   readonly reservationToEdit = input<ReservationEntity>();
   readonly client = input<ClientEntity>();
   readonly shadow = input<ShadowEntity>();
-  editMode = linkedSignal(()=>{
-    if(this.reservationToEdit()) return true
-    return false;
+  editMode = linkedSignal(() => {
+    return !!this.reservationToEdit();
   })
-  reservation = linkedSignal<ReservationEntity>(()=> this.reservationToEdit() || {
-    shadow: this.shadow(),
-    dates: {
-      checkIn: '',
-      checkOut: '',
-    },
-    price:this.service().price?? 10,
-    client: this.client(),
-    serviceId: this.service().id!
+  reset = output<boolean>()
+  reservation = linkedSignal<ReservationEntity>(() => {
+    const reservationToEdit = this.reservationToEdit();
+    if (reservationToEdit) {
+      return {
+        ...reservationToEdit,
+        dates: {
+            checkIn: this.formatParaInput(reservationToEdit.dates.checkIn),
+            checkOut: this.formatParaInput(reservationToEdit.dates.checkOut)
+          }
+      }
+    } else {
+      return {
+        shadow: {id: 'none'} as ShadowEntity,
+        dates: {
+          checkIn: '',
+          checkOut: '',
+        },
+        price: 10,
+        client: {id: 'none'} as ClientEntity,
+        serviceId: ''
+      };
+    }
+
+
   });
-  reservationForm = form(this.reservation, (schemaPath) =>{
-    required(schemaPath.dates.checkIn, {message:'La fecha y hora del Check-in es requerida'});
-    required(schemaPath.dates.checkOut, {message:'La fecha y hora del Check-out es requerida '});
-    min(schemaPath.price,0, {message:'El precio debe ser positivo'})
-    validate(schemaPath.dates.checkOut,minDateValidator(schemaPath.dates.checkIn));
-  });
+  reservationForm = form(this.reservation, (schemaPath) => {
+      required(schemaPath.dates.checkIn, {message: 'La fecha y hora del Check-in es requerida'});
+      required(schemaPath.dates.checkOut, {message: 'La fecha y hora del Check-out es requerida '});
+      min(schemaPath.price, 0, {message: 'El precio debe ser positivo'})
+      validate(schemaPath.dates.checkOut, minDateValidator(schemaPath.dates.checkIn));
+      if (schemaPath.client!) {
+        validate(schemaPath.client, requireValidSelection('invalidClient', 'Debe seleccionar un cliente'));
+      }
+      if (schemaPath.shadow!) {
+        validate(schemaPath.shadow, requireValidSelection('invalidShadow', 'Debe asignar una carpa o sombrilla'));
+      }
+    }
+  );
   finalReservation = output<ReservationEntity>();
   allFormErrors = computed(() => {
     const root = this.reservationForm().errors() || [];
@@ -58,19 +87,65 @@ export class ReservationForm {
     const price = this.reservationForm.price().errors() || [];
     const checkIn = this.reservationForm.dates.checkIn().errors() || [];
     const checkOut = this.reservationForm.dates.checkOut().errors() || [];
-    const client = this.reservationForm.client!().errors() || [];
-    const shadow = this.reservationForm.shadow!()!.errors() || [];
+    const client = this.reservationForm.client?.().errors() || [];
+    const shadow = this.reservationForm.shadow?.().errors() || [];
 
-    return [...root, ...price, ...checkIn, ...checkOut,...client,...shadow];
+    return [...root, ...price, ...checkIn, ...checkOut, ...client, ...shadow];
   });
 
   constructor() {
-    this.serviceManager.currentType.set('BOOKING');
+    this.serviceManager.currentType.set('RESERVATION');
+    effect(() => {
+      this.client()
+      this.reservation.update(p => {
+        return {...p, client: this.client()}
+      })
+    });
+    effect(() => {
+      this.shadow()
+      this.reservation.update(p => {
+        return {...p, shadow: this.shadow()}
+      })
+    });
   }
-  submitted(){
-    if(!this.reservationForm().invalid()) {
+
+  submitted() {
+    if (!this.reservationForm().invalid()) {
       this.finalReservation.emit(this.reservation());
     }
   }
+
+  protected handleServiceChange(event: Event) {
+    const selectElement = event.target as HTMLSelectElement;
+    const selectId = selectElement.value;
+    const service = this.services().find(s => s.id === selectId);
+    if (service) {
+      this.reservation.update(prev => ({
+        ...prev,
+        price: service.price
+      }));
+    }
+  }
+  protected handleReset() {
+    this.editMode.set(false)
+    this.reset.emit(true)
+    this.reservation.update(() => ({
+      shadow: {id: 'none'} as ShadowEntity,
+      dates: {
+        checkIn: '',
+        checkOut: '',
+      },
+      price: 10,
+      client: {id: 'none'} as ClientEntity,
+      serviceId: ''
+    }))
+  }
+
+  private formatParaInput(isoDate: string | undefined): string {
+    if (!isoDate) return '';
+    return isoDate.substring(0, 16);
+  }
+
 }
+
 

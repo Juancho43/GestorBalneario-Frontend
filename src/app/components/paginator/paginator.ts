@@ -1,4 +1,5 @@
 import {Component, input, output, signal} from '@angular/core';
+import {PaginatedQuery} from '../../core/services/ClientHttp/get-clients-http';
 
 @Component({
   selector: 'app-paginator',
@@ -7,14 +8,15 @@ import {Component, input, output, signal} from '@angular/core';
   styleUrl: './paginator.scss',
 })
 export class Paginator {
- pageChange = output<number>();
-
+  pageChange = output<number>();
+  query = input.required<PaginatedQuery>()
   totalPages = signal<number>(1);
   onPrev(): void {
-    this.pageChange.emit(-1)
+     if(this.query().page-1 < 0) return;
+    this.pageChange.emit(this.query().page - 1)
   }
 
   onNext(): void {
-    this.pageChange.emit(1)
+    this.pageChange.emit(this.query().page + 1);
   }
 }

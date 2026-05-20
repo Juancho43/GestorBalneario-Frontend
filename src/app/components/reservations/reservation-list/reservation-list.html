@@ -1,5 +1,5 @@
 @let list = this.list();
-
+<app-reservation-searcher/>
   @for (reservation of list; track $index ) {
     <app-reservation-card
       (click)="openReservationDialog(reservation)"

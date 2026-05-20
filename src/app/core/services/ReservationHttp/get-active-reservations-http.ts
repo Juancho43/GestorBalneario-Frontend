@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {ReservationEntity} from '../../model/reservationEntity';
 import {environment} from '../../../../environments/environment.development';
 import {ApiResponse} from '../../DTO/ApiResponse';
+import {PaginatedQuery} from '../ClientHttp/get-clients-http';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,7 @@ import {ApiResponse} from '../../DTO/ApiResponse';
 export class GetActiveReservationsHttp {
   private http = inject(HttpClient);
 
-  get(){
-    return this.http.get<ApiResponse<ReservationEntity[]>>(`${environment.apiUrl}/reservation/active`);
+  get(query: PaginatedQuery){
+    return this.http.get<ApiResponse<ReservationEntity[]>>(`${environment.apiUrl}/reservation/active?page=${query.page}&size=${query.pageSize}`);
   }
 }

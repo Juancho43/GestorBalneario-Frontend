@@ -1,4 +1,4 @@
-@let details = this.details();
+@let details = this.reservationData();
 @if (details){
   <div class="detail-container">
     <div class="detail" animate.enter="enter-animation">
@@ -6,6 +6,7 @@
       <h4>Fechas</h4>
       <p>{{details.reservation.dates.checkIn | date:'short'}}</p>
       <p>{{details.reservation.dates.checkOut | date:'short'}}</p>
+      <p>{{details.reservation.state! | reservationState}}</p>
       <h4>Cliente</h4>
       <p>{{details.client.name}}</p>
       <h4>Sombra</h4>

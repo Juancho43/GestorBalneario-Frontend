@@ -1,4 +1,4 @@
-import {Component, computed, inject, linkedSignal, signal} from '@angular/core';
+import {Component, computed, inject, linkedSignal, signal, ViewChild} from '@angular/core';
 import {ReservationForm} from '../../reservations/reservation-form/reservation-form';
 import {ReservationManager} from '../../../core/services/Managers/reservation-manager.service';
 import {ShadowMap} from '../../shadows/shadow-map/shadow-map';
@@ -27,10 +27,11 @@ import {ShadowMapDTO} from '../../../core/DTO/ShadowMapDTO';
   styleUrl: './reservation-create.scss',
 })
 export class ReservationCreate {
+  private reservationListManager = inject(ReservationManager);
   private shadowManager = inject(ShadowManager);
   private clientManager = inject(ClientManager);
   private matDialog = inject(Dialog);
-
+  @ViewChild('reservationForm') reservationForm!: ReservationForm;
   shadows = this.shadowManager.shadows;
   client = linkedSignal<ClientEntity>(()=>this.clientManager.currentClient() || {name: '', email: '', phone:''});
   shadow = signal(this.shadows()[0] ||
@@ -40,10 +41,14 @@ export class ReservationCreate {
         y:0
       }
     }as ShadowEntity);
-  private reservationListManager = inject(ReservationManager);
-  createReservation(reservation: ReservationEntity) {
-    this.reservationListManager.addReservation(reservation);
+  handleSubmit(reservation: ReservationEntity) {
+    if (!this.reservationForm.editMode()){
+      this.reservationListManager.addReservation(reservation);
+    }else{
+      this.reservationListManager.updateReservation(reservation);
+    }
   }
+
   openClientDialog(): void {
        this.matDialog.open(ClientManagerDialog);
   }
