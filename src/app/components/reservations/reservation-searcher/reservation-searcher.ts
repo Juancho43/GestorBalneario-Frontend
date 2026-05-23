@@ -1,17 +1,40 @@
-import {Component, output} from '@angular/core';
-import {MatCheckbox, MatCheckboxChange} from '@angular/material/checkbox';
+import {Component, inject, output} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {MatIcon} from '@angular/material/icon';
+import {FilterButton} from '../../layout/filter-button/filter-button';
+import {ReservationForm} from '../reservation-form/reservation-form';
+import {OverlayHelper} from '../../../core/utils/overlay-helper';
 
 @Component({
   selector: 'app-reservation-searcher',
   imports: [
-    MatCheckbox
+    FormsModule,
+    MatIcon,
+    FilterButton
   ],
   templateUrl: './reservation-searcher.html',
   styleUrl: './reservation-searcher.scss',
 })
 export class ReservationSearcher {
+  private overlay = inject(OverlayHelper);
   activeSelect=output<boolean>()
-  protected handleActive($event: MatCheckboxChange) {
-    this.activeSelect.emit($event.checked);
+  filterOpen = false;
+  protected searchTerm: any;
+  protected component = ReservationForm;
+
+  protected handleFilter() {
+    const config = this.overlay.getModalConfig();
+    if(!this.filterOpen){
+      this.filterOpen = true;
+      const overlayRef = this.overlay.open(ReservationForm, config);
+      overlayRef.backdropClick().subscribe(() => {
+        overlayRef!.dispose();
+        this.filterOpen = false
+      });
+    }
+  }
+
+  protected submitHandler() {
+
   }
 }

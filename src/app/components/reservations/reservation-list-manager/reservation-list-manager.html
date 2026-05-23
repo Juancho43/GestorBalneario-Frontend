@@ -1,0 +1,10 @@
+<app-reservation-searcher
+  (activeSelect)="active.set($event)"
+/>
+<app-reservation-list
+  [list]="reservations()"
+/>
+<!--<app-paginator-->
+<!--  [query]="query()"-->
+<!--  (pageChange)="handlePageChanged($event)"-->
+<!--/>-->

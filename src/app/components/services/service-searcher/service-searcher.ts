@@ -1,6 +1,8 @@
 import {Component, input, output, signal} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {ServiceTypePipe} from '../../../core/utils/pipes/service-type-pipe';
+import {MatIcon} from '@angular/material/icon';
+import {CustomMenu} from '../../layout/custom-menu/custom-menu';
 export interface serviceSearch{
   name: string
   type: string
@@ -8,8 +10,9 @@ export interface serviceSearch{
 @Component({
   selector: 'app-service-searcher',
   imports: [
+    MatIcon,
     FormsModule,
-    ServiceTypePipe
+    CustomMenu,
   ],
   templateUrl: './service-searcher.html',
   styleUrl: './service-searcher.scss',

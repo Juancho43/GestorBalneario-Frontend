@@ -1,72 +1,82 @@
-import { Component } from '@angular/core';
-import {RouterLink} from '@angular/router';
-import {CdkMenu, CdkMenuBar, CdkMenuItem, CdkMenuTrigger} from '@angular/cdk/menu';
-
+import {Component, signal} from '@angular/core';
+import {RouterLink, RouterLinkActive} from '@angular/router';
+import {MatIcon} from '@angular/material/icon';
+import {MatTooltip} from '@angular/material/tooltip';
+interface Link{
+  icon: string;
+  label: string;
+  path?: string;
+}
+interface MenuLink {
+  link: Link;
+  subLinks?: Link[]
+}
 @Component({
   selector: 'app-menu',
   imports: [
-    CdkMenuTrigger,
-    CdkMenu,
-    CdkMenuItem,
+    MatIcon,
     RouterLink,
-    CdkMenuBar,
+    RouterLinkActive,
+    MatTooltip
   ],
   templateUrl: './menu.html',
   styleUrl: './menu.scss',
 })
 export class Menu {
-  links = [
+  isOpen = signal(false);
+  links: MenuLink[]  = [
     {
-      label: 'Temporadas',
-      subLinks: [
-        {label : 'Configurar temporadas', url:'season-manager'},
-      ]
+      link:{
+        icon: 'date_range',
+        label: 'Temporadas',
+        path: 'season-manager'
+      }
     },
     {
-      label: 'Carpas',
-      subLinks :[
-        {label: 'Mapa de carpas', url:'shadow-view'},
-        {label: 'Editor del mapa', url:'shadow-editor'},
-      ]
+      link:{
+        icon: 'beach_access',
+        label: 'Carpas',
+        path: 'shadow-view'
+      }
     },
     {
-      label: 'Reservas',
-      subLinks: [
-        {label: 'Ver reservas', url:'reservation-view'},
-        {label: 'Crear reservas', url:'reservation-create'},
-      ]
+      link:{
+        icon:'book_online',
+        label:'Reservas',
+        path:'reservation-view'
+      }
     },
     {
-      label:'Pagos',
-      subLinks: [
-        {label: 'Ver pagos', url:'payment-view'},
-        {label: 'Crear pagos', url:'payment-create'},
-      ]
+      link:{
+        icon:'payments',
+        label:'Pagos',
+        path: 'payment-view'
+      }
     },
     {
-      label: 'Clientes',
-      subLinks: [
-        {label: 'Ver clientes', url:'client-view'},
-      ]
+      link:{
+        icon:'people',
+        label:'Clientes',
+        path:'client-view'
+      }
     },
     {
-      label: 'Servicios',
-      subLinks: [
-        {
-          label: 'Editar Servicios', url: 'service-manager'
-        }
-      ]
+      link:{
+        label: 'Servicios',
+        icon: "room_service",
+        path:'service-manager'
+      }
     },
     {
-      label: 'Facturas',
-      subLinks: [
-        {
-          label: 'Ver facturas', url : 'invoice-viewer'
-        },
-        {
-          label: 'Editar facturas', url :'invoice-editor'
-        }
-      ]
+      link:{
+        label: 'Facturas',
+        icon: "receipt_long",
+        path: 'invoice-viewer'
+      }
     }
+
   ]
+   protected toggleMenu() {
+    this.isOpen.update(value => !value);
+  }
 }

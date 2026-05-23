@@ -4,13 +4,13 @@ import {Paginator} from '../../paginator/paginator';
 import {ServiceCard} from '../service-card/service-card';
 import {ServiceManager} from '../../../core/services/Managers/service-manager';
 import {ServiceEntity} from '../../../core/model/serviceEntity';
+import {ServiceList} from '../service-list/service-list';
 
 @Component({
   selector: 'app-service-list-manager',
   imports: [
     ServiceSearcher,
-    Paginator,
-    ServiceCard
+    ServiceList
   ],
   templateUrl: './service-list-manager.html',
   styleUrl: './service-list-manager.scss',

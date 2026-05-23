@@ -1,4 +1,13 @@
-<form (ngSubmit)="submitHandler()">
-  <input type="text" name='seachTerm' [(ngModel)]="searchTerm" placeholder="Buscar por nombre o correo"/>
-  <input type="submit" value="Buscar"/>
-</form>
+<div class="search">
+  <form
+    (ngSubmit)="submitHandler()"
+  >
+    <input
+      type="text"
+      name='seachTerm'
+      [(ngModel)]="searchTerm"
+      placeholder="Buscar por nombre o correo"
+    />
+    <button type="submit"><mat-icon fontIcon="search"/></button>
+  </form>
+</div>

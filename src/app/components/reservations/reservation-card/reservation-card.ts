@@ -26,17 +26,17 @@ export class ReservationCard {
   }
   protected options = [
     {
-      label:"Ver detalles",
+      label:"ver detalles",
       icon:"open_in_new",
       value:"see-details"
     },
     {
-      label:"Editar",
+      label:"editar",
       icon:"edit",
       value:"edit"
     },
     {
-      label:"Eliminar",
+      label:"eliminar",
       icon:"delete",
       value:"delete"
     }

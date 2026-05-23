@@ -1,4 +1,5 @@
 <mat-icon
+  class="menu-trigger-icon"
   fontIcon="more_vert"
   cdkOverlayOrigin
   #trigger="cdkOverlayOrigin"
@@ -20,7 +21,9 @@
         type="button"
         class="menu-item"
         (click)="selectOption(option.value)">
-        <mat-icon fontIcon="{{ option.icon }}"/>
+        @if (option.icon){
+          <mat-icon fontIcon="{{ option.icon }}"/>
+        }
         {{ option.label }}
       </button>
 

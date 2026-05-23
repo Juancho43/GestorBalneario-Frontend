@@ -1,28 +1,21 @@
-import {Component, inject, input} from '@angular/core';
-import {ReservationManager} from '../../../core/services/Managers/reservation-manager.service';
+import {Component, input} from '@angular/core';
 import {ReservationEntity} from '../../../core/model/reservationEntity';
-import {Dialog} from '@angular/cdk/dialog';
-import {ReservationDetail} from '../reservation-detail/reservation-detail';
-import {ReservationCard} from '../reservation-card/reservation-card';
-import {ReservationSearcher} from '../reservation-searcher/reservation-searcher';
-import {Paginator} from '../../paginator/paginator';
+import {MatIcon} from '@angular/material/icon';
+import {CustomMenu} from '../../layout/custom-menu/custom-menu';
+import {ReservationStatePipe} from '../../../core/utils/pipes/reservation-state-pipe';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-reservation-list',
   imports: [
-    ReservationCard,
-    ReservationSearcher,
-    Paginator,
+    MatIcon,
+    CustomMenu,
+    ReservationStatePipe,
+    DatePipe
   ],
   templateUrl: './reservation-list.html',
   styleUrl: './reservation-list.scss',
 })
 export class ReservationList {
-  private reservationListManager = inject(ReservationManager);
-  readonly list = input<ReservationEntity[]>();
-  private dialog = inject(Dialog);
-  protected openReservationDialog(reservation: ReservationEntity) {
-    this.reservationListManager.currentReservation.set(reservation);
-    this.dialog.open(ReservationDetail);
-  }
+  readonly list = input.required<ReservationEntity[]>();
 }

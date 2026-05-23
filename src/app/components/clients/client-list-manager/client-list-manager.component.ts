@@ -23,7 +23,7 @@ export class ClientListManagerComponent {
   private clientManager = inject(ClientManager);
   readonly actions = input<boolean>(false)
   private searched = signal(false);
-  private query = signal<PaginatedQuery>({query:'',pageSize:10,page:0})
+  protected query = signal<PaginatedQuery>({query:'',pageSize:10,page:0})
 
   private searchResource = rxResource({
     params : () => {return {query:this.query()}},

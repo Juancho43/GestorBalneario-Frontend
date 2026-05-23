@@ -1,0 +1,57 @@
+.fab-button {
+  /* 1. Base del Componente */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-width: 56px;
+  height: 56px; /* Altura estricta M3 */
+  border-radius: 16px; /* Forma "Large" de M3 */
+  border: none;
+
+  /* 2. Colores (Primary Container de M3) */
+  background-color: #eaddff;
+  color: #21005d;
+
+  /* 3. Tipografía y Espaciado base */
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 500; /* Label Large */
+  letter-spacing: 0.1px;
+  cursor: pointer;
+  padding: 16px; /* Padding para FAB estándar (solo icono) */
+  gap: 12px; /* Espacio exacto M3 entre icono y texto */
+
+  /* 4. Elevación (Box Shadow M3 Nivel 3) */
+  box-shadow: 0 4px 8px 3px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+
+  mat-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* 5. Comportamiento Dinámico: Extended FAB
+     Si el botón contiene un span (gracias a tu @if), ajustamos el padding
+     según la especificación M3: 16px a la izquierda, 20px a la derecha */
+  &:has(span) {
+    padding: 0 20px 0 16px;
+  }
+
+  /* 6. Estados de Interacción */
+  &:hover {
+    background-color: #d0bcff; /* Estado Hover (ligeramente más oscuro) */
+    /* Elevación M3 Nivel 4 en Hover */
+    box-shadow: 0 6px 10px 4px rgba(0, 0, 0, 0.15), 0 2px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  &:active {
+    background-color: #b69df8; /* Estado Pressed */
+    /* Vuelve a la Elevación 3 al presionar */
+    box-shadow: 0 4px 8px 3px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+}

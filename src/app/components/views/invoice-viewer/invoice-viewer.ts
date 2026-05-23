@@ -5,27 +5,19 @@ import {PaymentEntity} from '../../../core/model/paymentEntity';
 import {InvoiceDetails} from '../../invoices/invoice-details/invoice-details';
 import {InvoiceEntity} from '../../../core/model/InvoiceEntity';
 import {Dialog} from '@angular/cdk/dialog';
+import {ServiceListManager} from '../../services/service-list-manager/service-list-manager';
+import {InvoiceListManager} from '../../invoices/invoice-list-manager/invoice-list-manager';
 
 @Component({
   selector: 'app-invoice-viewer',
   imports: [
-    InvoiceCard
+    InvoiceCard,
+    ServiceListManager,
+    InvoiceListManager
   ],
   templateUrl: './invoice-viewer.html',
   styleUrl: './invoice-viewer.scss',
 })
 export class InvoiceViewer {
-  private dialog = inject(Dialog);
-  private manager = inject(InvoiceManager);
-  protected invoices = computed(()=>this.manager.getList());
-  protected query = linkedSignal(()=> this.manager.getQuery());
-  constructor() {
-    this.query.set({query:'ALL',page:0,pageSize:10})
-    this.manager.setQuery(this.query());
-  }
 
-  protected openInvoiceDialog(invoice: InvoiceEntity) {
-    this.manager.currentInvoice.set(invoice.id!);
-    this.dialog.open(InvoiceDetails)
-  }
 }

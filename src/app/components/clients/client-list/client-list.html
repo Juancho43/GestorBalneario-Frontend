@@ -1,14 +1,17 @@
-@let list = this.list();
-@for (client of list; track client.id) {
-  <div class="client-card">
-    <app-client-card
-      [actions]="this.actions()"
-      (delete)="delete.emit(client)"
-      (edit)="edit.emit(client)"
-      [client]="client"
-      (selected)="selected.emit(client)"
-    />
-  </div>
-} @empty {
-  <p>No clients found.</p>
-}
+<ul class="m3-list">
+  @for (client of this.list(); track client.id) {
+    <li class="m3-list-item">
+      <mat-icon class="m3-leading-icon" aria-hidden="false" fontIcon="person"></mat-icon>
+      <div class="m3-text-content">
+        <span class="m3-headline">{{ client.name }}</span>
+        <span class="m3-supporting-text">{{client.email}}</span>
+        <span class="m3-supporting-text">{{ client.phone}}</span>
+      </div>
+      <div class="m3-trailing-action">
+        <app-custom-menu/>
+      </div>
+    </li>
+  } @empty {
+    <p class="m3-empty-state">Sin clientes por el momento</p>
+  }
+</ul>

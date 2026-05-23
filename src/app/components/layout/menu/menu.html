@@ -1,28 +1,41 @@
-  <ul cdkMenuBar class="menu-bar">
-    @for (link of links; track $index) {
+<div
+  [class.open-menu]="isOpen()"
+  class="menu"
+>
+  <ul>
+    <li>
+      @if(isOpen()){
+        <mat-icon
+          (click)="toggleMenu()"
+          fontIcon="menu_open"
+        />
+      }@else{
+        <mat-icon
+          (click)="toggleMenu()"
+          fontIcon="menu"
+        />
+      }
+    </li>
+    @for(item of links; track $index){
       <li>
+
         <button
-          class="menu-bar-item"
-          [cdkMenuTriggerFor]="subMenu"
-          cdkMenuItem>
-          {{ link.label }}
+          routerLinkActive="active-menu-button"
+          [routerLink]="item.link.path"
+          matTooltipPosition="after"
+          [matTooltipDisabled]="isOpen()"
+          [matTooltip]="item.link.label"
+        >
+          <mat-icon
+            [fontIcon]="item.link.icon"
+          />
+          @if(isOpen()){
+            {{item.link.label}}
+          }
         </button>
 
-        <ng-template #subMenu>
-          <ul cdkMenu class="sub-menu">
-            @for (item of link.subLinks; track $index) {
-              <li>
-                <button
-                  [routerLink]="item.url"
-                  class="sub-menu-item"
-                  cdkMenuItem
-                >
-                  {{ item.label }}
-                </button>
-              </li>
-            }
-          </ul>
-        </ng-template>
+
       </li>
     }
   </ul>
+</div>

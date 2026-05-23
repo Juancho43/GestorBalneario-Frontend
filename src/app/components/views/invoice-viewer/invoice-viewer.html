@@ -1,12 +1,8 @@
-<div class="component">
-  <h3>Ver facturas por temporadas</h3>
-  <div class="row">
+<div class="list-detail-layout">
+  <section class="list-panel">
+    <h2>Lista de facturas</h2>
+    <app-invoice-list-manager
 
-  @for(invoice of invoices(); track $index){
-      <app-invoice-card
-        (click)="openInvoiceDialog(invoice)"
-        [invoice]="invoice"
-      />
-  }
-  </div>
+    />
+  </section>
 </div>

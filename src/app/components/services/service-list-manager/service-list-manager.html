@@ -2,11 +2,7 @@
   (search)="handleSearch($event)"
   [serviceTypes]="serviceTypes()"
 />
-@for (service of services(); track $index) {
-  <app-service-card
-    [service]="service"
-    (edit)="edit.emit($event)"
-    (delete)="delete.emit($event)"
-  />
-}
-<app-paginator/>
+<app-service-list
+  [list]="services()"
+/>
+<!--<app-paginator/>-->

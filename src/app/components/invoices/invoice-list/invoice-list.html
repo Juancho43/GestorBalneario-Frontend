@@ -1,0 +1,17 @@
+<ul class="m3-list">
+  @for (invoice of this.list(); track invoice.id) {
+    <li class="m3-list-item">
+      <mat-icon class="m3-leading-icon" aria-hidden="false" fontIcon="receipt"/>
+      <div class="m3-text-content">
+        <span class="m3-headline">{{ invoice.clientName }}</span>
+        <span class="m3-supporting-text">{{invoice.state | invoiceState}}</span>
+        <span class="m3-supporting-text">{{ invoice.amount | currency}}</span>
+      </div>
+      <div class="m3-trailing-action">
+        <app-custom-menu/>
+      </div>
+    </li>
+  } @empty {
+    <p class="m3-empty-state">Sin facturas por el momento</p>
+  }
+</ul>

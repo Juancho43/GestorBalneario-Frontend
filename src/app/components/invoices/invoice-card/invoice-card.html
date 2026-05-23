@@ -1,7 +1,9 @@
 @let invoice = this.invoice();
 <mat-card class="card">
-  <p>Fecha: {{invoice.date | date:'short'}} </p>
-  <p>Monto: {{invoice.amount | currency}}</p>
-  <p>Estado: {{invoice.state | invoiceState}}</p>
-  <p>Cliente: {{invoice.clientName}}</p>
+  <div class="data">
+    <p>Fecha: {{invoice.date | date:'short'}} </p>
+    <p>Monto: {{invoice.amount | currency}}</p>
+    <p>Estado: {{invoice.state | invoiceState}}</p>
+    <p>Cliente: {{invoice.clientName}}</p>
+  </div>
 </mat-card>

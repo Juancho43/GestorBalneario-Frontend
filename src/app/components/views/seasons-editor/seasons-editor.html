@@ -1,15 +1,18 @@
-<div class="component">
-  <h3>Configurar temporadas</h3>
-  <div class="row">
+<div class="list-detail-layout">
+  <section class="list-panel">
+    <h2>Temporadas configuradas</h2>
     <app-season-list
       [list]="seasonList()"
       (edit)="handleEdit($event)"
       (delete)="handleDelete($event)"
     />
+  </section>
+  <section class="detail-panel">
+    <h2>Temporada a configurar</h2>
     <app-season-form
       #seasonForm
       [seasonToEdit]="formattedSeason()"
       (finalSeason)="handleSubmit($event)"
     />
-  </div>
+  </section>
 </div>

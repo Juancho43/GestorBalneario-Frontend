@@ -6,12 +6,16 @@ import {MatDialog} from '@angular/material/dialog';
 import {IDeleteDialogData} from '../../../core/DTO/DeleteDialogData';
 import {DeleteConfirmation} from '../../layout/delete-confirmation/delete-confirmation';
 import {ServiceListManager} from '../../services/service-list-manager/service-list-manager';
+import {ClientListManagerComponent} from '../../clients/client-list-manager/client-list-manager.component';
+import {FABButton} from '../../layout/fab-button/fab-button';
 
 @Component({
   selector: 'app-service-editor',
   imports: [
     ServiceForm,
-    ServiceListManager
+    ServiceListManager,
+    ClientListManagerComponent,
+    FABButton
   ],
   templateUrl: './service-editor.html',
   styleUrl: './service-editor.scss',

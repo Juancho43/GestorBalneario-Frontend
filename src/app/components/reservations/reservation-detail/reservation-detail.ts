@@ -6,13 +6,17 @@ import {rxResource} from '@angular/core/rxjs-interop';
 import {InvoiceDetails} from '../../invoices/invoice-details/invoice-details';
 import {InvoiceManager} from '../../../core/services/Managers/invoice-manager.service';
 import {ReservationStatePipe} from '../../../core/utils/pipes/reservation-state-pipe';
+import {CloseButton} from '../../layout/close-button/close-button';
+import {MatDialog} from '@angular/material/dialog';
+import {Dialog} from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-reservation-detail',
   imports: [
     DatePipe,
     InvoiceDetails,
-    ReservationStatePipe
+    ReservationStatePipe,
+    CloseButton
   ],
   templateUrl: './reservation-detail.html',
   styleUrl: './reservation-detail.scss',
@@ -21,6 +25,7 @@ export class ReservationDetail implements OnDestroy{
   private getDetails = inject(GetReservationDetailsHttp);
   private invoiceManager = inject(InvoiceManager);
   private manager = inject(ReservationManager);
+  private dialog = inject(Dialog);
   reservation = computed(() => this.manager.currentReservation());
   reservationResource = rxResource({
     params:() =>{return{id:this.reservation()?.id!}},
@@ -38,4 +43,8 @@ export class ReservationDetail implements OnDestroy{
   ngOnDestroy(): void {
     this.manager.currentReservation.set(null);
     }
+
+  protected closeModal() {
+    this.dialog.closeAll();
+  }
 }

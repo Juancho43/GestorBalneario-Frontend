@@ -1,10 +1,18 @@
-<form>
-  <mat-checkbox (change)="handleActive($event)">
-    Activas
-  </mat-checkbox>
-  <label>Ordenar</label>
-  <select>
-    <option>Fecha ascendente</option>
-    <option>Fecha descendente</option>
-  </select>
-</form>
+<div class="search">
+  <form
+    (ngSubmit)="submitHandler()"
+  >
+    <input
+      type="text"
+      name='seachTerm'
+      [(ngModel)]="searchTerm"
+      placeholder="Buscar por nombre o correo"
+    />
+    <app-filter-button
+      (pressed)="handleFilter()"
+    />
+    <button type="submit">
+      <mat-icon fontIcon="search"/>
+    </button>
+  </form>
+</div>

@@ -1,11 +1,9 @@
-  <div class="app">
-    <div class="nav">
-      <h1 routerLink="">{{title()}}</h1>
-      <app-menu/>
-
-      <app-current-season-display/>
-    </div>
-    <div class="panel">
+<div class="app">
+  <app-menu/>
+  <div class="main-container">
+    <app-app-bar/>
+    <div class="content">
       <router-outlet/>
     </div>
   </div>
+</div>

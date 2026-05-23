@@ -1,0 +1,36 @@
+/* Only necessary if you are NOT using mat-icon-button, or need to override strict search-bar limits */
+.icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #49454f; /* Color del ícono en estado inactivo */
+  /* M3 Standard Icon Button Container Size */
+  width: 40px;
+  height: 40px;
+  padding: 8px; /* Centers the 24px icon perfectly inside the 40px container */
+
+  /* M3 Fully Rounded Shape */
+  border-radius: 50%;
+
+  /* Remove default button styling */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+
+  /* Add smooth M3 state layer transition */
+  transition: background-color 0.2s ease-in-out;
+
+
+  &:hover {
+    background-color: rgba(103, 80, 164, 0.08); /* Efecto ripple nativo simulado */
+    color: #6750a4; /* Cambia al color primario al pasar el mouse */
+  }
+  mat-icon {
+    /* M3 Standard Icon Size */
+    width: 24px;
+    height: 24px;
+    font-size: 24px;
+  }
+}

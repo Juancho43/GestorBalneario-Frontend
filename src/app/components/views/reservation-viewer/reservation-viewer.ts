@@ -4,20 +4,14 @@ import {ReservationCard} from '../../reservations/reservation-card/reservation-c
 import {ReservationSearcher} from '../../reservations/reservation-searcher/reservation-searcher';
 import {ReservationForm} from '../../reservations/reservation-form/reservation-form';
 import {ReservationEntity} from '../../../core/model/reservationEntity';
-import {ReservationList} from '../../reservations/reservation-list/reservation-list';
 import {Paginator} from '../../paginator/paginator';
+import {ClientListManagerComponent} from '../../clients/client-list-manager/client-list-manager.component';
+import {ReservationListManager} from '../../reservations/reservation-list-manager/reservation-list-manager';
 
 @Component({
   selector: 'app-reservation-viewer',
   imports: [
-    ReservationCard,
-    ReservationSearcher,
-    ReservationForm,
-    Paginator,
-    //
-    // if (!currentSeason || !currentSeason.id) {
-    //   return throwError(() => new Error('La temporada aún no está cargada.'));
-    // }Paginator
+    ReservationListManager,
   ],
   templateUrl: './reservation-viewer.html',
   styleUrl: './reservation-viewer.scss',

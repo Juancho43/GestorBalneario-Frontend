@@ -1,17 +1,19 @@
 @let client = this.client();
 <mat-card class="card client-card">
   <mat-icon aria-hidden="false" fontIcon="person"/>
-  <div (click)="selected.emit(client)">
+  <div
+    class="data"
+    (click)="selected.emit(client)"
+  >
     <p>Nombre: {{client.name}}</p>
     <p>Email: {{client.email}}</p>
     <p>Telefono: {{client.phone}}</p>
   </div>
   @if (this.actions()) {
-    <div>
-      <h4>Acciones</h4>
-      <mat-icon aria-hidden="false" fontIcon="edit" (click)="edit.emit(client)"/>
-      <mat-icon aria-hidden="false" fontIcon="delete" (click)="delete.emit(client)"/>
-    </div>
+   <app-custom-menu
+    (selectedOptionChange)="handleMenuOption($event!)"
+    [options]="options"
+  />
 
   }
 </mat-card>

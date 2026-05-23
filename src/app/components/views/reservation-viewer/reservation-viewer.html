@@ -1,38 +1,53 @@
-<div class="component">
-  <h3>Ver reservas</h3>
-  <div class="row">
+<!--<div class="component">-->
+<!--  <h3>Ver reservas</h3>-->
+<!--  <div class="row">-->
 
-    <div class="list">
+<!--    <div class="list">-->
 
-      <app-reservation-searcher
-        (activeSelect)="active.set($event)"
-      />
-      <div>
-        @let reservations = this.reservations();
-        @for(reservation of reservations; track $index) {
-          <app-reservation-card
-            [reservation]="reservation"
-            (edit)="this.editForm.set($event)"
-          />
-        }
-      </div>
-      <app-paginator
-        [query]="query()"
-        (pageChange)="handlePageChanged($event)"
-      />
-    </div>
-    @if(editForm()) {
-      <div>
-        <app-reservation-form
-          (finalReservation)="handleSubmit($event)"
-          [reservationToEdit]="currentReservation()!"
-          (reset)="handleReset()"
-        />
-      </div>
-    }@else{
-      <div>
-        <p>Selecciona una reserva para editarla</p>
-      </div>
-    }
-  </div>
+<!--      <app-reservation-searcher-->
+<!--        (activeSelect)="active.set($event)"-->
+<!--      />-->
+<!--      <div>-->
+<!--        @let reservations = this.reservations();-->
+<!--        @for(reservation of reservations; track $index) {-->
+<!--          <app-reservation-card-->
+<!--            [reservation]="reservation"-->
+<!--            (edit)="this.editForm.set($event)"-->
+<!--          />-->
+<!--        }-->
+<!--      </div>-->
+<!--      <app-paginator-->
+<!--        [query]="query()"-->
+<!--        (pageChange)="handlePageChanged($event)"-->
+<!--      />-->
+<!--    </div>-->
+<!--    @if(editForm()) {-->
+<!--      <div>-->
+<!--        <app-reservation-form-->
+<!--          (finalReservation)="handleSubmit($event)"-->
+<!--          [reservationToEdit]="currentReservation()!"-->
+<!--          (reset)="handleReset()"-->
+<!--        />-->
+<!--      </div>-->
+<!--    }@else{-->
+<!--      <div>-->
+<!--        <p>Selecciona una reserva para editarla</p>-->
+<!--      </div>-->
+<!--    }-->
+<!--  </div>-->
+<!--</div>-->
+<div class="list-detail-layout">
+  <section class="list-panel">
+    <h2>Listado de reservaciones</h2>
+    <app-reservation-list-manager
+    />
+  </section>
+  <!--  <section class="detail-panel">-->
+  <!--    <h2>Temporada a configurar</h2>-->
+  <!--    <app-season-form-->
+  <!--      #seasonForm-->
+  <!--      [seasonToEdit]="formattedSeason()"-->
+  <!--      (finalSeason)="handleSubmit($event)"-->
+  <!--    />-->
+  <!--  </section>-->
 </div>

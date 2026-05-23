@@ -1,0 +1,27 @@
+.top-app-bar {
+  height: var(--m3-top-bar-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  background-color: #f3edf7; // M3 Surface Container
+  color: #1a1c1e; // M3 On Surface
+
+  .app-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+  }
+
+  .trailing-section {
+    display: flex;
+    gap: 8px;
+
+    button {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: #49454f; // M3 On Surface Variant
+    }
+  }
+}

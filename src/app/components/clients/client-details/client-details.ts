@@ -1,4 +1,4 @@
-import {Component, computed, effect, inject} from '@angular/core';
+import {Component, computed, effect, inject, OnDestroy} from '@angular/core';
 import {ClientDetailHttp} from '../../../core/services/ClientHttp/client-detail-http';
 import {ClientManager} from '../../../core/services/Managers/client-manager.service';
 import {rxResource} from '@angular/core/rxjs-interop';
@@ -17,7 +17,7 @@ import {ClientEntity} from '../../../core/model/clientEntity';
   templateUrl: './client-details.html',
   styleUrl: './client-details.scss',
 })
-export class ClientDetails{
+export class ClientDetails implements OnDestroy {
   private manager = inject(ClientManager);
   private invoiceManager = inject(InvoiceManager);
   private query = inject(ClientDetailHttp);
@@ -35,23 +35,18 @@ export class ClientDetails{
     if(!this.clientResource.isLoading() && !this.clientResource.error()){
       return this.clientResource.value()?.data!;
     }
-
     return {
       client: {} as ClientEntity,
       invoices: []
     } as ClientDetailDTO;
   })
-
   protected selectInvoice(id: string ) {
     this.invoiceManager.currentInvoice.set(id);
   }
 
-  constructor() {
-    effect(() => {
-      if(this.client()!.client !== undefined && this.client()!.invoices.length > 0){
-        this.selectInvoice(this.client()!.invoices[0].id!);
-      }
-    });
+  ngOnDestroy(): void {
+    this.invoiceManager.currentInvoice.set('');
   }
+
 }
 

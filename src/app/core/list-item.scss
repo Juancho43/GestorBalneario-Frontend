@@ -1,0 +1,70 @@
+// Contenedor principal de la lista
+.m3-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 8px 0; // M3 requiere 8px de padding superior e inferior en la lista
+  display: flex;
+  flex-direction: column;
+}
+
+// El elemento de la lista (Fila de 3 líneas)
+.m3-list-item {
+  display: flex;
+  align-items: center; // Centra verticalmente el icono, el texto y el menú
+  min-height: 88px; // M3 Spec: Altura mínima para una lista de 3 líneas
+  padding: 12px 16px; // 16px de padding horizontal
+  gap: 16px; // Espacio exacto entre el icono y el texto
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  // Efecto hover estándar de M3 (State Layer)
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+}
+
+// Icono (Leading)
+.m3-leading-icon {
+  color: #49454f; // M3 On-Surface-Variant
+  width: 24px;
+  height: 24px;
+}
+
+// Contenedor para apilar los textos
+.m3-text-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1; // Toma todo el espacio disponible, empujando el menú a la derecha
+}
+
+// Título principal (M3 Body Large)
+.m3-headline {
+  font-size: 16px;
+  font-weight: 400;
+  color: #1d1b20; // M3 On-Surface
+  line-height: 24px;
+}
+
+// Texto de soporte (M3 Body Medium)
+.m3-supporting-text {
+  font-size: 14px;
+  font-weight: 400;
+  color: #49454f; // M3 On-Surface-Variant
+  line-height: 20px;
+}
+
+// Contenedor del menú Kebab (Trailing)
+.m3-trailing-action {
+  margin-left: auto; // Asegura que se mantenga a la derecha
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Estado vacío
+.m3-empty-state {
+  padding: 24px 16px;
+  text-align: center;
+  color: #49454f;
+  font-size: 14px;
+}

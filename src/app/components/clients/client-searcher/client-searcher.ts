@@ -1,9 +1,11 @@
 import {Component, output} from '@angular/core';
 import {FormsModule} from '@angular/forms';
+import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'app-client-searcher',
   imports: [
+    MatIcon,
     FormsModule
   ],
   templateUrl: './client-searcher.html',

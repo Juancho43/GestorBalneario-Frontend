@@ -1,0 +1,17 @@
+<ul class="m3-list">
+  @for (serviceEntity of this.list(); track serviceEntity.id) {
+    <li class="m3-list-item">
+      <mat-icon class="m3-leading-icon" aria-hidden="false" fontIcon="info"/>
+      <div class="m3-text-content">
+        <span class="m3-headline">{{ serviceEntity.name }}</span>
+        <span class="m3-supporting-text">{{serviceEntity.type | serviceType}}</span>
+        <span class="m3-supporting-text">Costo: {{ serviceEntity.price | currency }}</span>
+      </div>
+      <div class="m3-trailing-action">
+        <app-custom-menu></app-custom-menu>
+      </div>
+    </li>
+  } @empty {
+    <p class="m3-empty-state">Sin servicios por el momento</p>
+  }
+</ul>

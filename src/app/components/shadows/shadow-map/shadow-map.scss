@@ -1,59 +1,94 @@
-@use "../../../../styles";
+.shadowMap {
+  position: relative;
+  width: 100%;
+  height: 70dvh;
+  background-color: #f4f3f7;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 .map {
-  border: 4px solid white ;
-  background-color: #ffffff !important;
-  color: #000000 !important;
-  transition: border-color 0.3s ease;
-  border-radius: 5px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  border: 2px solid transparent;
+
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3),
+  0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Add this to create a responsive, high-performance feel when the user hovers */
+.map:hover {
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3),
+  0px 2px 6px 2px rgba(0, 0, 0, 0.15);
+}
+// ==========================================
+// ESTADOS DEL CANVAS (M3 Semantic Colors)
+// ==========================================
+
+.border-view {
+  // Estado Normal / Lectura
+  border-color: #cac4d0; // M3 Outline (Un gris neutro que no distrae)
 }
 
 .border-editing {
-  border-color: #E67E22; /* Naranja: Acción requerida / Editando */
+  // Acción Requerida / Editando
+  border-color: #006a6a; // M3 Primary (El verde/azul de tu botón principal)
+  box-shadow: 0 0 0 4px rgba(0, 106, 106, 0.1); // Halo de enfoque suave
 }
 
 .border-delete {
-  border-color: #f80447; /* Rojo: Alerta / Modo borrado */
+  // Alerta / Modo Borrado
+  border-color: #ba1a1a; // M3 Error (Rojo estándar para acciones destructivas)
+  box-shadow: 0 0 0 4px rgba(186, 26, 26, 0.1); // Halo de alerta
 }
 
-.border-view {
-  border-color: #27AE60; /* Verde: Todo en orden / Vista */
-}
-
-.shadowMap {
-  position: relative;
-  margin: 0 auto;
-  width: 100%;
-  height: 70dvh;
-  overflow: hidden;
-}
+// ==========================================
+// CONTROLES FLOTANTES (Estilo M3 Floating Toolbar)
+// ==========================================
 
 .buttons {
   position: absolute;
+  bottom: 24px;
+  left: 24px;
   z-index: 20;
   display: flex;
-  gap: 8px; // Give your actions room to breathe
+  align-items: center;
+  gap: 4px;
 
-  /* The Secret to "Inside" Positioning */
-  bottom: 20px;
-  left: 20px;
-
-  /* Aesthetic Excellence: Make them look like a floating toolbar */
-  background: rgba(0, 0, 0, 0.6);
-  padding: 10px;
-  border-radius: 8px;
-  backdrop-filter: blur(4px); // A touch of modern professionalism
+  // Transformación a una barra de herramientas M3
+  background-color: #ffffff; // Fondo limpio
+  padding: 6px;
+  border-radius: 28px; // Forma de píldora
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15); // M3 Elevation 2
 }
 
+// Estilo de los botones individuales dentro de la barra
 .buttons button {
   cursor: pointer;
-  padding: 5px 12px;
-  border: 1px solid #fff;
+  border: none;
   background: transparent;
-  color: white;
-  transition: all 0.2s ease;
+  color: #49454f; // M3 On-Surface Variant (Gris oscuro legible)
+  font-weight: 500;
+  font-size: 14px;
+  height: 40px;
+  min-width: 40px; // Mantiene los botones + y - cuadrados/circulares
+  padding: 0 16px;
+  border-radius: 20px; // Redondeo interno para el hover
+  transition: background-color 0.2s ease, color 0.2s ease;
 
+  // M3 State Layer (Efecto al pasar el mouse)
   &:hover {
-    background: white;
-    color: #000;
+    background-color: rgba(73, 69, 79, 0.08);
+  }
+
+  // Efecto visual al hacer clic
+  &:active {
+    background-color: rgba(73, 69, 79, 0.12);
   }
 }

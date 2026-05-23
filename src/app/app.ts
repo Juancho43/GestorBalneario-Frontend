@@ -5,10 +5,11 @@ import {Menu} from './components/layout/menu/menu';
 import {SeasonManager} from './core/services/Managers/season-manager';
 import {CurrentSeasonDisplay} from './components/seasons/current-season-display/current-season-display';
 import {NotificationHelper} from './core/services/other/notification-helper';
+import {AppBar} from './components/layout/app-bar/app-bar';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Menu, RouterLink, CurrentSeasonDisplay],
+  imports: [RouterOutlet, Menu, RouterLink, CurrentSeasonDisplay, AppBar],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

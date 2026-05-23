@@ -1,15 +1,34 @@
-<div class="component">
-  <div class="row">
+<!--<div class="component">-->
+<!--  <div class="row">-->
+<!--    <app-client-list-manager-->
+<!--      [actions]="true"-->
+<!--      (selectedClient)="openClientDetail($event)"-->
+<!--      (edit)="setCurrentClient($event)"-->
+<!--      (delete)="deleteClient($event)"-->
+<!--    />-->
+<!--&lt;!&ndash;    <app-client-form&ndash;&gt;-->
+<!--&lt;!&ndash;      #clientForm&ndash;&gt;-->
+<!--&lt;!&ndash;      (finalClient)="handleSubmit($event)"&ndash;&gt;-->
+<!--&lt;!&ndash;      [clientToEdit]="currentClient()!"&ndash;&gt;-->
+<!--&lt;!&ndash;    />&ndash;&gt;-->
+<!--  </div>-->
+<!--</div>-->
+<div class="list-detail-layout">
+  <section class="list-panel">
+    <h2>Cartera de clientes</h2>
     <app-client-list-manager
       [actions]="true"
       (selectedClient)="openClientDetail($event)"
       (edit)="setCurrentClient($event)"
       (delete)="deleteClient($event)"
     />
-    <app-client-form
-      #clientForm
-      (finalClient)="handleSubmit($event)"
-      [clientToEdit]="currentClient()!"
-    />
-  </div>
+  </section>
+<!--  <section class="detail-panel">-->
+<!--    <h2>Temporada a configurar</h2>-->
+<!--    <app-season-form-->
+<!--      #seasonForm-->
+<!--      [seasonToEdit]="formattedSeason()"-->
+<!--      (finalSeason)="handleSubmit($event)"-->
+<!--    />-->
+<!--  </section>-->
 </div>

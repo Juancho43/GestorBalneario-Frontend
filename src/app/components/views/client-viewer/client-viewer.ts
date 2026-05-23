@@ -7,19 +7,23 @@ import {ClientForm} from '../../clients/client-form/client-form';
 import {DeleteConfirmation} from '../../layout/delete-confirmation/delete-confirmation';
 import {MatDialog} from '@angular/material/dialog';
 import {IDeleteDialogData} from '../../../core/DTO/DeleteDialogData';
+import {Dialog} from '@angular/cdk/dialog';
+import {SeasonForm} from '../../seasons/season-form/season-form';
 
 @Component({
   selector: 'app-client-viewer',
   imports: [
     ClientListManagerComponent,
-    ClientForm
+    ClientForm,
+    SeasonForm
   ],
   templateUrl: './client-viewer.html',
   styleUrl: './client-viewer.scss',
 })
 export class ClientViewer {
   private manager = inject(ClientManager);
-  private dialog = inject(MatDialog);
+  private dialog = inject(Dialog);
+  private matDialog = inject(MatDialog);
   @ViewChild('clientForm') form!: ClientForm;
   protected currentClient = this.manager.currentClient
 
@@ -39,7 +43,7 @@ export class ClientViewer {
       cancelText: 'Cancelar',
       confirmText: 'Eliminar'
     }
-    const ref = this.dialog.open(DeleteConfirmation,{
+    const ref = this.matDialog.open(DeleteConfirmation,{
       disableClose: true,
       data: data
     });
