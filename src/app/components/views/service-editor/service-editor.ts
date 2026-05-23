@@ -8,6 +8,7 @@ import {DeleteConfirmation} from '../../layout/delete-confirmation/delete-confir
 import {ServiceListManager} from '../../services/service-list-manager/service-list-manager';
 import {ClientListManagerComponent} from '../../clients/client-list-manager/client-list-manager.component';
 import {FABButton} from '../../layout/fab-button/fab-button';
+import {OverlayHelper} from '../../../core/utils/overlay-helper';
 
 @Component({
   selector: 'app-service-editor',
@@ -23,8 +24,9 @@ import {FABButton} from '../../layout/fab-button/fab-button';
 export class ServiceEditor {
   private manager = inject(ServiceManager);
   private dialog = inject(MatDialog);
+  private overlayHelper = inject(OverlayHelper);
+  isOverlayOpen = false;
   protected types = computed(()=>this.manager.getTypes())
-  @ViewChild('serviceForm') form!: ServiceForm;
   services =  linkedSignal(()=> this.manager.getList());
   currentService = this.manager.currentService
    protected editHandler($event: ServiceEntity) {
@@ -50,10 +52,22 @@ export class ServiceEditor {
   }
 
   protected handleFormSubmit($event: ServiceEntity) {
-   if(this.form.editMode()){
-     this.manager.editService($event);
-   }else{
-     this.manager.createService($event);
-   }
+   // if(this.form.editMode()){
+   //   this.manager.editService($event);
+   // }else{
+   //   this.manager.createService($event);
+   // }
+  }
+
+  protected handleFABButton() {
+    if (!this.isOverlayOpen){
+      this.isOverlayOpen = true;
+      const config = this.overlayHelper.getModalConfig();
+      const overlayRef = this.overlayHelper.open(ServiceForm, config);
+      overlayRef.backdropClick().subscribe(() => {
+        overlayRef!.dispose();
+        this.isOverlayOpen = false
+      });
+    }
   }
 }

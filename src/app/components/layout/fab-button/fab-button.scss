@@ -1,4 +1,15 @@
 .fab-button {
+
+  /* Break the button out of the normal document flow */
+  position: absolute;
+
+  /* Lock it to the bottom right corner using M3 standard desktop spacing */
+  bottom: 24px;
+  right: 24px;
+
+  /* Ensure it always floats above your list content */
+  z-index: 10;
+
   /* 1. Base del Componente */
   display: inline-flex;
   align-items: center;

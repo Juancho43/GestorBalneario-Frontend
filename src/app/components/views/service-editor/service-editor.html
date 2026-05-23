@@ -1,15 +1,3 @@
-<!--<div class="component">-->
-<!--  <h3>Configurar servicios</h3>-->
-<!--  <div class="row">-->
-
-<!--    <app-service-form-->
-<!--      #serviceForm-->
-<!--      [types]="types()"-->
-<!--      [serviceToEdit]="currentService()!"-->
-<!--      (finalService)="handleFormSubmit($event)"-->
-<!--    />-->
-<!--  </div>-->
-<!--</div>-->
 <div class="list-detail-layout">
   <section class="list-panel">
     <h2>Lista de servicios</h2>
@@ -17,5 +5,9 @@
 
     />
   </section>
-  <app-fab-button icon="add" label="Nuevo servicio"/>
+  <app-fab-button
+    icon="add"
+    label="Nuevo servicio"
+    (touched)="handleFABButton()"
+  />
 </div>

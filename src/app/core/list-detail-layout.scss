@@ -1,0 +1,65 @@
+/* =========================================================================
+   M3 List-Detail Canonical Layout
+   ========================================================================= */
+
+.list-detail-layout {
+  positon:relative;
+  /* 1. La Fundación: Flexbox para alinear los paneles lado a lado */
+  display: flex;
+  gap: 24px; /* Espaciado estándar M3 entre paneles */
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* =========================================================================
+   El Panel Maestro (La Lista)
+   ========================================================================= */
+.list-panel {
+  /* 2. La Regla de Oro M3: Ancho fijo estricto para escaneo rápido */
+  width: 360px;
+  display: flex;
+  flex-direction: column;
+
+  /* Permite que la lista tenga su propio scroll si hay muchas temporadas */
+  overflow-y: auto;
+  padding-right: 8px; /* Pequeño respiro antes del gap */
+
+  h2 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--m3-on-surface, #1a1c1e);
+    margin: 0 0 16px 16px; /* Alinear con los elementos de la lista */
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+}
+
+/* =========================================================================
+   El Panel de Detalles (El Área de Enfoque)
+   ========================================================================= */
+.detail-panel {
+  /* 3. El Motor de Crecimiento: Toma todo el espacio restante */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  /* M3 Large Shape: Un contenedor sutil para el área de trabajo */
+  background-color: var(--m3-surface-container-low, #f7f2fa);
+  border-radius: 24px;
+  padding: 32px;
+
+  /* Scroll independiente para que el formulario largo no mueva toda la página */
+  overflow-y: auto;
+
+  h2 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--m3-on-surface, #1a1c1e);
+    margin: 0 0 24px 0;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--m3-outline-variant, #cac4d0);
+  }
+}
