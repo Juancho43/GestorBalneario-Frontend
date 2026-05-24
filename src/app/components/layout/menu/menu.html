@@ -3,19 +3,6 @@
   class="menu"
 >
   <ul>
-    <li>
-      @if(isOpen()){
-        <mat-icon
-          (click)="toggleMenu()"
-          fontIcon="menu_open"
-        />
-      }@else{
-        <mat-icon
-          (click)="toggleMenu()"
-          fontIcon="menu"
-        />
-      }
-    </li>
     @for(item of links; track $index){
       <li>
 
@@ -33,8 +20,6 @@
             {{item.link.label}}
           }
         </button>
-
-
       </li>
     }
   </ul>

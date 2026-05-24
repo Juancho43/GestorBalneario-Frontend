@@ -1,3 +1,27 @@
-<app-fab-button
-  icon="add"
-/>
+<div class="fab-menu-wrapper">
+
+  @if (isOpen) {
+    <div class="mini-fab-list">
+      @for (action of actions(); track action.name) {
+        <button
+          (click)="executeAction(action.name)"
+          class="fab-button"
+          [class.menu-open]="isOpen"
+        >
+          <mat-icon
+            [fontIcon]="action.icon"
+          />
+          <span>{{action.tooltip}}</span>
+        </button>
+      }
+    </div>
+  }
+
+  <button
+    (click)="toggleMenu()"
+    class="main-trigger fab-button"
+    [class.menu-open]="isOpen">
+    <mat-icon>{{ isOpen ? 'close' : 'add' }}</mat-icon>
+  </button>
+
+</div>

@@ -1,13 +1,25 @@
 <form (ngSubmit)="submittedForm()">
-  <label>Fechas</label>
-  <input type="date" [formField]="queryForm.start">
-  <input type="date" [formField]="queryForm.end">
-  <label>Tipo de pago</label>
-  <select [formField]="queryForm.type">
-    <option value="ALL">Todos</option>
-    @for (method of paymentMethods();track $index){
-      <option [value]="method"> {{method|paymentType}}</option>
-    }
-  </select>
-  <button type="submit">Enviar</button>
+  <div class="m3-date-field">
+    <label>Fecha inicio</label>
+    <input type="date" [formField]="queryForm.start">
+  </div>
+  <div class="m3-date-field">
+    <label>Fecha final</label>
+    <input type="date" [formField]="queryForm.end">
+  </div>
+  <div class="m3-select-field">
+    <label>Tipo de pago</label>
+    <select [formField]="queryForm.type">
+      <option value="ALL">Todos</option>
+      @for (method of paymentMethods();track $index){
+        <option [value]="method"> {{method|paymentType}}</option>
+      }
+    </select>
+    <mat-icon class="trailing-icon" fontIcon="arrow_drop_down"/>
+  </div>
+
+  <div class="m3-form-actions">
+    <button type="reset" class="m3-button-text">Limpiar Formulario</button>
+    <button type="submit" class="m3-button-filled">Generar reporte</button>
+  </div>
 </form>

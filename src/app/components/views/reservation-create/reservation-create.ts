@@ -14,12 +14,13 @@ import {ShadowMapHttp} from '../../../core/services/ShadowHttp/shadow-map-http';
 import {rxResource} from '@angular/core/rxjs-interop';
 import {ShadowEntity} from '../../../core/model/shadowEntity';
 import {ShadowMapDTO} from '../../../core/DTO/ShadowMapDTO';
+import {ReservationSideSheet} from '../../../core/components/reservation-side-sheet/reservation-side-sheet';
 
 @Component({
   selector: 'app-reservation-create',
   imports: [
-    ReservationForm,
     ShadowMap,
+    ReservationForm,
     ClientCard,
     ShadowCard
   ],

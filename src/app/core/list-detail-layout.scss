@@ -3,7 +3,6 @@
    ========================================================================= */
 
 .list-detail-layout {
-  positon:relative;
   /* 1. La Fundación: Flexbox para alinear los paneles lado a lado */
   display: flex;
   gap: 24px; /* Espaciado estándar M3 entre paneles */
@@ -29,7 +28,8 @@
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     font-weight: 500;
-    color: var(--m3-on-surface, #1a1c1e);
+    /* M3: on-surface-variant es ideal para encabezados de sección secundarios */
+    color: var(--md-sys-color-on-surface-variant);
     margin: 0 0 16px 16px; /* Alinear con los elementos de la lista */
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -46,7 +46,8 @@
   flex-direction: column;
 
   /* M3 Large Shape: Un contenedor sutil para el área de trabajo */
-  background-color: var(--m3-surface-container-low, #f7f2fa);
+  /* Utilizamos surface-container para diferenciarlo del fondo principal */
+  background-color: var(--md-sys-color-surface-container);
   border-radius: 24px;
   padding: 32px;
 
@@ -57,9 +58,50 @@
     font-family: 'Roboto', sans-serif;
     font-size: 24px;
     font-weight: 400;
-    color: var(--m3-on-surface, #1a1c1e);
+    color: var(--md-sys-color-on-surface); /* M3: Texto principal */
     margin: 0 0 24px 0;
     padding-bottom: 16px;
-    border-bottom: 1px solid var(--m3-outline-variant, #cac4d0);
+    /* M3 Spec: outline-variant es el token correcto para líneas divisorias */
+    border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  }
+}
+
+/* =========================================================================
+   Responsividad (Breakpoints)
+   ========================================================================= */
+
+/* 1. The Tablet Breakpoint (Medium: < 840px) */
+@media screen and (max-width: 839px) {
+  .list-detail-layout {
+    gap: 16px; /* Compress the standard M3 gap slightly for tablet efficiency */
+  }
+
+  .list-panel {
+    width: 300px; /* Reduce the fixed width to prioritize the detail content */
+  }
+}
+
+/* 2. The Compact Breakpoint (Mobile: < 600px)
+   Goal: Total focus. Switch to a vertical layout to prevent horizontal overflow. */
+@media screen and (max-width: 599px) {
+  .list-detail-layout {
+    flex-direction: column; /* Stack the panels vertically for a clear, readable flow */
+    gap: 16px;
+  }
+
+  .list-panel {
+    width: 100%; /* Claim the full width of the mobile screen */
+    max-height: 40vh; /* Confine the list height so the detail panel stays visible */
+    padding-right: 0;
+  }
+
+  .detail-panel {
+    padding: 16px; /* Reduce inner padding to maximize mobile screen real estate */
+    border-radius: 16px; /* Soften the Large Shape radius for smaller screens */
+  }
+
+  .detail-panel h2 {
+    font-size: 20px; /* Slightly scale down the typography for compact view */
+    margin-bottom: 16px;
   }
 }

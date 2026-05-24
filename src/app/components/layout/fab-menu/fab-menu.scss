@@ -1,0 +1,48 @@
+@use "../../../core/fab";
+.fab-menu-wrapper {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+  z-index: 100;
+}
+
+/* 2. Style the list of secondary actions */
+.mini-fab-list {
+  display: flex;
+  flex-direction: column-reverse; /* Stacks mini-fabs from bottom to top */
+  gap: 12px;
+
+  /* Optional: Add a smooth entrance animation */
+  animation: slideUp 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* 3. Add polish to the main trigger */
+.main-trigger {
+
+  transition: background-color 0.2s ease;
+
+  /* Smoothly rotate the icon when opened for a premium feel */
+  mat-icon {
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  &.menu-open mat-icon {
+    transform: rotate(90deg);
+  }
+}
+
+/* Keyframe for the pop-up animation */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

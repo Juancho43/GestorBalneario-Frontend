@@ -3,24 +3,25 @@
     display: flex;
     align-items: center;
     height: 56px;
-    background-color: #ece6f0;
-    border-radius: 28px;
-    padding: 0 8px 0 24px; /* Ajustado asimétricamente para el botón del ícono */
+    /* M3 Spec: Search bars use elevated surface containers, not accent colors */
+    background-color: var(--md-sys-color-surface-container-high);
+    border-radius: 28px; /* M3 Fully rounded pill shape */
+    padding: 0 8px 0 24px;
     margin-bottom: 24px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.12);
+    /* Subtle base shadow. M3 prefers tonal elevation, but a light shadow is acceptable */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
     transition: box-shadow 0.2s ease, background-color 0.2s ease;
     width: 100%;
     box-sizing: border-box;
-    gap: 12px; /* Espaciado clave entre los elementos internos */
+    gap: 12px;
 
-    /* Elevación enfocada: cuando el usuario toma acción */
+    /* Elevación enfocada: El usuario toma acción */
     &:focus-within {
-      background-color: #e6e0e9;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+      /* Sube un nivel de elevación tonal al enfocar */
+      background-color: var(--md-sys-color-surface-container-highest);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
     }
 
-    /* Ocultamos los labels visualmente para mantener el diseño de la píldora M3,
-       pero siguen en el DOM. Te sugiero agregar un atributo placeholder a tu input text */
     label {
       display: none;
     }
@@ -34,42 +35,12 @@
       outline: none;
       font-family: 'Roboto', sans-serif;
       font-size: 16px;
-      color: #1d1b20;
+      /* M3 Spec: El texto principal SIEMPRE va sobre su fondo correspondiente */
+      color: var(--md-sys-color-on-surface);
 
       &::placeholder {
-        color: #49454f;
-      }
-    }
-
-    /* 2. El Filtro Select (Tipo de Servicio: Carpa, Sombrilla, etc.) */
-    select {
-      height: 40px;
-      border: none;
-      background-color: transparent;
-      font-family: 'Roboto', sans-serif;
-      font-size: 14px;
-      font-weight: 500;
-      color: #49454f;
-      outline: none;
-      cursor: pointer;
-      padding: 0 12px;
-      border-radius: 8px;
-      transition: background-color 0.2s ease, color 0.2s ease;
-
-      /* Un sutil borde izquierdo para separar visualmente el filtro de la búsqueda */
-      border-left: 1px solid #cac4d0;
-      border-radius: 0;
-      padding-left: 16px;
-
-      &:hover, &:focus {
-        background-color: rgba(103, 80, 164, 0.08);
-        color: #6750a4;
-      }
-
-      /* Estilo para las opciones desplegadas */
-      option {
-        background-color: #fff;
-        color: #1d1b20;
+        /* M3 Spec: Texto secundario o de ayuda */
+        color: var(--md-sys-color-on-surface-variant);
       }
     }
 
@@ -80,7 +51,8 @@
       justify-content: center;
       background-color: transparent;
       border: none;
-      color: #49454f; /* Color del ícono en estado inactivo */
+      /* M3 Spec: El ícono inactivo usa la variante on-surface */
+      color: var(--md-sys-color-on-surface-variant);
       width: 40px;
       height: 40px;
       border-radius: 50%;
@@ -88,8 +60,10 @@
       transition: background-color 0.2s ease, color 0.2s ease;
 
       &:hover {
-        background-color: rgba(103, 80, 164, 0.08); /* Efecto ripple nativo simulado */
-        color: #6750a4; /* Cambia al color primario al pasar el mouse */
+        /* Efecto hover adaptativo: usamos surface-variant en lugar de rgba estático */
+        background-color: var(--md-sys-color-surface-variant);
+        /* Cambia al color primario del tema para indicar que es accionable */
+        color: var(--md-sys-color-primary);
       }
 
       mat-icon {

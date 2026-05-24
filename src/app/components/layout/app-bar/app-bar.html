@@ -1,9 +1,30 @@
 <header class="top-app-bar">
   <div class="leading-section">
-    <span class="app-title">{{pageTitle()}}</span>
+    @if(menuOpen()){
+      <mat-icon
+        (click)="button.emit()"
+        fontIcon="menu_open"
+      />
+    }@else{
+      <mat-icon
+        (click)="button.emit()"
+        fontIcon="menu"
+      />
+    }
+
+    <span
+      class="app-title"
+      (click)="titleTouched.emit()"
+    >
+      {{title()}}
+    </span>
   </div>
 
   <div class="trailing-section">
     <app-current-season-display/>
+    <mat-icon
+      fontIcon="light_mode"
+      (click)="toggleMode.emit()"
+    />
   </div>
 </header>

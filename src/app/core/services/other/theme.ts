@@ -1,25 +1,29 @@
-import {effect, Injectable, signal} from '@angular/core';
+import {DOCUMENT, inject, Injectable, signal} from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Theme {
-  // Signal to track theme: 'light' | 'dark' | 'system'
-  theme = signal<string>(localStorage.getItem('user-theme') || 'system');
-
+  public isDarkMode = signal<boolean>(false);
+  private document = inject(DOCUMENT);
   constructor() {
-    // Effect to apply changes whenever the signal updates
-    effect(() => {
-      const currentTheme = this.theme();
-      const isDark = currentTheme === 'dark' ||
-        (currentTheme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
-
-      document.documentElement.classList.toggle('dark', isDark);
-      localStorage.setItem('user-theme', currentTheme);
-    });
+    this.applyTheme(false);
   }
 
-  setTheme(newTheme: 'light' | 'dark' | 'system') {
-    this.theme.set(newTheme);
+  public toggleTheme(): void {
+    const newThemeState = !this.isDarkMode();
+    this.isDarkMode.set(newThemeState);
+    this.applyTheme(newThemeState);
+  }
+
+  private applyTheme(isDark: boolean): void {
+    const bodyClassList = this.document.body.classList;
+    if (isDark) {
+      bodyClassList.remove('light');
+      bodyClassList.add('dark');
+    } else {
+      bodyClassList.remove('dark');
+      bodyClassList.add('light');
+    }
   }
 }

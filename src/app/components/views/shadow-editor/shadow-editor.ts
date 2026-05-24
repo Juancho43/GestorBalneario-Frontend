@@ -8,6 +8,8 @@ import {ShadowForm} from '../../shadows/shawdow-form/shadow-form.component';
 import {Dialog} from '@angular/cdk/dialog';
 import {NewShadow} from '../../shadows/new-shadow/new-shadow';
 import {SeasonManager} from '../../../core/services/Managers/season-manager';
+import {FabAction, FABMenu} from '../../layout/fab-menu/fab-menu';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-shadow-editor',
@@ -15,6 +17,7 @@ import {SeasonManager} from '../../../core/services/Managers/season-manager';
     ShadowList,
     ShadowMap,
     ShadowForm,
+    FABMenu,
   ],
   templateUrl: './shadow-editor.html',
   styleUrl: './shadow-editor.scss',
@@ -24,12 +27,22 @@ export default class ShadowEditor {
   private currentSeason = inject(SeasonManager);
   private shadowList = inject(ShadowManager);
 
+  private router = inject(Router);
   season = this.currentSeason.currentSeason;
 
   shadows = linkedSignal(() => this.shadowList.shadows());
   @ViewChild(ShadowMap) shadowMap!: ShadowMap;
   currentShadow = signal<ShadowEntity>({identifier: '',state:'available', name: '', type: 'carpa', coords: {x: 0, y: 0}});
 
+  protected readonly actions = signal<FabAction[]>([{
+    name: "Ver mapa",
+    icon: "info",
+    tooltip: "Ver mapa"
+  },{
+    name:"Crear reserva",
+    icon:"add",
+    tooltip: "Crear reserva"
+  }]);
   constructor() {
     effect(() => {
       this.season()
@@ -93,5 +106,13 @@ export default class ShadowEditor {
     if(selected){
       this.shadowList.deleteShadow(selected.id!);
     }
+  }
+
+ protected handleMenuAction($event: string) {
+      if($event ==='Ver mapa'){
+        this.router.navigateByUrl('shadow-view')
+      }else if($event === 'Crear reserva'){
+        this.router.navigateByUrl('reservation-create')
+      }
   }
 }

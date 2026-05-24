@@ -9,6 +9,7 @@ import {ShadowEntity} from '../../../core/model/shadowEntity';
 import {ServiceEntity} from '../../../core/model/serviceEntity';
 import {minDateValidator} from '../../../core/utils/validator/dateValidator';
 import {ServiceManager} from '../../../core/services/Managers/service-manager';
+import {MatIcon} from '@angular/material/icon';
 export function requireValidSelection(errorKind: string, errorMessage: string) {
   return (context: any) => {
     if (context.value?.id === 'none') {
@@ -20,7 +21,7 @@ export function requireValidSelection(errorKind: string, errorMessage: string) {
 
 @Component({
   selector: 'app-reservation-form',
-  imports: [MatFormFieldModule, MatDatepickerModule, FormsModule, ReactiveFormsModule, FormField],
+  imports: [MatFormFieldModule, MatDatepickerModule, FormsModule, ReactiveFormsModule, FormField, MatIcon],
   templateUrl: './reservation-form.html',
   styleUrl: './reservation-form.scss',
 })

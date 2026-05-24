@@ -7,13 +7,16 @@ import {InvoiceEntity} from '../../../core/model/InvoiceEntity';
 import {Dialog} from '@angular/cdk/dialog';
 import {ServiceListManager} from '../../services/service-list-manager/service-list-manager';
 import {InvoiceListManager} from '../../invoices/invoice-list-manager/invoice-list-manager';
+import {ClientDetails} from '../../clients/client-details/client-details';
 
 @Component({
   selector: 'app-invoice-viewer',
   imports: [
     InvoiceCard,
     ServiceListManager,
-    InvoiceListManager
+    InvoiceListManager,
+    ClientDetails,
+    InvoiceDetails
   ],
   templateUrl: './invoice-viewer.html',
   styleUrl: './invoice-viewer.scss',

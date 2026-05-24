@@ -1,20 +1,33 @@
-import { Component } from '@angular/core';
-import {FABButton} from '../fab-button/fab-button';
-interface MenuItem {
-  icon: string;
-  label?: string;
-  action:string;
+import {Component, input, output} from '@angular/core';
+import {MatIcon} from '@angular/material/icon';
+export interface FabAction {
+  name: string;      // The unique identifier for the action (e.g., 'EDIT')
+  icon: string;      // The material icon name (e.g., 'edit')
+  tooltip: string;   // The text to display on hover
+  color?: 'primary' | 'accent' | 'warn'; // Optional material color
 }
 @Component({
   selector: 'app-fab-menu',
   imports: [
-    FABButton
+    MatIcon,
   ],
   templateUrl: './fab-menu.html',
   styleUrl: './fab-menu.scss',
 })
 export class FABMenu {
-  items: MenuItem[] = [
-    {icon: 'add',label:'Nueva reserva',action:'new-reservation'},
-    ]
+  public isOpen: boolean = false;
+   actions = input<FabAction[]>([]);
+   actionSelected =output<string>()
+
+  public toggleMenu(): void {
+    this.isOpen = !this.isOpen;
+  }
+
+  public executeAction(actionName: string): void {
+    // Tell the parent component what happened
+    this.actionSelected.emit(actionName);
+
+    // Close the menu immediately to maintain a clean UI
+    this.isOpen = false;
+  }
 }

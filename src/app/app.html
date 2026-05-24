@@ -1,9 +1,15 @@
 <div class="app">
-  <app-menu/>
+  <app-app-bar
+    (toggleMode)="toggleMode()"
+    [title]="title()"
+    [menuOpen]="menuRail()"
+    (button)="toggleMenu()"
+    (titleTouched)="goHome()"
+  />
+  <app-menu
+    [isOpen]="menuRail()"
+  />
   <div class="main-container">
-    <app-app-bar/>
-    <div class="content">
-      <router-outlet/>
-    </div>
+    <router-outlet/>
   </div>
 </div>

@@ -1,9 +1,9 @@
-<div>
-  <h3>Editar mapa carpas/sombrillas</h3>
-  <div>
-      <app-shadow-list
-        (onDropped)="updateMap($event)"
-      />
+<div class="single-layout">
+  <h2>Editar mapa carpas/sombrillas</h2>
+  <div class="content">
+    <app-shadow-list
+      (onDropped)="updateMap($event)"
+    />
     <app-shadow-map
       initialState="editing"
       [loadedShadows]="shadows()"
@@ -12,9 +12,13 @@
       (currentElement)="selectShadowHandler($event)"
       (deletedElement)="deleteShadow($event)"
     />
-      <app-shadow-form
-        (finalShadow)="identifierChangedHandler($event)"
-        [shadowToEdit]="currentShadow()"
-      />
+    <app-shadow-form
+      (finalShadow)="identifierChangedHandler($event)"
+      [shadowToEdit]="currentShadow()"
+    />
   </div>
 </div>
+<app-fab-menu
+  (actionSelected)="handleMenuAction($event)"
+  [actions]="actions()"
+/>

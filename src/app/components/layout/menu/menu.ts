@@ -1,4 +1,4 @@
-import {Component, signal} from '@angular/core';
+import {Component, input, signal} from '@angular/core';
 import {RouterLink, RouterLinkActive} from '@angular/router';
 import {MatIcon} from '@angular/material/icon';
 import {MatTooltip} from '@angular/material/tooltip';
@@ -23,7 +23,7 @@ interface MenuLink {
   styleUrl: './menu.scss',
 })
 export class Menu {
-  isOpen = signal(false);
+  isOpen = input.required<boolean>();
   links: MenuLink[]  = [
     {
       link:{
@@ -76,7 +76,6 @@ export class Menu {
     }
 
   ]
-   protected toggleMenu() {
-    this.isOpen.update(value => !value);
-  }
+
+
 }

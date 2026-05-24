@@ -1,47 +1,15 @@
 @use '@angular/material' as mat;
-$fondo: #F4F6F7;
-$fondo-2: #7F8C8D;
-$primario: #1B4F72;
-$primario-2: #AED6F1;
-$secundario: #F5F5DC;
-$secundario-2: #D4AC0D;
-// Definición de colores base (opcional, para referencia)
-$blue-deep: #1B4F72;
-$blue-light: #AED6F1;
-$gold: #D4AC0D;
-$beige: #F5F5DC;
-
-//@import "picnic/picnic.min.css";
+@use '../src/app/core/light';
+@use '../src/app/core/dark';
 :root {
-  /* Modo Claro (Default) */
-  --bg-color: #ffffff;
-  --text-color: #212121;
-
-  --bg-form: #{$gold};
-  --text-form: #000000;
-
-  --bg-card: #{$blue-light};
-  --bg-detail: #{$beige};
-    @include mat.dialog-overrides((
-      container-color: none,
-      subhead-color: red,
-    ));
-    @include mat.tooltip-overrides((
-      container-color: $blue-light,
-      supporting-text-color: $blue-deep,
-    ));
-}
-
-html.dark {
-  /* Modo Oscuro (Override) */
-  --bg-color: #121212;
-  --text-color: #e0e0e0;
-
-  --bg-form: #9A7D0A;
-  --text-form: #ffffff;
-
-  --bg-card: #1B4F72;
-  --bg-detail: #2C3E50;
+  @include mat.dialog-overrides((
+  container-color: none,
+  subhead-color: red,
+));
+  @include mat.tooltip-overrides((
+  container-color: var(--color-surface),
+  supporting-text-color: var(--color-on-surface),
+));
 }
 
 html, body {
@@ -55,52 +23,37 @@ html, body {
 *, *::before, *::after {
   box-sizing: inherit;
 }
-.app{
-  display: flex;
+.app {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  grid-template-rows: max-content 1fr;
   height: 100dvh;
   width: 100dvw;
   overflow: hidden;
-  background-color:var(--bg-color);
+  background-color: var(--md-sys-color-surface);
+  color: var(--md-sys-color-on-surface);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
-.main-container {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  overflow: hidden;
-}
-.content {
-  flex: 1;
-  overflow-y: auto;
-  padding: 24px;
+app-app-bar {
+  grid-column: 1 / -1;
+  grid-row: 1 / 2;
 }
 
-.active{
-  background-color: red;
+app-menu {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
 }
-.nav{
-  align-self: flex-start;
-  display: flex;
-  align-items: center;
-  gap:20px;
-  color: var(--text-color);
-  padding: 10px;
+
+.main-container {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  padding:24px;
+  margin-top: 10px;
+  /* Allow the main content to scroll independently of the menu */
+  overflow-y: auto;
+  background-color: var(--m3-surface);
 }
-.component{
-  h3{
-    text-transform: uppercase;
-    margin-bottom: 2em;
-  }
-  width: 80dvw;
-  min-height: 80dvh;
-  display: flex;
-  flex-direction: column;
-  padding: 5px;
-  .row{
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-  }
-}
+
 
 .panel{
   box-shadow: inset 2px 2px 20px 1px var(--text-color);
@@ -117,24 +70,14 @@ html, body {
   padding: 1em;
   overflow: auto;
 }
-//
-//form {
-//  background-color: var(--bg-form);
-//  color: var(--text-form);
-//  border-radius: 10px;
-//  padding: 10px;
-//  font-size: 20px;
-//  display: flex;
-//  flex-direction: column;
-//  transition: all 0.3s ease;
-//  .error{
-//    padding: 10px;
-//    border-radius: 5px;
-//    background-color: #e74c3c;
-//    font-size: 14px;
-//    margin-top: 5px;
-//  }
-//}
+
+.error{
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #e74c3c;
+  font-size: 14px;
+  margin-top: 5px;
+}
 
 .card {
   display: flex;

@@ -1,19 +1,27 @@
 import {Component, inject, signal} from '@angular/core';
-import {RouterLink, RouterOutlet} from '@angular/router';
-import {Theme} from './core/services/other/theme';
+import {Router, RouterOutlet} from '@angular/router';
 import {Menu} from './components/layout/menu/menu';
-import {SeasonManager} from './core/services/Managers/season-manager';
-import {CurrentSeasonDisplay} from './components/seasons/current-season-display/current-season-display';
-import {NotificationHelper} from './core/services/other/notification-helper';
 import {AppBar} from './components/layout/app-bar/app-bar';
+import {Theme} from './core/services/other/theme';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Menu, RouterLink, CurrentSeasonDisplay, AppBar],
+  imports: [RouterOutlet, Menu, AppBar],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
 export class App {
-  private readonly theme = inject(Theme);
+  private theme = inject(Theme);
+  private router = inject(Router);
   protected readonly title = signal('Gestor Balneario');
+  menuRail = signal(true);
+  protected toggleMenu() {
+    this.menuRail.update(value => !value);
+  }
+  toggleMode() {
+    this.theme.toggleTheme();
+  }
+  protected goHome() {
+    this.router.navigate(['/']);
+  }
 }

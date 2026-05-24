@@ -1,10 +1,5 @@
-<div class="component">
-  <h3>Generar reporte de pagos</h3>
-  <app-report-form
-    [paymentMethods]="paymentMethods()"
-    (finalQuery)="query.set($event)"
-  />
-
+<div class="single-layout">
+  <h2>Reportes de pagos</h2>
   @if (report() !== null) {
 
     <app-payments-table
@@ -12,5 +7,10 @@
       (clickedPayment)="openInvoiceDialog($event)"
     />
   }
-<!--  <app-paginator/>-->
+
+  <app-report-form
+    class="m3-side-sheet sheet-open"
+    [paymentMethods]="paymentMethods()"
+    (finalQuery)="query.set($event)"
+  />
 </div>

@@ -1,27 +1,37 @@
 .top-app-bar {
-  height: var(--m3-top-bar-height);
+  height: 5dvh;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
-  background-color: #f3edf7; // M3 Surface Container
-  color: #1a1c1e; // M3 On Surface
-
+  background-color:var( --md-sys-color-surface-tint); // M3 Surface Container
+  color: var(--md-sys-color-inverse-on-surface);
+  mat-icon{
+    margin-left:  12px;
+    font-weight: 500;
+  }
+  .leading-section {
+    display: flex;
+    align-items: center; /* Perfectly centers the icon and text vertically */
+    gap: 16px; /* M3 Standard gap between navigation icon and headline */
+  }
   .app-title {
     font-family: 'Roboto', sans-serif;
     font-size: 22px;
     font-weight: 400;
+    margin: 0;
   }
 
   .trailing-section {
     display: flex;
+    align-items: center;
     gap: 8px;
 
     button {
       background: transparent;
       border: none;
       cursor: pointer;
-      color: #49454f; // M3 On Surface Variant
+      color: var(--md-sys-color-on-surface); // M3 On Surface Variant
     }
   }
 }

@@ -1,0 +1,322 @@
+/* =========================================================================
+   M3 Outlined Text Field Architecture
+   ========================================================================= */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.m3-text-field {
+  position: relative;
+  display: flex;
+  width: 100%;
+  margin-top: 8px;
+  margin-bottom: 24px; /* Standard spacing between form fields */
+
+  input {
+    width: 100%;
+    height: 56px;
+    padding: 0 16px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: var(--md-sys-color-on-surface);
+    background: transparent;
+
+    /* The Foundation: A stable border */
+    border: 1px solid var(--md-sys-color-outline);
+    border-radius: 4px; /* M3 standard Extra Small shape for text fields */
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease-in-out, border-width 0.2s ease-in-out;
+
+    /* The Habit of Attention: Hover State */
+    &:hover {
+      border-color: var(--md-sys-color-on-surface);
+    }
+
+    /* Total Focus: Active State */
+    &:focus {
+      border: 2px solid var(--md-sys-color-primary);
+      padding: 0 15px; /* Subtract 1px to prevent layout shift from thicker border */
+    }
+  }
+
+  label {
+    position: absolute;
+    left: 12px;
+    top: 16px; /* Centered in the 56px box */
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: var(--md-sys-color-on-surface-variant);
+    pointer-events: none; /* Allows the user to click "through" the label to the input */
+
+    /* Smooth animation parameters */
+    transition: transform 0.2s ease-in-out, font-size 0.2s ease-in-out, color 0.2s ease-in-out, top 0.2s ease-in-out;
+
+    /* This background color MUST match your form's background (e.g., surface-container)
+       so the label cleanly cuts through the border line */
+    background-color: var(--md-sys-color-surface-container);
+    padding: 0 4px;
+  }
+
+  /* =========================================================================
+     The Floating Label Mechanics
+     ========================================================================= */
+
+  /* When the user clicks in OR when text exists (placeholder is no longer showing) */
+  input:focus + label,
+  input:not(:placeholder-shown) + label {
+    top: -8px; /* Push the label up onto the border */
+    font-size: 12px; /* Scale down according to M3 typography rules */
+  }
+
+  /* Color behavior: Primary when focused */
+  input:focus + label {
+    color: var(--md-sys-color-primary);
+  }
+
+  /* Color behavior: Return to neutral when filled but not focused */
+  input:not(:placeholder-shown):not(:focus) + label {
+    color: var(--md-sys-color-on-surface-variant);
+  }
+}
+
+/* =========================================================================
+   M3 Outlined Date Field
+   ========================================================================= */
+.m3-date-field {
+  position: relative;
+  display: flex;
+  width: 100%;
+  margin-top: 8px;
+  margin-bottom: 24px;
+
+  input[type="date"], input[type="datetime-local"] {
+    width: 100%;
+    height: 56px;
+    padding: 0 16px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: var(--md-sys-color-on-surface);
+    background: transparent;
+
+    border: 1px solid var(--md-sys-color-outline);
+    border-radius: 4px;
+    outline: none;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+
+    &:focus {
+      border: 2px solid var(--md-sys-color-primary);
+      padding: 0 15px;
+    }
+
+    /* Target the native calendar icon */
+    &::-webkit-calendar-picker-indicator {
+      cursor: pointer;
+      opacity: 0.6;
+      transition: 0.2s;
+      /* In dark mode, you may want to add filter: invert(1) if the native icon stays black */
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  label {
+    position: absolute;
+    left: 12px;
+    /* 1. Permanently push the label to the top border */
+    top: -8px;
+    font-size: 12px;
+
+    font-family: 'Roboto', sans-serif;
+    color: var(--md-sys-color-on-surface-variant);
+    background-color: var(--md-sys-color-surface-container); /* Match form background */
+    padding: 0 4px;
+    pointer-events: none;
+    transition: color 0.2s ease;
+  }
+
+  /* 2. Only change the color to primary when the user focuses the date picker */
+  input[type="date"]:focus + label,
+  input[type="datetime-local"]:focus + label {
+    color: var(--md-sys-color-primary);
+  }
+}
+
+/* =========================================================================
+   M3 Outlined Select Field
+   ========================================================================= */
+.m3-select-field {
+  position: relative;
+  display: flex;
+  width: 100%;
+  margin-top: 8px;
+  margin-bottom: 24px;
+
+  select {
+    /* 1. Destroy the default browser styling */
+    appearance: none;
+    -webkit-appearance: none;
+
+    width: 100%;
+    height: 56px;
+    padding: 0 48px 0 16px; /* Extra padding on the right for the arrow */
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: var(--md-sys-color-on-surface);
+    background-color: transparent;
+
+    border: 1px solid var(--md-sys-color-outline);
+    border-radius: 4px; /* M3 Extra Small shape */
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s ease, border-width 0.2s ease;
+
+    &:focus {
+      border: 2px solid var(--md-sys-color-primary);
+      padding: 0 47px 0 15px; /* Adjust padding to prevent layout shift */
+    }
+  }
+
+  /* 2. The Custom Arrow Positioning */
+  .trailing-icon {
+    position: absolute;
+    right: 12px;
+    top: 16px;
+    color: var(--md-sys-color-on-surface-variant);
+    pointer-events: none; /* Clicks pass through to the select element */
+  }
+
+  label {
+    position: absolute;
+    left: 12px;
+    top: 16px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: var(--md-sys-color-on-surface-variant);
+    pointer-events: none;
+    transition: all 0.2s ease-in-out;
+    background-color: var(--md-sys-color-surface-container); /* Match form background */
+    padding: 0 4px;
+  }
+
+  /* 3. The Floating Logic: Triggers on focus OR when a valid option is selected */
+  select:focus + label,
+  select:valid + label {
+    top: -8px;
+    font-size: 12px;
+  }
+
+  select:focus + label {
+    color: var(--md-sys-color-primary);
+  }
+}
+
+/* =========================================================================
+   M3 Form Action Area & Buttons
+   ========================================================================= */
+
+.m3-form-actions {
+  display: flex;
+  justify-content: flex-end; /* Aligns buttons to the trailing edge */
+  align-items: center;
+  gap: 16px; /* A safe, comfortable distance between the two actions */
+  margin-top: 32px;
+  width: 100%;
+}
+
+/* Base M3 Button Standards */
+.m3-button-filled,
+.m3-button-text {
+  position: relative;
+  overflow: hidden; /* Contains the state layer */
+  height: 40px; /* M3 standard button height */
+  border-radius: 20px; /* Fully rounded pill shape */
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  /* State Layer Base */
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: 0;
+  }
+
+  /* Elevates the text above the state layer */
+  span {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+/* =========================================================================
+   The Primary Action: Filled Button (Submit)
+   ========================================================================= */
+.m3-button-filled {
+  background-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+  border: none;
+  padding: 0 24px;
+
+  &::before {
+    background-color: var(--md-sys-color-on-primary);
+  }
+
+  &:hover {
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+    &::before {
+      opacity: 0.08; /* M3 standard hover opacity */
+    }
+  }
+
+  &:disabled {
+    /* Adaptive disabled state that works in light and dark modes */
+    background-color: var(--md-sys-color-surface-variant);
+    color: var(--md-sys-color-outline);
+    cursor: not-allowed;
+    box-shadow: none;
+    &::before {
+      display: none;
+    }
+  }
+}
+
+/* =========================================================================
+   The Secondary Action: Text Button (Reset)
+   ========================================================================= */
+.m3-button-text {
+  background-color: transparent;
+  color: var(--md-sys-color-primary);
+  border: none;
+  padding: 0 12px;
+
+  &::before {
+    background-color: var(--md-sys-color-primary);
+  }
+
+  &:hover {
+    &::before {
+      opacity: 0.08; /* M3 standard hover opacity */
+    }
+  }
+
+  &:disabled {
+    color: var(--md-sys-color-outline);
+    cursor: not-allowed;
+    &::before {
+      display: none;
+    }
+  }
+}

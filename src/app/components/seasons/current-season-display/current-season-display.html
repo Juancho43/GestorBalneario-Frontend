@@ -1,8 +1,9 @@
 @if(this.season()){
   @let season = this.season();
   <div
+    #overlayOrigin
     [class.active]="!season.isActive"
-    (click)="openDialog()"
+    (click)="openSwicher()"
   >
     @if(this.season()!){
       @let season = this.season();

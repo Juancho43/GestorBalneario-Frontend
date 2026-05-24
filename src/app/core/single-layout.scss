@@ -1,0 +1,43 @@
+.single-layout {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  min-height: 80dvh;
+  h2 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-on-surface);
+    margin: 0 0 16px 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .content {
+    flex: 1;
+    padding: 20px;
+  }
+}
+@media screen and (min-width: 600px) {
+  .single-layout h2 {
+    margin-left: 24px;
+    padding-left: 0; /* Resetting just in case */
+  }
+
+  .single-layout .content {
+    padding: 24px;
+  }
+}
+
+/* 4. The Expanded Breakpoint (Desktops: 840px+)
+   Action: Execute total control over line length to guarantee readability. */
+@media screen and (min-width: 840px) {
+  .single-layout h2 {
+    margin-left: 0; /* Center align perfectly with the constrained content */
+    padding-left: 32px; /* Match content padding visually */
+  }
+
+  .single-layout .content {
+    padding: 32px;
+  }
+}

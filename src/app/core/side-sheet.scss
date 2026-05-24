@@ -1,0 +1,62 @@
+/* =========================================================================
+   M3 Standard Side Sheet Architecture
+   ========================================================================= */
+
+.m3-side-sheet {
+  /* 1. The Anchor: Lock it to the right side of the screen */
+  position: fixed;
+  top:5dvh;
+  right:0;
+  /* 2. M3 Dimension Standards */
+  width: 400px; /* Standard width for a comprehensive side sheet */
+  height: 95dvh;
+  box-sizing: border-box;
+
+  /* 3. Surface & Elevation */
+  background-color: var(--md-sys-color-surface-container-low);
+  border-left: 1px solid var(--md-sys-color-outline-variant);
+  box-shadow: -4px 0 16px rgba(0, 0, 0, 0.05); /* Subtle elevation */
+  //z-index: 1000; /* Ensure it commands the top layer */
+
+  /* 4. Internal Structure: Flexbox for smooth vertical flow */
+  display: flex;
+  flex-direction: column;
+  padding: 24px; /* Standard M3 internal padding */
+  overflow-y: auto; /* Allow scrolling if the form gets too long */
+
+  /* Optional: Smooth entry transition. Toggle a '.sheet-open' class via Angular to trigger this */
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1);
+
+  &.sheet-open {
+    transform: translateX(0);
+  }
+
+  /* =========================================================================
+     Typography & Spacing Control
+     ========================================================================= */
+
+  p {
+    /* Style your label paragraphs to look like professional M3 section headers */
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--md-sys-color-tertiary);
+    margin: 24px 0 8px 0; /* Give the previous section breathing room, hug the next */
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+
+    /* Target the very first paragraph so it doesn't push down too far from the top */
+    &:first-of-type {
+      margin-top: 16px;
+    }
+  }
+
+  /* Force your Angular components to behave as block-level structural elements */
+  app-reservation-form,
+  app-client-card,
+  app-shadow-card {
+    display: block;
+    width: 100%;
+  }
+}

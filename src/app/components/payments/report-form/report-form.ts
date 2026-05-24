@@ -3,13 +3,15 @@ import {ReportQuery} from '../../../core/DTO/ReportQuery';
 import {form, FormField} from '@angular/forms/signals';
 import {FormsModule} from '@angular/forms';
 import {PaymentTypePipe} from '../../../core/utils/pipes/payment-type-pipe';
+import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'app-report-form',
   imports: [
     FormsModule,
     FormField,
-    PaymentTypePipe
+    PaymentTypePipe,
+    MatIcon
   ],
   templateUrl: './report-form.html',
   styleUrl: './report-form.scss',

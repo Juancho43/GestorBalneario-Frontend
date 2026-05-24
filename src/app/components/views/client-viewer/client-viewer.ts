@@ -15,7 +15,8 @@ import {SeasonForm} from '../../seasons/season-form/season-form';
   imports: [
     ClientListManagerComponent,
     ClientForm,
-    SeasonForm
+    SeasonForm,
+    ClientDetails
   ],
   templateUrl: './client-viewer.html',
   styleUrl: './client-viewer.scss',
@@ -29,7 +30,7 @@ export class ClientViewer {
 
   protected openClientDetail(client: ClientEntity) {
     this.setCurrentClient(client);
-    this.dialog.open(ClientDetails);
+    // this.dialog.open(ClientDetails);
   }
   protected setCurrentClient(client: ClientEntity) {
     this.manager.currentClient.set(client);

@@ -5,6 +5,7 @@
   padding: 8px 0; // M3 requiere 8px de padding superior e inferior en la lista
   display: flex;
   flex-direction: column;
+  color: var(--md-sys-color-on-surface);
 }
 
 // El elemento de la lista (Fila de 3 líneas)
@@ -17,15 +18,15 @@
   cursor: pointer;
   transition: background-color 0.2s ease;
 
-  // Efecto hover estándar de M3 (State Layer)
+  // Efecto hover mejorado: Utiliza un contenedor de superficie para adaptarse a Light/Dark
   &:hover {
-    background-color: rgba(0, 0, 0, 0.04);
+    background-color: var(--md-sys-color-surface-container-high);
   }
 }
 
 // Icono (Leading)
 .m3-leading-icon {
-  color: #49454f; // M3 On-Surface-Variant
+  color: var(--md-sys-color-on-surface-variant); // Corregido: "variant"
   width: 24px;
   height: 24px;
 }
@@ -34,14 +35,14 @@
 .m3-text-content {
   display: flex;
   flex-direction: column;
-  flex: 1; // Toma todo el espacio disponible, empujando el menú a la derecha
+  flex: 1;
 }
 
 // Título principal (M3 Body Large)
 .m3-headline {
   font-size: 16px;
   font-weight: 400;
-  color: #1d1b20; // M3 On-Surface
+  color: var(--md-sys-color-on-surface); // Eliminado el hex estático
   line-height: 24px;
 }
 
@@ -49,7 +50,7 @@
 .m3-supporting-text {
   font-size: 14px;
   font-weight: 400;
-  color: #49454f; // M3 On-Surface-Variant
+  color: var(--md-sys-color-on-surface-variant); // Corregido: "variant"
   line-height: 20px;
 }
 
@@ -59,12 +60,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--md-sys-color-on-surface-variant); // Asegura que el ícono kebab tome el color correcto
 }
 
 // Estado vacío
 .m3-empty-state {
   padding: 24px 16px;
   text-align: center;
-  color: #49454f;
+  color: var(--md-sys-color-outline); // Reemplazado hex estático. Outline es ideal para texto de baja prioridad/vacío
   font-size: 14px;
 }

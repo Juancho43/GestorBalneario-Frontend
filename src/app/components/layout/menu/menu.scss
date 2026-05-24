@@ -1,30 +1,12 @@
-/* =========================================================================
-   M3 Design Tokens & Core Variables
-   ========================================================================= */
 :host {
-  /* Surface & Standard Text */
-  --m3-surface: #fdfcff;
-  --m3-on-surface: #1a1c1e;
-  --m3-surface-container: #f3edf7;
-  --m3-on-surface-variant: #49454f;
-
-  /* Active Destination Tokens (Crucial for routerLinkActive) */
-  --m3-secondary-container: #e8def8;
-  --m3-on-secondary-container: #1d192b;
-
-  /* Dimensions & Motion */
   --m3-rail-width: 80px;
   --m3-drawer-width: 256px;
   --m3-transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
 }
-
-/* =========================================================================
-   Main Container
-   ========================================================================= */
 .menu {
   width: var(--m3-rail-width);
-  height: 100vh;
-  background-color: var(--m3-surface);
+  height: 95dvh;
+  background-color: var(--md-sys-color-surface-tint);
   transition: var(--m3-transition);
   display: flex;
   flex-direction: column;
@@ -44,25 +26,6 @@
     gap: 8px;
   }
 
-  /* Hamburger Toggle Placement */
-  li:first-child {
-    margin-bottom: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding-left: 16px;
-
-    mat-icon {
-      cursor: pointer;
-      color: var(--m3-on-surface-variant);
-      transition: var(--m3-transition);
-
-      &:hover {
-        opacity: 0.8;
-      }
-    }
-  }
-
   /* =========================================================================
      Primary Navigation Buttons
      ========================================================================= */
@@ -75,14 +38,21 @@
     align-items: center;
     padding: 0 16px;
     border-radius: 28px; /* M3 Pill Shape */
-    color: var(--m3-on-surface-variant);
+    color: var(--md-sys-color-inverse-on-surface);
     font-family: Roboto, sans-serif;
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
     transition: var(--m3-transition);
     white-space: nowrap;
+    /* ADD THIS: The ultimate safeguard against spilling text */
+    overflow: hidden;
 
+    /* Smooth transition for when the menu opens and closes */
+    .menu-label {
+      transition: opacity 0.2s ease-in-out;
+      white-space: nowrap;
+    }
     mat-icon {
       margin-right: 12px;
       transition: var(--m3-transition);
@@ -90,7 +60,7 @@
 
     /* Hover State (Only for non-active buttons) */
     &:hover:not(.active-menu-button) {
-      background-color: var(--m3-surface-container);
+      background-color: var(--color-surface);
       color: var(--m3-on-surface);
     }
   }
@@ -99,12 +69,12 @@
      Active State (routerLinkActive)
      ========================================================================= */
   .active-menu-button {
-    background-color: var(--m3-secondary-container);
-    color: var(--m3-on-secondary-container);
+    background-color: var(--md-sys-color-secondary-container);
+    color: var(--md-sys-color-on-secondary-container);
     font-weight: 700;
 
     mat-icon {
-      color: var(--m3-on-secondary-container);
+      color: var(--md-sys-color-on-secondary-container);
     }
   }
 }
@@ -118,139 +88,48 @@
     justify-content: center;
     padding-left: 0;
   }
+  li:first-child { justify-content: center; padding-left: 0; }
 
+  button {
+
+  }
   /* Collapse the pill to a perfect circle around the icon */
   button {
     justify-content: center;
     padding: 0;
     width: 56px; /* Matches the 56px height to create a circle */
     margin: 0 auto; /* Keeps it centered in the 80px rail */
+    mat-icon { margin-right: 0; }
 
+    /* ADD THIS: Completely eliminate the label in the closed state */
+    .menu-label {
+      display: none;
+    }
     mat-icon {
       margin-right: 0; /* Drops the spacing since the label is hidden */
     }
   }
 }
-//.menu {
-//  display: flex;
-//  flex-direction: column;
-//  align-items: start;
-//  list-style: none;
-//  padding: 8px;
-//  gap: 5px;
-//  width: 8dvw;
-//  height: 100dvh;
-//  background-color: white;
-//  ul{
-//    list-style: none;
-//  }
-//}
-//.open-menu{
-//  width: 20dvw;
-//}
-//.menu-bar-item {
-//  color:var(--text-color);
-//  background: transparent;
-//  border: none;
-//  padding: 8px 16px;
-//  cursor: pointer;
-//  border-radius: 4px;
-//}
-//
-//.menu-bar-item:hover {
-//  background-color: var(--bg-detail);
-//  color:var(--text-color);
-//
-//}
-//
-///* Vertical dropdown styling */
-//.sub-menu {
-//  color:var(--text-color);
-//  background: var(--bg-detail);
-//  min-width: 180px;
-//  padding: 8px 0;
-//  border: 1px solid #ccc;
-//  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-//  list-style: none;
-//  border-radius: 4px;
-//}
-//
-//.sub-menu-item {
-//  display: block;
-//  color:var(--text-color);
-//  width: 100%;
-//  text-align: left;
-//  padding: 10px 20px;
-//  background: none;
-//  border: none;
-//  cursor: pointer;
-//}
-//
-//.sub-menu-item:hover {
-//  background-color: var(--bg-card);
-//  color:var(--text-color);
-//}
-//.menu-item {
-//  display: flex;
-//  align-items: center;
-//  width: 100%;
-//  height: 56px;
-//
-//  // Padding inicial (cuando está abierto)
-//  padding: 0 16px;
-//  gap: 12px;
-//  border: none;
-//  background: transparent;
-//  border-radius: 100px;
-//
-//  // ... (tus otras propiedades de tipografía)
-//
-//  // NUEVO: Ajuste para cuando el menú está cerrado (Rail mode)
-//  .menu-collapsed & {
-//    padding: 0; // Eliminamos el padding lateral
-//    justify-content: center; // Centramos el icono horizontalmente
-//    width: 48px; // Forzamos el ancho del Rail (M3 estándar)
-//  }
-//
-//  mat-icon {
-//    font-size: 24px;
-//    width: 24px;
-//    height: 24px;
-//    display: flex;
-//    align-items: center;
-//    justify-content: center;
-//    flex-shrink: 0; // Asegura que el icono no se deforme
-//  }
-//}
-//.button-menu {
-//  /* 1. The Touch Target (M3 Standard is 48x48px for interactive icons) */
-//  width: 48px;
-//  height: 48px;
-//
-//  /* 2. Perfect Centering for the mat-icon ligature */
-//  display: flex;
-//  align-items: center;
-//  justify-content: center;
-//
-//  /* 3. The Shape and Positioning */
-//  border-radius: 50%; /* Creates a perfect circle for the hover state */
-//  margin: 8px 8px 16px 12px; /* Defines space from edges and pushes the list down */
-//  cursor: pointer;
-//
-//  /* 4. Typography and Color */
-//  color: #1d192b; /* Strong, dark color for primary navigational controls */
-//  font-size: 24px; /* Keeps the icon itself at the standard 24px size */
-//
-//  /* 5. Fluid Interaction */
-//  transition: background-color 0.2s ease;
-//
-//  /* The Hover State: Gives the user immediate confidence */
-//  &:hover {
-//    background-color: rgba(28, 27, 31, 0.08); /* M3 Subtle dark overlay */
-//  }
-//
-//  /* Active/Click State: Physical feedback */
-//  &:active {
-//    background-color: rgba(28, 27, 31, 0.12);
-//  }
-//}
+@media screen and (min-width: 600px) and (max-width: 839px) {
+  .menu {
+    /* Tablets need the screen space for the detail panel. Force the rail width. */
+    width: var(--m3-rail-width) !important;
+    position: relative;
+    z-index: 10;
+
+    /* Ensure the text labels remain hidden to maintain the clean, circular icon layout */
+    span {
+      display: none;
+    }
+  }
+}
+
+/* 3. The Expanded Breakpoint (Desktops: 840px+)
+   Goal: Total user control. Allow smooth toggling between Rail and Full Drawer. */
+@media screen and (min-width: 840px) {
+  .menu {
+    position: relative; /* Sits perfectly inline with your layout panels */
+    z-index: 10;
+    border-right: 1px solid var(--md-sys-color-outline-variant); /* Subtle separation */
+  }
+}

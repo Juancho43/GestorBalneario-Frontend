@@ -7,11 +7,15 @@ import {ReservationEntity} from '../../../core/model/reservationEntity';
 import {Paginator} from '../../paginator/paginator';
 import {ClientListManagerComponent} from '../../clients/client-list-manager/client-list-manager.component';
 import {ReservationListManager} from '../../reservations/reservation-list-manager/reservation-list-manager';
+import {ClientDetails} from '../../clients/client-details/client-details';
+import {ReservationDetail} from '../../reservations/reservation-detail/reservation-detail';
 
 @Component({
   selector: 'app-reservation-viewer',
   imports: [
     ReservationListManager,
+    ClientDetails,
+    ReservationDetail,
   ],
   templateUrl: './reservation-viewer.html',
   styleUrl: './reservation-viewer.scss',

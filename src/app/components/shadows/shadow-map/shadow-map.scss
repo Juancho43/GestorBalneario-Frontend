@@ -1,43 +1,33 @@
 .shadowMap {
   position: relative;
-  width: 100%;
+  width: 80dvw;
   height: 70dvh;
-  background-color: #f4f3f7;
+  background-color: var(--md-sys-color-on-primary-container);
   border-radius: 16px;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3),
+  0px 2px 6px 2px rgba(0, 0, 0, 0.15);
+  &:hover {
+    box-shadow: 0px 1px 2px 0px var(--md-sys-color-on-secondary-container),
+    0px 2px 6px 2px rgba(0, 0, 0, 0.15);
+  }
 }
 
 
 .map {
-  background-color: #ffffff;
   border-radius: 16px;
   border: 2px solid transparent;
-
-  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3),
-  0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-
+  background-color: #f4f3f7;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
-
-/* Add this to create a responsive, high-performance feel when the user hovers */
-.map:hover {
-  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3),
-  0px 2px 6px 2px rgba(0, 0, 0, 0.15);
-}
-// ==========================================
-// ESTADOS DEL CANVAS (M3 Semantic Colors)
-// ==========================================
-
 .border-view {
   // Estado Normal / Lectura
   border-color: #cac4d0; // M3 Outline (Un gris neutro que no distrae)
 }
-
 .border-editing {
-  // Acción Requerida / Editando
   border-color: #006a6a; // M3 Primary (El verde/azul de tu botón principal)
   box-shadow: 0 0 0 4px rgba(0, 106, 106, 0.1); // Halo de enfoque suave
 }
@@ -60,12 +50,10 @@
   display: flex;
   align-items: center;
   gap: 4px;
-
-  // Transformación a una barra de herramientas M3
-  background-color: #ffffff; // Fondo limpio
+ background-color: var( --md-sys-color-on-tertiary-container);
   padding: 6px;
-  border-radius: 28px; // Forma de píldora
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15); // M3 Elevation 2
+  border-radius: 28px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 // Estilo de los botones individuales dentro de la barra
@@ -73,22 +61,22 @@
   cursor: pointer;
   border: none;
   background: transparent;
-  color: #49454f; // M3 On-Surface Variant (Gris oscuro legible)
+  color: var(--md-sys-color-on-surface-variant);
   font-weight: 500;
   font-size: 14px;
   height: 40px;
-  min-width: 40px; // Mantiene los botones + y - cuadrados/circulares
+  min-width: 40px;
   padding: 0 16px;
-  border-radius: 20px; // Redondeo interno para el hover
+  border-radius: 20px;
   transition: background-color 0.2s ease, color 0.2s ease;
 
-  // M3 State Layer (Efecto al pasar el mouse)
   &:hover {
-    background-color: rgba(73, 69, 79, 0.08);
+   color:var(--md-sys-color-inverse-on-surface);
+    background-color:  var(--md-sys-color-on-tertiary-fixed-variant);
   }
 
-  // Efecto visual al hacer clic
   &:active {
+    color:var(--md-sys-color-inverse-on-surface);
     background-color: rgba(73, 69, 79, 0.12);
   }
 }
