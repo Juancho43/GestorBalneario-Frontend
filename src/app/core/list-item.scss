@@ -1,72 +1,63 @@
-// Contenedor principal de la lista
 .m3-list {
   list-style-type: none;
   margin: 0;
-  padding: 8px 0; // M3 requiere 8px de padding superior e inferior en la lista
+  padding: 8px 0;
   display: flex;
   flex-direction: column;
   color: var(--md-sys-color-on-surface);
 }
 
-// El elemento de la lista (Fila de 3 líneas)
 .m3-list-item {
   display: flex;
-  align-items: center; // Centra verticalmente el icono, el texto y el menú
-  min-height: 88px; // M3 Spec: Altura mínima para una lista de 3 líneas
-  padding: 12px 16px; // 16px de padding horizontal
-  gap: 16px; // Espacio exacto entre el icono y el texto
+  align-items: center;
+  min-height: 88px;
+  padding: 12px 16px;
+  gap: 16px;
   cursor: pointer;
   transition: background-color 0.2s ease;
 
-  // Efecto hover mejorado: Utiliza un contenedor de superficie para adaptarse a Light/Dark
   &:hover {
     background-color: var(--md-sys-color-surface-container-high);
   }
 }
 
-// Icono (Leading)
 .m3-leading-icon {
-  color: var(--md-sys-color-on-surface-variant); // Corregido: "variant"
+  color: var(--md-sys-color-on-surface-variant);
   width: 24px;
   height: 24px;
 }
 
-// Contenedor para apilar los textos
 .m3-text-content {
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 
-// Título principal (M3 Body Large)
 .m3-headline {
   font-size: 16px;
   font-weight: 400;
-  color: var(--md-sys-color-on-surface); // Eliminado el hex estático
+  color: var(--md-sys-color-on-surface);
   line-height: 24px;
 }
 
-// Texto de soporte (M3 Body Medium)
 .m3-supporting-text {
   font-size: 14px;
   font-weight: 400;
-  color: var(--md-sys-color-on-surface-variant); // Corregido: "variant"
+  color: var(--md-sys-color-on-surface-variant);
   line-height: 20px;
 }
 
-// Contenedor del menú Kebab (Trailing)
 .m3-trailing-action {
-  margin-left: auto; // Asegura que se mantenga a la derecha
+  margin-left: auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--md-sys-color-on-surface-variant); // Asegura que el ícono kebab tome el color correcto
+  color: var(--md-sys-color-on-surface-variant);
 }
 
-// Estado vacío
 .m3-empty-state {
   padding: 24px 16px;
   text-align: center;
-  color: var(--md-sys-color-outline); // Reemplazado hex estático. Outline es ideal para texto de baja prioridad/vacío
+  color: var(--md-sys-color-outline);
   font-size: 14px;
 }

@@ -1,12 +1,17 @@
 <div class="list-detail-layout">
-  <section class="list-panel">
-    <h2>Lista de facturas</h2>
-    <app-invoice-list-manager
+  @if(this.showList()){
+    <section class="list-panel">
+      <h2>Lista de facturas</h2>
+      <app-invoice-list-manager
 
-    />
-  </section>
-  <section class="detail-panel">
-    <h2>Factura seleccionada</h2>
-    <app-invoice-details/>
-  </section>
+      />
+    </section>
+  }
+  @if(this.showDetails()){
+    <section class="detail-panel">
+      <h2>Factura seleccionada</h2>
+      <app-invoice-details/>
+    </section>
+  }
+
 </div>
