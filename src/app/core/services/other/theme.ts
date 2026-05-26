@@ -7,7 +7,8 @@ export class Theme {
   public isDarkMode = signal<boolean>(false);
   private document = inject(DOCUMENT);
   constructor() {
-    this.applyTheme(false);
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    this.applyTheme(systemPrefersDark);
   }
 
   public toggleTheme(): void {
