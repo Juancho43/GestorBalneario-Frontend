@@ -1,23 +1,24 @@
+@let isOpen = this.isOpen();
 <div
-  [class.open-menu]="isOpen()"
+  [class.open-menu]="isOpen"
   class="menu"
 >
   <ul>
     @for(item of links; track $index){
       <li>
-
         <button
           routerLinkActive="active-menu-button"
-          [routerLink]="item.link.path"
+          [routerLink]="item.path"
+          matTooltipClass="tooltip"
           matTooltipPosition="after"
-          [matTooltipDisabled]="isOpen()"
-          [matTooltip]="item.link.label"
+          [matTooltipDisabled]="isOpen"
+          [matTooltip]="item.label"
         >
           <mat-icon
-            [fontIcon]="item.link.icon"
+            [fontIcon]="item.icon"
           />
-          @if(isOpen()){
-            {{item.link.label}}
+          @if(isOpen){
+            <span>{{item.label}}</span>
           }
         </button>
       </li>

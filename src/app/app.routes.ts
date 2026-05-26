@@ -27,7 +27,7 @@ export const routes: Routes = [
   },
   {
     title: 'Mapa de sombras',
-    path: 'shadow-view',
+    path: 'map',
     loadComponent: ()=> ShadowViewer
   },
   {

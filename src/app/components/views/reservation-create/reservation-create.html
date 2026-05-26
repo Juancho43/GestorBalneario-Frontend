@@ -5,13 +5,14 @@
     [loadedShadows]="shadows()"
     (currentElement)="setShadow($event)"
   />
-
-  <div class="m3-side-sheet sheet-open">
-    <app-reservation-form
-      #reservationForm
-      [client]="client()"
+  <app-side-sheet
+      [isOpen]="sideSheetOpen()"
+      headline="Crear reserva"
+      (closed)="this.sideSheetOpen.set(false)"
+    >
+    <p>Carpa seleccionada</p>
+    <app-shadow-card
       [shadow]="shadow()"
-      (finalReservation)="handleSubmit($event)"
     />
     <p>Cliente seleccionado</p>
     <app-client-card
@@ -19,10 +20,16 @@
       [client]="client()"
       (click)="openClientDialog()"
     />
-    <p>Carpa seleccionada</p>
-    <app-shadow-card
+    <app-reservation-form
+      #reservationForm
+      [client]="client()"
       [shadow]="shadow()"
+      (finalReservation)="handleSubmit($event)"
     />
-  </div>
-
+  </app-side-sheet>
 </div>
+  <app-fab-button
+    icon="add"
+    label="Crear reserva"
+    (touched)="this.sideSheetOpen.set(true)"
+  />

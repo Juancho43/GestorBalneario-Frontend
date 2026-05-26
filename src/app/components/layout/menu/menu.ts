@@ -1,4 +1,4 @@
-import {Component, input, signal} from '@angular/core';
+import {Component, input, linkedSignal, signal} from '@angular/core';
 import {RouterLink, RouterLinkActive} from '@angular/router';
 import {MatIcon} from '@angular/material/icon';
 import {MatTooltip} from '@angular/material/tooltip';
@@ -7,10 +7,7 @@ interface Link{
   label: string;
   path?: string;
 }
-interface MenuLink {
-  link: Link;
-  subLinks?: Link[]
-}
+
 @Component({
   selector: 'app-menu',
   imports: [
@@ -22,57 +19,48 @@ interface MenuLink {
   templateUrl: './menu.html',
   styleUrl: './menu.scss',
 })
-export class Menu {
+export default class Menu {
   isOpen = input.required<boolean>();
-  links: MenuLink[]  = [
+  links: Link[]  = [
     {
-      link:{
-        icon: 'date_range',
-        label: 'Temporadas',
-        path: 'season-manager'
-      }
+      icon: 'date_range',
+      label: 'Temporadas',
+      path: 'season-manager'
     },
     {
-      link:{
-        icon: 'beach_access',
-        label: 'Carpas',
-        path: 'shadow-view'
-      }
+      icon:'map',
+      label: 'Mapa',
+      path: 'map'
     },
     {
-      link:{
-        icon:'book_online',
-        label:'Reservas',
-        path:'reservation-view'
-      }
+      icon: 'beach_access',
+      label: 'Carpas',
+      path: 'shadow-view'
     },
     {
-      link:{
-        icon:'payments',
-        label:'Pagos',
-        path: 'payment-view'
-      }
+      icon:'book_online',
+      label:'Reservas',
+      path:'reservation-view'
     },
     {
-      link:{
-        icon:'people',
-        label:'Clientes',
-        path:'client-view'
-      }
+      icon:'payments',
+      label:'Pagos',
+      path: 'payment-view'
     },
     {
-      link:{
-        label: 'Servicios',
-        icon: "room_service",
-        path:'service-manager'
-      }
+      icon:'people',
+      label:'Clientes',
+      path:'client-view'
     },
     {
-      link:{
-        label: 'Facturas',
-        icon: "receipt_long",
-        path: 'invoice-viewer'
-      }
+      label: 'Servicios',
+      icon: "room_service",
+      path:'service-manager'
+    },
+    {
+      label: 'Facturas',
+      icon: "receipt_long",
+      path: 'invoice-viewer'
     }
 
   ]

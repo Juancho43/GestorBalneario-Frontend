@@ -1,7 +1,6 @@
-<app-reservation-searcher
-  (activeSelect)="active.set($event)"
-/>
+<app-reservation-searcher/>
 <app-reservation-list
+  (selectedReservation)="selectReservation($event)"
   [list]="reservations()"
 />
 <!--<app-paginator-->

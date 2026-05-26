@@ -7,13 +7,16 @@ import {SeasonList} from '../../seasons/season-list/season-list';
 import {MatDialog} from '@angular/material/dialog';
 import {IDeleteDialogData} from '../../../core/DTO/DeleteDialogData';
 import {DeleteConfirmation} from '../../layout/delete-confirmation/delete-confirmation';
+import {FABButton} from '../../layout/fab-button/fab-button';
+import {OverlayHelper} from '../../../core/utils/overlay-helper';
+import {BreakpointObserver} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-seasons-editor',
   imports: [
-    SeasonForm,
     FormsModule,
-    SeasonList
+    SeasonList,
+    FABButton
   ],
   templateUrl: './seasons-editor.html',
   styleUrl: './seasons-editor.scss',
@@ -22,6 +25,8 @@ export class SeasonsEditor {
   private manager = inject(SeasonManager);
   private dialog = inject(MatDialog);
   @ViewChild('seasonForm') form!: SeasonForm;
+  isOverlayOpen = false;
+  private overlayHelper = inject(OverlayHelper);
   seasonList =  computed(()=>this.manager.getList());
   seletedSeason = signal<SeasonEntity | undefined>(undefined);
   formattedSeason = computed(() => {
@@ -35,9 +40,29 @@ export class SeasonsEditor {
       endDate: new Date(s.endDate).toISOString().split('T')[0]
     } ;
   });
-  constructor() {
 
+  singlePane = signal(false);
+  currentPane = signal('list');
+  showList = computed(()=>{
+    if(this.singlePane()) return true;
+    return this.currentPane() === 'list';
+
+  })
+  showDetails = computed(()=>{
+    if(this.singlePane()) return true;
+    return this.currentPane() === 'detail';
+  })
+
+  constructor(){
+    (new BreakpointObserver()).observe(['(max-width: 800px)']).subscribe(result => {
+      if (result.matches) {
+        this.singlePane.set(false);
+      } else {
+        this.singlePane.set(true);
+      }
+    })
   }
+
   protected handleSubmit($event: SeasonEntity){
     if (this.form.editMode()){
       this.manager.updateSeason($event);
@@ -71,5 +96,17 @@ export class SeasonsEditor {
 
   protected handleEdit($event: SeasonEntity) {
    this.seletedSeason.set($event)
+  }
+
+  protected handleFABButton() {
+    if (!this.isOverlayOpen){
+      this.isOverlayOpen = true;
+      const config = this.overlayHelper.getModalConfig();
+      const overlayRef = this.overlayHelper.open(SeasonForm, config);
+      overlayRef.backdropClick().subscribe(() => {
+        overlayRef!.dispose();
+        this.isOverlayOpen = false
+      });
+    }
   }
 }

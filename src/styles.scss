@@ -6,10 +6,10 @@
   container-color: none,
   subhead-color: red,
 ));
-  @include mat.tooltip-overrides((
-  container-color: var(--color-surface),
-  supporting-text-color: var(--color-on-surface),
-));
+  //@include mat.tooltip-overrides((
+  //  container-color: var(--md-sys-color-secondary),
+  //  supporting-text-color: var(--md-sys-color-on-secondary),
+  //));
 }
 
 html, body {
@@ -215,4 +215,8 @@ app-menu {
 .status.pending {
   background-color: #fef08a;
   color: #854d0e;
+}
+.tooltip {
+  background-color: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-surface);
 }

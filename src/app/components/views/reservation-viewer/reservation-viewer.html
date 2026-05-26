@@ -1,11 +1,36 @@
 <div class="list-detail-layout">
-  <section class="list-panel">
-    <h2>Listado de reservaciones</h2>
-    <app-reservation-list-manager
-    />
-  </section>
+  @if(this.showList()){
+    <section class="list-panel">
+      <h2>Listado de reservaciones</h2>
+      <app-reservation-list-manager
+        (selectedReservation)="handleSelectedReservation($event)"
+      />
+    </section>
+  }
+@if(this.showDetails()){
   <section class="detail-panel">
-    <h2>Reserva seleccionada</h2>
-    <app-reservation-detail/>
+    <div class="detail-header">
+      <h2>Reserva seleccionada</h2>
+      @if(!this.singlePane()){
+        <button
+          class="icon-btn close-btn"
+          (click)="this.currentPane.set('list')">
+          <mat-icon fontIcon="close"/>
+        </button>
+      }
+    </div>
+    @if (selectedReservation()){
+      <app-reservation-detail
+        [reservation]="selectedReservation()!"
+      />
+    } @else {
+      <p>Seleccione una reserva para ver los detalles</p>
+    }
   </section>
+}
 </div>
+<app-fab-button
+  icon="add"
+  label="Crear una reserva"
+  (click)="handleFABButton()"
+/>

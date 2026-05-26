@@ -1,68 +1,98 @@
-/* =========================================================================
-   M3 List-Detail Canonical Layout
-   ========================================================================= */
-
 .list-detail-layout {
-  /* 1. La Fundación: Flexbox para alinear los paneles lado a lado */
   display: flex;
-  gap: 24px; /* Espaciado estándar M3 entre paneles */
+  gap: 24px;
   height: 100%;
   width: 100%;
   box-sizing: border-box;
 }
 
-/* =========================================================================
-   El Panel Maestro (La Lista)
-   ========================================================================= */
 .list-panel {
-  /* 2. La Regla de Oro M3: Ancho fijo estricto para escaneo rápido */
   width: 360px;
   display: flex;
   flex-direction: column;
 
-  /* Permite que la lista tenga su propio scroll si hay muchas temporadas */
   overflow-y: auto;
-  padding-right: 8px; /* Pequeño respiro antes del gap */
+  padding-right: 8px;
 
   h2 {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     font-weight: 500;
-    /* M3: on-surface-variant es ideal para encabezados de sección secundarios */
     color: var(--md-sys-color-on-surface-variant);
-    margin: 0 0 16px 16px; /* Alinear con los elementos de la lista */
+    margin: 0 0 16px 16px;
     text-transform: uppercase;
     letter-spacing: 0.1em;
   }
 }
-
-/* =========================================================================
-   El Panel de Detalles (El Área de Enfoque)
-   ========================================================================= */
 .detail-panel {
-  /* 3. El Motor de Crecimiento: Toma todo el espacio restante */
   flex: 1;
   display: flex;
   flex-direction: column;
 
-  /* M3 Large Shape: Un contenedor sutil para el área de trabajo */
-  /* Utilizamos surface-container para diferenciarlo del fondo principal */
   background-color: var(--md-sys-color-surface-container);
   border-radius: 24px;
   padding: 32px;
-
-  /* Scroll independiente para que el formulario largo no mueva toda la página */
   overflow-y: auto;
-
-  h2 {
-    font-family: 'Roboto', sans-serif;
-    font-size: 24px;
-    font-weight: 400;
-    color: var(--md-sys-color-on-surface); /* M3: Texto principal */
-    margin: 0 0 24px 0;
+  .detail-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
     padding-bottom: 16px;
-    /* M3 Spec: outline-variant es el token correcto para líneas divisorias */
-    border-bottom: 1px solid var(--md-sys-color-outline-variant);
+
+    h2 {
+      font-family: 'Roboto', sans-serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--md-sys-color-on-surface);
+    }
+
+    .close-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      margin: 4px;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      color: var(--md-sys-color-on-surface-variant);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--md-sys-color-on-surface-variant);
+        opacity: 0;
+        transition: opacity 0.2s linear;
+      }
+
+      &:hover::before {
+        opacity: 0.08;
+      }
+
+      &:focus-visible::before {
+        opacity: 0.12;
+      }
+
+      &:active::before {
+        opacity: 0.12;
+      }
+
+      mat-icon {
+        font-size: 24px;
+        width: 24px;
+        height: 24px;
+        z-index: 1;
+      }
+    }
   }
 }
 
@@ -91,7 +121,6 @@
 
   .list-panel {
     width: 100%; /* Claim the full width of the mobile screen */
-    max-height: 40vh; /* Confine the list height so the detail panel stays visible */
     padding-right: 0;
   }
 

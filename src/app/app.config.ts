@@ -7,6 +7,7 @@ import {notificationInterceptor} from './core/utils/interceptors/notification-in
 
 export const appConfig: ApplicationConfig = {
   providers: [
+
     provideBrowserGlobalErrorListeners(),
     provideHttpClient(withInterceptors([currentSeasonInterceptor,notificationInterceptor])),
     provideRouter(routes,withViewTransitions()),

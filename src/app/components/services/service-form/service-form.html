@@ -4,26 +4,35 @@
   } @else {
     <legend>Crear servicio</legend>
   }
-  <label>Nombre:</label>
-  <input type="text" [formField]="serviceForm.name">
-  <label>Precio:</label>
-  <input type="number" [formField]="serviceForm.price">
-  <label>Tipo:</label>
-  <select [formField]="serviceForm.type">
-    @for(type of types();track $index){
-      <option [value]="type">{{type | serviceType}}</option>
-    }
-  </select>
+  <div class="m3-text-field">
+    <label>Nombre:</label>
+    <input type="text" [formField]="serviceForm.name">
+  </div>
+
+  <div class="m3-text-field">
+    <label>Precio:</label>
+    <input type="number" [formField]="serviceForm.price">
+  </div>
+  <div class="m3-select-field">
+    <label>Tipo:</label>
+    <select [formField]="serviceForm.type">
+      @for(type of types();track $index){
+        <option [value]="type">{{type | serviceType}}</option>
+      }
+    </select>
+  </div>
   @if(serviceForm().touched()){
     @for(error of allFormErrors(); track $index){
       <p class="error">{{error.message}}</p>
     }
   }
-  @if (editMode()) {
-    <input type="submit" value="Actualizar">
-  } @else {
-    <input type="submit" value="Crear">
+  <div class="m3-form-actions">
+    <button type="reset" (click)="editMode.set(false)" class="m3-button-text">Limpiar Formulario</button>
+    @if (editMode()){
+      <button type="submit" class="m3-button-filled">Actualizar servicio</button>
+    }@else{
+      <button type="submit" class="m3-button-filled">Crear servicio</button>
+    }
+  </div>
 
-  }
-  <input type="reset" (click)="editMode.set(false)">
 </form>

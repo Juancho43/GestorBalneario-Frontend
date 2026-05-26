@@ -11,6 +11,8 @@ import {ReportResponse} from '../../../core/DTO/ReportResponse';
 import {Paginator} from '../../paginator/paginator';
 import {PaymentEntity} from '../../../core/model/paymentEntity';
 import {PaymentManager} from '../../../core/services/Managers/payment-manager';
+import {FABButton} from '../../layout/fab-button/fab-button';
+import {SideSheet} from '../../layout/side-sheet/side-sheet';
 
 @Component({
   selector: 'app-payment-viewer',
@@ -18,6 +20,8 @@ import {PaymentManager} from '../../../core/services/Managers/payment-manager';
     ReportForm,
     PaymentsTable,
     Paginator,
+    FABButton,
+    SideSheet,
   ],
   templateUrl: './payment-viewer.html',
   styleUrl: './payment-viewer.scss',
@@ -27,6 +31,7 @@ export class PaymentViewer {
   private invoiceManager = inject(InvoiceManager);
   private paymentManager = inject(PaymentManager)
   private dialog = inject(Dialog);
+  sideSheetOpen = signal(true);
   protected paymentMethods = this.paymentManager.paymentMethods;
   query = signal<ReportQuery>({
     page:0,

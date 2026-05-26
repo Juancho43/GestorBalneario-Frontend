@@ -2,7 +2,7 @@
   @for (reservation of this.list(); track reservation.id) {
     <li class="m3-list-item">
       <mat-icon class="m3-leading-icon" aria-hidden="false" fontIcon="event"/>
-      <div class="m3-text-content">
+      <div class="m3-text-content" (click)="selectedReservation.emit(reservation)">
         <span class="m3-headline">{{ reservation.client?.name! }}</span>
         <span class="m3-supporting-text">{{reservation.state | reservationState}}</span>
         <span class="m3-supporting-text">Inicio: {{ reservation.dates.checkIn | date }}</span>

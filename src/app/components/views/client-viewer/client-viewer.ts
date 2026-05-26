@@ -1,4 +1,4 @@
-import {Component, inject, ViewChild} from '@angular/core';
+import {Component, computed, inject, signal, ViewChild} from '@angular/core';
 import {ClientManager} from '../../../core/services/Managers/client-manager.service';
 import {ClientEntity} from '../../../core/model/clientEntity';
 import {ClientDetails} from '../../clients/client-details/client-details';
@@ -7,30 +7,41 @@ import {ClientForm} from '../../clients/client-form/client-form';
 import {DeleteConfirmation} from '../../layout/delete-confirmation/delete-confirmation';
 import {MatDialog} from '@angular/material/dialog';
 import {IDeleteDialogData} from '../../../core/DTO/DeleteDialogData';
-import {Dialog} from '@angular/cdk/dialog';
-import {SeasonForm} from '../../seasons/season-form/season-form';
-
+import {FABButton} from '../../layout/fab-button/fab-button';
+import {OverlayHelper} from '../../../core/utils/overlay-helper';
+import {BreakpointObserver} from '@angular/cdk/layout';
+import {MatIcon} from '@angular/material/icon';
 @Component({
   selector: 'app-client-viewer',
   imports: [
     ClientListManagerComponent,
-    ClientForm,
-    SeasonForm,
-    ClientDetails
+    ClientDetails,
+    FABButton,
+    MatIcon,
   ],
   templateUrl: './client-viewer.html',
   styleUrl: './client-viewer.scss',
 })
 export class ClientViewer {
   private manager = inject(ClientManager);
-  private dialog = inject(Dialog);
+  singlePane = signal(false);
+  currentPane = signal('list');
+  showList = computed(()=>{
+    if(this.singlePane()) return true;
+    return this.currentPane() === 'list';
+
+  })
+  showDetails = computed(()=>{
+    if(this.singlePane()) return true;
+    return this.currentPane() === 'detail';
+  })
+  private overlayHelper = inject(OverlayHelper);
+  isOverlayOpen = false;
   private matDialog = inject(MatDialog);
-  @ViewChild('clientForm') form!: ClientForm;
-  protected currentClient = this.manager.currentClient
 
   protected openClientDetail(client: ClientEntity) {
+    this.currentPane.set('detail');
     this.setCurrentClient(client);
-    // this.dialog.open(ClientDetails);
   }
   protected setCurrentClient(client: ClientEntity) {
     this.manager.currentClient.set(client);
@@ -54,12 +65,27 @@ export class ClientViewer {
       }
     })
   }
+  constructor(){
+    (new BreakpointObserver()).observe(['(max-width: 800px)']).subscribe(result => {
+      if (result.matches) {
+        this.singlePane.set(false);
+      } else {
+        this.singlePane.set(true);
+      }
+    })
+  }
 
-  protected handleSubmit($event: ClientEntity) {
-    if (this.form.editMode()){
-      this.manager.updateClient($event);
-    }else{
-      this.manager.addClient($event);
+
+
+  protected handleFABButton() {
+    if (!this.isOverlayOpen){
+      this.isOverlayOpen = true;
+      const config = this.overlayHelper.getModalConfig();
+      const overlayRef = this.overlayHelper.open(ClientForm, config);
+      overlayRef.backdropClick().subscribe(() => {
+        overlayRef!.dispose();
+        this.isOverlayOpen = false
+      });
     }
   }
 }

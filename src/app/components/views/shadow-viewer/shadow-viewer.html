@@ -1,12 +1,10 @@
 <div class="single-layout">
   <h2>Mapa de carpas/sombrillas</h2>
-  <div class="content">
     <app-shadow-map
       (currentElement)="show($event)"
       initialState="viewing"
       [loadedShadows]="shadows()"
     />
-  </div>
 </div>
 <app-fab-menu
   (actionSelected)="handleMenuAction($event)"

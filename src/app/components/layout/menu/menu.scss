@@ -90,10 +90,7 @@
   }
   li:first-child { justify-content: center; padding-left: 0; }
 
-  button {
 
-  }
-  /* Collapse the pill to a perfect circle around the icon */
   button {
     justify-content: center;
     padding: 0;
@@ -110,26 +107,13 @@
     }
   }
 }
-@media screen and (min-width: 600px) and (max-width: 839px) {
-  .menu {
-    /* Tablets need the screen space for the detail panel. Force the rail width. */
-    width: var(--m3-rail-width) !important;
-    position: relative;
-    z-index: 10;
 
-    /* Ensure the text labels remain hidden to maintain the clean, circular icon layout */
-    span {
-      display: none;
+@media (max-width: 599px) {
+  .menu {
+    z-index: 100;
+    &.open-menu {
+      position: fixed;
     }
   }
-}
 
-/* 3. The Expanded Breakpoint (Desktops: 840px+)
-   Goal: Total user control. Allow smooth toggling between Rail and Full Drawer. */
-@media screen and (min-width: 840px) {
-  .menu {
-    position: relative; /* Sits perfectly inline with your layout panels */
-    z-index: 10;
-    border-right: 1px solid var(--md-sys-color-outline-variant); /* Subtle separation */
-  }
 }

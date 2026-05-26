@@ -4,6 +4,7 @@ import {MatIcon} from '@angular/material/icon';
 import {FilterButton} from '../../layout/filter-button/filter-button';
 import {ReservationForm} from '../reservation-form/reservation-form';
 import {OverlayHelper} from '../../../core/utils/overlay-helper';
+import {ReservationFilters} from '../reservation-filters/reservation-filters';
 
 @Component({
   selector: 'app-reservation-searcher',
@@ -26,7 +27,7 @@ export class ReservationSearcher {
     const config = this.overlay.getModalConfig();
     if(!this.filterOpen){
       this.filterOpen = true;
-      const overlayRef = this.overlay.open(ReservationForm, config);
+      const overlayRef = this.overlay.open(ReservationFilters, config);
       overlayRef.backdropClick().subscribe(() => {
         overlayRef!.dispose();
         this.filterOpen = false

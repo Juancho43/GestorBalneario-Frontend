@@ -7,10 +7,23 @@
       (clickedPayment)="openInvoiceDialog($event)"
     />
   }
+  <app-side-sheet
+    [isOpen]="sideSheetOpen()"
+    headline="Generar reporte de pagos"
+    (closed)="this.sideSheetOpen.set(false)">
 
-  <app-report-form
-    class="m3-side-sheet sheet-open"
-    [paymentMethods]="paymentMethods()"
-    (finalQuery)="query.set($event)"
-  />
+    <app-report-form
+      (dblclick)="this.sideSheetOpen.set(false)"
+      [class.sheet-open]="sideSheetOpen()"
+      [paymentMethods]="paymentMethods()"
+      (finalQuery)="query.set($event)"
+    />
+
+  </app-side-sheet>
+
 </div>
+<app-fab-button
+  icon="tune"
+  label="Generar reporte"
+  (touched)="this.sideSheetOpen.set(true)"
+/>

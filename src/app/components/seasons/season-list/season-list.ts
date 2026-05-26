@@ -9,7 +9,7 @@ import {CustomMenu} from '../../layout/custom-menu/custom-menu';
   imports: [
     MatIcon,
     DatePipe,
-    CustomMenu
+    CustomMenu,
   ],
   templateUrl: './season-list.html',
   styleUrl: './season-list.scss',

@@ -1,13 +1,23 @@
 <div class="list-detail-layout">
-  <section class="list-panel">
-    <h2>Temporadas configuradas</h2>
-    <app-season-list
-      [list]="seasonList()"
-      (edit)="handleEdit($event)"
-      (delete)="handleDelete($event)"
-    />
-  </section>
-  <section class="detail-panel">
-    <h2>Temporada a configurar</h2>
-  </section>
+  @if(this.showList()){
+    <section class="list-panel">
+      <h2>Temporadas configuradas</h2>
+      <app-season-list
+        [list]="seasonList()"
+        (edit)="handleEdit($event)"
+        (delete)="handleDelete($event)"
+      />
+    </section>
+  }
+  @if(this.showDetails()){
+    <section class="detail-panel">
+      <h2>Detalles de la temporada</h2>
+    </section>
+  }
+
 </div>
+<app-fab-button
+  icon="add"
+  label="Nueva temporada"
+  (touched)="handleFABButton()"
+/>

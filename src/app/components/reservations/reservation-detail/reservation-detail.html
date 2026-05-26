@@ -2,7 +2,6 @@
 @if (details){
   <div class="detail-container">
     <div class="detail" animate.enter="enter-animation">
-      <app-close-button (closeClicked)="closeModal()"/>
       <h3>Detalle de la reserva</h3>
       <h4>Fechas</h4>
       <p>{{details.reservation.dates.checkIn | date:'short'}}</p>

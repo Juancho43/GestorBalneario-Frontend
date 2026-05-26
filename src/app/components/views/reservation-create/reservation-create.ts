@@ -1,4 +1,4 @@
-import {Component, computed, inject, linkedSignal, signal, ViewChild} from '@angular/core';
+import {Component, inject, linkedSignal, signal, ViewChild} from '@angular/core';
 import {ReservationForm} from '../../reservations/reservation-form/reservation-form';
 import {ReservationManager} from '../../../core/services/Managers/reservation-manager.service';
 import {ShadowMap} from '../../shadows/shadow-map/shadow-map';
@@ -10,11 +10,9 @@ import {ClientManagerDialog} from '../../clients/client-searcher-dialog/client-m
 import {ClientManager} from '../../../core/services/Managers/client-manager.service';
 import {ReservationEntity} from '../../../core/model/reservationEntity';
 import {ShadowCard} from '../../shadows/shadow-card/shadow-card';
-import {ShadowMapHttp} from '../../../core/services/ShadowHttp/shadow-map-http';
-import {rxResource} from '@angular/core/rxjs-interop';
 import {ShadowEntity} from '../../../core/model/shadowEntity';
-import {ShadowMapDTO} from '../../../core/DTO/ShadowMapDTO';
-import {ReservationSideSheet} from '../../../core/components/reservation-side-sheet/reservation-side-sheet';
+import {FABButton} from '../../layout/fab-button/fab-button';
+import {SideSheet} from '../../layout/side-sheet/side-sheet';
 
 @Component({
   selector: 'app-reservation-create',
@@ -22,7 +20,9 @@ import {ReservationSideSheet} from '../../../core/components/reservation-side-sh
     ShadowMap,
     ReservationForm,
     ClientCard,
-    ShadowCard
+    ShadowCard,
+    FABButton,
+    SideSheet
   ],
   templateUrl: './reservation-create.html',
   styleUrl: './reservation-create.scss',
@@ -32,6 +32,7 @@ export class ReservationCreate {
   private shadowManager = inject(ShadowManager);
   private clientManager = inject(ClientManager);
   private matDialog = inject(Dialog);
+  sideSheetOpen = signal(false);
   @ViewChild('reservationForm') reservationForm!: ReservationForm;
   shadows = this.shadowManager.shadows;
   client = linkedSignal<ClientEntity>(()=>this.clientManager.currentClient() || {name: '', email: '', phone:''});
