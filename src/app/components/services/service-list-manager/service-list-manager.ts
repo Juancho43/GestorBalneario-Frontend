@@ -1,6 +1,6 @@
 import {Component, computed, inject, input, output, signal} from '@angular/core';
 import {serviceSearch, ServiceSearcher} from '../service-searcher/service-searcher';
-import {Paginator} from '../../paginator/paginator';
+import {Paginator} from '../../layout/paginator/paginator';
 import {ServiceCard} from '../service-card/service-card';
 import {ServiceManager} from '../../../core/services/Managers/service-manager';
 import {ServiceEntity} from '../../../core/model/serviceEntity';

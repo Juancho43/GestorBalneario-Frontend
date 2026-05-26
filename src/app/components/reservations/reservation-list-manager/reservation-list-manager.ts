@@ -1,5 +1,5 @@
 import {Component, computed, inject, output, signal} from '@angular/core';
-import {Paginator} from '../../paginator/paginator';
+import {Paginator} from '../../layout/paginator/paginator';
 import {ReservationCard} from '../reservation-card/reservation-card';
 import {ReservationSearcher} from '../reservation-searcher/reservation-searcher';
 import {ReservationList} from '../reservation-list/reservation-list';

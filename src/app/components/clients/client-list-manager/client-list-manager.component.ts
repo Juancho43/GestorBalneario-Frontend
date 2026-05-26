@@ -5,7 +5,7 @@ import {rxResource} from '@angular/core/rxjs-interop';
 import {ClientEntity} from '../../../core/model/clientEntity';
 import {ClientSearchHttp} from '../../../core/services/ClientHttp/client-search-http';
 import {ClientManager} from '../../../core/services/Managers/client-manager.service';
-import {Paginator} from '../../paginator/paginator';
+import {Paginator} from '../../layout/paginator/paginator';
 import {GetClientsHttp, PaginatedQuery} from '../../../core/services/ClientHttp/get-clients-http';
 
 @Component({

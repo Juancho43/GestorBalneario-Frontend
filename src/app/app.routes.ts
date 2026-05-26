@@ -1,18 +1,18 @@
 import { Routes } from '@angular/router';
-import ShadowViewer from './components/views/shadow-viewer/shadow-viewer';
-import {ReservationCreate} from './components/views/reservation-create/reservation-create';
+import ShadowViewer from './views/shadow-viewer/shadow-viewer';
+import {ReservationCreate} from './views/reservation-create/reservation-create';
 import MainMenu from './components/layout/main-menu/main-menu';
 import {AboutMenu} from './components/layout/about-menu/about-menu';
-import ShadowEditor from './components/views/shadow-editor/shadow-editor';
-import {ReservationViewer} from './components/views/reservation-viewer/reservation-viewer';
-import {ClientViewer} from './components/views/client-viewer/client-viewer';
-import {PaymentViewer} from './components/views/payment-viewer/payment-viewer';
-import PaymentEditor from './components/views/payment-editor/payment-editor';
-import {ServiceEditor} from './components/views/service-editor/service-editor';
+import ShadowEditor from './views/shadow-editor/shadow-editor';
+import {ReservationViewer} from './views/reservation-viewer/reservation-viewer';
+import {ClientViewer} from './views/client-viewer/client-viewer';
+import {PaymentViewer} from './views/payment-viewer/payment-viewer';
+import PaymentEditor from './views/payment-editor/payment-editor';
+import {ServiceEditor} from './views/service-editor/service-editor';
 import {currentSeasonGuard} from './core/utils/current-season-guard';
-import {SeasonsEditor} from './components/views/seasons-editor/seasons-editor';
-import {InvoiceEditor} from './components/views/invoice-editor/invoice-editor';
-import {InvoiceViewer} from './components/views/invoice-viewer/invoice-viewer';
+import {SeasonsEditor} from './views/seasons-editor/seasons-editor';
+import {InvoiceEditor} from './views/invoice-editor/invoice-editor';
+import {InvoiceViewer} from './views/invoice-viewer/invoice-viewer';
 
 export const routes: Routes = [
   {

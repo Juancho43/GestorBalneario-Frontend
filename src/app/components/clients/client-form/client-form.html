@@ -4,22 +4,31 @@
   } @else {
     <legend>Editando cliente</legend>
   }
-  <label for="name">Nombre:</label>
-  <input type="text" [formField]="clientForm.name"/>
-  <label for="email">Email:</label>
-  <input type="email" [formField]="clientForm.email" />
-  <label for="phone">Télefono:</label>
-  <input type="tel" [formField]="clientForm.phone"/>
+  <div class="m3-text-field">
+    <label for="name">Nombre:</label>
+    <input type="text" [formField]="clientForm.name"/>
+  </div>
+  <div class="m3-text-field">
+    <label for="email">Email:</label>
+    <input type="email" [formField]="clientForm.email" />
+  </div>
+  <div class="m3-text-field">
+    <label for="phone">Télefono:</label>
+    <input type="tel" [formField]="clientForm.phone"/>
+  </div>
 
   @if(clientForm().touched()){
     @for(error of allFormErrors(); track $index){
       <p class="error">{{error.message}}</p>
     }
   }
-  @if (!editMode()){
-    <input type="submit" value="Crear cliente" />
-  } @else {
-    <input type="submit" value="Actualizar cliente" />
-  }
-  <input type="reset" (click)="editMode.set(false)" value="Cancelar" />
+  <div class="m3-form-actions">
+
+    <button type="reset" (click)="editMode.set(false)" class="m3-button-text">Limpiar Formulario</button>
+    @if (editMode()){
+      <button type="submit" class="m3-button-filled">Actualizar cliente</button>
+    }@else{
+      <button type="submit" class="m3-button-filled">Crear cliente</button>
+    }
+  </div>
 </form>

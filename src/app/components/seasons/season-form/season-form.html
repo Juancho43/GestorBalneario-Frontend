@@ -4,27 +4,39 @@
   }@else{
     <legend>Crear temporada</legend>
   }
-  <label>Nombre</label>
-  <input type="text" [formField]="seasonForm.name">
-  <label>Fechas</label>
-  <input type="date" [formField]="seasonForm.startDate">
-  <input type="date" [formField]="seasonForm.endDate">
+  <div class="m3-text-field">
+    <label>Nombre</label>
+    <input type="text" [formField]="seasonForm.name">
+  </div>
+  <div class="m3-date-field">
+    <label>Fecha de comienzo:</label>
+    <input type="date" [formField]="seasonForm.startDate">
+  </div>
 
+  <div class="m3-date-field">
+    <label>Fecha de comienzo:</label>
+    <input type="date" [formField]="seasonForm.endDate">
+  </div>
   @if(seasonForm().touched()){
     @for(error of allFormErrors(); track $index){
       <p class="error">{{error.message}}</p>
     }
   }
-  @if (this.editMode()){
-    <input type="submit" value="Actualizar">
-  }@else{
+  @if(!this.editMode()){
     <mat-checkbox
       [(ngModel)]="cloneSeason"
       [ngModelOptions]="{standalone: true}"
     >
       Clonar carpas y servicios actuales
     </mat-checkbox>
-    <input type="submit" value="Guardar">
   }
-  <input type="reset" value="Cancelar" (click)="editMode.set(false)">
+  <div class="m3-form-actions">
+    <button type="reset" (click)="editMode.set(false)" class="m3-button-text">Limpiar Formulario</button>
+    @if (editMode()){
+      <button type="submit" class="m3-button-filled">Actualizar temporada</button>
+    }@else{
+      <button type="submit" class="m3-button-filled">Crear temporada</button>
+    }
+  </div>
+
 </form>
