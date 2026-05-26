@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CloseButton } from './close-button';
+import { SideSheet } from './side-sheet';
 
-describe('CloseButton', () => {
-  let component: CloseButton;
-  let fixture: ComponentFixture<CloseButton>;
+describe('SideSheet', () => {
+  let component: SideSheet;
+  let fixture: ComponentFixture<SideSheet>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CloseButton],
+      imports: [SideSheet],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CloseButton);
+    fixture = TestBed.createComponent(SideSheet);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

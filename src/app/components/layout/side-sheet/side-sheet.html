@@ -1,0 +1,23 @@
+<div
+  class="side-sheet"
+  [class.open]="isOpen()"
+>
+@if (isOpen()){
+
+    <div class="side-sheet-header">
+      <div class="header-left">
+        <h2 class="headline">{{ headline() }}</h2>
+      </div>
+      <button class="icon-btn close-btn" (click)="this.closed.emit()">
+        <mat-icon
+            fontIcon="close"
+          />
+      </button>
+    </div>
+
+    <div class="side-sheet-body">
+      <ng-content></ng-content>
+    </div>
+
+}
+</div>
