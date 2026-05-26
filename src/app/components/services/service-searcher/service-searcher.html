@@ -1,23 +1,19 @@
-<div class="search">
-  <form (ngSubmit)="handleSubmit()">
-    <label>Nombre</label>
-    <input
-      placeholder="Buscar por nombre"
-      type="text"
-      [ngModelOptions]="{standalone: true}"
-      [(ngModel)]="searchQuery().name"
-    >
-
-<!--    <label>Tipo</label>-->
-<!--    <select-->
-<!--      [ngModelOptions]="{standalone: true}"-->
-<!--      [(ngModel)]="searchQuery().type" >-->
-<!--      <option value="ALL">Todos</option>-->
-<!--      @for (serviceType of serviceTypes(); track $index){-->
-<!--        <option [value]="serviceType">{{serviceType| serviceType}}</option>-->
-<!--      }-->
-<!--    </select>-->
-
-    <button type="submit"><mat-icon fontIcon="search"/></button>
-  </form>
-</div>
+<app-search-bar>
+  <input
+    search-input
+    type="text"
+    name='seachTerm'
+    [(ngModel)]="searchTerm"
+    placeholder="Escribe aquí para buscar"
+  />
+  <app-filter-button
+    search-filter
+    (pressed)="handleFilter()"
+  />
+  <button
+    search-button
+    (click)="submitHandler()"
+    type="submit">
+    <mat-icon fontIcon="search"/>
+  </button>
+</app-search-bar>

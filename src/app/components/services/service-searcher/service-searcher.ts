@@ -1,8 +1,8 @@
-import {Component, input, output, signal} from '@angular/core';
+import {Component, output} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {ServiceTypePipe} from '../../../core/utils/pipes/service-type-pipe';
 import {MatIcon} from '@angular/material/icon';
-import {CustomMenu} from '../../layout/custom-menu/custom-menu';
+import {FilterButton} from '../../layout/filter-button/filter-button';
+import {SearchBar} from '../../layout/search-bar/search-bar';
 export interface serviceSearch{
   name: string
   type: string
@@ -12,16 +12,22 @@ export interface serviceSearch{
   imports: [
     MatIcon,
     FormsModule,
-    CustomMenu,
+    FilterButton,
+    SearchBar,
   ],
   templateUrl: './service-searcher.html',
   styleUrl: './service-searcher.scss',
 })
 export class ServiceSearcher {
-  readonly serviceTypes = input.required<string[]>();
-  searchQuery =signal<serviceSearch>({name:'',type:'ALL'})
-  search = output<serviceSearch>()
-  protected handleSubmit() {
-    this.search.emit(this.searchQuery())
+  requestSearch = output<any>();
+  protected searchTerm: string = '';
+
+  protected submitHandler() {
+    this.requestSearch.emit({query: this.searchTerm, limit: 10, page: 0});
+
+  }
+
+  protected handleFilter() {
+
   }
 }

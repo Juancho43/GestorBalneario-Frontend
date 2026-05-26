@@ -1,23 +1,20 @@
-.search {
-  form {
+app-search-bar {
+
+  .search-container {
     display: flex;
     align-items: center;
     height: 56px;
-    /* M3 Spec: Search bars use elevated surface containers, not accent colors */
     background-color: var(--md-sys-color-surface-container-high);
-    border-radius: 28px; /* M3 Fully rounded pill shape */
+    border-radius: 28px;
     padding: 0 8px 0 24px;
     margin-bottom: 24px;
-    /* Subtle base shadow. M3 prefers tonal elevation, but a light shadow is acceptable */
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
     transition: box-shadow 0.2s ease, background-color 0.2s ease;
     width: 100%;
     box-sizing: border-box;
     gap: 12px;
 
-    /* Elevación enfocada: El usuario toma acción */
     &:focus-within {
-      /* Sube un nivel de elevación tonal al enfocar */
       background-color: var(--md-sys-color-surface-container-highest);
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
     }
@@ -26,49 +23,49 @@
       display: none;
     }
 
-    /* 1. El Campo de Búsqueda Principal */
-    input[type="text"] {
-      flex: 1;
-      height: 100%;
-      border: none;
-      background: transparent;
-      outline: none;
-      font-family: 'Roboto', sans-serif;
-      font-size: 16px;
-      /* M3 Spec: El texto principal SIEMPRE va sobre su fondo correspondiente */
-      color: var(--md-sys-color-on-surface);
+    .input-wrapper {
+      input[type='text']{
+        flex: 1;
+        height: 100%;
+        border: none;
+        background: transparent;
+        outline: none;
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+        color: var(--md-sys-color-on-surface);
 
-      &::placeholder {
-        /* M3 Spec: Texto secundario o de ayuda */
-        color: var(--md-sys-color-on-surface-variant);
+        &::placeholder {
+          color: var(--md-sys-color-on-surface-variant);
+        }
       }
+
     }
 
-    /* 3. El Botón de Acción (Ícono) */
-    button[type="submit"] {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: transparent;
-      border: none;
-      /* M3 Spec: El ícono inactivo usa la variante on-surface */
-      color: var(--md-sys-color-on-surface-variant);
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      cursor: pointer;
-      transition: background-color 0.2s ease, color 0.2s ease;
+    .action-button {
+      button[type='submit'] {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: transparent;
+        border: none;
+        /* M3 Spec: El ícono inactivo usa la variante on-surface */
+        color: var(--md-sys-color-on-surface-variant);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background-color 0.2s ease, color 0.2s ease;
 
-      &:hover {
-        /* Efecto hover adaptativo: usamos surface-variant en lugar de rgba estático */
-        background-color: var(--md-sys-color-surface-variant);
-        /* Cambia al color primario del tema para indicar que es accionable */
-        color: var(--md-sys-color-primary);
+        &:hover {
+          background-color: var(--md-sys-color-surface-variant);
+          color: var(--md-sys-color-primary);
+        }
+
+        mat-icon {
+          font-size: 24px;
+        }
       }
 
-      mat-icon {
-        font-size: 24px;
-      }
     }
   }
 }

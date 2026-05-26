@@ -25,4 +25,8 @@ export class ReservationListManager {
   protected selectReservation(reservation: ReservationEntity){
     this.selectedReservation.emit(reservation);
   }
+  searchQuery = signal<any>(null);
+  protected handleSearch($event: any) {
+    this.searchQuery.set($event)
+  }
 }

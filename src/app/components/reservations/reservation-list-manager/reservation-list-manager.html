@@ -1,4 +1,6 @@
-<app-reservation-searcher/>
+<app-reservation-searcher
+  (finalQuery)="handleSearch($event)"
+/>
 <app-reservation-list
   (selectedReservation)="selectReservation($event)"
   [list]="reservations()"
