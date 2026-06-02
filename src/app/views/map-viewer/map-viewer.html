@@ -1,0 +1,12 @@
+<div class="single-layout">
+  <h2>Mapa</h2>
+    <app-shadow-map
+      (currentElement)="show($event)"
+      initialState="viewing"
+      [loadedShadows]="shadows()"
+    />
+</div>
+<app-fab-menu
+  (actionSelected)="handleMenuAction($event)"
+  [actions]="actions()"
+/>

@@ -1,0 +1,15 @@
+<div
+  cdkDropList
+  [cdkDropListData]=""
+  class="item-list">
+  @for (shadow of paleta; track $index) {
+    <div
+      class="item"
+      cdkDrag
+      [cdkDragData]="shadow"
+      (cdkDragEnded)="dropped($event, shadow)"
+    >
+      {{ shadow.name }}
+    </div>
+  }
+</div>

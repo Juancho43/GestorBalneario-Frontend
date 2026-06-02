@@ -1,0 +1,103 @@
+.dialog {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--md-sys-color-surface-container-high, var(--md-sys-color-background));
+  color: var(--md-sys-color-on-surface);
+
+  border-radius: 28px;
+  padding: 24px;
+  min-width: 320px;
+  max-width: 560px;
+  box-sizing: border-box;
+  gap: 24px;
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .headline {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      h3 {
+        margin: 0;
+        font-size: 24px;
+        font-weight: 400;
+        line-height: 32px;
+        color: var(--md-sys-color-on-surface);
+      }
+
+      .filter-icon {
+        color: var(--md-sys-color-secondary);
+      }
+    }
+
+    .close-icon {
+      cursor: pointer;
+      color: var(--md-sys-color-on-surface-variant);
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: var(--md-sys-color-on-surface);
+      }
+    }
+  }
+  .actions {
+    display: flex;
+    justify-content: flex-end; /* Pushes buttons to the right edge */
+    align-items: center;
+    gap: 8px; /* M3 standard: 8px spacing between action buttons */
+    margin-top: 24px; /* Ensure proper breathing room below your filter lists */
+
+    button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px; /* Precise spacing between the Material Icon and the text */
+      height: 40px; /* M3 standard target size for all standard buttons */
+      border-radius: 20px; /* M3 stadium shape (fully rounded corners) */
+      font-size: 14px; /* M3 Label Large typography */
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s cubic-bezier(0.2, 0, 0, 1); /* Crisp, standard M3 easing */
+
+      /* Optimize the icon size to match the Label Large text */
+      mat-icon {
+        font-size: 18px;
+        width: 18px;
+        height: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* 1. "Limpiar" - M3 Text Button (Low Emphasis) */
+      &:first-child {
+        background-color: transparent;
+        color: var(--md-sys-color-primary);
+        padding: 0 12px; /* Text buttons use slightly tighter horizontal padding */
+
+        &:hover {
+          /* M3 hover state often utilizes the surface-variant for text buttons */
+          background-color: var(--md-sys-color-surface-variant);
+        }
+      }
+
+      /* 2. "Aplicar" - M3 Filled Button (High Emphasis) */
+      &:last-child {
+        background-color: var(--md-sys-color-primary);
+        color: var(--md-sys-color-on-primary);
+        padding: 0 24px; /* Filled buttons require wider padding to anchor the text */
+
+        &:hover {
+          /* Subtle elevation and brightness shift to simulate M3 hover interaction */
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+          filter: brightness(1.08);
+        }
+      }
+    }
+  }
+}

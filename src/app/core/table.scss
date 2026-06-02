@@ -1,0 +1,40 @@
+.m3-table-container {
+  background-color: var(--md-sys-color-surface);
+  border-radius: 12px; /* Standard M3 large shape */
+  border: 1px solid var(--md-sys-color-outline-variant);
+  overflow-x: auto;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  font-family: Roboto, sans-serif;
+}
+
+.m3-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  color: var(--md-sys-color-on-surface);
+  th{
+    color: var(--md-sys-color-on-surface-variant);
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 16px;
+    border-bottom: 1px solid var(--md-sys-color-outline-variant);
+    white-space: nowrap;
+  }
+  td {
+    font-size: 0.875rem;
+    font-weight: 400;
+    padding: 16px;
+    border-bottom: 1px solid var(--md-sys-color-outline-variant);
+
+  }
+  tbody{
+    tr:last-child td {
+      border-bottom: none;
+    }
+    tr:hover{
+      background-color: var(--md-sys-color-on-secondary-container);
+      cursor: pointer;
+      color: white;
+    }
+  }
+}
