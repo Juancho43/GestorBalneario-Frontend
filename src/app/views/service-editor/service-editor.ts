@@ -1,21 +1,18 @@
-import {Component, computed, inject, linkedSignal, ViewChild} from '@angular/core';
+import {Component, computed, inject, linkedSignal} from '@angular/core';
 import {ServiceManager} from '../../core/services/Managers/service-manager';
 import {ServiceForm} from '../../components/services/service-form/service-form';
 import {ServiceEntity} from '../../core/model/serviceEntity';
 import {MatDialog} from '@angular/material/dialog';
-import {IDeleteDialogData} from '../../core/DTO/DeleteDialogData';
+import {IDeleteDialogData} from '../../core/Interfaces/DeleteDialogData';
 import {DeleteConfirmation} from '../../components/layout/delete-confirmation/delete-confirmation';
 import {ServiceListManager} from '../../components/services/service-list-manager/service-list-manager';
-import {ClientListManagerComponent} from '../../components/clients/client-list-manager/client-list-manager.component';
 import {FABButton} from '../../components/layout/fab-button/fab-button';
 import {OverlayHelper} from '../../core/utils/overlay-helper';
 
 @Component({
   selector: 'app-service-editor',
   imports: [
-    ServiceForm,
     ServiceListManager,
-    ClientListManagerComponent,
     FABButton
   ],
   templateUrl: './service-editor.html',

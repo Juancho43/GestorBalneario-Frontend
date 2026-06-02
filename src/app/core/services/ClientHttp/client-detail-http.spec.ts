@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { ClientDetailHttp } from './client-detail-http';
+import {ClientDetailHttp} from './client-detail-http';
 
 describe('ClientDetailHttp', () => {
   let service: ClientDetailHttp;

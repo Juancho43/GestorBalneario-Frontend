@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import * as fabric from 'fabric';
 import {CdkDragEnd} from '@angular/cdk/drag-drop';
+
 @Injectable({
   providedIn: 'root',
 })

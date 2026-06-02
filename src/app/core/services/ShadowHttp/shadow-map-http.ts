@@ -1,9 +1,9 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment.development';
-import {ShadowMapDTO} from '../../DTO/ShadowMapDTO';
+import {ShadowMapDTO} from '../../Interfaces/ShadowMapDTO';
 import {SeasonManager} from '../Managers/season-manager';
-import {ApiResponse} from '../../DTO/ApiResponse';
+import {ApiResponse} from '../../Interfaces/ApiResponse';
 
 @Injectable({
   providedIn: 'root',

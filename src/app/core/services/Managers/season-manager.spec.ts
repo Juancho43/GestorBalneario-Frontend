@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { SeasonManager } from './season-manager';
+import {SeasonManager} from './season-manager';
 
 describe('SeasonManager', () => {
   let service: SeasonManager;

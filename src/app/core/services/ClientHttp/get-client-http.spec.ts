@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { GetClientHttp } from './get-client-http';
+import {GetClientHttp} from './get-client-http';
 
 describe('GetClientHttp', () => {
   let service: GetClientHttp;

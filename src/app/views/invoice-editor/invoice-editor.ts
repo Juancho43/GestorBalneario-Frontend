@@ -2,7 +2,6 @@ import {Component, computed, inject, linkedSignal, signal, ViewChild} from '@ang
 import {InvoiceCard} from "../../components/invoices/invoice-card/invoice-card";
 import {InvoiceManager} from '../../core/services/Managers/invoice-manager.service';
 import {InvoiceItemForm} from '../../components/invoices/invoice-adjustment-form/invoice-item-form.component';
-import {ItemsTable} from '../../components/invoices/items-table/items-table';
 import {InvoiceItemsManager} from '../../core/services/Managers/invoice-items-manager';
 import {InvoiceItem} from '../../core/model/invoiceItemEntity';
 import {InvoiceAdjustment} from '../../components/invoices/invoice-adjustment/invoice-adjustment';

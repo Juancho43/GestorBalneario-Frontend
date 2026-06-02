@@ -1,8 +1,8 @@
-import { Routes } from '@angular/router';
-import ShadowViewer from './views/shadow-viewer/shadow-viewer';
+import {Routes} from '@angular/router';
+import MapViewer from './views/map-viewer/map-viewer';
 import {ReservationCreate} from './views/reservation-create/reservation-create';
-import MainMenu from './components/layout/main-menu/main-menu';
-import {AboutMenu} from './components/layout/about-menu/about-menu';
+import MainMenu from './views/main-menu/main-menu';
+import {AboutMenu} from './views/about-menu/about-menu';
 import ShadowEditor from './views/shadow-editor/shadow-editor';
 import {ReservationViewer} from './views/reservation-viewer/reservation-viewer';
 import {ClientViewer} from './views/client-viewer/client-viewer';
@@ -13,6 +13,7 @@ import {currentSeasonGuard} from './core/utils/current-season-guard';
 import {SeasonsEditor} from './views/seasons-editor/seasons-editor';
 import {InvoiceEditor} from './views/invoice-editor/invoice-editor';
 import {InvoiceViewer} from './views/invoice-viewer/invoice-viewer';
+import {ShadowViewer} from './views/shadow-viewer/shadow-viewer';
 
 export const routes: Routes = [
   {
@@ -28,6 +29,12 @@ export const routes: Routes = [
   {
     title: 'Mapa de sombras',
     path: 'map',
+    loadComponent: ()=> MapViewer
+  },
+
+  {
+    title:'Ver carpas',
+    path:'shadow-view',
     loadComponent: ()=> ShadowViewer
   },
   {

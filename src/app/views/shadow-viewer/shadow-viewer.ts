@@ -1,66 +1,39 @@
-import {Component, effect, inject, linkedSignal, signal} from '@angular/core';
-import {ShadowMap} from '../../components/shadows/shadow-map/shadow-map';
+import {Component, computed, signal} from '@angular/core';
+import {BreakpointObserver} from '@angular/cdk/layout';
+import {MatIcon} from '@angular/material/icon';
 import {ShadowDetail} from '../../components/shadows/shadow-detail/shadow-detail';
-import {ShadowEntity} from '../../core/model/shadowEntity';
-import {ShadowManager} from '../../core/services/Managers/shadow-manager.service';
-import {Dialog} from '@angular/cdk/dialog';
-import {FabAction, FABMenu} from '../../components/layout/fab-menu/fab-menu';
-import {Router} from '@angular/router';
+import {ShadowListManager} from '../../components/shadows/shadow-list-manager/shadow-list-manager';
 
 @Component({
   selector: 'app-shadow-viewer',
   imports: [
-    ShadowMap,
-    FABMenu,
+    MatIcon,
+    ShadowDetail,
+    ShadowListManager
   ],
   templateUrl: './shadow-viewer.html',
   styleUrl: './shadow-viewer.scss',
 })
-export default class ShadowViewer {
-  private shadowList = inject(ShadowManager);
-  private dialog = inject(Dialog);
-  private router = inject(Router);
-  shadows = linkedSignal(() => this.shadowList.shadows());
-  constructor() {
-    effect(() => {
-      this.shadowList.shadowsResource.reload();
-    });
-  }
-  currentShadow = linkedSignal(()=> this.shadows()[0] ||
-    {
-      id:'',
-      identifier:'',
-      coords:{
-        x:0,
-        y:0
+export class ShadowViewer {
+  protected selectedShadow = computed(()=> {return false})
+  protected singlePane = signal(false);
+  protected currentPane = signal('list');
+  protected showList = computed(()=>{
+    if(this.singlePane()) return true;
+    return this.currentPane() === 'list';
+
+  })
+  protected showDetails = computed(()=>{
+    if(this.singlePane()) return true;
+    return this.currentPane() === 'detail';
+  })
+  constructor(){
+    (new BreakpointObserver()).observe(['(max-width: 800px)']).subscribe(result => {
+      if (result.matches) {
+        this.singlePane.set(false);
+      } else {
+        this.singlePane.set(true);
       }
-    } as ShadowEntity);
-  protected readonly actions = signal<FabAction[]>([{
-    name: "Editar mapa",
-    icon: "edit",
-    tooltip: "Editar mapa"
-  },{
-    name:"Crear reserva",
-    icon:"add",
-    tooltip: "Crear reserva"
-  }]);
-
-
-  protected show($event: any) {
-   this.currentShadow.set(this.shadowList.getByCoords({x: $event.left, y: $event.top})!);
-   this.openShadowDetailDialog()
-  }
-
-  protected openShadowDetailDialog() {
-    this.shadowList.currentShadow.set(this.currentShadow());
-    this.dialog.open(ShadowDetail)
-  }
-
-  protected handleMenuAction($event: string) {
-      if($event ==='Editar mapa'){
-        this.router.navigateByUrl('shadow-editor')
-      }else if($event === 'Crear reserva'){
-        this.router.navigateByUrl('reservation-create')
-      }
+    })
   }
 }

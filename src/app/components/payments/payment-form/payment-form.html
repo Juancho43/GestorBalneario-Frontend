@@ -1,25 +1,35 @@
-<form (ngSubmit)="submitPayment()">
+<form class="dialog" (ngSubmit)="submitPayment()">
   @if (editMode()) {
     <legend>Editar pago</legend>
   } @else {
     <legend>Crear pago</legend>
   }
-  <label>Fecha</label>
-  <input type="date" [formField]="paymentForm.date"/>
-  <label>Monto</label>
-  <input type="number" [formField]="paymentForm.amount"/>
-  <label>Descripcion</label>
-  <input type="text" [formField]="paymentForm.description!"/>
+  <mat-form-field>
+    <mat-label>Fecha</mat-label>
+    <input matInput type="date" [formField]="paymentForm.date"/>
+  </mat-form-field>
+  <mat-form-field>
+    <label>Monto</label>
+    <input matInput type="number" [formField]="paymentForm.amount"/>
+  </mat-form-field>
+  <mat-form-field>
+    <label>Descripcion</label>
+    <input matInput type="text" [formField]="paymentForm.description!"/>
+  </mat-form-field>
   <label>Tipo de pago</label>
   <select [formField]="paymentForm.type">
     @for (method of paymentMethods();track $index){
       <option [value]="method"> {{method|paymentType}}</option>
     }
   </select>
-  <label>Cambio</label>
-  <input type="number" [formField]="paymentForm.changeType"/>
-  <label>Factura</label>
-  <input type="text" [value]="payment().invoiceId!" readonly/>
+  <mat-form-field>
+    <label>Cambio</label>
+    <input matInput type="number" [formField]="paymentForm.changeType"/>
+  </mat-form-field>
+  <mat-form-field>
+    <label>Factura</label>
+    <input matInput type="text" [value]="payment().invoiceId!" readonly/>
+  </mat-form-field>
   <label>Total:</label>
   <p>{{total() | currency}}</p>
   @if(paymentForm().touched()){

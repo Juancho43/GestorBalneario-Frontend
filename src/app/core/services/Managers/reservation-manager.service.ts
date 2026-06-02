@@ -1,51 +1,44 @@
-import {inject, Injectable, linkedSignal, signal} from '@angular/core';
+import {computed, inject, Injectable, signal} from '@angular/core';
 import {ReservationEntity} from '../../model/reservationEntity';
-import {GetClientsHttp, PaginatedQuery} from '../ClientHttp/get-clients-http';
-import {CreateClientHttp} from '../ClientHttp/create-client-http';
-import {EditClientHttp} from '../ClientHttp/edit-client-http';
-import {DeleteClientHttp} from '../ClientHttp/delete-client-http';
-import {GetAllReservationsHttp} from '../ReservationHttp/get-all-reservations-http';
 import {CreateReservationHttp} from '../ReservationHttp/create-reservation-http';
 import {EditReservationHttp} from '../ReservationHttp/edit-reservation-http';
 import {DeleteReservationHttp} from '../ReservationHttp/delete-reservation-http';
 import {rxResource} from '@angular/core/rxjs-interop';
-import {ClientEntity} from '../../model/clientEntity';
-import {GetActiveReservationsHttp} from '../ReservationHttp/get-active-reservations-http';
+import {SearchQuery} from '../../Interfaces/SearchInterfaces';
+import {ReservationSearch} from '../ReservationHttp/reservation-search.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ReservationManager {
+  private searchHttp = inject(ReservationSearch)
   private create = inject(CreateReservationHttp);
   private update = inject(EditReservationHttp)
   private delete = inject(DeleteReservationHttp);
-  private  getActiveHttp = inject(GetActiveReservationsHttp);
-  private allReservationsHttp = inject(GetAllReservationsHttp);
-  private activeResource = rxResource({
-    params: ()=>this.query(),
-    stream:({params}) => this.getActiveHttp.get(params)
+
+
+  searchQuery = signal<SearchQuery>({
+    pagination: {
+      limit: 10,
+      page:0,
+    },
+    search:{
+      query: '',
+      filters:{
+        orderDirection:'asc',
+        state:'All'
+      }
+    }
   })
-  private query = signal<PaginatedQuery>({ query:'',page:0,pageSize:10});
-  private reservationsResource= rxResource({
-    params: ()=>this.query(),
-    stream:({params})=> this.allReservationsHttp.get(params)
+  searchResource = rxResource({
+    params: () => this.searchQuery(),
+    stream:({params}) => this.searchHttp.execute(params)
+  })
+  reservationsToDisplay = computed(()=>{
+    return this.searchResource.isLoading() || this.searchResource.error() ? [] : this.searchResource.value()?.data!
   })
   currentReservation = signal<ReservationEntity| null>(null);
-  /*
-  * A list of the current reservations. It is updated when a shadow is added, updated or deleted.
-  * */
-  private reservations = linkedSignal(()=>
-    this.reservationsResource.isLoading() || this.reservationsResource.error() ? [] : this.reservationsResource.value()!.data!
-  )
-  private activeReservations = linkedSignal(()=>
-    this.activeResource.isLoading() || this.activeResource.error() ? [] : this.activeResource.value()!.data!
-  )
-  getActive(){
-    return this.activeReservations();
-  }
-  getList(){
-    return this.reservations();
-  }
+
 
   addReservation(reservation:ReservationEntity) {
     this.create.create(reservation).subscribe(r=>{
@@ -62,10 +55,5 @@ export class ReservationManager {
   deleteReservation(entity: ReservationEntity){
     this.delete.delete(entity.id!).subscribe();
   }
-  getQuery(){
-    return this.query()
-  }
-  updateQuery(query: PaginatedQuery){
-    this.query.set(query);
-  }
+
 }

@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { SetActiveSeasonHttp } from './set-active-season-http';
+import {SetActiveSeasonHttp} from './set-active-season-http';
 
 describe('SetActiveSeasonHttp', () => {
   let service: SetActiveSeasonHttp;

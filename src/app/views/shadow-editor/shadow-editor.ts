@@ -1,9 +1,9 @@
-import {Component, computed, effect, inject, linkedSignal, signal, ViewChild} from '@angular/core';
+import {Component, effect, inject, linkedSignal, signal, ViewChild} from '@angular/core';
 import {ShadowManager} from '../../core/services/Managers/shadow-manager.service';
 import {ShadowMap} from '../../components/shadows/shadow-map/shadow-map';
 import {ShadowEntity} from '../../core/model/shadowEntity';
 import {CdkDragEnd} from '@angular/cdk/drag-drop';
-import {ShadowList} from '../../components/shadows/shadow-list/shadow-list';
+import {ShadowTypeList} from '../../components/shadows/shadow-list/shadow-type-list.component';
 import {ShadowForm} from '../../components/shadows/shawdow-form/shadow-form.component';
 import {Dialog} from '@angular/cdk/dialog';
 import {NewShadow} from '../../components/shadows/new-shadow/new-shadow';
@@ -14,7 +14,7 @@ import {Router} from '@angular/router';
 @Component({
   selector: 'app-shadow-editor',
   imports: [
-    ShadowList,
+    ShadowTypeList,
     ShadowMap,
     ShadowForm,
     FABMenu,

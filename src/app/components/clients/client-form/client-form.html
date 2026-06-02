@@ -1,21 +1,21 @@
-<form (ngSubmit)="submitted()">
+<form class="dialog" (ngSubmit)="submitted()">
   @if (!editMode()){
     <legend>Crear cliente</legend>
   } @else {
     <legend>Editando cliente</legend>
   }
-  <div class="m3-text-field">
-    <label for="name">Nombre:</label>
-    <input type="text" [formField]="clientForm.name"/>
-  </div>
-  <div class="m3-text-field">
-    <label for="email">Email:</label>
-    <input type="email" [formField]="clientForm.email" />
-  </div>
-  <div class="m3-text-field">
-    <label for="phone">Télefono:</label>
-    <input type="tel" [formField]="clientForm.phone"/>
-  </div>
+  <mat-form-field>
+    <mat-label>Nombre</mat-label>
+    <input matInput type="text" [formField]="clientForm.name"/>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input matInput type="email" [formField]="clientForm.email" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Télefono</mat-label>
+    <input matInput type="tel" [formField]="clientForm.phone"/>
+  </mat-form-field>
 
   @if(clientForm().touched()){
     @for(error of allFormErrors(); track $index){
@@ -23,7 +23,6 @@
     }
   }
   <div class="m3-form-actions">
-
     <button type="reset" (click)="editMode.set(false)" class="m3-button-text">Limpiar Formulario</button>
     @if (editMode()){
       <button type="submit" class="m3-button-filled">Actualizar cliente</button>

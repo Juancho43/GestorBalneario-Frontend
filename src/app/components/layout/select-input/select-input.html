@@ -1,0 +1,10 @@
+<mat-form-field class="custom-select">
+  <mat-label>{{this.label()}}</mat-label>
+  <mat-select [value]="currentOption()" >
+    @for(option of options(); track $index) {
+      <mat-option [value]="option" (click)="chooseOption(option)">
+        {{this.optionsToDisplay()[$index]}}
+      </mat-option>
+    }
+  </mat-select>
+</mat-form-field>

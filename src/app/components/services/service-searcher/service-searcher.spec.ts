@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ServiceSearcher } from './service-searcher';
+import {ServiceSearcher} from './service-searcher';
 
 describe('ServiceSearcher', () => {
   let component: ServiceSearcher;

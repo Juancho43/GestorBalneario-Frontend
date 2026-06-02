@@ -1,7 +1,7 @@
-import { TestBed } from '@angular/core/testing';
-import { HttpInterceptorFn } from '@angular/common/http';
+import {TestBed} from '@angular/core/testing';
+import {HttpInterceptorFn} from '@angular/common/http';
 
-import { currentSeasonInterceptor } from './current-season-interceptor';
+import {currentSeasonInterceptor} from './current-season-interceptor';
 
 describe('currentSeasonInterceptor', () => {
   const interceptor: HttpInterceptorFn = (req, next) =>

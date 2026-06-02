@@ -1,4 +1,4 @@
-import {Component, computed, inject, signal, ViewChild} from '@angular/core';
+import {Component, computed, inject, signal} from '@angular/core';
 import {ClientManager} from '../../core/services/Managers/client-manager.service';
 import {ClientEntity} from '../../core/model/clientEntity';
 import {ClientDetails} from '../../components/clients/client-details/client-details';
@@ -6,11 +6,12 @@ import {ClientListManagerComponent} from '../../components/clients/client-list-m
 import {ClientForm} from '../../components/clients/client-form/client-form';
 import {DeleteConfirmation} from '../../components/layout/delete-confirmation/delete-confirmation';
 import {MatDialog} from '@angular/material/dialog';
-import {IDeleteDialogData} from '../../core/DTO/DeleteDialogData';
+import {IDeleteDialogData} from '../../core/Interfaces/DeleteDialogData';
 import {FABButton} from '../../components/layout/fab-button/fab-button';
 import {OverlayHelper} from '../../core/utils/overlay-helper';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {MatIcon} from '@angular/material/icon';
+
 @Component({
   selector: 'app-client-viewer',
   imports: [

@@ -4,31 +4,24 @@
   } @else {
     <legend>Crear Reserva</legend>
   }
-  <legend>Fechas</legend>
-  <div class="m3-date-field">
-    <label>CheckIn</label>
-    <input type="datetime-local" [formField]="reservationForm.dates.checkIn">
-  </div>
-  <div class="m3-date-field">
-    <label>CheckOut</label>
-    <input type="datetime-local" [formField]="reservationForm.dates.checkOut">
-  </div>
+  <app-date-input-picker
+  label="Comienzo"
+  (value)="this.handleCheckInDate($event)"
+  />
+  <app-date-input-picker
+    label="Finalización"
+    (value)="this.handleCheckOutDate($event)"
+  />
   @if(!editMode()){
-    <div class="m3-text-field">
-      <label>Precio</label>
-      <input type="number" [formField]="reservationForm.price">
-    </div>
-    <div class="m3-select-fielde">
-      <label>Servicio</label>
-      <select
-        (change)="handleServiceChange($event)"
-        [formField]="reservationForm.serviceId!" >
-        @for (service of services(); track $index){
-          <option [value]="service.id">{{service.name}}</option>
-        }
-      </select>
-      <mat-icon class="trailing-icon" fontIcon="arrow_drop_down"/>
-    </div>
+    <app-select-input
+      label="Servicio"
+      [options]="servicesToDisplay()"
+      (selectedOption)="handleServiceChange($event)"
+    />
+    <mat-form-field>
+      <mat-label>Precio</mat-label>
+      <input matInput type="number" [formField]="reservationForm.price">
+    </mat-form-field>
     <p>Cliente: {{reservation().client?.name}}</p>
     <p>Carpa: {{reservation().shadow?.identifier}}</p>
   }
@@ -40,7 +33,6 @@
   }
 
   <div class="m3-form-actions">
-
     <button type="reset" (click)="handleReset()" class="m3-button-text">Limpiar Formulario</button>
     @if (editMode()){
       <button type="submit" class="m3-button-filled">Actualizar reserva</button>

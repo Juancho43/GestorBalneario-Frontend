@@ -1,0 +1,50 @@
+<div class="dialog">
+  <section class="header">
+    <div class="headline">
+      <mat-icon class="filter-icon">filter_list</mat-icon>
+      <h3>Filtros servicios</h3>
+    </div>
+    <mat-icon class="close-icon" (click)="close()">close</mat-icon>
+  </section>
+
+  <section class="filter-options">
+    <article>
+      <h4>Ordenar por</h4>
+      <ul>
+        @for (option of orderOptions; track option.value) {
+          <li>
+            <button
+              (click)="orderBy.set(option.value)"
+              [class.active]="orderBy() === option.value">
+              {{ option.label }}
+            </button>
+          </li>
+        }
+      </ul>
+    </article>
+    <article>
+      <h4>Dirección</h4>
+      <ul>
+        @for (option of directionOptions; track option.value) {
+          <li>
+            <button
+              (click)="orderDirection.set($any(option.value))"
+              [class.active]="orderDirection() === option.value">
+              {{ option.label }}
+            </button>
+          </li>
+        }
+      </ul>
+    </article>
+  </section>
+  <section class="actions">
+    <button (click)="clearFilters()">
+      <mat-icon>filter_list_off</mat-icon>
+      Limpiar
+    </button>
+    <button (click)="applyFilters()">
+      <mat-icon fontIcon="done"/>
+      Aplicar
+    </button>
+  </section>
+</div>

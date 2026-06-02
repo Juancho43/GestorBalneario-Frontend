@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ShadowDetail } from './shadow-detail';
+import {ShadowDetail} from './shadow-detail';
 
 describe('ShadowDetail', () => {
   let component: ShadowDetail;

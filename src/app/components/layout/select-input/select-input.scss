@@ -1,0 +1,15 @@
+@use '@angular/material' as mat;
+
+.custom-select {
+  @include mat.select-overrides((
+    panel-background-color:white,
+  ));
+}
+
+.dark {
+  .custom-select {
+    @include mat.select-overrides((
+      panel-background-color:black,
+    ));
+  }
+}

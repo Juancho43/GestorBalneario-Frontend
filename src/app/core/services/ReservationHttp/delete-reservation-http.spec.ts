@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { DeleteReservationHttp } from './delete-reservation-http';
+import {DeleteReservationHttp} from './delete-reservation-http';
 
 describe('DeleteReservationHttp', () => {
   let service: DeleteReservationHttp;

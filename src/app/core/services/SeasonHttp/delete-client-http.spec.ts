@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { DeleteSeasonHttp } from './delete-season-http.service';
+import {DeleteSeasonHttp} from './delete-season-http.service';
 
 describe('DeleteClientHttp', () => {
   let service: DeleteSeasonHttp;

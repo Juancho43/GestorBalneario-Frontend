@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { DeleteClientHttp } from './delete-client-http';
+import {DeleteClientHttp} from './delete-client-http';
 
 describe('DeleteClientHttp', () => {
   let service: DeleteClientHttp;

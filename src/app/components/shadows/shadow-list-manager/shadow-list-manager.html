@@ -1,0 +1,10 @@
+<app-shadow-searcher
+(finalQuery)="handleSearch($event)"
+/>
+<app-shadow-list
+  [list]="shadows()"
+/>
+<app-paginator
+  [query]="query()"
+  (pageChange)="handlePage($event)"
+/>

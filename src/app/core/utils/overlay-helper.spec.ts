@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { OverlayHelper } from './overlay-helper';
+import {OverlayHelper} from './overlay-helper';
 
 describe('OverlayHelper', () => {
   let service: OverlayHelper;

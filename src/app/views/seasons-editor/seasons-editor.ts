@@ -1,33 +1,33 @@
-import {Component, computed, inject,signal, ViewChild} from '@angular/core';
+import {Component, computed, inject, signal, ViewChild} from '@angular/core';
 import {SeasonForm} from '../../components/seasons/season-form/season-form';
 import {SeasonEntity} from '../../core/model/SeasonEntity';
 import {FormsModule} from '@angular/forms';
 import {SeasonManager} from '../../core/services/Managers/season-manager';
-import {SeasonList} from '../../components/seasons/season-list/season-list';
 import {MatDialog} from '@angular/material/dialog';
-import {IDeleteDialogData} from '../../core/DTO/DeleteDialogData';
+import {IDeleteDialogData} from '../../core/Interfaces/DeleteDialogData';
 import {DeleteConfirmation} from '../../components/layout/delete-confirmation/delete-confirmation';
 import {FABButton} from '../../components/layout/fab-button/fab-button';
 import {OverlayHelper} from '../../core/utils/overlay-helper';
 import {BreakpointObserver} from '@angular/cdk/layout';
+import {SeasonListManager} from '../../components/seasons/season-list-manager/season-list-manager';
 
 @Component({
   selector: 'app-seasons-editor',
   imports: [
     FormsModule,
-    SeasonList,
-    FABButton
+    FABButton,
+    SeasonListManager
   ],
   templateUrl: './seasons-editor.html',
   styleUrl: './seasons-editor.scss',
 })
 export class SeasonsEditor {
   private manager = inject(SeasonManager);
+  seasonList =  computed(()=>this.manager.getList());
   private dialog = inject(MatDialog);
   @ViewChild('seasonForm') form!: SeasonForm;
   isOverlayOpen = false;
   private overlayHelper = inject(OverlayHelper);
-  seasonList =  computed(()=>this.manager.getList());
   seletedSeason = signal<SeasonEntity | undefined>(undefined);
   formattedSeason = computed(() => {
     const s = this.seletedSeason();

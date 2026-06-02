@@ -1,18 +1,19 @@
-import {computed, effect, inject, Injectable, linkedSignal, signal} from '@angular/core';
+import {computed, effect, inject, Injectable, signal} from '@angular/core';
 import {ShadowEntity} from '../../model/shadowEntity';
 import {CreateShadowHttp} from '../ShadowHttp/create-shadow-http';
 import {UpdateShadowHttp} from '../ShadowHttp/update-shadow-http';
 import {DeleteShadowHttp} from '../ShadowHttp/delete-shadow-http';
-import {GetCurrentShadowsHttp} from '../ShadowHttp/get-current-shadows-http';
 import {rxResource} from '@angular/core/rxjs-interop';
-import {GetShadowHttp} from '../ShadowHttp/get-shadow-http';
 import {ShadowMapHttp} from '../ShadowHttp/shadow-map-http';
 import {SeasonManager} from './season-manager';
+import {ShadowSearch} from '../ShadowHttp/shadow-search';
+import {SearchQuery} from '../../Interfaces/SearchInterfaces';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ShadowManager {
+  private searchHttp = inject(ShadowSearch);
   private create = inject(CreateShadowHttp);
   private update = inject(UpdateShadowHttp);
   private delete = inject(DeleteShadowHttp);
@@ -21,6 +22,28 @@ export class ShadowManager {
   private season = this.currentSeason.currentSeason;
   shadowsResource= rxResource({
     stream:()=> this.shadowMap.get()
+  })
+  searchQuery = signal<SearchQuery>({
+    pagination: {
+      limit: 10,
+      page:0,
+    },
+    search:{
+      query: '',
+      filters:{
+        type: '',
+        orderDirection:'asc',
+        state:''
+      }
+    }
+  })
+  searchResource = rxResource({
+    params: () => this.searchQuery(),
+    stream:({params}) => this.searchHttp.execute(params)
+  })
+
+  shadowsToDisplay = computed(()=>{
+    return this.searchResource.isLoading() || this.searchResource.error() ? [] : this.searchResource.value()?.data!
   })
 
   shadows = computed(() =>{
@@ -90,13 +113,9 @@ export class ShadowManager {
       this.shadowsResource.reload();
     });
   }
-  /*
-  * Get shadow list.
-  * */
+
   getList(){
     return this.shadows();
   }
-  setList(shadows: ShadowEntity[]){
-    // this.shadows.set(shadows);
-  }
+
 }

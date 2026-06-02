@@ -1,8 +1,8 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {InvoiceDetail} from '../../DTO/InvoiceDetailDTO';
+import {InvoiceDetail} from '../../Interfaces/InvoiceDetailDTO';
 import {environment} from '../../../../environments/environment.development';
-import {ApiResponse} from '../../DTO/ApiResponse';
+import {ApiResponse} from '../../Interfaces/ApiResponse';
 
 @Injectable({
   providedIn: 'root',

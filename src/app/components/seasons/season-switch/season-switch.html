@@ -1,6 +1,12 @@
-<div class=" detail">
+<div class="dialog">
+  <section class="header">
+    <div class="headline">
+      <h3>Cambiar temporada</h3>
+    </div>
+    <mat-icon class="close-icon" (click)="close()">close</mat-icon>
+  </section>
+
   @let list = this.seasons!;
-  <div class="row">
     <div>
       @if(list) {
         @for (season of list;track $index) {
@@ -14,5 +20,4 @@
         }
       }
     </div>
-  </div>
 </div>

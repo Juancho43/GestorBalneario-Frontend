@@ -1,48 +1,55 @@
-import {Component, input, OnInit, output, signal} from '@angular/core';
-import {ReportQuery} from '../../../core/DTO/ReportQuery';
-import {form, FormField} from '@angular/forms/signals';
+import {Component, computed, input, linkedSignal, output, signal} from '@angular/core';
+import {ReportQuery} from '../../../core/Interfaces/ReportQuery';
 import {FormsModule} from '@angular/forms';
 import {PaymentTypePipe} from '../../../core/utils/pipes/payment-type-pipe';
-import {MatIcon} from '@angular/material/icon';
+import {SelectInput} from '../../layout/select-input/select-input';
+import {DateInputPicker} from '../../layout/date-input-picker/date-input-picker';
 
 @Component({
   selector: 'app-report-form',
   imports: [
     FormsModule,
-    FormField,
-    PaymentTypePipe,
-    MatIcon
+    SelectInput,
+    DateInputPicker
   ],
   templateUrl: './report-form.html',
   styleUrl: './report-form.scss',
 })
-export class ReportForm implements OnInit {
-
+export class ReportForm{
   readonly paymentMethods = input.required<string[]>()
-  query = signal<ReportQuery>({
-    page:0,
-    limit:10,
-    type: 'ALL',
-    start: '',
-    end:''
-  });
-
-  queryForm = form(this.query);
+  pipe = new PaymentTypePipe()
+  paymentOptions = computed(() => {
+    if(this.paymentMethods()){
+      let array = this.paymentMethods();
+      array.push('ALL')
+      return array;
+    }
+    return [];
+  })
+  starDate  = linkedSignal(()=>new Date());
+  endDate =linkedSignal(()=>new Date());
+  page = signal(0);
+  pageSize = signal(10);
+  paymentType = signal('ALL')
+  query = computed<ReportQuery>(()=>({
+    page:this.page(),
+    limit:this.pageSize(),
+    type: this.paymentType(),
+    start: this.starDate(),
+    end: this.endDate(),
+  }));
 
   finalQuery = output<ReportQuery>();
-  ngOnInit() {
-
-    this.query.update(prev => {
-      return{
-        ...prev,
-        start: new Date(new Date().setHours(0, 0, 0, 0)).toISOString().split('T')[0],
-        end: new Date(new Date().setHours(23, 59, 59, 999)).toISOString().split('T')[0],
-      }    })
-
+  submittedForm(){
+    this.finalQuery.emit(this.query());
   }
 
-  submittedForm(){
-    console.log(this.query());
-    this.finalQuery.emit(this.query());
+
+  protected handleEndDate($event: string) {
+    this.endDate.set(new Date($event))
+  }
+
+  protected handleStartDate($event: string) {
+    this.starDate.set(new Date($event))
   }
 }

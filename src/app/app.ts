@@ -4,10 +4,17 @@ import Menu from './components/layout/menu/menu';
 import {AppBar} from './components/layout/app-bar/app-bar';
 import {Theme} from './core/services/other/theme';
 import {BreakpointObserver} from '@angular/cdk/layout';
+import {MAT_DATE_LOCALE} from '@angular/material/core';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, AppBar, Menu],
+  imports: [RouterOutlet, AppBar, Menu,],
+  providers: [
+    // The locale would typically be provided on the root module of your application. We do it at
+    // the component level here, due to limitations of our example generation script.
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' }
+
+  ],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

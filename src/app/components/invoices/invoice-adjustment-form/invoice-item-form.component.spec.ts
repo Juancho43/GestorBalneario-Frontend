@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { InvoiceItemForm } from './invoice-item-form.component';
+import {InvoiceItemForm} from './invoice-item-form.component';
 
 describe('InvoiceAdjustmentForm', () => {
   let component: InvoiceItemForm;

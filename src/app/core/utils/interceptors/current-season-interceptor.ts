@@ -1,4 +1,4 @@
-import { HttpInterceptorFn } from '@angular/common/http';
+import {HttpInterceptorFn} from '@angular/common/http';
 import {SeasonManager} from '../../services/Managers/season-manager';
 import {inject} from '@angular/core';
 import {USE_SEASON_HEADER} from './UseSeasonHeader';

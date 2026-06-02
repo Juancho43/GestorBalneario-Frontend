@@ -1,4 +1,6 @@
-<app-client-searcher (requestSearch)="searchHandler($event)"/>
+<app-client-searcher
+  (finalQuery)="handleSearch($event)"
+/>
 <app-client-list
   [actions]="actions()"
   [list]="list()"
@@ -7,6 +9,6 @@
   (delete)="deleteClient($event)"
 />
 <app-paginator
-  (pageChange)="changePage($event)"
+  (pageChange)="handlePage($event)"
   [query]="query()"
 />

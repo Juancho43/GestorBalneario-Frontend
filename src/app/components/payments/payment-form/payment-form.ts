@@ -5,6 +5,7 @@ import {InvoiceEntity} from '../../../core/model/InvoiceEntity';
 import {FormsModule} from '@angular/forms';
 import {PaymentTypePipe} from '../../../core/utils/pipes/payment-type-pipe';
 import {CurrencyPipe} from '@angular/common';
+import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
 
 @Component({
   selector: 'app-payment-form',
@@ -12,7 +13,10 @@ import {CurrencyPipe} from '@angular/common';
     FormField,
     FormsModule,
     PaymentTypePipe,
-    CurrencyPipe
+    CurrencyPipe,
+    MatFormField,
+    MatInput,
+    MatLabel
   ],
   templateUrl: './payment-form.html',
   styleUrl: './payment-form.scss',

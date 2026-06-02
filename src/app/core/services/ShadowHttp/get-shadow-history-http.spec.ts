@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { GetShadowHistoryHttp } from './get-shadow-history-http';
+import {GetShadowHistoryHttp} from './get-shadow-history-http';
 
 describe('GetShadowHistoryHttp', () => {
   let service: GetShadowHistoryHttp;

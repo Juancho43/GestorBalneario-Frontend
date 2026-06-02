@@ -1,4 +1,4 @@
-import { PaymentTypePipe } from './payment-type-pipe';
+import {PaymentTypePipe} from './payment-type-pipe';
 
 describe('PaymentTypePipe', () => {
   it('create an instance', () => {

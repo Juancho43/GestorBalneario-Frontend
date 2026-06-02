@@ -3,7 +3,7 @@ import {HttpClient, HttpContext} from '@angular/common/http';
 import {ServiceEntity} from '../../model/serviceEntity';
 import {environment} from '../../../../environments/environment.development';
 import {USE_SEASON_HEADER} from '../../utils/interceptors/UseSeasonHeader';
-import {ApiResponse} from '../../DTO/ApiResponse';
+import {ApiResponse} from '../../Interfaces/ApiResponse';
 
 @Injectable({
   providedIn: 'root',

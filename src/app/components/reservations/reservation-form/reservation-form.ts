@@ -9,7 +9,10 @@ import {ShadowEntity} from '../../../core/model/shadowEntity';
 import {ServiceEntity} from '../../../core/model/serviceEntity';
 import {minDateValidator} from '../../../core/utils/validator/dateValidator';
 import {ServiceManager} from '../../../core/services/Managers/service-manager';
-import {MatIcon} from '@angular/material/icon';
+import {MatInput} from '@angular/material/input';
+import {DateInputPicker} from '../../layout/date-input-picker/date-input-picker';
+import {SelectInput} from '../../layout/select-input/select-input';
+
 export function requireValidSelection(errorKind: string, errorMessage: string) {
   return (context: any) => {
     if (context.value?.id === 'none') {
@@ -21,7 +24,7 @@ export function requireValidSelection(errorKind: string, errorMessage: string) {
 
 @Component({
   selector: 'app-reservation-form',
-  imports: [MatFormFieldModule, MatDatepickerModule, FormsModule, ReactiveFormsModule, FormField, MatIcon],
+  imports: [MatFormFieldModule, MatDatepickerModule, FormsModule, ReactiveFormsModule, FormField, MatInput, DateInputPicker, SelectInput],
   templateUrl: './reservation-form.html',
   styleUrl: './reservation-form.scss',
 })
@@ -35,7 +38,7 @@ export class ReservationForm {
       name: 'Booking-false'
     } as ServiceEntity;
   });
-
+  servicesToDisplay = computed(() => this.services().map(p => p.name))
   readonly reservationToEdit = input<ReservationEntity>();
   readonly client = input<ClientEntity>();
   readonly shadow = input<ShadowEntity>();
@@ -116,10 +119,9 @@ export class ReservationForm {
     }
   }
 
-  protected handleServiceChange(event: Event) {
-    const selectElement = event.target as HTMLSelectElement;
-    const selectId = selectElement.value;
-    const service = this.services().find(s => s.id === selectId);
+  protected handleServiceChange(event: string) {
+    const service =  this.services().find(s => s.name == event);
+    console.log(service);
     if (service) {
       this.reservation.update(prev => ({
         ...prev,
@@ -146,7 +148,27 @@ export class ReservationForm {
     if (!isoDate) return '';
     return isoDate.substring(0, 16);
   }
+  handleCheckInDate(date:string){
+    const checkIn = new Date(date);
+    this.reservation.update(prev => ({
+      ...prev,
+      dates:{
+        checkIn:checkIn.toISOString(),
+        checkOut: prev.dates.checkOut
+      }
+    }))
+  }
 
+  handleCheckOutDate(date:string ){
+    const checkOut = new Date(date);
+    this.reservation.update(prev => ({
+      ...prev,
+      dates:{
+        checkOut:checkOut.toISOString(),
+        checkIn: prev.dates.checkIn
+      }
+    }))
+  }
 }
 
 

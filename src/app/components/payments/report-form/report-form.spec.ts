@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ReportForm } from './report-form';
+import {ReportForm} from './report-form';
 
 describe('ReportForm', () => {
   let component: ReportForm;

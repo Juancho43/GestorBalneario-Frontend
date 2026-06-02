@@ -2,7 +2,7 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {SeasonEntity} from '../../model/SeasonEntity';
 import {environment} from '../../../../environments/environment.development';
-import {ApiResponse} from '../../DTO/ApiResponse';
+import {ApiResponse} from '../../Interfaces/ApiResponse';
 
 @Injectable({
   providedIn: 'root',

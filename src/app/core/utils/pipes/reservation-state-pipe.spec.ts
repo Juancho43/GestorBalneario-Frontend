@@ -1,4 +1,4 @@
-import { ReservationStatePipe } from './reservation-state-pipe';
+import {ReservationStatePipe} from './reservation-state-pipe';
 
 describe('ReservationStatePipe', () => {
   it('create an instance', () => {

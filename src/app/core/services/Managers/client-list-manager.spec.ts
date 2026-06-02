@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { ClientManager } from './client-manager.service';
+import {ClientManager} from './client-manager.service';
 
 describe('ClientListManager', () => {
   let service: ClientManager;

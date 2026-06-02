@@ -1,6 +1,5 @@
 import {Component, computed, input} from '@angular/core';
 import {CurrencyPipe, DatePipe} from "@angular/common";
-import {InvoiceDetail} from '../../../core/DTO/InvoiceDetailDTO';
 
 @Component({
   selector: 'app-items-table',

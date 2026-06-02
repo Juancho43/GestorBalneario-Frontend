@@ -1,11 +1,14 @@
 import {
   AfterViewInit,
-  Component, computed,
+  Component,
+  computed,
   effect,
   ElementRef,
-  HostListener, inject,
+  HostListener,
+  inject,
   input,
-  output, signal,
+  output,
+  signal,
   ViewChild
 } from '@angular/core';
 import {CdkDragEnd} from '@angular/cdk/drag-drop';

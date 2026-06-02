@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ShadowMap } from './shadow-map';
+import {ShadowMap} from './shadow-map';
 
 describe('ShadowMap', () => {
   let component: ShadowMap;

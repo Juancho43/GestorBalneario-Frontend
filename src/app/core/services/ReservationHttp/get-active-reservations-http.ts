@@ -2,7 +2,7 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ReservationEntity} from '../../model/reservationEntity';
 import {environment} from '../../../../environments/environment.development';
-import {ApiResponse} from '../../DTO/ApiResponse';
+import {ApiResponse} from '../../Interfaces/ApiResponse';
 import {PaginatedQuery} from '../ClientHttp/get-clients-http';
 
 @Injectable({

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, input, output, Output, signal} from '@angular/core';
+import {Component, input, output, signal} from '@angular/core';
 import {ServiceEntity} from '../../../core/model/serviceEntity';
 import {CurrencyPipe} from '@angular/common';
 import {MatIcon} from '@angular/material/icon';

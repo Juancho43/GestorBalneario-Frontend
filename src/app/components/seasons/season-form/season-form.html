@@ -1,22 +1,22 @@
-<form (ngSubmit)="submitHandler()">
+<form class="dialog" (ngSubmit)="submitHandler()">
   @if (this.editMode()){
     <legend>Editar temporada</legend>
   }@else{
     <legend>Crear temporada</legend>
   }
-  <div class="m3-text-field">
-    <label>Nombre</label>
-    <input type="text" [formField]="seasonForm.name">
-  </div>
-  <div class="m3-date-field">
-    <label>Fecha de comienzo:</label>
-    <input type="date" [formField]="seasonForm.startDate">
-  </div>
+  <mat-form-field>
+    <mat-label>Nombre</mat-label>
+    <input matInput type="text" [formField]="seasonForm.name">
+  </mat-form-field>
+  <app-date-input-picker
+    label="Fecha de comienzo"
+    (value)="handleStartDate($event)"
+  />
+  <app-date-input-picker
+    label="Fecha de finalización"
+    (value)="handleEndDate($event)"
+  />
 
-  <div class="m3-date-field">
-    <label>Fecha de comienzo:</label>
-    <input type="date" [formField]="seasonForm.endDate">
-  </div>
   @if(seasonForm().touched()){
     @for(error of allFormErrors(); track $index){
       <p class="error">{{error.message}}</p>

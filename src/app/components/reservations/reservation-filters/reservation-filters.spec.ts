@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ReservationFilters } from './reservation-filters';
+import {ReservationFilters} from './reservation-filters';
 
 describe('ReservationFilters', () => {
   let component: ReservationFilters;

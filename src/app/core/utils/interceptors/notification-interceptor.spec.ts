@@ -1,7 +1,7 @@
-import { TestBed } from '@angular/core/testing';
-import { HttpInterceptorFn } from '@angular/common/http';
+import {TestBed} from '@angular/core/testing';
+import {HttpInterceptorFn} from '@angular/common/http';
 
-import { notificationInterceptor } from './notification-interceptor';
+import {notificationInterceptor} from './notification-interceptor';
 
 describe('notificationInterceptor', () => {
   const interceptor: HttpInterceptorFn = (req, next) =>

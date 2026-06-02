@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { UpdateShadowHttp } from './update-shadow-http';
+import {UpdateShadowHttp} from './update-shadow-http';
 
 describe('UpdateShadowHttp', () => {
   let service: UpdateShadowHttp;

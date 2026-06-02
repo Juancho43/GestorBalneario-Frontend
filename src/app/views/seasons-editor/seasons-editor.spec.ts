@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SeasonsEditor } from './seasons-editor';
+import {SeasonsEditor} from './seasons-editor';
 
 describe('SeasonsEditor', () => {
   let component: SeasonsEditor;

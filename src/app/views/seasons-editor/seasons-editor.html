@@ -2,11 +2,14 @@
   @if(this.showList()){
     <section class="list-panel">
       <h2>Temporadas configuradas</h2>
-      <app-season-list
-        [list]="seasonList()"
-        (edit)="handleEdit($event)"
-        (delete)="handleDelete($event)"
+      <app-season-list-manager
+
       />
+<!--      <app-season-list-->
+<!--        [list]="seasonList()"-->
+<!--        (edit)="handleEdit($event)"-->
+<!--        (delete)="handleDelete($event)"-->
+<!--      />-->
     </section>
   }
   @if(this.showDetails()){

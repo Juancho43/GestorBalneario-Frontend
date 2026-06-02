@@ -1,4 +1,4 @@
-<div class="filter-dialog">
+<div class="dialog">
   <section class="header">
     <div class="headline">
       <mat-icon class="filter-icon">filter_list</mat-icon>
@@ -7,20 +7,6 @@
     <mat-icon class="close-icon" (click)="close()">close</mat-icon>
   </section>
   <section class="filter-options">
-    <article>
-      <h4>Fechas</h4>
-      <ul>
-        @for (option of dateOptions; track option.value) {
-          <li>
-            <button
-              (click)="dateRange.set(option.value)"
-              [class.active]="dateRange() === option.value">
-              {{ option.label }}
-            </button>
-          </li>
-        }
-      </ul>
-    </article>
     <article>
       <h4>Estado</h4>
       <ul>
@@ -50,7 +36,7 @@
       </ul>
     </article>
   </section>
-  <section class="filter-actions">
+  <section class="actions">
     <button (click)="clearFilters()">
       <mat-icon>filter_list_off</mat-icon>
       Limpiar

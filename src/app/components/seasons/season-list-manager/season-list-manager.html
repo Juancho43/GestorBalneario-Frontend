@@ -1,0 +1,9 @@
+<app-season-searcher
+  (finalQuery)="handleSearch($event)"
+/>
+<app-season-list [list]="seasonList()"/>
+<app-paginator
+  [query]="query()"
+  (pageChange)="handlePage($event)"
+/>
+

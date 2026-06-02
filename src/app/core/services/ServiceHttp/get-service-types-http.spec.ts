@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { GetServiceTypesHttp } from './get-service-types-http';
+import {GetServiceTypesHttp} from './get-service-types-http';
 
 describe('GetServiceTypesHttp', () => {
   let service: GetServiceTypesHttp;

@@ -1,5 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import {ApiResponse} from '../../DTO/ApiResponse';
+import {ApiResponse} from '../../Interfaces/ApiResponse';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment.development';
 

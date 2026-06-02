@@ -1,8 +1,8 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment.development';
-import {ShadowHistory} from '../../DTO/ShadowHistory';
-import {ApiResponse} from '../../DTO/ApiResponse';
+import {ShadowHistory} from '../../Interfaces/ShadowHistory';
+import {ApiResponse} from '../../Interfaces/ApiResponse';
 
 @Injectable({
   providedIn: 'root',

@@ -1,3 +1,11 @@
+<app-invoice-searcher
+  (finalQuery)="handleSearch($event)"
+/>
 <app-invoice-list
   [list]="invoices()"
+
+/>
+<app-paginator
+  (pageChange)="handlePage($event)"
+  [query]="query()"
 />

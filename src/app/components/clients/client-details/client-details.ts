@@ -1,11 +1,11 @@
-import {Component, computed, effect, inject, OnDestroy} from '@angular/core';
+import {Component, computed, inject, OnDestroy} from '@angular/core';
 import {ClientDetailHttp} from '../../../core/services/ClientHttp/client-detail-http';
 import {ClientManager} from '../../../core/services/Managers/client-manager.service';
 import {rxResource} from '@angular/core/rxjs-interop';
 import {InvoiceCard} from '../../invoices/invoice-card/invoice-card';
 import {InvoiceDetails} from '../../invoices/invoice-details/invoice-details';
 import {InvoiceManager} from '../../../core/services/Managers/invoice-manager.service';
-import {ClientDetailDTO} from '../../../core/DTO/ClientDetailDTO';
+import {ClientDetailDTO} from '../../../core/Interfaces/ClientDetailDTO';
 import {ClientEntity} from '../../../core/model/clientEntity';
 
 @Component({
@@ -36,7 +36,7 @@ export class ClientDetails implements OnDestroy {
       return this.clientResource.value()?.data!;
     }
     return {
-      client: {} as ClientEntity,
+      client: {id:'nul'} as ClientEntity,
       invoices: []
     } as ClientDetailDTO;
   })

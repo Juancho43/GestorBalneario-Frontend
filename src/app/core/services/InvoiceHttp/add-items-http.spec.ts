@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { AddItemsHttp } from './add-items-http';
+import {AddItemsHttp} from './add-items-http';
 
 describe('AddItemsHttp', () => {
   let service: AddItemsHttp;

@@ -1,5 +1,5 @@
 import {Component, input, output, signal} from '@angular/core';
-import {PaginatedQuery} from '../../../core/services/ClientHttp/get-clients-http';
+import {PaginationInfo} from '../../../core/Interfaces/SearchInterfaces';
 
 @Component({
   selector: 'app-paginator',
@@ -9,7 +9,7 @@ import {PaginatedQuery} from '../../../core/services/ClientHttp/get-clients-http
 })
 export class Paginator {
   pageChange = output<number>();
-  query = input.required<PaginatedQuery>()
+  query = input.required<PaginationInfo>()
   totalPages = signal<number>(1);
   onPrev(): void {
      if(this.query().page-1 < 0) return;

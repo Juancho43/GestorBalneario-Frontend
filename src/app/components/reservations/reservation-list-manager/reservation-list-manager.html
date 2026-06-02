@@ -3,9 +3,9 @@
 />
 <app-reservation-list
   (selectedReservation)="selectReservation($event)"
-  [list]="reservations()"
+  [list]="list()"
 />
-<!--<app-paginator-->
-<!--  [query]="query()"-->
-<!--  (pageChange)="handlePageChanged($event)"-->
-<!--/>-->
+<app-paginator
+  (pageChange)="handlePage($event)"
+  [query]="query()"
+/>

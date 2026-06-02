@@ -1,30 +1,39 @@
-import {Component, computed, inject, linkedSignal} from '@angular/core';
+import {Component, computed, inject} from '@angular/core';
 import {InvoiceList} from '../invoice-list/invoice-list';
-import {Dialog} from '@angular/cdk/dialog';
 import {InvoiceManager} from '../../../core/services/Managers/invoice-manager.service';
-import {InvoiceEntity} from '../../../core/model/InvoiceEntity';
-import {InvoiceDetails} from '../invoice-details/invoice-details';
+import {InvoiceSearcher} from '../invoice-searcher/invoice-searcher';
+import {Paginator} from '../../layout/paginator/paginator';
+import {SearchBarData} from '../../../core/Interfaces/SearchInterfaces';
 
 @Component({
   selector: 'app-invoice-list-manager',
   imports: [
-    InvoiceList
+    InvoiceList,
+    InvoiceSearcher,
+    Paginator,
   ],
   templateUrl: './invoice-list-manager.html',
   styleUrl: './invoice-list-manager.scss',
 })
 export class InvoiceListManager {
-  private dialog = inject(Dialog);
   private manager = inject(InvoiceManager);
-  protected invoices = computed(()=>this.manager.getList());
-  protected query = linkedSignal(()=> this.manager.getQuery());
-  constructor() {
-    this.query.set({query:'ALL',page:0,pageSize:10})
-    this.manager.setQuery(this.query());
+  protected invoices = computed(()=>this.manager.invoicesToDisplay());
+  protected query = computed(()=>this.manager.searchQuery().pagination)
+
+  protected handleSearch($event: SearchBarData) {
+    this.manager.searchQuery.update((p) => ({
+      ...p,
+      search: $event
+    }))
   }
 
-  protected openInvoiceDialog(invoice: InvoiceEntity) {
-    this.manager.currentInvoice.set(invoice.id!);
-    this.dialog.open(InvoiceDetails)
+  protected handlePage($event:number) {
+    this.manager.searchQuery.update((p) => ({
+      ...p,
+      pagination:{
+        page: $event,
+        limit:10
+      }
+    }))
   }
 }

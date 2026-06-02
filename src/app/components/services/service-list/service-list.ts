@@ -1,4 +1,4 @@
-import {Component, input, output} from '@angular/core';
+import {Component, input} from '@angular/core';
 import {ServiceEntity} from '../../../core/model/serviceEntity';
 import {MatIcon} from '@angular/material/icon';
 import {CustomMenu} from '../../layout/custom-menu/custom-menu';

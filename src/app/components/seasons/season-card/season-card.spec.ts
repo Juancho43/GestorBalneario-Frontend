@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SeasonCard } from './season-card';
+import {SeasonCard} from './season-card';
 
 describe('SeasonCard', () => {
   let component: SeasonCard;

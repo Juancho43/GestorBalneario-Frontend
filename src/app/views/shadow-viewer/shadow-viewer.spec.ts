@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ShadowViewer } from './shadow-viewer';
+import {ShadowViewer} from './shadow-viewer';
 
 describe('ShadowViewer', () => {
   let component: ShadowViewer;

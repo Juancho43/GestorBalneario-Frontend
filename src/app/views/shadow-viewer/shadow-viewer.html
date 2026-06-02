@@ -1,12 +1,28 @@
-<div class="single-layout">
-  <h2>Mapa de carpas/sombrillas</h2>
-    <app-shadow-map
-      (currentElement)="show($event)"
-      initialState="viewing"
-      [loadedShadows]="shadows()"
-    />
+<div class="list-detail-layout">
+  @if(this.showList()){
+    <section class="list-panel">
+      <h2>Listado de carpas</h2>
+      <app-shadow-list-manager
+      />
+    </section>
+  }
+  @if(this.showDetails()){
+    <section class="detail-panel">
+      <div class="detail-header">
+        <h2>Carpa seleccionada</h2>
+        @if(!this.singlePane()){
+          <button
+            class="icon-btn close-btn"
+            (click)="this.currentPane.set('list')">
+            <mat-icon fontIcon="close"/>
+          </button>
+        }
+      </div>
+      @if (selectedShadow()){
+        <app-shadow-detail/>
+      } @else {
+        <p>Seleccione una reserva para ver los detalles</p>
+      }
+    </section>
+  }
 </div>
-<app-fab-menu
-  (actionSelected)="handleMenuAction($event)"
-  [actions]="actions()"
-/>

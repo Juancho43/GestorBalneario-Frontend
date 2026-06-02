@@ -4,13 +4,24 @@ import {form, FormField, required, validate} from '@angular/forms/signals';
 import {SeasonEntity} from '../../../core/model/SeasonEntity';
 import {minDateValidator} from '../../../core/utils/validator/dateValidator';
 import {MatCheckbox} from '@angular/material/checkbox';
+import {MatFormField, MatInput, MatInputModule, MatLabel} from '@angular/material/input';
+import {MatDatepickerModule,} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import {DateInputPicker} from '../../layout/date-input-picker/date-input-picker';
 
 @Component({
   selector: 'app-season-form',
   imports: [
     FormsModule,
     FormField,
-    MatCheckbox
+    MatCheckbox,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    DateInputPicker
   ],
   templateUrl: './season-form.html',
   styleUrl: './season-form.scss',
@@ -18,11 +29,13 @@ import {MatCheckbox} from '@angular/material/checkbox';
 export class SeasonForm {
   seasonToEdit = input<SeasonEntity>();
   editMode=linkedSignal(()=> !!this.seasonToEdit());
+  startDate = linkedSignal(()=>new Date(new Date().setHours(0, 0, 0, 0)))
+  endDate = linkedSignal(()=>new Date(new Date().setHours(23, 59, 59, 999)))
   season = linkedSignal(()=> this.seasonToEdit() ?? {
     id:'',
     name:'',
-    startDate: new Date(new Date().setHours(0, 0, 0, 0)).toISOString().split('T')[0],
-    endDate: new Date(new Date().setHours(23, 59, 59, 999)).toISOString().split('T')[0],
+    startDate: this.startDate().toISOString().split('T')[0],
+    endDate:this.endDate().toISOString().split('T')[0],
   } as SeasonEntity);
   cloneSeason = false;
   seasonForm = form(this.season,(s) =>{
@@ -47,5 +60,13 @@ export class SeasonForm {
       this.finalSeason.emit(this.season());
       this.editMode.set(false);
     }
+  }
+
+  protected handleEndDate($event: string) {
+   this.endDate.set(new Date($event));
+  }
+
+  protected handleStartDate($event: string) {
+    this.startDate.set(new Date($event));
   }
 }

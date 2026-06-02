@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ServiceListManager } from './service-list-manager';
+import {ServiceListManager} from './service-list-manager';
 
 describe('ServiceListManager', () => {
   let component: ServiceListManager;

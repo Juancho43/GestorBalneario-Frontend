@@ -6,6 +6,10 @@
     [(ngModel)]="searchTerm"
     placeholder="Buscar por nombre o correo"
   />
+  <app-filter-button
+    search-filter
+    (pressed)="handleFilter()"
+  />
   <button
     search-button
     (click)="submitHandler()"

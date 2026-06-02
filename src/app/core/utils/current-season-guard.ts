@@ -1,4 +1,4 @@
-import { CanActivateFn } from '@angular/router';
+import {CanActivateFn} from '@angular/router';
 import {SeasonManager} from '../services/Managers/season-manager';
 import {inject} from '@angular/core';
 

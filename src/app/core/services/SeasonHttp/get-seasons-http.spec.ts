@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { GetSeasonsHttp } from './get-seasons-http';
+import {GetSeasonsHttp} from './get-seasons-http';
 
 describe('GetSeasonsHttp', () => {
   let service: GetSeasonsHttp;

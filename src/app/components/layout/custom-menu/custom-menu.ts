@@ -1,6 +1,7 @@
 import {Component, input, model, signal} from '@angular/core';
 import {MatIcon} from '@angular/material/icon';
 import {CdkConnectedOverlay, CdkOverlayOrigin, ConnectedPosition} from '@angular/cdk/overlay';
+
 export interface CustomMenuOption {
   icon?:string;
   label: string;

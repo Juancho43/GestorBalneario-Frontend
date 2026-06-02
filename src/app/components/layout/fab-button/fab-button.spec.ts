@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { FABButton } from './fab-button';
+import {FABButton} from './fab-button';
 
 describe('FABButton', () => {
   let component: FABButton;

@@ -1,26 +1,31 @@
-<form (ngSubmit)="onSubmit()">
+<form class="dialog" (ngSubmit)="onSubmit()">
   @if(editMode()){
     <legend>Editar servicio</legend>
   } @else {
     <legend>Crear servicio</legend>
   }
-  <div class="m3-text-field">
-    <label>Nombre:</label>
-    <input type="text" [formField]="serviceForm.name">
-  </div>
 
-  <div class="m3-text-field">
-    <label>Precio:</label>
-    <input type="number" [formField]="serviceForm.price">
-  </div>
-  <div class="m3-select-field">
-    <label>Tipo:</label>
-    <select [formField]="serviceForm.type">
-      @for(type of types();track $index){
-        <option [value]="type">{{type | serviceType}}</option>
-      }
-    </select>
-  </div>
+  <mat-form-field>
+    <mat-label>Nombre</mat-label>
+    <input matInput type="text" [formField]="serviceForm.name">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Precio:</mat-label>
+    <input matInput type="number" [formField]="serviceForm.price">
+  </mat-form-field>
+  <app-select-input
+  label="tipo"
+  [options]="types()"
+  />
+<!--  <div class="m3-select-field">-->
+<!--    <label>Tipo:</label>-->
+<!--    <select [formField]="serviceForm.type">-->
+<!--      @for(type of types();track $index){-->
+<!--        <option [value]="type">{{type | serviceType}}</option>-->
+<!--      }-->
+<!--    </select>-->
+<!--  </div>-->
   @if(serviceForm().touched()){
     @for(error of allFormErrors(); track $index){
       <p class="error">{{error.message}}</p>

@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { EditServiceHttp } from './edit-service-http';
+import {EditServiceHttp} from './edit-service-http';
 
 describe('EditServiceHttp', () => {
   let service: EditServiceHttp;

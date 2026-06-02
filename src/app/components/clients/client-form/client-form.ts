@@ -1,13 +1,17 @@
 import {Component, computed, input, linkedSignal, output} from '@angular/core';
 import {ClientEntity} from '../../../core/model/clientEntity';
-import {email, form, FormField, required, schema} from '@angular/forms/signals';
+import {email, form, FormField, required} from '@angular/forms/signals';
 import {FormsModule} from '@angular/forms';
+import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
 
 @Component({
   selector: 'app-client-form',
   imports: [
     FormField,
-    FormsModule
+    FormsModule,
+    MatLabel,
+    MatFormField,
+    MatInput
   ],
   templateUrl: './client-form.html',
   styleUrl: './client-form.scss',

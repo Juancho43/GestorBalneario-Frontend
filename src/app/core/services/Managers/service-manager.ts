@@ -7,12 +7,15 @@ import {ServiceEntity} from '../../model/serviceEntity';
 import {EditServiceHttp} from '../ServiceHttp/edit-service-http';
 import {DeleteServiceHttp} from '../ServiceHttp/delete-service-http';
 import {GetServiceTypesHttp} from '../ServiceHttp/get-service-types-http';
+import {SearchQuery} from '../../Interfaces/SearchInterfaces';
+import {ServiceSearch} from '../ServiceHttp/service-search';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ServiceManager {
   private getServicesHttp = inject(GetServicesHttp);
+  private searchHttp = inject(ServiceSearch)
   private createHttp = inject(CreateServiceHttp);
   private getOne = inject(GetServiceHttp);
   private editHttp = inject(EditServiceHttp);
@@ -21,12 +24,33 @@ export class ServiceManager {
   private serviceTypesResource = rxResource({
     stream: () => this.serviceTypeHttp.execute()
   })
+
+  searchQuery = signal<SearchQuery>({
+    pagination: {
+      limit: 10,
+      page:0,
+    },
+    search:{
+      query: '',
+      filters:{
+        orderDirection:'asc',
+        orderBy:'description'
+      }
+    }
+  })
+  searchResource = rxResource({
+    params: () => this.searchQuery(),
+    stream: ({params}) => this.searchHttp.execute(params)
+  })
   currentType = signal('ALL');
   private serviceResource = rxResource({
     params : () => this.currentType(),
     stream : ({params}) => this.getServicesHttp.get(params)
   })
 
+  servicesToDisplay = computed(()=>
+  this.searchResource.isLoading() && this.searchResource.error() ? [] : this.searchResource.value()?.data!
+  )
   private serviceTypes = computed(()=>
     this.serviceTypesResource.isLoading() && this.serviceTypesResource.error() ? [] : this.serviceTypesResource.value()?.data!
   )

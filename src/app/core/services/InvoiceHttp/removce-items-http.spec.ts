@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { RemoveItemsHttp } from './remove-items-http.service';
+import {RemoveItemsHttp} from './remove-items-http.service';
 
 describe('RemovceItemsHttp', () => {
   let service: RemoveItemsHttp;

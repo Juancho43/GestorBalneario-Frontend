@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ReservationForm } from './reservation-form';
+import {ReservationForm} from './reservation-form';
 
 describe('ReservationForm', () => {
   let component: ReservationForm;

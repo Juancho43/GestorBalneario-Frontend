@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ServiceForm } from './service-form';
+import {ServiceForm} from './service-form';
 
 describe('ServiceForm', () => {
   let component: ServiceForm;

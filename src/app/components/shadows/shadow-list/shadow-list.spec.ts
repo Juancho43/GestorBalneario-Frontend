@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ShadowList } from './shadow-list';
+import {ShadowList} from './shadow-list';
 
 describe('ShadowList', () => {
   let component: ShadowList;

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ShadowCard } from './shadow-card';
+import {ShadowCard} from './shadow-card';
 
 describe('ShadowCard', () => {
   let component: ShadowCard;

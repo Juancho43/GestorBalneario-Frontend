@@ -2,20 +2,24 @@ import {Component, computed, input, linkedSignal, output} from '@angular/core';
 import {ServiceEntity} from '../../../core/model/serviceEntity';
 import {form, FormField, min, required} from '@angular/forms/signals';
 import {FormsModule} from '@angular/forms';
-import {ServiceTypePipe} from '../../../core/utils/pipes/service-type-pipe';
+import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
+import {SelectInput} from '../../layout/select-input/select-input';
 
 @Component({
   selector: 'app-service-form',
   imports: [
     FormField,
     FormsModule,
-    ServiceTypePipe
+    MatFormField,
+    MatLabel,
+    MatInput,
+    SelectInput
   ],
   templateUrl: './service-form.html',
   styleUrl: './service-form.scss',
 })
 export class ServiceForm {
-  readonly types = input.required<string[]>();
+  readonly types = input<string[]>([]);
   serviceToEdit = input<ServiceEntity>();
   service = linkedSignal(()=> this.serviceToEdit() ?? {
     name:'',

@@ -1,24 +1,18 @@
-import {Component,output} from '@angular/core';
-import {CdkDrag, CdkDragEnd, CdkDropList} from '@angular/cdk/drag-drop';
+import {Component, input, output} from '@angular/core';
 import {ShadowEntity} from '../../../core/model/shadowEntity';
+import {CustomMenu} from '../../layout/custom-menu/custom-menu';
+import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'app-shadow-list',
   imports: [
-    CdkDropList,
-    CdkDrag
+    CustomMenu,
+    MatIcon,
   ],
   templateUrl: './shadow-list.html',
   styleUrl: './shadow-list.scss',
 })
 export class ShadowList {
-  onDropped = output<{event: CdkDragEnd, shadow: ShadowEntity}>();
-  paleta: ShadowEntity[] = [
-    {identifier:'...',name: 'Carpa Estándar', state:'available', coords: {x: 0, y: 0}, type: 'carpa'},
-    {identifier:'...',name: 'Sombrilla VIP',state:"available", coords: {x: 0, y: 0}, type : 'sombrilla'},
-  ];
-
-  dropped(event: CdkDragEnd, shadow: ShadowEntity) {
-    this.onDropped.emit({event, shadow});
-  }
+  readonly list = input.required<ShadowEntity[]>();
+  selectedReservation = output<ShadowEntity>();
 }

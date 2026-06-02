@@ -1,6 +1,11 @@
 <app-service-searcher
+  (finalQuery)="handleSearch($event)"
 />
 <app-service-list
   [list]="services()"
 />
-<!--<app-paginator/>-->
+<app-paginator
+  [query]="query()"
+  (pageChange)="handlePage($event)"
+/>
+

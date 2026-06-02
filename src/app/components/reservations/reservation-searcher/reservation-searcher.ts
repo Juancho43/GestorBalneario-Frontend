@@ -4,7 +4,8 @@ import {MatIcon} from '@angular/material/icon';
 import {FilterButton} from '../../layout/filter-button/filter-button';
 import {ReservationFilters} from '../reservation-filters/reservation-filters';
 import {SearchBar} from '../../layout/search-bar/search-bar';
-import {MatDialog} from '@angular/material/dialog';
+import {DialogHelper} from '../../../core/utils/dialog-helper';
+import {Filters, SearchBarData} from '../../../core/Interfaces/SearchInterfaces';
 
 @Component({
   selector: 'app-reservation-searcher',
@@ -18,23 +19,23 @@ import {MatDialog} from '@angular/material/dialog';
   styleUrl: './reservation-searcher.scss',
 })
 export class ReservationSearcher {
-  private dialog = inject(MatDialog);
-  filters = signal<any | null>(null);
-  protected searchTerm = ''
-  searchQuery = computed(()=>({
-    filters: this.filters(),
-    query : this.searchTerm,
+  private dialog = inject(DialogHelper);
+  filters = signal<Filters | null>(null);
+  searchTerm = signal<string>('');
+  searchQuery = computed<SearchBarData>(()=>({
+    filters: this.filters()!,
+    query : this.searchTerm(),
   }));
-  finalQuery = output<any>();
+  finalQuery = output<SearchBarData>();
+
   protected handleFilter() {
-    const ref = this.dialog.open(ReservationFilters);
+    const ref = this.dialog.openDialog(ReservationFilters,this.dialog.getConfig());
     ref.afterClosed().subscribe(r =>{
       if(r!=undefined){
         this.filters.set(r);
       }
     })
   }
-
   protected submitHandler() {
     this.finalQuery.emit(this.searchQuery());
   }

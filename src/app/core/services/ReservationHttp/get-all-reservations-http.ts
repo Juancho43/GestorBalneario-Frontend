@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment.development';
 import {PaginatedQuery} from '../ClientHttp/get-clients-http';
 import {ReservationEntity} from '../../model/reservationEntity';
-import {ApiResponse} from '../../DTO/ApiResponse';
+import {ApiResponse} from '../../Interfaces/ApiResponse';
 import {SeasonManager} from '../Managers/season-manager';
 import {throwError} from 'rxjs';
 

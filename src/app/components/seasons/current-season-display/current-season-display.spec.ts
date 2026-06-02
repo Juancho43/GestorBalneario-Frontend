@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CurrentSeasonDisplay } from './current-season-display';
+import {CurrentSeasonDisplay} from './current-season-display';
 
 describe('CurrentSeasonDisplay', () => {
   let component: CurrentSeasonDisplay;

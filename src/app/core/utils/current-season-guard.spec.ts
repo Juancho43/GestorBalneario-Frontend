@@ -1,7 +1,7 @@
-import { TestBed } from '@angular/core/testing';
-import { CanActivateFn } from '@angular/router';
+import {TestBed} from '@angular/core/testing';
+import {CanActivateFn} from '@angular/router';
 
-import { currentSeasonGuard } from './current-season-guard';
+import {currentSeasonGuard} from './current-season-guard';
 
 describe('currentSeasonGuard', () => {
   const executeGuard: CanActivateFn = (...guardParameters) =>

@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { PaymentsReportHttp } from './payments-report-http';
+import {PaymentsReportHttp} from './payments-report-http';
 
 describe('PaymentsReportHttp', () => {
   let service: PaymentsReportHttp;

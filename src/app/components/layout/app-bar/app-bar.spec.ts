@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AppBar } from './app-bar';
+import {AppBar} from './app-bar';
 
 describe('AppBar', () => {
   let component: AppBar;

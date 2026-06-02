@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CustomMenu } from './custom-menu';
+import {CustomMenu} from './custom-menu';
 
 describe('CustomMenu', () => {
   let component: CustomMenu;

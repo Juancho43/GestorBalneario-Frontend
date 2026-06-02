@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { InvoiceItemsManager } from './invoice-items-manager';
+import {InvoiceItemsManager} from './invoice-items-manager';
 
 describe('InvoiceItemsManager', () => {
   let service: InvoiceItemsManager;

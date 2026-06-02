@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { ShadowMap } from './shadow-map';
+import {ShadowMap} from './shadow-map';
 
 describe('ShadowMap', () => {
   let service: ShadowMap;

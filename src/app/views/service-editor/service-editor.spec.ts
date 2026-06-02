@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ServiceEditor } from './service-editor';
+import {ServiceEditor} from './service-editor';
 
 describe('ServiceEditor', () => {
   let component: ServiceEditor;

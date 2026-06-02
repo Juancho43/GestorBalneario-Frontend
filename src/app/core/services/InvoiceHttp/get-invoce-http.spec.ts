@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { GetInvoiceHttp } from './get-invoice-http.service';
+import {GetInvoiceHttp} from './get-invoice-http.service';
 
 describe('GetInvoceHttp', () => {
   let service: GetInvoiceHttp;

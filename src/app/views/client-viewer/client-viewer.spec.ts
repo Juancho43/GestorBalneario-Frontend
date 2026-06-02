@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ClientViewer } from './client-viewer';
+import {ClientViewer} from './client-viewer';
 
 describe('ClientViewer', () => {
   let component: ClientViewer;

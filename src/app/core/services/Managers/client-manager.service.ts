@@ -1,15 +1,18 @@
-import {inject, Injectable, linkedSignal, signal} from '@angular/core';
+import {computed, inject, Injectable, linkedSignal, signal} from '@angular/core';
 import {rxResource} from '@angular/core/rxjs-interop';
 import {GetClientsHttp, PaginatedQuery} from '../ClientHttp/get-clients-http';
 import {CreateClientHttp} from '../ClientHttp/create-client-http';
 import {EditClientHttp} from '../ClientHttp/edit-client-http';
 import {DeleteClientHttp} from '../ClientHttp/delete-client-http';
 import {ClientEntity} from '../../model/clientEntity';
+import {ClientSearchHttp} from '../ClientHttp/client-search-http';
+import {SearchQuery} from '../../Interfaces/SearchInterfaces';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClientManager {
+  private searchHttp = inject(ClientSearchHttp);
   private clientsHttp = inject(GetClientsHttp);
   private create = inject(CreateClientHttp);
   private update = inject(EditClientHttp);
@@ -18,6 +21,26 @@ export class ClientManager {
    clientsResource= rxResource({
     params: ()=>this.query(),
     stream:({params})=> this.clientsHttp.get(params)
+  })
+  searchQuery = signal<SearchQuery>({
+    pagination: {
+      limit: 10,
+      page:0,
+    },
+    search:{
+      query: '',
+      filters:{
+        orderDirection:'asc',
+        orderBy:'name'
+      }
+    }
+  })
+  searchResource = rxResource({
+    params: () => this.searchQuery(),
+    stream:({params}) => this.searchHttp.execute(params)
+  })
+  clientsToDisplay = computed(()=>{
+    return this.searchResource.isLoading() || this.searchResource.error() ? [] : this.searchResource.value()?.data!
   })
   currentClient = signal<ClientEntity| null>(null);
   /*

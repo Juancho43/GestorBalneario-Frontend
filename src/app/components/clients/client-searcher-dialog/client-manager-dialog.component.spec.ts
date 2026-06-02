@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ClientManagerDialog } from './client-manager-dialog.component';
+import {ClientManagerDialog} from './client-manager-dialog.component';
 
 describe('ClientSearcherDialog', () => {
   let component: ClientManagerDialog;

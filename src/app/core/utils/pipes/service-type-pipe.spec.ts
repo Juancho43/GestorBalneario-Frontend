@@ -1,4 +1,4 @@
-import { ServiceTypePipe } from './service-type-pipe';
+import {ServiceTypePipe} from './service-type-pipe';
 
 describe('ServiceTypePipe', () => {
   it('create an instance', () => {

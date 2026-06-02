@@ -1,8 +1,9 @@
-import {Component, input, linkedSignal, signal} from '@angular/core';
+import {Component, input} from '@angular/core';
 import {RouterLink, RouterLinkActive} from '@angular/router';
 import {MatIcon} from '@angular/material/icon';
 import {MatTooltip} from '@angular/material/tooltip';
-interface Link{
+
+export interface Link{
   icon: string;
   label: string;
   path?: string;

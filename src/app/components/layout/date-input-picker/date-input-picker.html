@@ -1,0 +1,6 @@
+<mat-form-field  class="custom-datepicker-field">
+  <mat-label>{{label()}}</mat-label>
+  <input matInput [matDatepicker]="miPicker" [value]="initialValue()" (dateChange)="onDateChange($event)">
+  <mat-datepicker-toggle matIconSuffix [for]="miPicker"></mat-datepicker-toggle>
+  <mat-datepicker #miPicker panelClass="balneario-theme-picker"></mat-datepicker>
+</mat-form-field>

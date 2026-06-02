@@ -1,0 +1,18 @@
+<app-search-bar>
+  <input
+    search-input
+    type="text"
+    [(ngModel)]="searchTerm"
+    placeholder="Escribe aquí para buscar"
+  />
+  <app-filter-button
+    search-filter
+    (pressed)="handleFilter()"
+  />
+  <button
+    search-button
+    (click)="submitHandler()"
+    type="submit">
+    <mat-icon fontIcon="search"/>
+  </button>
+</app-search-bar>

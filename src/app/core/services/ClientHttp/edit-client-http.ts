@@ -1,9 +1,8 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {ShadowEntity} from '../../model/shadowEntity';
 import {environment} from '../../../../environments/environment.development';
 import {ClientEntity} from '../../model/clientEntity';
-import {ApiResponse} from '../../DTO/ApiResponse';
+import {ApiResponse} from '../../Interfaces/ApiResponse';
 
 @Injectable({
   providedIn: 'root',

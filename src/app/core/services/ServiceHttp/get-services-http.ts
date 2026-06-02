@@ -2,8 +2,8 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment.development';
 import {SeasonManager} from '../Managers/season-manager';
-import {SeasonServicesDTO} from '../../DTO/SeasonServicesDTO';
-import {ApiResponse} from '../../DTO/ApiResponse';
+import {SeasonServicesDTO} from '../../Interfaces/SeasonServicesDTO';
+import {ApiResponse} from '../../Interfaces/ApiResponse';
 import {throwError} from 'rxjs';
 
 @Injectable({

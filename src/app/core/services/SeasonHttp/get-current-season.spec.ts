@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { GetCurrentSeason } from './get-current-season';
+import {GetCurrentSeason} from './get-current-season';
 
 describe('GetCurrentSeason', () => {
   let service: GetCurrentSeason;

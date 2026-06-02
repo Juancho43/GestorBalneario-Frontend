@@ -1,5 +1,5 @@
-import {ElementRef, inject, Injectable, Type} from '@angular/core';
-import {Overlay, OverlayConfig} from '@angular/cdk/overlay';
+import {ElementRef, inject, Injectable, signal, Type} from '@angular/core';
+import {Overlay, OverlayConfig, OverlayRef} from '@angular/cdk/overlay';
 import {ComponentPortal} from '@angular/cdk/portal';
 
 @Injectable({
@@ -7,7 +7,7 @@ import {ComponentPortal} from '@angular/cdk/portal';
 })
 export class OverlayHelper {
   private overlay = inject(Overlay);
-
+  private overlayRef = signal< OverlayRef | null>(null);
 // 1. Método principal de apertura modificado para devolver la referencia
   open(component: Type<any>, config?: OverlayConfig) {
     const overlayRef = this.overlay.create(config);
@@ -69,5 +69,11 @@ export class OverlayHelper {
       // Bloquea el scroll de la página de fondo mientras el modal está abierto
       scrollStrategy: this.overlay.scrollStrategies.block()
     });
+  }
+  setRef(overlayRef: OverlayRef | null) {
+    this.overlayRef.set(overlayRef);
+  }
+  getRef() {
+    return this.overlayRef();
   }
 }

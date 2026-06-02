@@ -7,11 +7,14 @@ import {CreateSeasonHttp} from '../SeasonHttp/create-season-http';
 import {GetSeasonsHttp} from '../SeasonHttp/get-seasons-http';
 import {EditSeasonHttp} from '../SeasonHttp/edit-client-http';
 import {DeleteSeasonHttp} from '../SeasonHttp/delete-season-http.service';
+import {SeasonSearch} from '../SeasonHttp/season-search';
+import {SearchQuery} from '../../Interfaces/SearchInterfaces';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SeasonManager {
+  private searchHttp = inject(SeasonSearch);
   private createHttp = inject(CreateSeasonHttp);
   private getSeason = inject(GetCurrentSeason);
   private getSeasonsHttp = inject(GetSeasonsHttp);
@@ -21,6 +24,27 @@ export class SeasonManager {
   private seasonResource = rxResource({
     stream: () => this.getSeason.get()
   })
+
+  searchQuery = signal<SearchQuery>({
+    pagination: {
+      limit: 10,
+      page:0,
+    },
+    search:{
+      query: '',
+      filters:{
+        orderDirection:'asc',
+        orderBy:'description'
+      }
+    }
+  })
+  private searchResource= rxResource({
+    params: () => this.searchQuery(),
+    stream: ({params}) => this.searchHttp.execute(params)
+  })
+  seasonsToDisplay = computed(()=>
+    this.searchResource.isLoading() &&  this.searchResource.error() ? [] : this.searchResource.value()?.data!
+)
   private seasonsResource = rxResource({
     stream: () => this.getSeasonsHttp.get()
   });

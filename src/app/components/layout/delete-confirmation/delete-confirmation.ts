@@ -1,6 +1,6 @@
 import {Component, inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogActions, MatDialogContent, MatDialogRef} from '@angular/material/dialog';
-import {IDeleteDialogData} from '../../../core/DTO/DeleteDialogData';
+import {IDeleteDialogData} from '../../../core/Interfaces/DeleteDialogData';
 
 @Component({
   selector: 'app-delete-confirmation',

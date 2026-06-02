@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
   name: 'paymentType',
@@ -12,6 +12,7 @@ export class PaymentTypePipe implements PipeTransform {
     if(value == 'USD_DOLLAR') return 'Dolar'
     if(value == 'CRYPTO') return 'Cripto'
     if(value == 'OTHER') return 'Otro'
+    if(value === 'ALL') return 'Todos'
     return null;
   }
 }

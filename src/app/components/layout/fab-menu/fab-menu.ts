@@ -1,5 +1,6 @@
 import {Component, input, output} from '@angular/core';
 import {MatIcon} from '@angular/material/icon';
+
 export interface FabAction {
   name: string;      // The unique identifier for the action (e.g., 'EDIT')
   icon: string;      // The material icon name (e.g., 'edit')

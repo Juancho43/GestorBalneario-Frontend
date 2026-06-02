@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { GetAllReservationsHttp } from './get-all-reservations-http';
+import {GetAllReservationsHttp} from './get-all-reservations-http';
 
 describe('GetAllReservationsHttp', () => {
   let service: GetAllReservationsHttp;
