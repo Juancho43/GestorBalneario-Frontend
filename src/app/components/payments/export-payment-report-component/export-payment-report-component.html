@@ -1,0 +1,9 @@
+<app-select-input
+  label="Formato de exportación"
+  [options]="exportOptions()"
+  (selectedOption)="exportOption.set($event)"
+/>
+<app-report-form
+  [paymentMethods]="paymentMethods()"
+  (finalQuery)="this.handleExportReport($event)"
+/>

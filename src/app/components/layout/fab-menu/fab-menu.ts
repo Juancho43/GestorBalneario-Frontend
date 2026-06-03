@@ -25,10 +25,8 @@ export class FABMenu {
   }
 
   public executeAction(actionName: string): void {
-    // Tell the parent component what happened
     this.actionSelected.emit(actionName);
 
-    // Close the menu immediately to maintain a clean UI
     this.isOpen = false;
   }
 }

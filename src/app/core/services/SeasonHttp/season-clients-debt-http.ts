@@ -1,8 +1,8 @@
 import {computed, inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {ApiResponse} from '../Interfaces/ApiResponse';
-import {SeasonManager} from './Managers/season-manager';
-import {environment} from '../../../environments/environment.development';
+import {ApiResponse} from '../../Interfaces/ApiResponse';
+import {SeasonManager} from '../Managers/season-manager';
+import {environment} from '../../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',

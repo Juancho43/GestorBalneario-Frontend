@@ -13,7 +13,15 @@ export class PaymentsReportHttp {
   generate(query: ReportQuery){
     const startDate = query.start.toISOString().split('T')[0];
     const endDate = query.end.toISOString().split('T')[0];
-    const url = `${environment.apiUrl}/payment/report?start=${startDate}&end=${endDate}&method=${query.type}&page=${query.page}&size${query.limit}`
+
+    const params = new URLSearchParams({
+      method:query.type,
+      start:startDate,
+      end:endDate,
+      page: query.page.toString(),
+      size: query.limit.toString()
+    });
+    const url = `${environment.apiUrl}/payment/report?${params.toString()}`;
     return this.http.get<ApiResponse<ReportResponse>>(url);
   }
 }

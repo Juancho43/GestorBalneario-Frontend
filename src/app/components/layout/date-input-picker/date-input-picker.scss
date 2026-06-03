@@ -1,8 +1,0 @@
-@use '@angular/material' as mat;
-:host{
-  @include mat.datepicker-overrides((
-    calendar-body-label-text-color: white,
-    calendar-container-text-color:white,
-    calendar-container-background-color:rgb(0 97 150),
-  ));
-}

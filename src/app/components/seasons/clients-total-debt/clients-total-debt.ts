@@ -1,6 +1,6 @@
 import {Component, computed, inject} from '@angular/core';
 import {rxResource} from '@angular/core/rxjs-interop';
-import {SeasonClientsDebtHttp} from '../../../core/services/season-clients-debt-http';
+import {SeasonClientsDebtHttp} from '../../../core/services/SeasonHttp/season-clients-debt-http';
 import {CurrencyPipe} from '@angular/common';
 
 @Component({

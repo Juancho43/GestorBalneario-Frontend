@@ -45,18 +45,18 @@ app-menu {
 
 .toast-error {
   @include mat.snack-bar-overrides((
-    container-color: #e74c3c,
-    supporting-text-color: #fff,
-    button-color: #fff
-  ));
+  container-color: #e74c3c,
+  supporting-text-color: #fff,
+  button-color: #fff
+));
 }
 
 .toast-success {
   @include mat.snack-bar-overrides((
-    container-color: #00C853,
-    supporting-text-color: #ffffff,
-    button-color: #fff
-  ));
+  container-color: #00C853,
+  supporting-text-color: #ffffff,
+  button-color: #fff
+));
 }
 
 .tooltip {
@@ -70,4 +70,11 @@ app-menu {
 .custom-dark-dialog .mat-dialog-container {
   background-color: transparent !important;
   box-shadow: none;
+}
+:root{
+  @include mat.datepicker-overrides((
+    calendar-body-label-text-color: white,
+    calendar-container-text-color:white,
+    calendar-container-background-color:rgb(0 97 150),
+  ));
 }

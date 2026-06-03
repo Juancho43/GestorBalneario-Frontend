@@ -1,60 +1,71 @@
 import {Component, computed, inject, signal} from '@angular/core';
-import {PaymentsReportHttp} from '../../core/services/PaymentHttp/payments-report-http';
-import {rxResource} from '@angular/core/rxjs-interop';
 import {ReportQuery} from '../../core/Interfaces/ReportQuery';
 import {ReportForm} from '../../components/payments/report-form/report-form';
 import {Dialog} from '@angular/cdk/dialog';
 import {InvoiceDetails} from '../../components/invoices/invoice-details/invoice-details';
 import {InvoiceManager} from '../../core/services/Managers/invoice-manager.service';
 import {PaymentsTable} from '../../components/payments/payments-table/payments-table';
-import {ReportResponse} from '../../core/Interfaces/ReportResponse';
 import {PaymentEntity} from '../../core/model/paymentEntity';
 import {PaymentManager} from '../../core/services/Managers/payment-manager';
-import {FABButton} from '../../components/layout/fab-button/fab-button';
 import {SideSheet} from '../../components/layout/side-sheet/side-sheet';
+import {FabAction, FABMenu} from '../../components/layout/fab-menu/fab-menu';
+import {
+  ExportPaymentReportComponent
+} from '../../components/payments/export-payment-report-component/export-payment-report-component';
 
 @Component({
   selector: 'app-payment-viewer',
   imports: [
     ReportForm,
     PaymentsTable,
-    FABButton,
     SideSheet,
+    FABMenu,
+    ExportPaymentReportComponent,
   ],
   templateUrl: './payment-viewer.html',
   styleUrl: './payment-viewer.scss',
 })
 export class PaymentViewer {
-  private reportsService = inject(PaymentsReportHttp);
-  private invoiceManager = inject(InvoiceManager);
   private paymentManager = inject(PaymentManager)
+  private invoiceManager = inject(InvoiceManager);
   private dialog = inject(Dialog);
-  sideSheetOpen = signal(true);
-  protected paymentMethods = this.paymentManager.paymentMethods;
-  query = signal<ReportQuery>({
-    page:0,
-    limit:10,
-    type: 'ALL',
-    start: new Date(),
-    end: new Date()
-  });
-  reportResource = rxResource({
-    params : () =>this.query(),
-    stream: ({params}) => this.reportsService.generate(params)
-  })
-  report = computed(()=> {
-      if(!this.reportResource.error() && !this.reportResource.isLoading()){
-         return this.reportResource.value()!.data;
-      }else{
-        return {
-          payments : [],
-          total : 0,
-        } as ReportResponse
+  protected paymentMethods = computed(()=>this.paymentManager.paymentMethods());
+  protected report = computed(()=>this.paymentManager.report());
+  reportSideSheetOpen = signal(true);
+  exportSideSheetOpen = signal(false);
+
+  protected readonly actions = signal<FabAction[]>(
+    [
+      {
+        name:"export",
+        icon:"download",
+        tooltip: "Exportar reporte"
+      },
+      {
+        name: "generate",
+        icon: "tune",
+        tooltip: "Generar reporte"
       }
-    }
-  )
+    ]
+  );
+
   protected openInvoiceDialog(payment: PaymentEntity) {
     this.invoiceManager.currentInvoice.set(payment.invoiceId!);
     this.dialog.open(InvoiceDetails)
+  }
+  protected handleMenuAction($event: string) {
+    if($event == 'generate'){
+      this.reportSideSheetOpen.set(true);
+      this.exportSideSheetOpen.set(false);
+    }else if ($event == 'export'){
+      this.reportSideSheetOpen.set(false);
+      this.exportSideSheetOpen.set(true);
+    }
+  }
+
+  protected handleReportForm($event: ReportQuery) {
+   this.paymentManager.query.set($event);
+   this.reportSideSheetOpen.set(false);
+   this.exportSideSheetOpen.set(false);
   }
 }

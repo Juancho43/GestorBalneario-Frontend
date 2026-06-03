@@ -1,29 +1,37 @@
 <div class="single-layout">
   <h2>Reportes de pagos</h2>
-  @if (report() !== null) {
-
+  @if (report()) {
     <app-payments-table
       [payments]="report()!.payments!"
       (clickedPayment)="openInvoiceDialog($event)"
     />
   }
+  <!--  Generar reporte de pagos-->
   <app-side-sheet
-    [isOpen]="sideSheetOpen()"
+    [isOpen]="reportSideSheetOpen()"
     headline="Generar reporte de pagos"
-    (closed)="this.sideSheetOpen.set(false)">
+    (closed)="this.reportSideSheetOpen.set(false)">
 
     <app-report-form
-      (dblclick)="this.sideSheetOpen.set(false)"
-      [class.sheet-open]="sideSheetOpen()"
+      [class.sheet-open]="reportSideSheetOpen()"
       [paymentMethods]="paymentMethods()"
-      (finalQuery)="query.set($event)"
+      (finalQuery)="handleReportForm($event)"
     />
-
   </app-side-sheet>
+  <!--  Exportar reporte de pagos-->
+  <app-side-sheet
+    [isOpen]="exportSideSheetOpen()"
+    headline="Exportar reporte de pagos"
+    (closed)="this.exportSideSheetOpen.set(false)">
 
+  <app-export-payment-report-component
+    [class.sheet-open]="exportSideSheetOpen()"
+    (close)="this.exportSideSheetOpen.set(false)"
+  />
+  </app-side-sheet>
 </div>
-<app-fab-button
-  icon="tune"
-  label="Generar reporte"
-  (touched)="this.sideSheetOpen.set(true)"
+
+<app-fab-menu
+  (actionSelected)="handleMenuAction($event)"
+  [actions]="actions()"
 />
