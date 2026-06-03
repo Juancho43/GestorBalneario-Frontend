@@ -28,7 +28,7 @@ export class InvoiceManager {
       query: '',
       filters:{
         orderDirection:'asc',
-        orderBy:'created_at',
+        orderBy:'i.created_at',
         state:'All'
       }
     }
