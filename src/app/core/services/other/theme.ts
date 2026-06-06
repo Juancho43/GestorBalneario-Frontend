@@ -1,30 +1,31 @@
-import {DOCUMENT, inject, Injectable, signal} from '@angular/core';
+import {effect, inject, Injectable, linkedSignal, signal} from '@angular/core';
+import {DOCUMENT} from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Theme {
-  public isDarkMode = signal<boolean>(false);
   private document = inject(DOCUMENT);
+  private systemTheme = signal<'dark' | 'light'>(
+    window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  );
+  public isDarkMode = linkedSignal(() => this.systemTheme() === 'dark');
+
   constructor() {
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    this.applyTheme(systemPrefersDark);
-  }
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      this.systemTheme.set(e.matches ? 'dark' : 'light');
+    });
 
-  public toggleTheme(): void {
-    const newThemeState = !this.isDarkMode();
-    this.isDarkMode.set(newThemeState);
-    this.applyTheme(newThemeState);
+    effect(() => {
+      this.applyTheme(this.isDarkMode());
+    });
   }
-
+  public toggleTheme(){
+    this.isDarkMode.update(p => !p);
+  }
   private applyTheme(isDark: boolean): void {
     const bodyClassList = this.document.body.classList;
-    if (isDark) {
-      bodyClassList.remove('light');
-      bodyClassList.add('dark');
-    } else {
-      bodyClassList.remove('dark');
-      bodyClassList.add('light');
-    }
+    bodyClassList.remove(isDark ? 'light' : 'dark');
+    bodyClassList.add(isDark ? 'dark' : 'light');
   }
 }
