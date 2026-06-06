@@ -1,12 +1,15 @@
 <div class="app">
   <app-app-bar
-    (toggleMode)="toggleMode()"
     [title]="title()"
     [menuOpen]="menuRail()"
     (button)="toggleMenu()"
     (titleTouched)="goHome()"
   />
+  <app-navigation-bar
+    [isShown]="isMobile()"
+  />
   <app-menu
+    [isMobile]="isMobile()"
     [isOpen]="menuRail()"
   />
   <div class="main-container">

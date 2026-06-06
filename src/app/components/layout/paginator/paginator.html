@@ -4,17 +4,16 @@
     (click)="onPrev()"
 
     aria-label="Previous Page">
-    &laquo; Prev
-  </button>
 
-<!--  <div class="page-info">-->
-<!--    <span>Page <strong>{{ currentPage() }}</strong> of <strong>{{ totalPages() }}</strong></span>-->
-<!--  </div>-->
+    <mat-icon class="page-icon">navigate_before</mat-icon>
+  </button>
 
   <button
     class="page-btn"
     (click)="onNext()"
     aria-label="Next Page">
-    Next &raquo;
+
+    <mat-icon class="page-icon">navigate_next</mat-icon>
+
   </button>
 </div>

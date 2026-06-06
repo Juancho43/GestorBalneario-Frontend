@@ -1,7 +1,8 @@
-import {Component, input} from '@angular/core';
+import {Component, computed, inject, input, output} from '@angular/core';
 import {RouterLink, RouterLinkActive} from '@angular/router';
 import {MatIcon} from '@angular/material/icon';
 import {MatTooltip} from '@angular/material/tooltip';
+import {Theme} from '../../../core/services/other/theme';
 
 export interface Link{
   icon: string;
@@ -21,8 +22,17 @@ export interface Link{
   styleUrl: './menu.scss',
 })
 export default class Menu {
-  isOpen = input.required<boolean>();
-  links: Link[]  = [
+  private theme = inject(Theme);
+  readonly isOpen = input.required<boolean>();
+  readonly isMobile = input.required<boolean>();
+  protected darkMode = computed(() => this.theme.isDarkMode());
+  protected show = computed(() => this.isOpen() || !this.isMobile());
+  protected links: Link[]  = [
+    {
+      icon:'home',
+      label: 'Inicio',
+      path:'home'
+    },
     {
       icon: 'date_range',
       label: 'Temporadas',
@@ -65,6 +75,7 @@ export default class Menu {
     }
 
   ]
-
-
+  toggleMode(){
+    this.theme.toggleTheme();
+  }
 }

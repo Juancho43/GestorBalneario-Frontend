@@ -1,27 +1,57 @@
 @let isOpen = this.isOpen();
-<div
-  [class.open-menu]="isOpen"
-  class="menu"
->
-  <ul>
-    @for(item of links; track $index){
+@let show = this.show();
+@if(show){
+  <div
+    animate.leave="hide-animation"
+    animate.enter="show-animation"
+    [class.open-menu]="isOpen"
+    class="menu"
+  >
+    <ul>
+      @for(item of links; track $index){
+        <li>
+          <button
+            routerLinkActive="active-menu-button"
+            [routerLink]="item.path"
+            matTooltipClass="tooltip"
+            matTooltipPosition="after"
+            [matTooltipDisabled]="isOpen"
+            [matTooltip]="item.label"
+          >
+            <mat-icon
+              [fontIcon]="item.icon"
+            />
+            @if(isOpen){
+              <span>{{item.label}}</span>
+            }
+          </button>
+        </li>
+      }
       <li>
         <button
-          routerLinkActive="active-menu-button"
-          [routerLink]="item.path"
+          (click)="toggleMode()"
           matTooltipClass="tooltip"
           matTooltipPosition="after"
           [matTooltipDisabled]="isOpen"
-          [matTooltip]="item.label"
+          [matTooltip]="darkMode() ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'"
         >
-          <mat-icon
-            [fontIcon]="item.icon"
-          />
-          @if(isOpen){
-            <span>{{item.label}}</span>
+          @if (!darkMode()){
+            <mat-icon
+              fontIcon="dark_mode"
+            />
+            @if(isOpen){
+              <span>Cambiar a modo claro</span>
+            }
+          } @else {
+            <mat-icon
+              fontIcon="light_mode"
+            />
+            @if(isOpen){
+              <span>Cambiar a modo oscuro</span>
+            }
           }
         </button>
       </li>
-    }
-  </ul>
-</div>
+    </ul>
+  </div>
+}

@@ -1,4 +1,4 @@
-import {Component, input, output} from '@angular/core';
+import {Component, computed, input, output} from '@angular/core';
 import {CurrentSeasonDisplay} from '../../seasons/current-season-display/current-season-display';
 import {MatIcon} from '@angular/material/icon';
 
@@ -14,7 +14,7 @@ import {MatIcon} from '@angular/material/icon';
 export class AppBar {
   readonly title = input.required<string>();
   menuOpen = input.required<boolean>();
+
   button = output();
   titleTouched = output()
-  toggleMode = output();
 }

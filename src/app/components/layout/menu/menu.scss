@@ -17,6 +17,7 @@
     width: var(--m3-drawer-width);
   }
 
+
   ul {
     list-style: none;
     padding: 12px;
@@ -82,6 +83,34 @@
 /* =========================================================================
    Collapsed State (Navigation Rail) Formatting
    ========================================================================= */
+@keyframes enter-animation {
+  0% {
+    opacity: 0;
+    transform: translateX(-400px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes leave-animation {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-400px);
+  }
+}
+.hide-animation{
+
+  animation: leave-animation 0.5s ease-out forwards;
+}
+.show-animation {
+  animation: enter-animation 0.5s ease-out forwards;
+}
 .menu:not(.open-menu) {
   /* Center the hamburger menu icon */
   li:first-child {

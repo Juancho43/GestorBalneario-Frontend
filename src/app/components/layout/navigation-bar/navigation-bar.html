@@ -1,0 +1,19 @@
+@if (isShown()) {
+  <div class="navigation-bar">
+ <ul>
+    @for(item of links; track $index){
+      <li>
+        <button
+          routerLinkActive="active-menu-button"
+          [routerLink]="item.path"
+        >
+          <mat-icon
+            [fontIcon]="item.icon"
+          />
+          <span>{{item.label}}</span>
+        </button>
+      </li>
+    }
+ </ul>
+  </div>
+}

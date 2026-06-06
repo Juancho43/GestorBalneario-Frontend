@@ -18,9 +18,10 @@ import {ShadowViewer} from './views/shadow-viewer/shadow-viewer';
 export const routes: Routes = [
   {
     title: 'Main Menu',
-    path: '',
+    path: 'home',
     loadComponent: () => MainMenu
   },
+
   {
     title: 'About',
     path: 'about',
@@ -92,6 +93,9 @@ export const routes: Routes = [
     path:'invoice-editor',
     canActivate: [currentSeasonGuard],
     loadComponent: ()=>InvoiceEditor
-  }
-
+  },
+  {
+    path: '**',
+    redirectTo: '/home',
+  },
 ];
