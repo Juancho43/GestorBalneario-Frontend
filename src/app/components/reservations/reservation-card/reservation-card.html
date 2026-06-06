@@ -1,21 +1,41 @@
 @let reservation = this.reservation();
-<mat-card
-  class="card"
+
+<div
+  class="reservation-card"
+  [ngClass]="reservation.state!.toLowerCase()"
+  tabindex="0"
+  role="button"
 >
-  <div class="data">
-    @if (reservation.shadow!){
-      <p>{{reservation.shadow!.type}} - {{reservation.shadow!.identifier}}</p>
-    }
-    <p>Desde:{{reservation.dates.checkIn | date}}</p>
-    <p>Hasta:{{reservation.dates.checkOut | date}}</p>
-    <p>{{reservation.state! | reservationState}}</p>
-    <p>Duracion: {{duration()}}</p>
-    @if (reservation.client) {
-      <p>Responsable: {{reservation.client!.name}}</p>
+  <div class="card-icon-container">
+    @switch (reservation.state!) {
+      @case ('CreatedState') {
+        <mat-icon class="state-icon confirmed">event_available</mat-icon>
+      }
+      @case ('ActiveState') {
+        <mat-icon class="state-icon pending">date_range</mat-icon>
+      }
+      @case ('CompletedState') {
+        <mat-icon class="state-icon completed">done_all</mat-icon>
+      }
+      @case ('CanceledState') {
+        <mat-icon class="state-icon canceled">event_busy</mat-icon>
+      }
+      @default {
+        <mat-icon class="state-icon">calendar_today</mat-icon>
+      }
     }
   </div>
-  <app-custom-menu
-    (selectedOptionChange)="handleMenuOption($event!)"
-    [options]="options"
-  />
-</mat-card>
+
+  <div class="card-content">
+    <div class="card-header-row">
+      <span class="reservation-dates">
+        {{ reservation.dates.checkIn | date:'shortDate' }} - {{ reservation.dates.checkOut | date:'shortDate' }}
+      </span>
+      <span class="reservation-duration">{{ duration() }}</span>
+    </div>
+
+    <div class="card-body-row">
+      <span class="state-text">{{ reservation.state! | reservationState }}</span>
+    </div>
+  </div>
+</div>

@@ -6,12 +6,13 @@
   <div class="input-wrapper">
     <ng-content select="[search-input]"></ng-content>
   </div>
+  <div class="buttons">
+    <div class="filter-button">
+      <ng-content select="[search-filter]"></ng-content>
+    </div>
 
-  <div class="filter-button">
-    <ng-content select="[search-filter]"></ng-content>
-  </div>
-
-  <div class="action-button">
-    <ng-content select="[search-button]"></ng-content>
+    <div class="action-button">
+      <ng-content select="[search-button]"></ng-content>
+    </div>
   </div>
 </div>

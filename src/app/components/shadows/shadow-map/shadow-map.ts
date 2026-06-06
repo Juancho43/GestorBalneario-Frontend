@@ -64,7 +64,7 @@ export class ShadowMap implements AfterViewInit{
   }
   @HostListener('window:resize')
   onResize() {
-    const newWidth =  window.innerWidth * 0.80;
+    const newWidth =  window.innerWidth * 0.90;
     const newHeight =  window.innerHeight * 0.70;
     this.helpers.changeCanvasSize(this.canvas,newWidth,newHeight);
   }

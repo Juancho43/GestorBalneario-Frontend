@@ -1,19 +1,30 @@
 @let client = this.client();
-<mat-card class="card client-card">
-  <mat-icon aria-hidden="false" fontIcon="person"/>
-  <div
-    class="data"
-    (click)="selected.emit(client)"
-  >
-    <p>Nombre: {{client.name}}</p>
-    <p>Email: {{client.email}}</p>
-    <p>Telefono: {{client.phone}}</p>
-  </div>
-  @if (this.actions()) {
-   <app-custom-menu
-    (selectedOptionChange)="handleMenuOption($event!)"
-    [options]="options"
-  />
 
-  }
+<mat-card
+  class="client-card m3-elevated-card"
+  (click)="selected.emit(client)"
+  tabindex="0"
+  role="button"
+>
+  <!-- Contenedor del Icono/Avatar de M3 -->
+  <div class="avatar-container">
+    <mat-icon aria-hidden="true" fontIcon="person" />
+  </div>
+
+  <!-- Contenido de la Tarjeta -->
+  <div class="card-content">
+    <h3 class="client-name">{{ client.name }}</h3>
+
+    <div class="client-details">
+      <div class="detail-item">
+        <mat-icon class="detail-icon">mail</mat-icon>
+        <span class="detail-text">{{ client.email }}</span>
+      </div>
+
+      <div class="detail-item">
+        <mat-icon class="detail-icon">call</mat-icon>
+        <span class="detail-text">{{ client.phone }}</span>
+      </div>
+    </div>
+  </div>
 </mat-card>

@@ -3,12 +3,13 @@
     <section class="list-panel">
       <h2>Listado de reservaciones</h2>
       <app-reservation-list-manager
-        (selectedReservation)="handleSelectedReservation($event)"
+        (selectedReservation)="handleSelectReservation($event)"
       />
     </section>
   }
 @if(this.showDetails()){
   <section class="detail-panel">
+    @if (currentReservation()){
     <div class="detail-header">
       <h2>Reserva seleccionada</h2>
       @if(!this.singlePane()){
@@ -19,9 +20,8 @@
         </button>
       }
     </div>
-    @if (selectedReservation()){
       <app-reservation-detail
-        [reservation]="selectedReservation()!"
+        [reservationData]="currentReservation()"
       />
     } @else {
       <p>Seleccione una reserva para ver los detalles</p>

@@ -1,11 +1,11 @@
 import {Component, input} from '@angular/core';
 import {ShadowEntity} from '../../../core/model/shadowEntity';
-import {MatCard} from '@angular/material/card';
+import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'app-shadow-card',
   imports: [
-    MatCard
+    MatIcon
   ],
   templateUrl: './shadow-card.html',
   styleUrl: './shadow-card.scss',

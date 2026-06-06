@@ -7,17 +7,38 @@
   </section>
 
   @let list = this.seasons!;
-    <div>
+    <div class="content">
       @if(list) {
-        @for (season of list;track $index) {
-          <div (click)="setSeason(season)">
-
-            {{season.name | json}}:
-            {{season.startDate | date:'short'}} /
-            {{season.endDate | date: 'short'}}
-          </div>
-          <button (click)="setActive(season)">Marcar como active</button>
-        }
+        <ul class="season-list">
+          @for (season of list;track $index) {
+            <li class="season-item" [class.active]="season.isActive">
+                <mat-icon
+                  (click)="setSeason(season)"
+                  [fontIcon]="currentSeason().id === season.id ? 'check_box' :'check_box_outline_blank'"
+                  matTooltipClass="tooltip"
+                  [matTooltip]="season.isActive ? 'Temporada actual' :'Seleccionar temporada historica'"
+                  matTooltipPosition="below"
+                />
+              <p>
+                {{season.name | json}}:
+              </p>
+              @if (season.isActive){
+                <mat-icon
+                  matTooltipClass="tooltip"
+                  matTooltip="Temporada activa"
+                  fontIcon="toggle_on"
+                />
+              } @else {
+                <mat-icon
+                  matTooltip="Marcar como temporada activa"
+                  matTooltipClass="tooltip"
+                  (click)="setActive(season)"
+                  fontIcon="toggle_off"
+                />
+              }
+            </li>
+          }
+        </ul>
       }
     </div>
 </div>

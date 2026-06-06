@@ -10,10 +10,7 @@
   width: 360px;
   display: flex;
   flex-direction: column;
-
-  overflow-y: auto;
   padding-right: 8px;
-
   h2 {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
@@ -96,41 +93,28 @@
   }
 }
 
-/* =========================================================================
-   Responsividad (Breakpoints)
-   ========================================================================= */
 
-/* 1. The Tablet Breakpoint (Medium: < 840px) */
-@media screen and (max-width: 839px) {
+@media screen and (max-width: 955px) {
   .list-detail-layout {
-    gap: 16px; /* Compress the standard M3 gap slightly for tablet efficiency */
+    width: 100%;
+    display: flex;
+    gap: 0;
   }
 
   .list-panel {
-    width: 300px; /* Reduce the fixed width to prioritize the detail content */
-  }
-}
-
-/* 2. The Compact Breakpoint (Mobile: < 600px)
-   Goal: Total focus. Switch to a vertical layout to prevent horizontal overflow. */
-@media screen and (max-width: 599px) {
-  .list-detail-layout {
-    flex-direction: column; /* Stack the panels vertically for a clear, readable flow */
-    gap: 16px;
-  }
-
-  .list-panel {
-    width: 100%; /* Claim the full width of the mobile screen */
+    width: 100%;
     padding-right: 0;
   }
 
   .detail-panel {
-    padding: 16px; /* Reduce inner padding to maximize mobile screen real estate */
-    border-radius: 16px; /* Soften the Large Shape radius for smaller screens */
+    width: 100%;
+    height: calc(80dvh - 80px);
+    padding: 16px;
+    margin: 0;
   }
 
   .detail-panel h2 {
-    font-size: 20px; /* Slightly scale down the typography for compact view */
+    font-size: 20px;
     margin-bottom: 16px;
   }
 }

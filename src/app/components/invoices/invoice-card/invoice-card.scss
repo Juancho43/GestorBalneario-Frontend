@@ -1,1 +1,92 @@
 @use '../../../../styles';
+:host {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.invoice-card {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  gap: 16px;
+  background-color: var(--md-sys-color-surface-container-low, #1e1e1e); // Superficie M3 Oscura si aplica
+  border: 1px solid var(--md-sys-color-outline-variant, #333);
+  border-radius: 12px; // M3 Shape Medium
+  cursor: pointer;
+  transition: background-color 200ms ease, box-shadow 200ms ease;
+
+  &:hover {
+    background-color: var(--md-sys-color-surface-container-high, #2a2a2a);
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  &:active {
+    background-color: var(--md-sys-color-surface-container-highest, #333);
+  }
+}
+
+.card-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.state-icon {
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+
+  &.paid {
+    color: var(--md-sys-color-primary, #4caf50); // Verde o color primario de éxito
+  }
+  &.pending {
+    color: var(--md-sys-color-tertiary, #ffb74d); // Color de advertencia sutil
+  }
+  &.canceled {
+    color: var(--md-sys-color-error, #f44336); // Color de error M3
+  }
+}
+
+.card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.card-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .invoice-monto {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--md-sys-color-on-surface, #fff);
+  }
+
+  .invoice-fecha {
+    font-size: 12px;
+    color: var(--md-sys-color-on-surface-variant, #b0b0b0);
+  }
+}
+
+.card-body-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .invoice-id {
+    font-size: 12px;
+    font-family: monospace;
+    color: var(--md-sys-color-on-surface-variant, #888);
+  }
+
+  .state-text {
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    opacity: 0.7;
+  }
+}

@@ -29,9 +29,7 @@
   }
 }
 
-/* 4. The Expanded Breakpoint (Desktops: 840px+)
-   Action: Execute total control over line length to guarantee readability. */
-@media screen and (min-width: 840px) {
+@media screen and (min-width: 955px) {
   .single-layout h2 {
     margin-left: 0; /* Center align perfectly with the constrained content */
     padding-left: 32px; /* Match content padding visually */

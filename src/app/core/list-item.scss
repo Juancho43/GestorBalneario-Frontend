@@ -4,6 +4,8 @@
   padding: 8px 0;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+  height: 65dvh;
   color: var(--md-sys-color-on-surface);
 }
 
@@ -60,4 +62,9 @@
   text-align: center;
   color: var(--md-sys-color-outline);
   font-size: 14px;
+}
+@media (max-width: 955px) {
+  .m3-list {
+    height: calc(70vh - 80px);
+  }
 }

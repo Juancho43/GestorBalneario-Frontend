@@ -9,7 +9,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {IDeleteDialogData} from '../../core/Interfaces/DeleteDialogData';
 import {FABButton} from '../../components/layout/fab-button/fab-button';
 import {OverlayHelper} from '../../core/utils/overlay-helper';
-import {BreakpointObserver} from '@angular/cdk/layout';
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {MatIcon} from '@angular/material/icon';
 
 @Component({
@@ -25,29 +25,31 @@ import {MatIcon} from '@angular/material/icon';
 })
 export class ClientViewer {
   private manager = inject(ClientManager);
-  singlePane = signal(false);
-  currentPane = signal('list');
-  showList = computed(()=>{
-    if(this.singlePane()) return true;
-    return this.currentPane() === 'list';
+  protected currentClient = computed(()=>this.manager.currentClientDetails());
+  protected singlePane = signal(false);
+  protected currentPane = signal('list');
 
-  })
-  showDetails = computed(()=>{
-    if(this.singlePane()) return true;
-    return this.currentPane() === 'detail';
-  })
+  protected showList = computed(()=> this.singlePane() || this.currentPane() === 'list');
+  protected showDetails = computed(()=> this.singlePane() || this.currentPane() === 'detail');
+
+  constructor(){
+    (new BreakpointObserver()).observe([Breakpoints.XSmall,Breakpoints.Small]).subscribe(result => {
+      this.singlePane.set(!result.matches);
+    })
+  }
+
   private overlayHelper = inject(OverlayHelper);
+
   isOverlayOpen = false;
   private matDialog = inject(MatDialog);
 
-  protected openClientDetail(client: ClientEntity) {
+  protected handleSelectClient(client: ClientEntity) {
     this.currentPane.set('detail');
     this.setCurrentClient(client);
   }
   protected setCurrentClient(client: ClientEntity) {
-    this.manager.currentClient.set(client);
+    this.manager.selectedClientId.set(client.id!);
   }
-
   protected deleteClient($event: ClientEntity) {
     this.setCurrentClient($event);
     const data :IDeleteDialogData = {
@@ -63,15 +65,6 @@ export class ClientViewer {
     ref.beforeClosed().subscribe(res =>{
       if(res) {
         this.manager.deleteClient($event)
-      }
-    })
-  }
-  constructor(){
-    (new BreakpointObserver()).observe(['(max-width: 800px)']).subscribe(result => {
-      if (result.matches) {
-        this.singlePane.set(false);
-      } else {
-        this.singlePane.set(true);
       }
     })
   }

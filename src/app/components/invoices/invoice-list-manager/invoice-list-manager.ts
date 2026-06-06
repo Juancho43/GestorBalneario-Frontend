@@ -1,9 +1,10 @@
-import {Component, computed, inject} from '@angular/core';
+import {Component, computed, inject, output} from '@angular/core';
 import {InvoiceList} from '../invoice-list/invoice-list';
 import {InvoiceManager} from '../../../core/services/Managers/invoice-manager.service';
 import {InvoiceSearcher} from '../invoice-searcher/invoice-searcher';
 import {Paginator} from '../../layout/paginator/paginator';
 import {SearchBarData} from '../../../core/Interfaces/SearchInterfaces';
+import {InvoiceEntity} from '../../../core/model/InvoiceEntity';
 
 @Component({
   selector: 'app-invoice-list-manager',
@@ -19,7 +20,7 @@ export class InvoiceListManager {
   private manager = inject(InvoiceManager);
   protected invoices = computed(()=>this.manager.invoicesToDisplay());
   protected query = computed(()=>this.manager.searchQuery().pagination)
-
+  selectedInvoice = output<InvoiceEntity>();
   protected handleSearch($event: SearchBarData) {
     this.manager.searchQuery.update((p) => ({
       ...p,

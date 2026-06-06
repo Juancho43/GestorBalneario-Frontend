@@ -1,1 +1,41 @@
 @use "../../../core/dialog";
+
+.season-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  gap: 12px;
+}
+
+.season-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+
+  gap: 12px;
+  max-width: 280px;
+  padding: 16px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+
+  mat-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.active {
+  background-color: var(--md-sys-color-on-secondary-container);
+  color:var(--md-sys-color-inverse-on-surface)
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}

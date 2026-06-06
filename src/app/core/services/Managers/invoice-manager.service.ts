@@ -1,24 +1,16 @@
-import {computed, inject, Injectable, linkedSignal, signal} from '@angular/core';
-import {GetInvoicesHttp} from '../InvoiceHttp/get-invoices-http.service';
+import {computed, effect, inject, Injectable, signal} from '@angular/core';
 import {rxResource} from '@angular/core/rxjs-interop';
-import {PaginatedQuery} from '../ClientHttp/get-clients-http';
 import {InvoiceDetailHttp} from '../InvoiceHttp/invoice-detail-http';
 import {SearchQuery} from '../../Interfaces/SearchInterfaces';
 import {InvoiceSearch} from '../InvoiceHttp/invoice-search';
+import {InvoiceDetailsDTO} from '../../Interfaces/Details/InvoiceDetailDTO';
 
 @Injectable({
   providedIn: 'root',
 })
 export class InvoiceManager {
   private searchHttp = inject(InvoiceSearch)
-  private getByIdHttp = inject(InvoiceDetailHttp);
-  private listHttp = inject(GetInvoicesHttp);
-  private query = signal({query:'IssuedState',page:0,pageSize:10})
-  private invoicesResource= rxResource({
-    params:() => this.query(),
-    stream:({params})=> this.listHttp.get(params)
-  })
-
+  private getDetailsHttp = inject(InvoiceDetailHttp);
   searchQuery = signal<SearchQuery>({
     pagination: {
       limit: 10,
@@ -40,32 +32,39 @@ export class InvoiceManager {
   invoicesToDisplay = computed(()=>{
     return this.searchResource.isLoading() || this.searchResource.error() ? [] : this.searchResource.value()?.data!
   })
-  /*
-  * A list of the current shadows. It is updated when a shadow is added, updated or deleted.
-  * */
-  private invoices = linkedSignal(()=>
-    this.invoicesResource.isLoading() || this.invoicesResource.error() ? [] : this.invoicesResource.value()!.data!
-  )
-  setQuery(query: PaginatedQuery) {
-    this.query.set(query);
-  }
-  getQuery(): PaginatedQuery {
-    return this.query();
-  }
-  currentInvoice = signal<string>('')
+
+
+  selectedInvoiceId = signal<string | null>(null);
+  currentInvoiceDetails = signal<InvoiceDetailsDTO | undefined>(undefined);
 
   public invoiceResource = rxResource({
     params: () => {
-      const id = this.currentInvoice();
+      const id = this.selectedInvoiceId();
       return id ? { id } : undefined;
     },
-    stream: ({params}) => this.getByIdHttp.get(params.id)
+    stream: ({params}) => this.getDetailsHttp.get(params.id)
   });
   invoice = computed(()=>
   {
     return this.invoiceResource.value()?.data!;
   })
-  getList(){
-    return this.invoices();
+
+  constructor() {
+    effect(() => {
+      this.selectedInvoiceId();
+      this.getInvoiceDetails();
+    });
+  }
+  getInvoiceDetails(){
+    if(this.selectedInvoiceId()){
+      const id = this.selectedInvoiceId()!;
+      this.getDetailsHttp.get(id). subscribe(
+        {
+          next: (r) => {
+            if(r.data) this.currentInvoiceDetails.set(r.data)
+          }
+        }
+      )
+    }
   }
 }

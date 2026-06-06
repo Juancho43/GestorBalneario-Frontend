@@ -3,6 +3,7 @@
 />
 <app-shadow-list
   [list]="shadows()"
+  (selectedShadow)="this.selectedShadow.emit($event)"
 />
 <app-paginator
   [query]="query()"

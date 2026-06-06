@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {ReservationDetailDTO} from '../../Interfaces/ReservationDetailDTO';
+import {ReservationDetailsDTO} from '../../Interfaces/Details/ReservationDetailsDTO';
 import {environment} from '../../../../environments/environment.development';
 import {ApiResponse} from '../../Interfaces/ApiResponse';
 
@@ -10,6 +10,6 @@ import {ApiResponse} from '../../Interfaces/ApiResponse';
 export class GetReservationDetailsHttp {
   private http = inject(HttpClient);
   get(id:string){
-    return this.http.get<ApiResponse<ReservationDetailDTO>>(`${environment.apiUrl}/reservation/detail/${id}`);
+    return this.http.get<ApiResponse<ReservationDetailsDTO>>(`${environment.apiUrl}/reservation/detail/${id}`);
   }
 }

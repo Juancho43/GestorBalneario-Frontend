@@ -5,7 +5,7 @@ import {FABButton} from '../../components/layout/fab-button/fab-button';
 import {Router} from '@angular/router';
 import {ReservationManager} from '../../core/services/Managers/reservation-manager.service';
 import {MatIcon} from '@angular/material/icon';
-import {BreakpointObserver} from '@angular/cdk/layout';
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {ReservationEntity} from '../../core/model/reservationEntity';
 
 @Component({
@@ -15,6 +15,7 @@ import {ReservationEntity} from '../../core/model/reservationEntity';
     ReservationDetail,
     FABButton,
     MatIcon,
+    ReservationDetail,
   ],
   templateUrl: './reservation-viewer.html',
   styleUrl: './reservation-viewer.scss',
@@ -24,32 +25,22 @@ export class ReservationViewer {
   private manager = inject(ReservationManager);
   protected singlePane = signal(false);
   protected currentPane = signal('list');
-  protected showList = computed(()=>{
-    if(this.singlePane()) return true;
-    return this.currentPane() === 'list';
-
-  })
-  protected showDetails = computed(()=>{
-    if(this.singlePane()) return true;
-    return this.currentPane() === 'detail';
-  })
-  protected selectedReservation = computed(()=>this.manager.currentReservation());
-
+  protected currentReservation = computed(()=>this.manager.currentReservationDetails());
+  protected showList = computed(()=> this.singlePane() || this.currentPane() === 'list');
+  protected showDetails = computed(()=> this.singlePane() || this.currentPane() === 'detail');
   constructor(){
-    (new BreakpointObserver()).observe(['(max-width: 800px)']).subscribe(result => {
-      if (result.matches) {
-        this.singlePane.set(false);
-      } else {
-        this.singlePane.set(true);
-      }
+    (new BreakpointObserver()).observe([Breakpoints.XSmall,Breakpoints.Small]).subscribe(result => {
+      this.singlePane.set(!result.matches);
     })
   }
+
+
   protected handleFABButton() {
     this.router.navigateByUrl('/reservation-create');
   }
 
-  protected handleSelectedReservation($event: ReservationEntity) {
+  protected handleSelectReservation($event: ReservationEntity) {
     this.currentPane.set('detail');
-    this.manager.currentReservation.set($event);
+    this.manager.selectedReservationId.set($event.id!);
   }
 }

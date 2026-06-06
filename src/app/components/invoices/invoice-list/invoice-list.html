@@ -1,8 +1,15 @@
 <ul class="m3-list">
   @for (invoice of this.list(); track invoice.id) {
     <li class="m3-list-item">
-      <mat-icon class="m3-leading-icon" aria-hidden="false" fontIcon="receipt"/>
-      <div class="m3-text-content">
+      @switch (invoice.state!) {
+        @case ('PaidState') {
+          <mat-icon class="state-icon paid">check_circle</mat-icon>
+        }
+        @case ('IssuedState') {
+          <mat-icon class="state-icon pending">schedule</mat-icon>
+        }
+      }
+      <div class="m3-text-content" (click)="selected.emit(invoice)">
         <span class="m3-headline">{{ invoice.clientName }}</span>
         <span class="m3-supporting-text">{{invoice.state | invoiceState}}</span>
         <span class="m3-supporting-text">{{ invoice.amount | currency}}</span>

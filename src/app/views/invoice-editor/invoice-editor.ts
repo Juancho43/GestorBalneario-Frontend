@@ -1,5 +1,4 @@
-import {Component, computed, inject, linkedSignal, signal, ViewChild} from '@angular/core';
-import {InvoiceCard} from "../../components/invoices/invoice-card/invoice-card";
+import {Component, inject, linkedSignal, signal, ViewChild} from '@angular/core';
 import {InvoiceManager} from '../../core/services/Managers/invoice-manager.service';
 import {InvoiceItemForm} from '../../components/invoices/invoice-adjustment-form/invoice-item-form.component';
 import {InvoiceItemsManager} from '../../core/services/Managers/invoice-items-manager';
@@ -10,7 +9,6 @@ import {DeleteInvoiceItemCommand} from '../../core/services/InvoiceHttp/remove-i
 @Component({
   selector: 'app-invoice-editor',
   imports: [
-    InvoiceCard,
     InvoiceItemForm,
     InvoiceAdjustment
   ],
@@ -20,19 +18,13 @@ import {DeleteInvoiceItemCommand} from '../../core/services/InvoiceHttp/remove-i
 export class InvoiceEditor {
   private itemManager = inject(InvoiceItemsManager);
   private manager = inject(InvoiceManager);
-  protected invoices = computed(()=>this.manager.getList());
-  protected query = linkedSignal(()=> this.manager.getQuery());
   invoice = linkedSignal(()=>this.manager.invoice())
   editingItems =linkedSignal<InvoiceItem[]>(() => this.itemManager.currentItems())
   currentItem = signal<InvoiceItem | undefined>(undefined);
   @ViewChild('editItemForm') editItemForm!: InvoiceItemForm;
-  constructor() {
-    this.query.set({query:'ALL',page:0,pageSize:10})
-    this.manager.setQuery(this.query());
-  }
 
   protected selectInvoice(invoice: any) {
-    this.manager.currentInvoice.set(invoice.id!);
+    this.manager.selectedInvoiceId.set(invoice.id!);
   }
 
   protected handleSubmitEvent($event: InvoiceItem) {

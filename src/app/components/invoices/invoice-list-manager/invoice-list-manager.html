@@ -3,7 +3,7 @@
 />
 <app-invoice-list
   [list]="invoices()"
-
+  (selected)="selectedInvoice.emit($event)"
 />
 <app-paginator
   (pageChange)="handlePage($event)"

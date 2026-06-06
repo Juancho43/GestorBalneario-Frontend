@@ -3,14 +3,29 @@
     <section class="list-panel">
       <h2>Lista de facturas</h2>
       <app-invoice-list-manager
-
+        (selectedInvoice)="handleSelectedInvoice($event)"
       />
     </section>
   }
   @if(this.showDetails()){
     <section class="detail-panel">
-      <h2>Factura seleccionada</h2>
-      <app-invoice-details/>
+      @if(currentInvoice()){
+         <div class="detail-header">
+          <h2>Factura seleccionada</h2>
+          @if(!this.singlePane()){
+            <button
+              class="icon-btn close-btn"
+              (click)="this.currentPane.set('list')">
+              <mat-icon fontIcon="close"/>
+            </button>
+          }
+        </div>
+        <app-invoice-details
+          [invoiceData]="currentInvoice()"
+        />
+      } @else {
+        <p>Selecciona un factura para ver sus detalles</p>
+      }
     </section>
   }
 

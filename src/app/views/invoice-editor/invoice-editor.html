@@ -1,12 +1,12 @@
 <div class="component">
   <h3>Editar facturas.</h3>
   <div class="row">
-    @for(invoice of invoices(); track $index){
-      <app-invoice-card
-        (click)="selectInvoice(invoice)"
-        [invoice]="invoice"
-      />
-    }
+<!--    @for(invoice of invoices(); track $index){-->
+<!--      <app-invoice-card-->
+<!--        (click)="selectInvoice(invoice)"-->
+<!--        [invoice]="invoice"-->
+<!--      />-->
+<!--    }-->
   </div>
   @if (this.invoice()){
     <app-invoice-adjustment-form

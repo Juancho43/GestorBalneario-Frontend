@@ -1,11 +1,10 @@
-<div
-  class="list-detail-layout">
+<div class="list-detail-layout">
   @if (this.showList()){
     <section class="list-panel">
       <h2>Cartera de clientes</h2>
       <app-client-list-manager
         [actions]="true"
-        (selectedClient)="openClientDetail($event)"
+        (selectedClient)="handleSelectClient($event)"
         (edit)="setCurrentClient($event)"
         (delete)="deleteClient($event)"
       />
@@ -13,17 +12,23 @@
   }
   @if(this.showDetails()){
     <section class="detail-panel">
-      <div class="detail-header">
-        <h2>Cliente seleccionado</h2>
-        @if(!this.singlePane()){
-          <button
-            class="icon-btn close-btn"
-            (click)="this.currentPane.set('list')">
-            <mat-icon fontIcon="close"/>
-          </button>
-        }
-      </div>
-      <app-client-details/>
+      @if (currentClient()){
+        <div class="detail-header">
+          <h2>Cliente seleccionado</h2>
+          @if(!this.singlePane()){
+            <button
+              class="icon-btn close-btn"
+              (click)="this.currentPane.set('list')">
+              <mat-icon fontIcon="close"/>
+            </button>
+          }
+        </div>
+        <app-client-details
+          [clientData]="currentClient()"
+        />
+      }@else{
+        <p>Selecciona un cliente para ver sus detalles</p>
+      }
     </section>
   }
 </div>

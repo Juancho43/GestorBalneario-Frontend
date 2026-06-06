@@ -1,27 +1,22 @@
-@if (this.invoice()!){
-  @let invoice = this.invoice().invoice!;
-  @let client = this.invoice().client!;
- <div class="invoice detail" animate.enter="enter-animation">
-   <h3>Detalle factura</h3>
-   <div>
-     <p>{{invoice.state | invoiceState}}</p>
-     <p>Fecha: {{invoice.date | date}}</p>
-   </div>
-   <div class="client">
-     <h4>Cliente</h4>
-     <p>{{client.name}}</p>
-     <p>Email: {{client.email}}</p>
-     <p>Telefono: {{client.phone}}</p>
-   </div>
-   <div>
-     <app-items-table [items]="this.invoice().items"/>
-     @if(this.invoice()!.payments[0].id){
-       <app-payments-table [payments]="this.invoice()!.payments"/>
-     }@else{
-       <br>
-       <p>No hay pagos registrados para esta factura.</p>
-     }
-   </div>
- </div>
+@let data = this.invoiceData();
+@if (data !== undefined) {
+  @let invoice = data.invoice;
+  @let client = data.client;
+  @let payments = data.payments;
+  @let items = data.items;
+  <div class="invoice detail" animate.enter="enter-animation">
+    <app-client-card [client]="client"/>
+    <app-invoice-card [invoice]="invoice"/>
+    <div>
+      <app-items-table [items]="items"/>
+      {{invoice.item | json}}
+      @if(payments[0].id){
+        <app-payments-table [payments]="payments"/>
+      }@else{
+        <br>
+        <p>No hay pagos registrados para esta factura.</p>
+      }
+    </div>
+  </div>
 }
 

@@ -3,25 +3,28 @@
     <section class="list-panel">
       <h2>Listado de carpas</h2>
       <app-shadow-list-manager
+        (selectedShadow)="handleSelectShadow($event)"
       />
     </section>
   }
   @if(this.showDetails()){
     <section class="detail-panel">
-      <div class="detail-header">
-        <h2>Carpa seleccionada</h2>
-        @if(!this.singlePane()){
-          <button
-            class="icon-btn close-btn"
-            (click)="this.currentPane.set('list')">
-            <mat-icon fontIcon="close"/>
-          </button>
-        }
-      </div>
-      @if (selectedShadow()){
-        <app-shadow-detail/>
+      @if(currentShadow()){
+        <div class="detail-header">
+          <h2>Carpa seleccionada</h2>
+          @if(!this.singlePane()){
+            <button
+              class="icon-btn close-btn"
+              (click)="this.currentPane.set('list')">
+              <mat-icon fontIcon="close"/>
+            </button>
+          }
+        </div>
+        <app-shadow-detail
+          [shadowData]="currentShadow()"
+        />
       } @else {
-        <p>Seleccione una reserva para ver los detalles</p>
+        <p>Seleccione una carpa para ver los detalles</p>
       }
     </section>
   }

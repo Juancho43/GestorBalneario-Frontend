@@ -8,6 +8,8 @@ import {ShadowMapHttp} from '../ShadowHttp/shadow-map-http';
 import {SeasonManager} from './season-manager';
 import {ShadowSearch} from '../ShadowHttp/shadow-search';
 import {SearchQuery} from '../../Interfaces/SearchInterfaces';
+import {ShadowDetailsDTO} from '../../Interfaces/Details/ShadowDetailsDTO';
+import {GetShadowHistoryHttp} from '../ShadowHttp/get-shadow-history-http';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +21,7 @@ export class ShadowManager {
   private delete = inject(DeleteShadowHttp);
   private shadowMap = inject(ShadowMapHttp);
   private currentSeason = inject(SeasonManager);
+  private getDetailsHttp = inject(GetShadowHistoryHttp);
   private season = this.currentSeason.currentSeason;
   shadowsResource= rxResource({
     stream:()=> this.shadowMap.get()
@@ -65,8 +68,29 @@ export class ShadowManager {
       this.season()
       this.shadowsResource.reload();
     });
+    effect(()=>{
+      this.selectedShadowId();
+      this.getShadowDetails();
+    })
   }
   currentShadow = signal<ShadowEntity>(this.shadows()[0]);
+  selectedShadowId = signal<null | string>(null);
+  currentShadowDetails = signal<ShadowDetailsDTO | undefined>(undefined)
+
+
+  getShadowDetails(){
+    if (this.selectedShadowId()) {
+      const id = this.selectedShadowId();
+      this.getDetailsHttp.get(id!).subscribe({
+        next: (r) =>{
+          if(r.data){
+            this.currentShadowDetails.set(r.data)
+          }
+        }
+      })
+    }
+  }
+
 
   /**
    * Gets a shadow by its identifier.
@@ -114,8 +138,5 @@ export class ShadowManager {
     });
   }
 
-  getList(){
-    return this.shadows();
-  }
 
 }

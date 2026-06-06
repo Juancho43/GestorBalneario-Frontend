@@ -1,1 +1,17 @@
 @use "../../../core/list-item";
+.state-icon {
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+
+  &.paid {
+    color: var(--md-sys-color-primary, #4caf50); // Verde o color primario de éxito
+  }
+  &.pending {
+    color: var(--md-sys-color-tertiary, #ffb74d); // Color de advertencia sutil
+  }
+  &.canceled {
+    color: var(--md-sys-color-error, #f44336); // Color de error M3
+  }
+}
+

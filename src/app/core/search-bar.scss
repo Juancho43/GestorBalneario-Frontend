@@ -3,10 +3,10 @@ app-search-bar {
   .search-container {
     display: flex;
     align-items: center;
-    height: 56px;
+    height: 72px;
     background-color: var(--md-sys-color-surface-container-high);
-    border-radius: 28px;
-    padding: 0 8px 0 24px;
+    border-radius: 36px;
+    padding: 0 16px;
     margin-bottom: 24px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
     transition: box-shadow 0.2s ease, background-color 0.2s ease;
@@ -40,7 +40,11 @@ app-search-bar {
       }
 
     }
-
+    .buttons{
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+    }
     .action-button {
       button[type='submit'] {
         display: flex;
@@ -48,7 +52,6 @@ app-search-bar {
         justify-content: center;
         background-color: transparent;
         border: none;
-        /* M3 Spec: El ícono inactivo usa la variante on-surface */
         color: var(--md-sys-color-on-surface-variant);
         width: 40px;
         height: 40px;

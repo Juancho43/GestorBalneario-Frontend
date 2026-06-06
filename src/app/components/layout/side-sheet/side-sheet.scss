@@ -85,3 +85,13 @@
     color: var(--md-sys-color-on-surface-variant);
   }
 }
+
+@media (max-width: 600px) {
+  .side-sheet {
+    width: 100%;
+    top: 5dvh;
+    height: calc(95dvh - 80px);
+    border-left: none;
+    border-top: 1px solid var(--md-sys-color-outline-variant);
+  }
+}

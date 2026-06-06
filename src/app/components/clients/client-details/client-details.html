@@ -1,25 +1,16 @@
-<div class="detail-container">
-  @if (this.client()!){
-    @let client = this.client()!.client!;
-    @let invoices = this.client()!.invoices;
-    <div class=" detail" animate.enter="enter-animation">
-      <h3>Detalle del cliente</h3>
-      <p>{{client.name}}</p>
-      <p>Email: {{client.email}}</p>
-      <p>Telefono: {{client.phone}}</p>
+@let data= this.clientData();
+@if (data !== undefined) {
+  @let client = data.client;
+  @let invoices = data.invoices;
+  <div class="detail-container">
+    <div class="detail" animate.enter="enter-animation">
+      <app-client-card [client]="client"/>
       <h4>Facturas</h4>
-
-      @for (invoice of invoices; track $index){
-        <app-invoice-card
-          (click)="selectInvoice(invoice.id!)"
-          [invoice]="invoice"/>
+      @for (invoice of invoices; track $index) {
+        <app-invoice-card [invoice]="invoice" />
       } @empty {
         <p>No hay facturas para este cliente</p>
       }
-
     </div>
-    @if(invoices.length > 0){
-      <app-invoice-details/>
-    }
-  }
-</div>
+  </div>
+}

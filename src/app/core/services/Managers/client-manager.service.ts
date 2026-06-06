@@ -1,12 +1,14 @@
-import {computed, inject, Injectable, linkedSignal, signal} from '@angular/core';
+import {computed, effect, inject, Injectable, signal} from '@angular/core';
 import {rxResource} from '@angular/core/rxjs-interop';
-import {GetClientsHttp, PaginatedQuery} from '../ClientHttp/get-clients-http';
+import {GetClientsHttp} from '../ClientHttp/get-clients-http';
 import {CreateClientHttp} from '../ClientHttp/create-client-http';
 import {EditClientHttp} from '../ClientHttp/edit-client-http';
 import {DeleteClientHttp} from '../ClientHttp/delete-client-http';
 import {ClientEntity} from '../../model/clientEntity';
 import {ClientSearchHttp} from '../ClientHttp/client-search-http';
 import {SearchQuery} from '../../Interfaces/SearchInterfaces';
+import {ClientDetailHttp} from '../ClientHttp/client-detail-http';
+import {ClientDetailsDTO} from '../../Interfaces/Details/ClientDetailsDTO';
 
 @Injectable({
   providedIn: 'root',
@@ -17,11 +19,7 @@ export class ClientManager {
   private create = inject(CreateClientHttp);
   private update = inject(EditClientHttp);
   private delete = inject(DeleteClientHttp);
-  private query = signal<PaginatedQuery>({ query:'',page:1,pageSize:10});
-   clientsResource= rxResource({
-    params: ()=>this.query(),
-    stream:({params})=> this.clientsHttp.get(params)
-  })
+  private getDetailsHttp = inject(ClientDetailHttp);
   searchQuery = signal<SearchQuery>({
     pagination: {
       limit: 10,
@@ -35,6 +33,7 @@ export class ClientManager {
       }
     }
   })
+
   searchResource = rxResource({
     params: () => this.searchQuery(),
     stream:({params}) => this.searchHttp.execute(params)
@@ -42,16 +41,37 @@ export class ClientManager {
   clientsToDisplay = computed(()=>{
     return this.searchResource.isLoading() || this.searchResource.error() ? [] : this.searchResource.value()?.data!
   })
+
+  currentClientDetails = signal<ClientDetailsDTO | undefined>(undefined)
   currentClient = signal<ClientEntity| null>(null);
-  /*
-  * A list of the current clients. It is updated when a shadow is added, updated or deleted.
-  * */
-   clients = linkedSignal(()=>
-    this.clientsResource.isLoading() || this.clientsResource.error() ? [] : this.clientsResource.value()!.data!
-  )
-  getList(){
-    return this.clients();
+  selectedClientId = signal<null | string>(null);
+
+
+  constructor() {
+    effect(() => {
+      this.selectedClientId()
+      this.getClientDetails();
+    });
   }
+
+  getClientDetails(){
+    if(this.selectedClientId()){
+      const query = {
+        id: this.selectedClientId()!,
+        page: 0,
+        limit: 10,
+      };
+      this.getDetailsHttp.get(query.id,query.page,query.limit).subscribe({
+        next : (r) =>{
+          if(r.data){
+            this.currentClientDetails.set(r.data)
+          }
+        }
+      })
+    }
+  }
+
+
   addClient(client: ClientEntity){
     this.create.create(client).subscribe(r=>{
       this.currentClient.set(r.data!);
@@ -62,13 +82,13 @@ export class ClientManager {
   updateClient(client: ClientEntity){
     this.update.update(client).subscribe(r => {
       this.currentClient.set(r.data!);
-      this.clientsResource.reload();
+      // this.clientsResource.reload();
     })
   }
   deleteClient(client: ClientEntity){
     this.delete.delete(client.id!).subscribe(
       r =>{
-        this.clientsResource.reload()
+        // this.clientsResource.reload()
       }
     );
   }

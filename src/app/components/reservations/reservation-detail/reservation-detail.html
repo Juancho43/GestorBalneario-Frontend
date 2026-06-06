@@ -1,16 +1,15 @@
-@let details = this.reservationData();
-@if (details){
+@let data = this.reservationData();
+@if (data){
+  @let reservation = data.reservation;
+  @let client = data.client;
+  @let shadow = data.shadow;
+  @let invoice = data.invoice;
   <div class="detail-container">
     <div class="detail" animate.enter="enter-animation">
-      <h3>Detalle de la reserva</h3>
-      <h4>Fechas</h4>
-      <p>{{details.reservation.dates.checkIn | date:'short'}}</p>
-      <p>{{details.reservation.dates.checkOut | date:'short'}}</p>
-      <p>{{details.reservation.state! | reservationState}}</p>
-      <h4>Cliente</h4>
-      <p>{{details.client.name}}</p>
-      <h4>Sombra</h4>
-      <p>{{details.shadow.identifier}}-{{details.shadow.type}}</p>
+     <app-reservation-card [reservation]= "reservation"/>
+      <app-client-card [client]= "client"/>
+      <app-shadow-card [shadow]= "shadow"/>
+      <app-invoice-card [invoice]="invoice"/>
     </div>
     <app-invoice-details/>
   </div>
