@@ -1,5 +1,5 @@
 import {Component, computed, input} from '@angular/core';
-import {DatePipe, NgClass} from '@angular/common';
+import {DatePipe} from '@angular/common';
 import {ReservationEntity} from '../../../core/model/reservationEntity';
 import {ReservationStatePipe} from '../../../core/utils/pipes/reservation-state-pipe';
 import {MatIcon} from '@angular/material/icon';
@@ -8,7 +8,7 @@ import {Card} from '../../layout/card/card';
 
 @Component({
   selector: 'app-reservation-card',
-  imports: [DatePipe, ReservationStatePipe, NgClass, MatIcon, RouterLink, Card],
+  imports: [DatePipe, ReservationStatePipe, MatIcon, RouterLink, Card],
   templateUrl: './reservation-card.html',
   styleUrl: './reservation-card.scss',
 })

@@ -1,6 +1,6 @@
 import {Component, input} from '@angular/core';
 import {InvoiceEntity} from '../../../core/model/InvoiceEntity';
-import {CurrencyPipe, DatePipe, NgClass} from '@angular/common';
+import {CurrencyPipe, DatePipe} from '@angular/common';
 import {InvoiceStatePipe} from '../../../core/utils/pipes/invoice-state-pipe';
 import {MatIcon} from '@angular/material/icon';
 import {RouterLink} from '@angular/router';
@@ -12,7 +12,6 @@ import {Card} from '../../layout/card/card';
     DatePipe,
     CurrencyPipe,
     InvoiceStatePipe,
-    NgClass,
     MatIcon,
     RouterLink,
     Card,

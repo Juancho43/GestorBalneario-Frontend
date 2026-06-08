@@ -1,12 +1,9 @@
 @let invoice = this.invoice();
-<div
-  class="invoice-card"
-  [ngClass]="invoice.state!.toLowerCase()"
+<app-card
   role="button"
-  tabindex="0"
   [routerLink]="['/invoice-view', invoice.id!]"
 >
-  <div class="card-icon-container">
+  <div card-icon>
     @switch (invoice.state!) {
       @case ('PaidState') {
         <mat-icon class="state-icon paid">check_circle</mat-icon>
@@ -16,14 +13,14 @@
       }
     }
   </div>
-  <div class="card-content">
-    <div class="card-header-row">
-      <span class="invoice-monto">{{ invoice.amount | currency }}</span>
-      <span class="invoice-fecha">{{ invoice.date | date:'shortDate' }}</span>
-    </div>
-    <div class="card-body-row">
-      <span class="invoice-id">#{{ invoice.id!.substring(0,8) }}</span>
-      <span class="state-text">{{ invoice.state! | invoiceState}}</span>
-    </div>
+
+  <div card-body-row>
+    <span class="invoice-monto">{{ invoice.amount | currency }}</span>
+    <span class="invoice-fecha">{{ invoice.date | date:'shortDate' }}</span>
   </div>
-</div>
+  <div card-header-row>
+    <span class="invoice-id">#{{ invoice.id!.substring(0,8) }}</span>
+    <span class="state-text">{{ invoice.state! | invoiceState}}</span>
+  </div>
+</app-card>
+

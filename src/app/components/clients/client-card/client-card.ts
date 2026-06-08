@@ -1,6 +1,5 @@
 import {Component, input, output} from '@angular/core';
 import {ClientEntity} from '../../../core/model/clientEntity';
-import {MatCard} from '@angular/material/card';
 import {MatIcon} from '@angular/material/icon';
 import {RouterLink} from '@angular/router';
 import {Card} from '../../layout/card/card';
@@ -8,7 +7,6 @@ import {Card} from '../../layout/card/card';
 @Component({
   selector: 'app-client-card',
   imports: [
-    MatCard,
     MatIcon,
     RouterLink,
     Card,
