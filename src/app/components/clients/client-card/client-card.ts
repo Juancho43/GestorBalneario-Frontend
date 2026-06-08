@@ -2,14 +2,16 @@ import {Component, input, output} from '@angular/core';
 import {ClientEntity} from '../../../core/model/clientEntity';
 import {MatCard} from '@angular/material/card';
 import {MatIcon} from '@angular/material/icon';
-import {CustomMenu} from '../../layout/custom-menu/custom-menu';
+import {RouterLink} from '@angular/router';
+import {Card} from '../../layout/card/card';
 
 @Component({
   selector: 'app-client-card',
   imports: [
     MatCard,
     MatIcon,
-    CustomMenu
+    RouterLink,
+    Card,
   ],
   templateUrl: './client-card.html',
   styleUrl: './client-card.scss',
@@ -17,7 +19,7 @@ import {CustomMenu} from '../../layout/custom-menu/custom-menu';
 export class ClientCard {
   readonly client = input.required<ClientEntity>();
   readonly actions = input<boolean>(true);
-  selected = output<ClientEntity>()
+  // selected = output<ClientEntity>()
   edit = output<ClientEntity>()
   delete = output<ClientEntity>()
   protected options = [
@@ -41,7 +43,7 @@ export class ClientCard {
   protected handleMenuOption(value: string) {
     switch(value){
       case 'see-details':
-        this.selected.emit(this.client());
+        // this.selected.emit(this.client());
         break;
       case'edit':
         this.edit.emit(this.client());

@@ -3,10 +3,12 @@ import {DatePipe, NgClass} from '@angular/common';
 import {ReservationEntity} from '../../../core/model/reservationEntity';
 import {ReservationStatePipe} from '../../../core/utils/pipes/reservation-state-pipe';
 import {MatIcon} from '@angular/material/icon';
+import {RouterLink} from '@angular/router';
+import {Card} from '../../layout/card/card';
 
 @Component({
   selector: 'app-reservation-card',
-  imports: [DatePipe, ReservationStatePipe, NgClass, MatIcon],
+  imports: [DatePipe, ReservationStatePipe, NgClass, MatIcon, RouterLink, Card],
   templateUrl: './reservation-card.html',
   styleUrl: './reservation-card.scss',
 })

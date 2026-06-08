@@ -1,12 +1,10 @@
 @let reservation = this.reservation();
-
-<div
-  class="reservation-card"
-  [ngClass]="reservation.state!.toLowerCase()"
-  tabindex="0"
+<app-card
   role="button"
+  [routerLink]="['/reservation-view', reservation.id!]"
 >
-  <div class="card-icon-container">
+
+  <div card-icon>
     @switch (reservation.state!) {
       @case ('CreatedState') {
         <mat-icon class="state-icon confirmed">event_available</mat-icon>
@@ -26,16 +24,14 @@
     }
   </div>
 
-  <div class="card-content">
-    <div class="card-header-row">
-      <span class="reservation-dates">
+  <div card-body-row>
+    <span class="reservation-dates">
         {{ reservation.dates.checkIn | date:'shortDate' }} - {{ reservation.dates.checkOut | date:'shortDate' }}
-      </span>
-      <span class="reservation-duration">{{ duration() }}</span>
-    </div>
-
-    <div class="card-body-row">
-      <span class="state-text">{{ reservation.state! | reservationState }}</span>
-    </div>
+    </span>
   </div>
-</div>
+  <div card-header-row>
+    <span class="reservation-duration">{{ duration() }} días</span>
+    <span class="state-text">{{ reservation.state! | reservationState }}</span>
+  </div>
+</app-card>
+

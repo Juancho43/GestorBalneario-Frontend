@@ -1,33 +1,34 @@
 @let shadow = this.shadow();
+<app-card
+  role="button"
+  [routerLink]="['/shadow-view', shadow.id!]"
+>
 
-<div class="shadow-card" tabindex="0" role="button">
-  <div class="card-icon-container">
+  <div class="card-icon-container" card-icon>
     @switch (shadow.type.toLowerCase()) {
       @case ('carpa') {
         <svg
           class="type-icon carpa"
-          width="80px" height="80px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M11.4187 3.18627C11.7664 2.93791 12.2335 2.93791 12.5812 3.18627L19.2081 7.91974C19.6819 8.25817 19.9847 8.78627 20.0374 9.36613L20.8967 18.8189C21.0032 19.9902 20.081 21 18.9049 21H13H11H5.09501C3.91895 21 2.99675 19.9902 3.10323 18.8189L3.96257 9.36613C4.01528 8.78627 4.31808 8.25817 4.79188 7.91974L11.4187 3.18627ZM12 5.2289L5.95436 9.5472L5.09501 19L9.99998 19V13C9.99998 12.4477 10.4477 12 11 12H13C13.5523 12 14 12.4477 14 13V19L18.9049 19L18.0456 9.54721L12 5.2289Z" fill="#000000"/>
+          width="28px" height="28px"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg">
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M11.4187 3.18627C11.7664 2.93791 12.2335 2.93791 12.5812 3.18627L19.2081 7.91974C19.6819 8.25817 19.9847 8.78627 20.0374 9.36613L20.8967 18.8189C21.0032 19.9902 20.081 21 18.9049 21H13H11H5.09501C3.91895 21 2.99675 19.9902 3.10323 18.8189L3.96257 9.36613C4.01528 8.78627 4.31808 8.25817 4.79188 7.91974L11.4187 3.18627ZM12 5.2289L5.95436 9.5472L5.09501 19L9.99998 19V13C9.99998 12.4477 10.4477 12 11 12H13C13.5523 12 14 12.4477 14 13V19L18.9049 19L18.0456 9.54721L12 5.2289Z"
+            fill="currentColor"
+          />
         </svg>
       }
       @case ('sombrilla') {
         <mat-icon class="type-icon sombrilla">beach_access</mat-icon>
       }
-      @default {
-        <svg class="type-icon custom-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path fill="currentColor" d="M12 2L2 22h20L12 2z"/> </svg>
-      }
     }
   </div>
-
-  <div class="card-content">
-    <div class="card-header-row">
-      <span class="shadow-id">#{{ shadow.identifier }}</span>
-      <span class="shadow-title">{{ shadow.type }}</span>
-    </div>
-
-    <div class="card-body-row">
-      <span class="shadow-coords">Coords: X: {{ shadow.coords.x }}, Y: {{ shadow.coords.y }}</span>
-    </div>
+  <div card-header-row>
+    <span class="identifier">#{{ shadow.identifier }}</span>
+    <span class="type-label"> - {{ shadow.type }}</span>
   </div>
-</div>
+  <span card-body-row>Coords: X: {{ shadow.coords.x }}, Y: {{ shadow.coords.y }}</span>
+</app-card>

@@ -4,6 +4,7 @@ import {CurrencyPipe, DatePipe, NgClass} from '@angular/common';
 import {InvoiceStatePipe} from '../../../core/utils/pipes/invoice-state-pipe';
 import {MatIcon} from '@angular/material/icon';
 import {RouterLink} from '@angular/router';
+import {Card} from '../../layout/card/card';
 
 @Component({
   selector: 'app-invoice-card',
@@ -14,6 +15,7 @@ import {RouterLink} from '@angular/router';
     NgClass,
     MatIcon,
     RouterLink,
+    Card,
   ],
   templateUrl: './invoice-card.html',
   styleUrl: './invoice-card.scss',

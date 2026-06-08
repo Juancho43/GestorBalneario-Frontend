@@ -1,5 +1,5 @@
 import {ApplicationConfig, provideBrowserGlobalErrorListeners} from '@angular/core';
-import {provideRouter, withViewTransitions} from '@angular/router';
+import {provideRouter, withComponentInputBinding, withViewTransitions} from '@angular/router';
 import {routes} from './app.routes';
 import {provideHttpClient, withInterceptors} from '@angular/common/http';
 import {currentSeasonInterceptor} from './core/utils/interceptors/current-season-interceptor';
@@ -12,6 +12,6 @@ export const appConfig: ApplicationConfig = {
     provideNativeDateAdapter(),
     provideBrowserGlobalErrorListeners(),
     provideHttpClient(withInterceptors([currentSeasonInterceptor,notificationInterceptor])),
-    provideRouter(routes,withViewTransitions()),
+    provideRouter(routes,withViewTransitions(),withComponentInputBinding()),
   ]
 };

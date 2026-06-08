@@ -1,30 +1,21 @@
 @let client = this.client();
-
-<mat-card
-  class="client-card m3-elevated-card"
-  (click)="selected.emit(client)"
-  tabindex="0"
+<app-card
   role="button"
+  [routerLink]="['/client-view', client.id!]"
 >
-  <!-- Contenedor del Icono/Avatar de M3 -->
-  <div class="avatar-container">
-    <mat-icon aria-hidden="true" fontIcon="person" />
-  </div>
 
-  <!-- Contenido de la Tarjeta -->
-  <div class="card-content">
-    <h3 class="client-name">{{ client.name }}</h3>
+  <mat-icon aria-hidden="true" fontIcon="person" card-icon />
+  <span card-header-row>{{client.name}}</span>
+  <div class="client-details" card-body-row>
+    <div class="detail-item">
+      <mat-icon class="detail-icon">mail</mat-icon>
+      <span class="detail-text">{{ client.email }}</span>
+    </div>
 
-    <div class="client-details">
-      <div class="detail-item">
-        <mat-icon class="detail-icon">mail</mat-icon>
-        <span class="detail-text">{{ client.email }}</span>
-      </div>
-
-      <div class="detail-item">
-        <mat-icon class="detail-icon">call</mat-icon>
-        <span class="detail-text">{{ client.phone }}</span>
-      </div>
+    <div class="detail-item">
+      <mat-icon class="detail-icon">call</mat-icon>
+      <span class="detail-text">{{ client.phone }}</span>
     </div>
   </div>
-</mat-card>
+</app-card>
+
