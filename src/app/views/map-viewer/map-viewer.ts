@@ -1,9 +1,6 @@
 import {Component, effect, inject, linkedSignal, signal} from '@angular/core';
 import {ShadowMap} from '../../components/shadows/shadow-map/shadow-map';
-import {ShadowDetail} from '../../components/shadows/shadow-detail/shadow-detail';
-import {ShadowEntity} from '../../core/model/shadowEntity';
 import {ShadowManager} from '../../core/services/Managers/shadow-manager.service';
-import {Dialog} from '@angular/cdk/dialog';
 import {FabAction, FABMenu} from '../../components/layout/fab-menu/fab-menu';
 import {Router} from '@angular/router';
 
