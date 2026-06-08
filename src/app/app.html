@@ -9,6 +9,7 @@
     [isShown]="isMobile()"
   />
   <app-menu
+    (closed)="menuRail.set(false)"
     [isMobile]="isMobile()"
     [isOpen]="menuRail()"
   />

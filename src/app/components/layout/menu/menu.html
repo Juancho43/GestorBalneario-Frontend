@@ -17,6 +17,7 @@
             matTooltipPosition="after"
             [matTooltipDisabled]="isOpen"
             [matTooltip]="item.label"
+            (click)="this.close()"
           >
             <mat-icon
               [fontIcon]="item.icon"

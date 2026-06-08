@@ -27,6 +27,7 @@ export default class Menu {
   readonly isMobile = input.required<boolean>();
   protected darkMode = computed(() => this.theme.isDarkMode());
   protected show = computed(() => this.isOpen() || !this.isMobile());
+  closed = output();
   protected links: Link[]  = [
     {
       icon:'home',
@@ -77,5 +78,11 @@ export default class Menu {
   ]
   toggleMode(){
     this.theme.toggleTheme();
+  }
+
+  close(){
+    if(this.isMobile()){
+      this.closed.emit()
+    }
   }
 }
