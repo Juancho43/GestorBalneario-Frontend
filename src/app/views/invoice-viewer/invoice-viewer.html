@@ -3,7 +3,7 @@
     <section class="list-panel">
       <h2>Lista de facturas</h2>
       <app-invoice-list-manager
-        (selectedInvoice)="handleSelectedInvoice($event)"
+        (selectedInvoice)="handleSelectedInvoice($event.id!)"
       />
     </section>
   }

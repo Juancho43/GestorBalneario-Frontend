@@ -1,13 +1,35 @@
 <div class="list-detail-layout">
-  <section class="list-panel">
-    <h2>Lista de servicios</h2>
-    <app-service-list-manager
+  @if (this.showList()){
+    <section class="list-panel">
+      <h2>Lista de servicios</h2>
+      <app-service-list-manager
 
-    />
-  </section>
-  <app-fab-button
-    icon="add"
-    label="Nuevo servicio"
-    (touched)="handleFABButton()"
-  />
+      />
+    </section>
+  }
+  @if(this.showDetails()){
+    <section class="detail-panel">
+      @if(currentService()){
+        <div class="detail-header">
+          <h2>Servicio seleccionado</h2>
+          @if(!this.singlePane()){
+            <button
+              class="icon-btn close-btn"
+              (click)="this.currentPane.set('list')">
+              <mat-icon fontIcon="close"/>
+            </button>
+          }
+        </div>
+        <!--      <app-service-details/>-->
+        {{currentService() | json}}
+      }@else{
+        <p>Seleccione un servicio para ver sus detalles</p>
+      }
+    </section>
+  }
 </div>
+<app-fab-button
+  icon="add"
+  label="Nuevo servicio"
+  (touched)="handleFABButton()"
+/>

@@ -1,10 +1,9 @@
-import {Component, computed, inject, signal} from '@angular/core';
+import {Component, computed, effect, inject, input, signal} from '@angular/core';
 import {InvoiceListManager} from '../../components/invoices/invoice-list-manager/invoice-list-manager';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {MatIcon} from '@angular/material/icon';
 import {InvoiceDetailsDTO} from '../../core/Interfaces/Details/InvoiceDetailDTO';
 import {InvoiceManager} from '../../core/services/Managers/invoice-manager.service';
-import {InvoiceEntity} from '../../core/model/InvoiceEntity';
 import {InvoiceDetails} from '../../components/invoices/invoice-details/invoice-details';
 
 @Component({
@@ -19,6 +18,7 @@ import {InvoiceDetails} from '../../components/invoices/invoice-details/invoice-
 })
 export class InvoiceViewer {
   private manager = inject(InvoiceManager);
+  readonly id = input<string>();
   protected currentInvoice = computed<InvoiceDetailsDTO | undefined>(()=>this.manager.currentInvoiceDetails())
   protected singlePane = signal(false);
   protected currentPane = signal('list');
@@ -28,11 +28,16 @@ export class InvoiceViewer {
     (new BreakpointObserver()).observe([Breakpoints.XSmall,Breakpoints.Small]).subscribe(result => {
       this.singlePane.set(!result.matches);
     })
+
+    effect(() => {
+      if(this.id() !== undefined){
+        this.handleSelectedInvoice(this.id()!);
+      }
+    })
   }
 
-
-  protected handleSelectedInvoice($event: InvoiceEntity) {
-    this.manager.selectedInvoiceId.set($event.id!);
+  protected handleSelectedInvoice($event: string) {
+    this.manager.selectedInvoiceId.set($event);
     this.currentPane.set('detail');
   }
 }

@@ -1,5 +1,11 @@
 @let invoice = this.invoice();
-<div class="invoice-card" [ngClass]="invoice.state!.toLowerCase()">
+<div
+  class="invoice-card"
+  [ngClass]="invoice.state!.toLowerCase()"
+  role="button"
+  tabindex="0"
+  [routerLink]="['/invoice-view', invoice.id!]"
+>
   <div class="card-icon-container">
     @switch (invoice.state!) {
       @case ('PaidState') {

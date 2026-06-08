@@ -37,7 +37,7 @@ export default class Menu {
     {
       icon: 'date_range',
       label: 'Temporadas',
-      path: 'season-manager'
+      path: 'season-view'
     },
     {
       icon:'map',
@@ -67,12 +67,12 @@ export default class Menu {
     {
       label: 'Servicios',
       icon: "room_service",
-      path:'service-manager'
+      path:'service-view'
     },
     {
       label: 'Facturas',
       icon: "receipt_long",
-      path: 'invoice-viewer'
+      path: 'invoice-view'
     }
 
   ]

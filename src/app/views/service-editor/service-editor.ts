@@ -1,4 +1,4 @@
-import {Component, computed, inject, linkedSignal} from '@angular/core';
+import {Component, computed, inject, linkedSignal, signal} from '@angular/core';
 import {ServiceManager} from '../../core/services/Managers/service-manager';
 import {ServiceForm} from '../../components/services/service-form/service-form';
 import {ServiceEntity} from '../../core/model/serviceEntity';
@@ -8,12 +8,17 @@ import {DeleteConfirmation} from '../../components/layout/delete-confirmation/de
 import {ServiceListManager} from '../../components/services/service-list-manager/service-list-manager';
 import {FABButton} from '../../components/layout/fab-button/fab-button';
 import {OverlayHelper} from '../../core/utils/overlay-helper';
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import {MatIcon} from '@angular/material/icon';
+import {JsonPipe} from '@angular/common';
 
 @Component({
   selector: 'app-service-editor',
   imports: [
     ServiceListManager,
-    FABButton
+    FABButton,
+    MatIcon,
+    JsonPipe
   ],
   templateUrl: './service-editor.html',
   styleUrl: './service-editor.scss',
@@ -25,7 +30,7 @@ export class ServiceEditor {
   isOverlayOpen = false;
   protected types = computed(()=>this.manager.getTypes())
   services =  linkedSignal(()=> this.manager.getList());
-  currentService = this.manager.currentService
+  currentService = computed(()=>this.manager.currentService())
    protected editHandler($event: ServiceEntity) {
    this.manager.currentService.set($event);
   }
@@ -66,5 +71,15 @@ export class ServiceEditor {
         this.isOverlayOpen = false
       });
     }
+  }
+  protected singlePane = signal(false);
+  protected currentPane = signal('list');
+
+  protected showList = computed(()=> this.singlePane() || this.currentPane() === 'list');
+  protected showDetails = computed(()=> this.singlePane() || this.currentPane() === 'detail');
+  constructor(){
+    (new BreakpointObserver()).observe([Breakpoints.XSmall,Breakpoints.Small]).subscribe(result => {
+      this.singlePane.set(!result.matches);
+    })
   }
 }

@@ -34,19 +34,29 @@ export const routes: Routes = [
   },
 
   {
-    title:'Ver carpas',
-    path:'shadow-view',
-    loadComponent: ()=> ShadowViewer
-  },
-  {
     title: 'Editar mapa',
     canActivate: [currentSeasonGuard],
     path:'shadow-editor',
     loadComponent: ()=> ShadowEditor
   },
   {
+    title:'Ver carpas',
+    path:'shadow-view',
+    loadComponent: ()=> ShadowViewer
+  },
+  {
+    title:'Ver carpa',
+    path:'shadow-view/:id',
+    loadComponent: ()=> ShadowViewer
+  },
+  {
     title: 'Ver reservas',
     path: 'reservation-view',
+    loadComponent:()=>ReservationViewer
+  },
+  {
+    title: 'Ver reserva',
+    path: 'reservation-view/:id',
     loadComponent:()=>ReservationViewer
   },
   {
@@ -58,6 +68,11 @@ export const routes: Routes = [
   {
     title: 'Ver clientes',
     path: 'client-view',
+    loadComponent: ()=> ClientViewer
+  },
+  {
+    title: 'Ver cliente',
+    path: 'client-view/:id',
     loadComponent: ()=> ClientViewer
   },
   {
@@ -74,18 +89,22 @@ export const routes: Routes = [
   {
     title: 'Configurar temporadas',
     canActivate: [currentSeasonGuard],
-    path: 'season-manager',
+    path: 'season-view',
     loadComponent: () => SeasonsEditor
   },
   {
     title: 'Configurar servicios',
-    canActivate: [currentSeasonGuard],
-    path: 'service-manager',
+    path: 'service-view',
     loadComponent: ()=> ServiceEditor
   },
   {
     title:'Ver facturas',
-    path: 'invoice-viewer',
+    path: 'invoice-view',
+    loadComponent: () => InvoiceViewer
+  },
+  {
+    title:'Ver factura',
+    path: 'invoice-view/:id',
     loadComponent: () => InvoiceViewer
   },
   {
