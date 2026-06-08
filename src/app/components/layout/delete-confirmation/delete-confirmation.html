@@ -1,12 +1,21 @@
-<h2 mat-dialog-title>{{ data.title }}</h2>
-<mat-dialog-content>
-  <p>{{ data.message }}</p>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button (click)="onCancel()">
-    {{ data.cancelText || 'Cancel' }}
-  </button>
-  <button mat-raised-button color="warn" (click)="onConfirm()">
-    {{ data.confirmText || 'Delete' }}
-  </button>
-</mat-dialog-actions>
+<div class="dialog">
+ <section class="header">
+   <div class="headline">
+     <mat-icon class="icon">delete</mat-icon>
+     <h3>{{data.title}}</h3>
+   </div>
+   <mat-icon class="close-icon" (click)="close()">close</mat-icon>
+ </section>
+  <section class="content">
+    <p>{{ data.message }}</p>
+  </section>
+
+  <section class="actions">
+    <button (click)="onCancel()">
+      {{ data.cancelText || 'Cancel' }}
+    </button>
+    <button (click)="onConfirm()">
+      {{ data.confirmText || 'Delete' }}
+    </button>
+  </section>
+</div>
