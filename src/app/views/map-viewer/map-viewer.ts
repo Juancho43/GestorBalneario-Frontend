@@ -18,7 +18,6 @@ import {Router} from '@angular/router';
 })
 export default class MapViewer {
   private shadowList = inject(ShadowManager);
-  private dialog = inject(Dialog);
   private router = inject(Router);
   shadows = linkedSignal(() => this.shadowList.shadows());
   constructor() {
@@ -26,15 +25,7 @@ export default class MapViewer {
       this.shadowList.shadowsResource.reload();
     });
   }
-  currentShadow = linkedSignal(()=> this.shadows()[0] ||
-    {
-      id:'',
-      identifier:'',
-      coords:{
-        x:0,
-        y:0
-      }
-    } as ShadowEntity);
+
   protected readonly actions = signal<FabAction[]>([{
     name: "Editar mapa",
     icon: "edit",
@@ -47,14 +38,10 @@ export default class MapViewer {
 
 
   protected show($event: any) {
-   this.currentShadow.set(this.shadowList.getByCoords({x: $event.left, y: $event.top})!);
-   this.openShadowDetailDialog()
+    const shadow = this.shadowList.getByCoords({x: $event.left, y: $event.top})!
+    this.router.navigate(['/shadow-view',shadow.id!]);
   }
 
-  protected openShadowDetailDialog() {
-    this.shadowList.currentShadow.set(this.currentShadow());
-    this.dialog.open(ShadowDetail)
-  }
 
   protected handleMenuAction($event: string) {
       if($event ==='Editar mapa'){

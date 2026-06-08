@@ -1,10 +1,9 @@
-import {Component, computed, inject, signal} from '@angular/core';
+import {Component, computed, effect, inject, input, signal} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {MatIcon} from '@angular/material/icon';
 import {ShadowDetail} from '../../components/shadows/shadow-detail/shadow-detail';
 import {ShadowListManager} from '../../components/shadows/shadow-list-manager/shadow-list-manager';
 import {ShadowManager} from '../../core/services/Managers/shadow-manager.service';
-import {ShadowEntity} from '../../core/model/shadowEntity';
 
 @Component({
   selector: 'app-shadow-viewer',
@@ -18,20 +17,25 @@ import {ShadowEntity} from '../../core/model/shadowEntity';
 })
 export class ShadowViewer {
   private manager = inject(ShadowManager);
+  readonly id = input<string>();
   protected currentShadow = computed(()=> this.manager.currentShadowDetails());
   protected singlePane = signal(false);
   protected currentPane = signal('list');
-
   protected showList = computed(()=> this.singlePane() || this.currentPane() === 'list');
   protected showDetails = computed(()=> this.singlePane() || this.currentPane() === 'detail');
   constructor(){
     (new BreakpointObserver()).observe([Breakpoints.XSmall,Breakpoints.Small]).subscribe(result => {
       this.singlePane.set(!result.matches);
     })
+    effect(() => {
+      if(this.id() !== undefined){
+        this.handleSelectShadow(this.id()!);
+      }
+    });
   }
 
-  protected handleSelectShadow($event: ShadowEntity) {
-    this.manager.selectedShadowId.set($event.id!);
+  protected handleSelectShadow($event: string) {
+    this.manager.selectedShadowId.set($event);
     this.currentPane.set('details');
   }
 }

@@ -4,8 +4,8 @@
       <h2>Cartera de clientes</h2>
       <app-client-list-manager
         [actions]="true"
-        (selectedClient)="handleSelectClient($event)"
-        (edit)="setCurrentClient($event)"
+        (selectedClient)="handleSelectClient($event.id!)"
+        (edit)="setCurrentClient($event.id!)"
         (delete)="deleteClient($event)"
       />
     </section>

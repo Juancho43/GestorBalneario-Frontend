@@ -3,7 +3,7 @@
     <section class="list-panel">
       <h2>Listado de carpas</h2>
       <app-shadow-list-manager
-        (selectedShadow)="handleSelectShadow($event)"
+        (selectedShadow)="handleSelectShadow($event.id!)"
       />
     </section>
   }
