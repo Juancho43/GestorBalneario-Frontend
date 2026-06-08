@@ -27,9 +27,9 @@ export class ClientViewer {
   private manager = inject(ClientManager);
   readonly id = input<string>();
   protected currentClient = computed(()=>this.manager.currentClientDetails());
+
   protected singlePane = signal(false);
   protected currentPane = signal('list');
-
   protected showList = computed(()=> this.singlePane() || this.currentPane() === 'list');
   protected showDetails = computed(()=> this.singlePane() || this.currentPane() === 'detail');
 
@@ -56,6 +56,13 @@ export class ClientViewer {
   protected setCurrentClient(client: string) {
     this.manager.selectedClientId.set(client);
   }
+
+  protected editClient($event: ClientEntity){
+
+    this.setCurrentClient($event.id!);
+    console.log("EDITING");
+  }
+
   protected deleteClient($event: ClientEntity) {
     this.setCurrentClient($event.id!);
     const data :IDeleteDialogData = {

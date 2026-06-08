@@ -21,6 +21,9 @@ export class InvoiceListManager {
   protected invoices = computed(()=>this.manager.invoicesToDisplay());
   protected query = computed(()=>this.manager.searchQuery().pagination)
   selectedInvoice = output<InvoiceEntity>();
+
+  edit = output<InvoiceEntity>()
+  delete = output<InvoiceEntity>()
   protected handleSearch($event: SearchBarData) {
     this.manager.searchQuery.update((p) => ({
       ...p,
@@ -36,5 +39,12 @@ export class InvoiceListManager {
         limit:10
       }
     }))
+  }
+
+  protected deleteInvoice($event: InvoiceEntity) {
+    this.delete.emit($event);
+  }
+  protected editInvoice($event: InvoiceEntity) {
+    this.edit.emit($event);
   }
 }

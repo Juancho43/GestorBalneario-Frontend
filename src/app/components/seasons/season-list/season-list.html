@@ -2,16 +2,18 @@
 <ul class="m3-list">
   @for (season of this.list(); track $index) {
     <li class="m3-list-item">
-      <mat-icon class="m3-leading-icon" aria-hidden="false" fontIcon="sunny"></mat-icon>
+      <mat-icon class="m3-leading-icon" aria-hidden="false" fontIcon="sunny"/>
 
-      <div class="m3-text-content">
+      <div class="m3-text-content" (click)="this.selected.emit(season)">
         <span class="m3-headline">{{ season.name }}</span>
         <span class="m3-supporting-text">Inicio: {{ season.startDate | date }}</span>
         <span class="m3-supporting-text">Fin: {{ season.endDate | date }}</span>
       </div>
-
       <div class="m3-trailing-action">
-        <app-custom-menu></app-custom-menu>
+        <app-custom-menu
+          [options]="options"
+          (selectedOption)="handleMenuOption($event,season)"
+        />
       </div>
     </li>
   } @empty {

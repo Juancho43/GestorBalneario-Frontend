@@ -18,5 +18,31 @@ import {DatePipe} from '@angular/common';
 })
 export class ReservationList {
   readonly list = input.required<ReservationEntity[]>();
+  protected options = [
+    {
+      label:"Editar",
+      icon:"edit",
+      value:"edit"
+    },
+    {
+      label:"Eliminar",
+      icon:"delete",
+      value:"delete"
+    }
+  ]
   selectedReservation = output<ReservationEntity>();
+  edit = output<ReservationEntity>()
+  delete = output<ReservationEntity>()
+
+  protected handleMenuOption(value: string,reservation: ReservationEntity) {
+    switch(value){
+      case'edit':
+        this.edit.emit(reservation);
+        break;
+      case 'delete':
+        this.delete.emit(reservation);
+        break;
+    }
+  }
 }
+

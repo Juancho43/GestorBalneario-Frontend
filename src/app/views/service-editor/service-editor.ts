@@ -1,4 +1,4 @@
-import {Component, computed, inject, linkedSignal, signal} from '@angular/core';
+import {Component, computed, inject, signal} from '@angular/core';
 import {ServiceManager} from '../../core/services/Managers/service-manager';
 import {ServiceForm} from '../../components/services/service-form/service-form';
 import {ServiceEntity} from '../../core/model/serviceEntity';
@@ -29,12 +29,51 @@ export class ServiceEditor {
   private overlayHelper = inject(OverlayHelper);
   isOverlayOpen = false;
   protected types = computed(()=>this.manager.getTypes())
-  services =  linkedSignal(()=> this.manager.getList());
   currentService = computed(()=>this.manager.currentService())
-   protected editHandler($event: ServiceEntity) {
-   this.manager.currentService.set($event);
+
+  protected handleFormSubmit($event: ServiceEntity) {
+   // if(this.form.editMode()){
+   //   this.manager.editService($event);
+   // }else{
+   //   this.manager.createService($event);
+   // }
   }
-  protected deleteHandler($event: ServiceEntity) {
+
+  protected singlePane = signal(false);
+
+  protected currentPane = signal('list');
+  protected showList = computed(()=> this.singlePane() || this.currentPane() === 'list');
+  protected showDetails = computed(()=> this.singlePane() || this.currentPane() === 'detail');
+  constructor(){
+    (new BreakpointObserver()).observe([Breakpoints.XSmall,Breakpoints.Small]).subscribe(result => {
+      this.singlePane.set(!result.matches);
+    })
+  }
+  protected handleFABButton() {
+    if (!this.isOverlayOpen){
+      this.isOverlayOpen = true;
+      const config = this.overlayHelper.getModalConfig();
+      const overlayRef = this.overlayHelper.open(ServiceForm, config);
+      overlayRef.backdropClick().subscribe(() => {
+        overlayRef!.dispose();
+        this.isOverlayOpen = false
+      });
+    }
+  }
+
+  protected handleSelect(s: string) {
+
+    console.log("SELECT");
+  }
+
+
+
+  protected handleEdit($event: ServiceEntity) {
+
+    console.log("EDITING");
+  }
+
+  protected handleDelete($event: ServiceEntity) {
     this.manager.currentService.set($event);
     const data :IDeleteDialogData = {
       message: `Seguro que desea eliminar al siguinte servicio: ${$event.name}?`,
@@ -50,36 +89,6 @@ export class ServiceEditor {
       if(res) {
         this.manager.deleteService($event)
       }
-    })
-  }
-
-  protected handleFormSubmit($event: ServiceEntity) {
-   // if(this.form.editMode()){
-   //   this.manager.editService($event);
-   // }else{
-   //   this.manager.createService($event);
-   // }
-  }
-
-  protected handleFABButton() {
-    if (!this.isOverlayOpen){
-      this.isOverlayOpen = true;
-      const config = this.overlayHelper.getModalConfig();
-      const overlayRef = this.overlayHelper.open(ServiceForm, config);
-      overlayRef.backdropClick().subscribe(() => {
-        overlayRef!.dispose();
-        this.isOverlayOpen = false
-      });
-    }
-  }
-  protected singlePane = signal(false);
-  protected currentPane = signal('list');
-
-  protected showList = computed(()=> this.singlePane() || this.currentPane() === 'list');
-  protected showDetails = computed(()=> this.singlePane() || this.currentPane() === 'detail');
-  constructor(){
-    (new BreakpointObserver()).observe([Breakpoints.XSmall,Breakpoints.Small]).subscribe(result => {
-      this.singlePane.set(!result.matches);
     })
   }
 }

@@ -4,13 +4,15 @@
       <h2>Lista de facturas</h2>
       <app-invoice-list-manager
         (selectedInvoice)="handleSelectedInvoice($event.id!)"
+        (edit)="editInvoice($event)"
+        (delete)="deleteInvoice($event)"
       />
     </section>
   }
   @if(this.showDetails()){
     <section class="detail-panel">
       @if(currentInvoice()){
-         <div class="detail-header">
+        <div class="detail-header">
           <h2>Factura seleccionada</h2>
           @if(!this.singlePane()){
             <button

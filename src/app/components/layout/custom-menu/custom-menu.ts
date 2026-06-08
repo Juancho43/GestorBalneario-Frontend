@@ -1,4 +1,4 @@
-import {Component, input, model, signal} from '@angular/core';
+import {Component, input, output, signal} from '@angular/core';
 import {MatIcon} from '@angular/material/icon';
 import {CdkConnectedOverlay, CdkOverlayOrigin, ConnectedPosition} from '@angular/cdk/overlay';
 
@@ -20,8 +20,7 @@ export interface CustomMenuOption {
 export class CustomMenu {
   options = input<CustomMenuOption[]>([]);
   isOpen= signal(false)
-  selectedOption = model<string | null>(null);
-
+  selectedOption = output<string>()
   menuPositions: ConnectedPosition[] = [
     {
       originX: 'end',
@@ -47,7 +46,7 @@ export class CustomMenu {
   }
 
   selectOption(option: string): void {
-    this.selectedOption.set(option);
+    this.selectedOption.emit(option);
     this.closeMenu();
   }
 }

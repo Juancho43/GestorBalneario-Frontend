@@ -1,5 +1,4 @@
 import {Component, input} from '@angular/core';
-import {InvoiceDetails} from '../../invoices/invoice-details/invoice-details';
 import {ClientCard} from '../../clients/client-card/client-card';
 import {ReservationCard} from '../reservation-card/reservation-card';
 import {InvoiceCard} from '../../invoices/invoice-card/invoice-card';
@@ -9,7 +8,6 @@ import {ReservationDetailsDTO} from '../../../core/Interfaces/Details/Reservatio
 @Component({
   selector: 'app-reservation-detail',
   imports: [
-    InvoiceDetails,
     ClientCard,
     ReservationCard,
     InvoiceCard,

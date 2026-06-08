@@ -9,7 +9,10 @@
         <span class="m3-supporting-text">Fin: {{ reservation.dates.checkOut | date }}</span>
       </div>
       <div class="m3-trailing-action">
-        <app-custom-menu/>
+        <app-custom-menu
+          [options]="options"
+          (selectedOption)="handleMenuOption($event,reservation)"
+        />
       </div>
     </li>
   } @empty {

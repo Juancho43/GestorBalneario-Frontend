@@ -1,14 +1,17 @@
 <ul class="m3-list">
   @for (client of this.list(); track client.id) {
     <li class="m3-list-item">
-      <mat-icon class="m3-leading-icon" aria-hidden="false" fontIcon="person"></mat-icon>
+      <mat-icon class="m3-leading-icon" aria-hidden="false" fontIcon="person"/>
       <div class="m3-text-content" (click)="this.selected.emit(client)">
         <span class="m3-headline">{{ client.name }}</span>
         <span class="m3-supporting-text">{{client.email}}</span>
         <span class="m3-supporting-text">{{ client.phone}}</span>
       </div>
       <div class="m3-trailing-action">
-        <app-custom-menu/>
+        <app-custom-menu
+          [options]="options"
+          (selectedOption)="handleMenuOption($event,client)"
+        />
       </div>
     </li>
   } @empty {

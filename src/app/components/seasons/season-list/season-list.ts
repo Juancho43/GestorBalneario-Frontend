@@ -17,7 +17,31 @@ import {CustomMenu} from '../../layout/custom-menu/custom-menu';
 export class SeasonList {
   readonly list = input.required<SeasonEntity[]>();
 
+  selected = output<SeasonEntity>()
   edit = output<SeasonEntity>()
   delete = output<SeasonEntity>()
 
+  protected options = [
+    {
+      label:"Editar",
+      icon:"edit",
+      value:"edit"
+    },
+    {
+      label:"Eliminar",
+      icon:"delete",
+      value:"delete"
+    }
+  ]
+
+  protected handleMenuOption(value: string,season: SeasonEntity) {
+    switch(value){
+      case'edit':
+        this.edit.emit(season);
+        break;
+      case 'delete':
+        this.delete.emit(season);
+        break;
+    }
+  }
 }

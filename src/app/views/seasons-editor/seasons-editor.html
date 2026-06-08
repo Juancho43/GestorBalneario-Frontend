@@ -3,18 +3,28 @@
     <section class="list-panel">
       <h2>Temporadas configuradas</h2>
       <app-season-list-manager
-
+        (selected)="handleSelected($event)"
+        (edit)="handleEdit($event)"
+        (delete)="handleDelete($event)"
       />
-<!--      <app-season-list-->
-<!--        [list]="seasonList()"-->
-<!--        (edit)="handleEdit($event)"-->
-<!--        (delete)="handleDelete($event)"-->
-<!--      />-->
     </section>
   }
   @if(this.showDetails()){
     <section class="detail-panel">
-      <h2>Detalles de la temporada</h2>
+      @if(currentSeason()){
+        <h2>Detalles de la temporada</h2>
+        @if(!this.singlePane()){
+          <button
+            class="icon-btn close-btn"
+            (click)="this.currentPane.set('list')">
+            <mat-icon fontIcon="close"/>
+          </button>
+        }
+<!--        Season Details-->
+        {{currentSeason() | json}}
+      } @else {
+        <p>Seleccione una temporada para ver sus detalles</p>
+      }
     </section>
   }
 

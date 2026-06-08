@@ -3,6 +3,9 @@
 />
 <app-service-list
   [list]="services()"
+  (selected)="selectService($event)"
+  (edit)="editService($event)"
+  (delete)="deleteService($event)"
 />
 <app-paginator
   [query]="query()"

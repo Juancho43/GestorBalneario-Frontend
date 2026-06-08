@@ -3,7 +3,9 @@
     <section class="list-panel">
       <h2>Lista de servicios</h2>
       <app-service-list-manager
-
+        (selectedService)="handleSelect($event.id!)"
+        (edit)="handleEdit($event)"
+        (delete)="handleDelete($event)"
       />
     </section>
   }

@@ -19,4 +19,29 @@ import {CurrencyPipe} from '@angular/common';
 export class InvoiceList {
   readonly list = input.required<InvoiceEntity[]>()
   selected = output<InvoiceEntity>()
+  edit = output<InvoiceEntity>()
+  delete = output<InvoiceEntity>()
+  protected options = [
+    {
+      label:"Editar",
+      icon:"edit",
+      value:"edit"
+    },
+    {
+      label:"Eliminar",
+      icon:"delete",
+      value:"delete"
+    }
+  ]
+
+  protected handleMenuOption(value: string,invoice: InvoiceEntity) {
+    switch(value){
+      case'edit':
+        this.edit.emit(invoice);
+        break;
+      case 'delete':
+        this.delete.emit(invoice);
+        break;
+    }
+  }
 }

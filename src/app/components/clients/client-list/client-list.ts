@@ -14,8 +14,30 @@ import {CustomMenu} from '../../layout/custom-menu/custom-menu';
 })
 export class ClientList {
   readonly list = input.required<ClientEntity[]>()
-  readonly actions = input<boolean>(false)
   selected = output<ClientEntity>()
   edit = output<ClientEntity>()
   delete = output<ClientEntity>()
+  protected options = [
+    {
+      label:"Editar",
+      icon:"edit",
+      value:"edit"
+    },
+    {
+      label:"Eliminar",
+      icon:"delete",
+      value:"delete"
+    }
+  ]
+
+  protected handleMenuOption(value: string,client: ClientEntity) {
+    switch(value){
+      case'edit':
+        this.edit.emit(client);
+        break;
+      case 'delete':
+        this.delete.emit(client);
+        break;
+    }
+  }
 }

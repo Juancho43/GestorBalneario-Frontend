@@ -21,7 +21,7 @@ export class ServiceListManager {
   services = computed(() => this.manager.servicesToDisplay())
   edit = output<ServiceEntity>()
   delete = output<ServiceEntity>()
-
+  selectedService = output<ServiceEntity>()
   protected query = computed(()=>this.manager.searchQuery().pagination)
   protected handleSearch($event: SearchBarData) {
     this.manager.searchQuery.update((p) => ({
@@ -39,5 +39,15 @@ export class ServiceListManager {
       }
     }))
 
+  }
+
+  protected selectService($event: ServiceEntity) {
+    this.selectedService.emit($event);
+  }
+  protected deleteService($event: ServiceEntity) {
+    this.delete.emit($event);
+  }
+  protected editService($event: ServiceEntity) {
+    this.edit.emit($event);
   }
 }

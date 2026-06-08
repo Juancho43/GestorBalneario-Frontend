@@ -2,8 +2,10 @@
   (finalQuery)="handleSearch($event)"
 />
 <app-reservation-list
-  (selectedReservation)="selectReservation($event)"
   [list]="list()"
+  (selectedReservation)="selectReservation($event)"
+  (edit)="editReservation($event)"
+  (delete)="deleteReservation($event)"
 />
 <app-paginator
   (pageChange)="handlePage($event)"

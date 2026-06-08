@@ -1,7 +1,12 @@
 <app-season-searcher
   (finalQuery)="handleSearch($event)"
 />
-<app-season-list [list]="seasonList()"/>
+<app-season-list
+  [list]="seasonList()"
+  (selected)="select($event)"
+  (edit)="editSeason($event)"
+  (delete)="deleteSeason($event)"
+/>
 <app-paginator
   [query]="query()"
   (pageChange)="handlePage($event)"

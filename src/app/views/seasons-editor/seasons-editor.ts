@@ -91,6 +91,8 @@ export class SeasonsEditor {
 
   protected handleEdit($event: SeasonEntity) {
    this.seletedSeason.set($event)
+
+    console.log("EDITING");
   }
 
   protected handleFABButton() {
@@ -103,5 +105,9 @@ export class SeasonsEditor {
         this.isOverlayOpen = false
       });
     }
+  }
+
+  protected handleSelected($event: SeasonEntity) {
+
   }
 }

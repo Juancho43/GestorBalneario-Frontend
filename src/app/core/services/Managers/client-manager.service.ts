@@ -1,6 +1,5 @@
 import {computed, effect, inject, Injectable, signal} from '@angular/core';
 import {rxResource} from '@angular/core/rxjs-interop';
-import {GetClientsHttp} from '../ClientHttp/get-clients-http';
 import {CreateClientHttp} from '../ClientHttp/create-client-http';
 import {EditClientHttp} from '../ClientHttp/edit-client-http';
 import {DeleteClientHttp} from '../ClientHttp/delete-client-http';
@@ -15,7 +14,6 @@ import {ClientDetailsDTO} from '../../Interfaces/Details/ClientDetailsDTO';
 })
 export class ClientManager {
   private searchHttp = inject(ClientSearchHttp);
-  private clientsHttp = inject(GetClientsHttp);
   private create = inject(CreateClientHttp);
   private update = inject(EditClientHttp);
   private delete = inject(DeleteClientHttp);
@@ -75,20 +73,19 @@ export class ClientManager {
   addClient(client: ClientEntity){
     this.create.create(client).subscribe(r=>{
       this.currentClient.set(r.data!);
-
     });
   }
 
   updateClient(client: ClientEntity){
     this.update.update(client).subscribe(r => {
       this.currentClient.set(r.data!);
-      // this.clientsResource.reload();
+      this.searchResource.reload()
     })
   }
   deleteClient(client: ClientEntity){
     this.delete.delete(client.id!).subscribe(
       r =>{
-        // this.clientsResource.reload()
+        this.searchResource.reload()
       }
     );
   }

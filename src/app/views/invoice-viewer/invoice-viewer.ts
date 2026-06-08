@@ -5,6 +5,7 @@ import {MatIcon} from '@angular/material/icon';
 import {InvoiceDetailsDTO} from '../../core/Interfaces/Details/InvoiceDetailDTO';
 import {InvoiceManager} from '../../core/services/Managers/invoice-manager.service';
 import {InvoiceDetails} from '../../components/invoices/invoice-details/invoice-details';
+import {InvoiceEntity} from '../../core/model/InvoiceEntity';
 
 @Component({
   selector: 'app-invoice-viewer',
@@ -39,5 +40,13 @@ export class InvoiceViewer {
   protected handleSelectedInvoice($event: string) {
     this.manager.selectedInvoiceId.set($event);
     this.currentPane.set('detail');
+  }
+
+  protected editInvoice($event: InvoiceEntity) {
+   console.log('EDITING')
+  }
+
+  protected deleteInvoice($event: InvoiceEntity) {
+    console.log('DELETING')
   }
 }

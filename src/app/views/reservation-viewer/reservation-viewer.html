@@ -1,9 +1,11 @@
 <div class="list-detail-layout">
   @if(this.showList()){
     <section class="list-panel">
-      <h2>Listado de reservaciones</h2>
+      <h2>Listado de reservas</h2>
       <app-reservation-list-manager
-        (selectedReservation)="handleSelectReservation($event)"
+        (selectedReservation)="handleSelectReservation($event.id!)"
+        (edit)="handleEdit($event)"
+        (delete)="handleDelete($event)"
       />
     </section>
   }

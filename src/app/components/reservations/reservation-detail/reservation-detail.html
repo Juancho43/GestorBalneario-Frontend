@@ -6,11 +6,10 @@
   @let invoice = data.invoice;
   <div class="detail-container">
     <div class="detail" animate.enter="enter-animation">
-     <app-reservation-card [reservation]= "reservation"/>
-      <app-client-card [client]= "client"/>
-      <app-shadow-card [shadow]= "shadow"/>
+      <app-client-card [client]="client"/>
+      <app-shadow-card [shadow]="shadow" />
+      <app-reservation-card [reservation]= "reservation"/>
       <app-invoice-card [invoice]="invoice"/>
     </div>
-    <app-invoice-details/>
   </div>
 }

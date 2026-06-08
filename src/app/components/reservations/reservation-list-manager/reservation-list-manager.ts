@@ -18,14 +18,12 @@ import {SearchBarData} from '../../../core/Interfaces/SearchInterfaces';
 })
 export class ReservationListManager {
   private manager = inject(ReservationManager);
-  selectedReservation = output<ReservationEntity>()
   protected list = computed(()=> this.manager.reservationsToDisplay())
-  protected selectReservation(reservation: ReservationEntity){
-    this.selectedReservation.emit(reservation);
-  }
-
   protected query = computed(()=>this.manager.searchQuery().pagination)
 
+  selectedReservation = output<ReservationEntity>()
+  edit = output<ReservationEntity>()
+  delete = output<ReservationEntity>()
 
   protected handleSearch($event: SearchBarData) {
     this.manager.searchQuery.update((p) => ({
@@ -44,4 +42,15 @@ export class ReservationListManager {
     }))
   }
 
+  protected selectReservation(reservation: ReservationEntity){
+    this.selectedReservation.emit(reservation);
+  }
+
+  protected editReservation($event: ReservationEntity) {
+   this.edit.emit($event);
+  }
+
+  protected deleteReservation($event: ReservationEntity) {
+    this.delete.emit($event);
+  }
 }
