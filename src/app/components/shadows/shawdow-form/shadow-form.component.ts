@@ -3,12 +3,16 @@ import {form, FormField, required, validate} from '@angular/forms/signals';
 import {ShadowEntity} from '../../../core/model/shadowEntity';
 import {ShadowManager} from '../../../core/services/Managers/shadow-manager.service';
 import {FormsModule} from '@angular/forms';
+import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
 
 @Component({
   selector: 'app-shadow-form',
   imports: [
     FormField,
     FormsModule,
+    MatFormField,
+    MatInput,
+    MatLabel,
   ],
   templateUrl: './shadow-form.component.html',
   styleUrl: './shadow-form.component.scss',
@@ -17,8 +21,8 @@ export class ShadowForm {
   private manager = inject(ShadowManager);
   readonly shadowToEdit = input<ShadowEntity>();
   editMode = linkedSignal(()=>{
-    if(this.shadowToEdit()) return true
-    return false;
+    return !!this.shadowToEdit();
+
   })
   shadow = linkedSignal(()=>this.shadowToEdit() || {coords: {x: 0, y: 0}, state:'available', identifier: '', name: '', type: 'carpa'} as ShadowEntity);
   finalShadow = output<ShadowEntity>();

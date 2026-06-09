@@ -1,0 +1,26 @@
+.type-icon {
+  &.carpa {
+    color: var(--md-sys-color-primary, #a8c7fa);
+    fill: currentColor;
+  }
+
+  &.sombrilla {
+    color: var(--md-sys-color-tertiary, #ffb74d);
+  }
+}
+
+.item-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.item {
+  gap: 5px;
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+}

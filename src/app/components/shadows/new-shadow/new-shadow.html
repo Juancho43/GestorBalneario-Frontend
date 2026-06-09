@@ -1,1 +1,10 @@
-<app-shadow-form (finalShadow)="checkIdentifier($event)"/>
+<div class="dialog">
+  <section class="header">
+    <div class="headline">
+      <mat-icon class="filter-icon">add</mat-icon>
+      <h3>Nueva carpa/sombrilla</h3>
+    </div>
+    <mat-icon class="close-icon" (click)="close()">close</mat-icon>
+  </section>
+  <app-shadow-form (finalShadow)="submitHandler($event)"/>
+</div>

@@ -1,9 +1,5 @@
 <div class="single-layout">
   <h2>Editar mapa carpas/sombrillas</h2>
-  <div class="content">
-    <app-shadow-list
-      (onDropped)="updateMap($event)"
-    />
     <app-shadow-map
       initialState="editing"
       [loadedShadows]="shadows()"
@@ -12,11 +8,23 @@
       (currentElement)="selectShadowHandler($event)"
       (deletedElement)="deleteShadow($event)"
     />
-    <app-shadow-form
-      (finalShadow)="identifierChangedHandler($event)"
-      [shadowToEdit]="currentShadow()"
+  <app-side-sheet
+    [isOpen]="sideSheetOpen()"
+    headline="Editor mapa"
+    (closed)="this.sideSheetOpen.set(false)">
+    <app-shadow-list
+      (onDropped)="updateMap($event)"
     />
-  </div>
+    @if(currentShadow()) {
+      <br>
+      <app-shadow-form
+        (finalShadow)="identifierChangedHandler($event)"
+        [shadowToEdit]="currentShadow()"
+      />
+    }@else{
+      <p>Seleccione un elemento del mapa para editarlo o arrastre uno de la lista para agregarlo al mapa.</p>
+    }
+  </app-side-sheet>
 </div>
 <app-fab-menu
   (actionSelected)="handleMenuAction($event)"

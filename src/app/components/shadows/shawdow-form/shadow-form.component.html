@@ -4,17 +4,23 @@
   } @else {
     <legend>Crear Carpa</legend>
   }
-  <label>Identificador</label>
-  <input type="text" [formField]="shadowForm.identifier" />
+
+  <mat-form-field>
+    <mat-label>Nombre</mat-label>
+    <input matInput type="text" [formField]="shadowForm.identifier"/>
+  </mat-form-field>
   @if(shadowForm().touched()){
     @for(error of allFormErrors(); track $index){
       <p class="error">{{error.message}}</p>
     }
   }
-  @if (editMode()) {
-    <input type="submit" value="Actualizar">
-  } @else {
-  <input type="submit" value="Guardar">
-  }
-  <input type="reset" (click)="editMode.set(false)" value="Cancelar">
+
+  <div class="form-actions">
+    <button type="reset" (click)="editMode.set(false)" class="button-text">Limpiar Formulario</button>
+    @if (editMode()){
+      <button type="submit" class="button-filled">Actualizar sombra</button>
+    }@else{
+      <button type="submit" class="button-filled">Crear sombra</button>
+    }
+  </div>
 </form>
