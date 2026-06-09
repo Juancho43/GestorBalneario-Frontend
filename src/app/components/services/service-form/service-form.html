@@ -31,12 +31,12 @@
       <p class="error">{{error.message}}</p>
     }
   }
-  <div class="m3-form-actions">
-    <button type="reset" (click)="editMode.set(false)" class="m3-button-text">Limpiar Formulario</button>
+  <div class="form-actions">
+    <button type="reset" (click)="editMode.set(false)" class="button-text">Limpiar Formulario</button>
     @if (editMode()){
-      <button type="submit" class="m3-button-filled">Actualizar servicio</button>
+      <button type="submit" class="button-filled">Actualizar servicio</button>
     }@else{
-      <button type="submit" class="m3-button-filled">Crear servicio</button>
+      <button type="submit" class="button-filled">Crear servicio</button>
     }
   </div>
 

@@ -1,17 +1,18 @@
-import {Component, inject} from '@angular/core';
+import {Component, computed, inject} from '@angular/core';
 import {DatePipe, JsonPipe} from '@angular/common';
 import {SeasonEntity} from '../../../core/model/SeasonEntity';
 import {SeasonManager} from '../../../core/services/Managers/season-manager';
 import {MatIcon} from '@angular/material/icon';
 import {MatDialog} from '@angular/material/dialog';
 import {OverlayHelper} from '../../../core/utils/overlay-helper';
+import {MatTooltip} from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-season-switch',
   imports: [
     JsonPipe,
-    DatePipe,
-    MatIcon
+    MatIcon,
+    MatTooltip
   ],
   templateUrl: './season-switch.html',
   styleUrl: './season-switch.scss',
@@ -20,8 +21,8 @@ export default class SeasonSwitch {
   private dialogRef = inject(MatDialog);
   private overlayHelper = inject(OverlayHelper);
   private manager = inject(SeasonManager);
-  seasons = this.manager.getList()
-
+  protected seasons = this.manager.getList()
+  protected currentSeason = computed(()=>this.manager.currentSeason());
   protected setSeason(season: SeasonEntity) {
    this.manager.currentSeason.set(season);
   }

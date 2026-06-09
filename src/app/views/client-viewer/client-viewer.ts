@@ -11,6 +11,7 @@ import {FABButton} from '../../components/layout/fab-button/fab-button';
 import {OverlayHelper} from '../../core/utils/overlay-helper';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {MatIcon} from '@angular/material/icon';
+import {DialogHelper} from '../../core/utils/dialog-helper';
 
 @Component({
   selector: 'app-client-viewer',
@@ -28,6 +29,7 @@ export class ClientViewer {
   readonly id = input<string>();
   protected currentClient = computed(()=>this.manager.currentClientDetails());
 
+  private dialog = inject(DialogHelper);
   protected singlePane = signal(false);
   protected currentPane = signal('list');
   protected showList = computed(()=> this.singlePane() || this.currentPane() === 'list');
@@ -62,7 +64,7 @@ export class ClientViewer {
     this.setCurrentClient($event.id!);
     console.log("EDITING");
   }
-
+  // TODO: Use dialogHelper instead of Overlay
   protected deleteClient($event: ClientEntity) {
     this.setCurrentClient($event.id!);
     const data :IDeleteDialogData = {

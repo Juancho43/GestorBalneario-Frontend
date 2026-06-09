@@ -1,5 +1,5 @@
 @use '@angular/material' as mat;
-
+@use "../../../core/form";
 .custom-select {
   @include mat.select-overrides((
     panel-background-color:white,

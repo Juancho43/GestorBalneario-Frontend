@@ -17,21 +17,20 @@ import {DateInputPicker} from '../../layout/date-input-picker/date-input-picker'
 })
 export class ReportForm{
   readonly paymentMethods = input.required<string[]>()
-  pipe = new PaymentTypePipe()
-  paymentOptions = computed(() => {
-    if(this.paymentMethods()){
-      let array = this.paymentMethods();
-      array.push('ALL')
-      return array;
+  protected pipe = new PaymentTypePipe()
+  protected paymentOptions = computed<string[]>(() => {
+    const methods = this.paymentMethods();
+    if (methods && methods.length > 0) {
+      return ['ALL', ...methods];
     }
-    return [];
-  })
-  starDate  = linkedSignal(()=>new Date());
-  endDate =linkedSignal(()=>new Date());
-  page = signal(0);
-  pageSize = signal(10);
-  paymentType = signal('ALL')
-  query = computed<ReportQuery>(()=>({
+    return ['ALL'];
+  });
+  protected starDate  = linkedSignal(()=>new Date());
+  protected endDate =linkedSignal(()=>new Date());
+  protected page = signal(0);
+  protected pageSize = signal(10);
+  protected paymentType = signal('ALL')
+  protected query = computed<ReportQuery>(()=>({
     page:this.page(),
     limit:this.pageSize(),
     type: this.paymentType(),
@@ -40,10 +39,9 @@ export class ReportForm{
   }));
 
   finalQuery = output<ReportQuery>();
-  submittedForm(){
+  protected submittedForm(){
     this.finalQuery.emit(this.query());
   }
-
 
   protected handleEndDate($event: string) {
     this.endDate.set(new Date($event))
