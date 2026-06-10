@@ -29,7 +29,6 @@ export class ClientViewer {
   readonly id = input<string>();
   protected currentClient = computed(()=>this.manager.currentClientDetails());
 
-  private dialog = inject(DialogHelper);
   protected singlePane = signal(false);
   protected currentPane = signal('list');
   protected showList = computed(()=> this.singlePane() || this.currentPane() === 'list');

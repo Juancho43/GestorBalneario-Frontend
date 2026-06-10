@@ -1,5 +1,5 @@
 import {Component, computed, inject} from '@angular/core';
-import {DatePipe, JsonPipe} from '@angular/common';
+import {JsonPipe} from '@angular/common';
 import {SeasonEntity} from '../../../core/model/SeasonEntity';
 import {SeasonManager} from '../../../core/services/Managers/season-manager';
 import {MatIcon} from '@angular/material/icon';

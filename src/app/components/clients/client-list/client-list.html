@@ -1,4 +1,4 @@
-<ul class="m3-list">
+<ul class="m3-list" [class.scrool]="scrollable()">
   @for (client of this.list(); track client.id) {
     <li class="m3-list-item">
       <mat-icon class="m3-leading-icon" aria-hidden="false" fontIcon="person"/>

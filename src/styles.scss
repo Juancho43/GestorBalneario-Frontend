@@ -2,6 +2,13 @@
 @use '../src/app/core/light';
 @use '../src/app/core/dark';
 
+:root{
+  @include mat.datepicker-overrides((
+    calendar-body-label-text-color: white,
+    calendar-container-text-color:white,
+    calendar-container-background-color:rgb(0 97 150),
+  ));
+}
 *, *::before, *::after {
   box-sizing: inherit;
 }
@@ -11,6 +18,29 @@ html, body {
   height: 100%;
   width: 100%;
   box-sizing: border-box;
+
+
+  scrollbar-color: #555555 #2d3035;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #2d3035;
+    border-bottom-right-radius: 12px;
+    border-top-right-radius: 12px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #555555;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #777777;
+  }
 }
 
 .app {
@@ -64,17 +94,9 @@ app-menu {
   color: var(--md-sys-color-on-surface);
 }
 
-/* Target the Angular Material dialog surface */
 .custom-dark-dialog .mdc-dialog__surface,
 .custom-dark-dialog .mat-mdc-dialog-container,
 .custom-dark-dialog .mat-dialog-container {
   background-color: transparent !important;
   box-shadow: none;
-}
-:root{
-  @include mat.datepicker-overrides((
-    calendar-body-label-text-color: white,
-    calendar-container-text-color:white,
-    calendar-container-background-color:rgb(0 97 150),
-  ));
 }

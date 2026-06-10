@@ -10,22 +10,23 @@
       headline="Crear reserva"
       (closed)="this.sideSheetOpen.set(false)"
     >
-    <p>Carpa seleccionada</p>
-    <app-shadow-card
-      [shadow]="shadow()"
-    />
-    <p>Cliente seleccionado</p>
-    <app-client-card
-      [actions]="false"
-      [client]="client()"
-      (click)="openClientDialog()"
-    />
     <app-reservation-form
-      #reservationForm
-      [client]="client()"
-      [shadow]="shadow()"
-      (finalReservation)="handleSubmit($event)"
+    #reservationForm
+    [client]="client()!"
+    [shadow]="shadow()"
+    (finalReservation)="handleSubmit($event)"
     />
+    @if(shadow() != null) {
+      <app-shadow-card
+        [shadow]="shadow()"
+      />
+    }
+    @if (client() != null) {
+      <app-client-card
+        [client]="client()!"
+      />
+    }
+    <p (click)="openClientDialog()">Seleccionar cliente</p>
   </app-side-sheet>
 </div>
   <app-fab-button

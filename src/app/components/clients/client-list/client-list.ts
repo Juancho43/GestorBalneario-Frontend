@@ -13,6 +13,7 @@ import {CustomMenu} from '../../layout/custom-menu/custom-menu';
   styleUrl: './client-list.scss',
 })
 export class ClientList {
+  readonly scrollable = input<boolean>(false);
   readonly list = input.required<ClientEntity[]>()
   selected = output<ClientEntity>()
   edit = output<ClientEntity>()

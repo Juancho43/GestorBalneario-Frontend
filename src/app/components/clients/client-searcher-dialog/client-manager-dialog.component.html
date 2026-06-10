@@ -1,17 +1,37 @@
-<div class="client-manager-dialog">
-  @if (this.mode() === 'search') {
-    <app-client-list-manager
-      (selectedClient)="selectClient($event)"
-    />
+<div class="dialog">
 
-    <button (click)="this.mode.set('create')">Crear</button>
-  }
+  <section class="header">
+    <div class="headline">
+      <mat-icon class="filter-icon">person</mat-icon>
+      <h3>Selecciona un cliente</h3>
+    </div>
+    <mat-icon class="close-icon" (click)="closeDialog()">close</mat-icon>
+  </section>
+  <section class="client-list-container">
+    @switch (this.mode()){
+      @case ('search'){
+        <app-client-list-manager
+          [actions]="true"
+          (selectedClient)="selectClient($event)"
+        />
+      }
+      @case ('create'){
+        <app-client-form
+          (finalClient)="createClient($event)"
+        />
+      }
+    }
+  </section>
 
-  @if (this.mode() === 'create') {
-    <app-client-form
-      (finalClient)="createClient($event)"
-    />
-    <button (click)="this.mode.set('search')">Buscar</button>
-  }
+  <section class="actions">
+    <button (click)="this.mode.set('search')">
+      <mat-icon fontIcon="search"/>
+      Buscar
+    </button>
+    <button (click)="this.mode.set('create')">
+      <mat-icon fontIcon="add"/>
+      Crear
+    </button>
+  </section>
 
 </div>

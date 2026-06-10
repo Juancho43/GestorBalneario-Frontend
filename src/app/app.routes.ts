@@ -14,6 +14,7 @@ import {SeasonsEditor} from './views/seasons-editor/seasons-editor';
 import {InvoiceEditor} from './views/invoice-editor/invoice-editor';
 import {InvoiceViewer} from './views/invoice-viewer/invoice-viewer';
 import {ShadowViewer} from './views/shadow-viewer/shadow-viewer';
+import {pendingChangesGuard} from './core/utils/PendingChanges';
 
 export const routes: Routes = [
   {
@@ -62,6 +63,7 @@ export const routes: Routes = [
   {
     title: 'Crear reservas',
     canActivate: [currentSeasonGuard],
+    canDeactivate: [pendingChangesGuard],
     path: 'reservation-create',
     loadComponent:()=> ReservationCreate
   },
