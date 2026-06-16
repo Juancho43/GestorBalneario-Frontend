@@ -3,12 +3,12 @@
   <div class="row">
     <div>
 
-      @for (invoice of invoices(); track $index){
-        <app-invoice-card
-          (click)="selectedInvoice.set(invoice)"
-          [invoice]="invoice"
-        />
-      }
+<!--      @for (invoice of invoices(); track $index){-->
+<!--        <app-invoice-card-->
+<!--          (click)="selectedInvoice.set(invoice)"-->
+<!--          [invoice]="invoice"-->
+<!--        />-->
+<!--      }-->
     </div>
     <app-payment-form
       [paymentMethods]="paymentMethods()"

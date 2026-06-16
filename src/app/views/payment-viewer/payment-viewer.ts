@@ -50,7 +50,7 @@ export class PaymentViewer {
   );
 
   protected openInvoiceDialog(payment: PaymentEntity) {
-    this.invoiceManager.currentInvoice.set(payment.invoiceId!);
+    this.invoiceManager.selectedInvoiceId.set(payment.invoiceId!);
     this.dialog.open(InvoiceDetails)
   }
   protected handleMenuAction($event: string) {

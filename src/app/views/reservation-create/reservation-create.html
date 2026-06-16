@@ -28,9 +28,12 @@
     }
     <p (click)="openClientDialog()">Seleccionar cliente</p>
   </app-side-sheet>
+
+
 </div>
-  <app-fab-button
-    icon="add"
-    label="Crear reserva"
-    (touched)="this.sideSheetOpen.set(true)"
-  />
+<app-fab-button
+  class="bottom-right"
+  icon="add"
+  label="Crear reserva"
+  (touched)="this.sideSheetOpen.set(true)"
+/>

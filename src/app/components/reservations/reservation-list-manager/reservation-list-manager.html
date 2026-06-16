@@ -7,7 +7,14 @@
   (edit)="editReservation($event)"
   (delete)="deleteReservation($event)"
 />
-<app-paginator
-  (pageChange)="handlePage($event)"
-  [query]="query()"
-/>
+<div class="bottom">
+  <app-paginator
+    (pageChange)="handlePage($event)"
+    [query]="query()"
+  />
+  <app-fab-button
+    icon="add"
+    label="Crear reserva"
+    (touched)="create.emit()"
+  />
+</div>

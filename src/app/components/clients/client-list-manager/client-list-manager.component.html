@@ -8,7 +8,16 @@
   (edit)="editClient($event)"
   (delete)="deleteClient($event)"
 />
-<app-paginator
-  (pageChange)="handlePage($event)"
-  [query]="query()"
-/>
+<div class="bottom">
+  <app-paginator
+    (pageChange)="handlePage($event)"
+    [query]="query()"
+  />
+  @if (!actions()){
+    <app-fab-button
+      icon="add"
+      label="Nuevo cliente"
+      (touched)="create.emit()"
+    />
+  }
+</div>

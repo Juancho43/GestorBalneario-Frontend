@@ -5,6 +5,7 @@ import {ServiceEntity} from '../../../core/model/serviceEntity';
 import {ServiceList} from '../service-list/service-list';
 import {SearchBarData} from '../../../core/Interfaces/SearchInterfaces';
 import {Paginator} from '../../layout/paginator/paginator';
+import {FABButton} from '../../layout/fab-button/fab-button';
 
 @Component({
   selector: 'app-service-list-manager',
@@ -12,6 +13,7 @@ import {Paginator} from '../../layout/paginator/paginator';
     ServiceSearcher,
     ServiceList,
     Paginator,
+    FABButton,
   ],
   templateUrl: './service-list-manager.html',
   styleUrl: './service-list-manager.scss',
@@ -21,6 +23,7 @@ export class ServiceListManager {
   services = computed(() => this.manager.servicesToDisplay())
   edit = output<ServiceEntity>()
   delete = output<ServiceEntity>()
+  create = output();
   selectedService = output<ServiceEntity>()
   protected query = computed(()=>this.manager.searchQuery().pagination)
   protected handleSearch($event: SearchBarData) {

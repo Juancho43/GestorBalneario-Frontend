@@ -9,12 +9,12 @@ import {ClientViewer} from './views/client-viewer/client-viewer';
 import {PaymentViewer} from './views/payment-viewer/payment-viewer';
 import PaymentEditor from './views/payment-editor/payment-editor';
 import {ServiceEditor} from './views/service-editor/service-editor';
-import {currentSeasonGuard} from './core/utils/current-season-guard';
+import {currentSeasonGuard} from './core/utils/guards/current-season-guard';
 import {SeasonsEditor} from './views/seasons-editor/seasons-editor';
 import {InvoiceEditor} from './views/invoice-editor/invoice-editor';
 import {InvoiceViewer} from './views/invoice-viewer/invoice-viewer';
 import {ShadowViewer} from './views/shadow-viewer/shadow-viewer';
-import {pendingChangesGuard} from './core/utils/PendingChanges';
+import {pendingChangesGuard} from './core/utils/guards/PendingChanges';
 
 export const routes: Routes = [
   {
@@ -111,7 +111,7 @@ export const routes: Routes = [
   },
   {
     title: 'Editar facturas',
-    path:'invoice-editor',
+    path:'invoice-editor/:id',
     canActivate: [currentSeasonGuard],
     loadComponent: ()=>InvoiceEditor
   },

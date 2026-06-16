@@ -6,6 +6,7 @@
         (selected)="handleSelected($event)"
         (edit)="handleEdit($event)"
         (delete)="handleDelete($event)"
+        (create)="handleFABButton()"
       />
     </section>
   }
@@ -29,8 +30,4 @@
   }
 
 </div>
-<app-fab-button
-  icon="add"
-  label="Nueva temporada"
-  (touched)="handleFABButton()"
-/>
+

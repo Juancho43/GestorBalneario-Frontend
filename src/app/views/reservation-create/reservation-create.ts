@@ -13,8 +13,8 @@ import {ShadowCard} from '../../components/shadows/shadow-card/shadow-card';
 import {ShadowEntity} from '../../core/model/shadowEntity';
 import {FABButton} from '../../components/layout/fab-button/fab-button';
 import {SideSheet} from '../../components/layout/side-sheet/side-sheet';
-import {DialogHelper} from '../../core/utils/dialog-helper';
-import {ComponentCanDeactivate} from '../../core/utils/PendingChanges';
+import {DialogHelper} from '../../core/utils/other/dialog-helper';
+import {ComponentCanDeactivate} from '../../core/utils/guards/PendingChanges';
 
 @Component({
   selector: 'app-reservation-create',

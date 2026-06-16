@@ -7,8 +7,16 @@
   (edit)="editSeason($event)"
   (delete)="deleteSeason($event)"
 />
-<app-paginator
-  [query]="query()"
-  (pageChange)="handlePage($event)"
-/>
 
+<div class="bottom">
+  <app-paginator
+    [query]="query()"
+    (pageChange)="handlePage($event)"
+  />
+
+  <app-fab-button
+    icon="add"
+    label="Nueva temporada"
+    (touched)="create.emit()"
+  />
+</div>

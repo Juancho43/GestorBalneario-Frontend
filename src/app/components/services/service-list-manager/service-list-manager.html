@@ -7,8 +7,14 @@
   (edit)="editService($event)"
   (delete)="deleteService($event)"
 />
-<app-paginator
-  [query]="query()"
-  (pageChange)="handlePage($event)"
-/>
-
+<div class="bottom">
+  <app-paginator
+    [query]="query()"
+    (pageChange)="handlePage($event)"
+  />
+  <app-fab-button
+    icon="add"
+    label="Nuevo servicio"
+    (touched)="create.emit()"
+  />
+</div>

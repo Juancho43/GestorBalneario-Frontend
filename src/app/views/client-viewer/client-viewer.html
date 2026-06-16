@@ -3,11 +3,12 @@
     <section class="list-panel">
       <h2>Cartera de clientes</h2>
       <app-client-list-manager
-        [actions]="true"
         (selectedClient)="handleSelectClient($event.id!)"
         (edit)="editClient($event!)"
         (delete)="deleteClient($event)"
+        (create)="handleFABButton()"
       />
+
     </section>
   }
   @if(this.showDetails()){
@@ -32,8 +33,4 @@
     </section>
   }
 </div>
-<app-fab-button
-  icon="add"
-  label="Nuevo cliente"
-  (touched)="handleFABButton()"
-/>
+

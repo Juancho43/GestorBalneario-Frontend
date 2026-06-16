@@ -1,16 +1,16 @@
 import {Component, computed, inject, signal} from '@angular/core';
 import {ServiceManager} from '../../core/services/Managers/service-manager';
-import {ServiceForm} from '../../components/services/service-form/service-form';
 import {ServiceEntity} from '../../core/model/serviceEntity';
-import {MatDialog} from '@angular/material/dialog';
 import {IDeleteDialogData} from '../../core/Interfaces/DeleteDialogData';
 import {DeleteConfirmation} from '../../components/layout/delete-confirmation/delete-confirmation';
 import {ServiceListManager} from '../../components/services/service-list-manager/service-list-manager';
 import {FABButton} from '../../components/layout/fab-button/fab-button';
-import {OverlayHelper} from '../../core/utils/overlay-helper';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {MatIcon} from '@angular/material/icon';
 import {JsonPipe} from '@angular/common';
+import {DialogHelper} from '../../core/utils/other/dialog-helper';
+import {EditServiceDialog} from '../../components/services/edit-service-dialog/edit-service-dialog';
+import {NewServiceDialog} from '../../components/services/new-service-dialog/new-service-dialog';
 
 @Component({
   selector: 'app-service-editor',
@@ -25,19 +25,10 @@ import {JsonPipe} from '@angular/common';
 })
 export class ServiceEditor {
   private manager = inject(ServiceManager);
-  private dialog = inject(MatDialog);
-  private overlayHelper = inject(OverlayHelper);
-  isOverlayOpen = false;
+  private dialog = inject(DialogHelper);
   protected types = computed(()=>this.manager.getTypes())
   currentService = computed(()=>this.manager.currentService())
 
-  protected handleFormSubmit($event: ServiceEntity) {
-   // if(this.form.editMode()){
-   //   this.manager.editService($event);
-   // }else{
-   //   this.manager.createService($event);
-   // }
-  }
 
   protected singlePane = signal(false);
 
@@ -50,27 +41,17 @@ export class ServiceEditor {
     })
   }
   protected handleFABButton() {
-    if (!this.isOverlayOpen){
-      this.isOverlayOpen = true;
-      const config = this.overlayHelper.getModalConfig();
-      const overlayRef = this.overlayHelper.open(ServiceForm, config);
-      overlayRef.backdropClick().subscribe(() => {
-        overlayRef!.dispose();
-        this.isOverlayOpen = false
-      });
-    }
+    this.dialog.openDialog(NewServiceDialog,this.dialog.getConfig());
   }
 
   protected handleSelect(s: string) {
-
-    console.log("SELECT");
+    // this.dialog.openDialog(EditServiceDialog,this.dialog.getConfig());
   }
 
 
 
   protected handleEdit($event: ServiceEntity) {
-
-    console.log("EDITING");
+    this.dialog.openDialog(EditServiceDialog,this.dialog.getConfig());
   }
 
   protected handleDelete($event: ServiceEntity) {
@@ -81,10 +62,13 @@ export class ServiceEditor {
       cancelText: 'Cancelar',
       confirmText: 'Eliminar'
     }
-    const ref = this.dialog.open(DeleteConfirmation,{
-      disableClose: true,
-      data: data
-    });
+    const config =
+      {
+        ...this.dialog.getConfig(),
+        disableClose: true,
+        data: data
+      }
+    const ref = this.dialog.openDialog(DeleteConfirmation,config);
     ref.beforeClosed().subscribe(res =>{
       if(res) {
         this.manager.deleteService($event)

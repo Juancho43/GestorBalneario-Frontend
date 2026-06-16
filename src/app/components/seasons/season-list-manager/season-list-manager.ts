@@ -5,6 +5,7 @@ import {SeasonManager} from '../../../core/services/Managers/season-manager';
 import {Paginator} from '../../layout/paginator/paginator';
 import {SearchBarData} from '../../../core/Interfaces/SearchInterfaces';
 import {SeasonEntity} from '../../../core/model/SeasonEntity';
+import {FABButton} from '../../layout/fab-button/fab-button';
 
 @Component({
   selector: 'app-season-list-manager',
@@ -12,6 +13,7 @@ import {SeasonEntity} from '../../../core/model/SeasonEntity';
     SeasonList,
     SeasonSearcher,
     Paginator,
+    FABButton,
   ],
   templateUrl: './season-list-manager.html',
   styleUrl: './season-list-manager.scss',
@@ -23,7 +25,7 @@ export class SeasonListManager {
   selected= output<SeasonEntity>();
   edit = output<SeasonEntity>();
   delete = output<SeasonEntity>();
-
+  create = output();
   protected handleSearch($event: SearchBarData) {
     this.manager.searchQuery.update((p) => ({
       ...p,

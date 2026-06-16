@@ -32,3 +32,18 @@
   }
 
 </div>
+@if(currentInvoice()){
+  <app-fab-button
+    icon="attach_money"
+    label="Agregar pago"
+    (touched)="paymentSideSheet.set(true)"
+  />
+  <app-side-sheet
+    headline="Agregar pago"
+    [isOpen]="paymentSideSheet()"
+    (closed)="paymentSideSheet.set(false)"
+  >
+    <app-new-payment-dialog/>
+
+  </app-side-sheet>
+}

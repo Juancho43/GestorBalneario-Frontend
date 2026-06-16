@@ -1,11 +1,13 @@
 .paginator-wrapper {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 1rem;
-  padding-top: 16px;
-  padding-bottom: 16px;
+  padding:16px;
   font-family: inherit;
+
+  //position: absolute;
+  //bottom: 12px;
+  //left: 24px;
 }
 
 .page-info {

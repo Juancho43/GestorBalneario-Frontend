@@ -7,11 +7,14 @@ import {MatDialog} from '@angular/material/dialog';
 import {IDeleteDialogData} from '../../core/Interfaces/DeleteDialogData';
 import {DeleteConfirmation} from '../../components/layout/delete-confirmation/delete-confirmation';
 import {FABButton} from '../../components/layout/fab-button/fab-button';
-import {OverlayHelper} from '../../core/utils/overlay-helper';
+import {OverlayHelper} from '../../core/utils/other/overlay-helper';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {SeasonListManager} from '../../components/seasons/season-list-manager/season-list-manager';
 import {MatIcon} from '@angular/material/icon';
 import {JsonPipe} from '@angular/common';
+import {DialogHelper} from '../../core/utils/other/dialog-helper';
+import {NewSeasonDialog} from '../../components/seasons/new-season-dialog/new-season-dialog';
+import {EditSeasonDialog} from '../../components/seasons/edit-season-dialog/edit-season-dialog';
 
 @Component({
   selector: 'app-seasons-editor',
@@ -27,7 +30,7 @@ import {JsonPipe} from '@angular/common';
 })
 export class SeasonsEditor {
   private manager = inject(SeasonManager);
-  private dialog = inject(MatDialog);
+  private dialog = inject(DialogHelper);
   currentSeason = computed(()=>this.manager.currentSeason());
   @ViewChild('seasonForm') form!: SeasonForm;
   isOverlayOpen = false;
@@ -78,7 +81,7 @@ export class SeasonsEditor {
       cancelText: 'Cancelar',
       confirmText: 'Eliminar'
     }
-    const ref = this.dialog.open(DeleteConfirmation,{
+    const ref = this.dialog.openDialog(DeleteConfirmation,{
       disableClose: true,
       data: data
     });
@@ -90,21 +93,12 @@ export class SeasonsEditor {
   }
 
   protected handleEdit($event: SeasonEntity) {
-   this.seletedSeason.set($event)
-
-    console.log("EDITING");
+    this.seletedSeason.set($event)
+    this.dialog.openDialog(EditSeasonDialog,this.dialog.getConfig())
   }
 
   protected handleFABButton() {
-    if (!this.isOverlayOpen){
-      this.isOverlayOpen = true;
-      const config = this.overlayHelper.getModalConfig();
-      const overlayRef = this.overlayHelper.open(SeasonForm, config);
-      overlayRef.backdropClick().subscribe(() => {
-        overlayRef!.dispose();
-        this.isOverlayOpen = false
-      });
-    }
+    this.dialog.openDialog(NewSeasonDialog,this.dialog.getConfig());
   }
 
   protected handleSelected($event: SeasonEntity) {

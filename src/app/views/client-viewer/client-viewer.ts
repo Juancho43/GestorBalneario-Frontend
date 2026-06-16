@@ -3,15 +3,14 @@ import {ClientManager} from '../../core/services/Managers/client-manager.service
 import {ClientEntity} from '../../core/model/clientEntity';
 import {ClientDetails} from '../../components/clients/client-details/client-details';
 import {ClientListManagerComponent} from '../../components/clients/client-list-manager/client-list-manager.component';
-import {ClientForm} from '../../components/clients/client-form/client-form';
 import {DeleteConfirmation} from '../../components/layout/delete-confirmation/delete-confirmation';
-import {MatDialog} from '@angular/material/dialog';
 import {IDeleteDialogData} from '../../core/Interfaces/DeleteDialogData';
 import {FABButton} from '../../components/layout/fab-button/fab-button';
-import {OverlayHelper} from '../../core/utils/overlay-helper';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {MatIcon} from '@angular/material/icon';
-import {DialogHelper} from '../../core/utils/dialog-helper';
+import {DialogHelper} from '../../core/utils/other/dialog-helper';
+import {EditClientDialog} from '../../components/clients/edit-client-dialog/edit-client-dialog';
+import {NewClientDialog} from '../../components/clients/new-client-dialog/new-client-dialog';
 
 @Component({
   selector: 'app-client-viewer',
@@ -45,10 +44,7 @@ export class ClientViewer {
     })
   }
 
-  private overlayHelper = inject(OverlayHelper);
-
-  isOverlayOpen = false;
-  private matDialog = inject(MatDialog);
+  private dialog = inject(DialogHelper);
 
   protected handleSelectClient(client:string) {
     this.currentPane.set('detail');
@@ -61,9 +57,9 @@ export class ClientViewer {
   protected editClient($event: ClientEntity){
 
     this.setCurrentClient($event.id!);
-    console.log("EDITING");
+    const ref = this.dialog.openDialog(EditClientDialog,this.dialog.getConfig());
+
   }
-  // TODO: Use dialogHelper instead of Overlay
   protected deleteClient($event: ClientEntity) {
     this.setCurrentClient($event.id!);
     const data :IDeleteDialogData = {
@@ -72,7 +68,7 @@ export class ClientViewer {
       cancelText: 'Cancelar',
       confirmText: 'Eliminar'
     }
-    const ref = this.matDialog.open(DeleteConfirmation,{
+    const ref = this.dialog.openDialog(DeleteConfirmation,{
       disableClose: true,
       data: data
     });
@@ -83,17 +79,8 @@ export class ClientViewer {
     })
   }
 
-
-
   protected handleFABButton() {
-    if (!this.isOverlayOpen){
-      this.isOverlayOpen = true;
-      const config = this.overlayHelper.getModalConfig();
-      const overlayRef = this.overlayHelper.open(ClientForm, config);
-      overlayRef.backdropClick().subscribe(() => {
-        overlayRef!.dispose();
-        this.isOverlayOpen = false
-      });
+      const ref = this.dialog.openDialog(NewClientDialog,this.dialog.getConfig());
     }
   }
-}
+

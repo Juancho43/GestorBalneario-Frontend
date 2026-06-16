@@ -5,6 +5,7 @@ import {ClientEntity} from '../../../core/model/clientEntity';
 import {ClientManager} from '../../../core/services/Managers/client-manager.service';
 import {Paginator} from '../../layout/paginator/paginator';
 import {SearchBarData} from '../../../core/Interfaces/SearchInterfaces';
+import {FABButton} from '../../layout/fab-button/fab-button';
 
 @Component({
   selector: 'app-client-list-manager',
@@ -12,6 +13,7 @@ import {SearchBarData} from '../../../core/Interfaces/SearchInterfaces';
     ClientList,
     ClientSearcher,
     Paginator,
+    FABButton,
   ],
   templateUrl: './client-list-manager.component.html',
   styleUrl: './client-list-manager.component.scss',
@@ -24,6 +26,7 @@ export class ClientListManagerComponent {
   selectedClient = output<ClientEntity>()
   edit = output<ClientEntity>()
   delete = output<ClientEntity>()
+  create = output();
   protected selectClient($event: ClientEntity) {
     this.manager.currentClient.set($event);
     this.selectedClient.emit($event);

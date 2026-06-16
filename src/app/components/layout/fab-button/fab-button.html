@@ -3,7 +3,7 @@
   (click)="this.touched.emit()"
 >
   <mat-icon [fontIcon]="icon()"/>
-  @if(this.label()){
+  @if(this.label() && this.showLabel()){
     <span>{{this.label()}}</span>
   }
 </button>

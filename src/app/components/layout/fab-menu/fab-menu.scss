@@ -46,3 +46,10 @@
     transform: translateY(0) scale(1);
   }
 }
+@media screen and (max-width: 955px) {
+  .fab-menu-wrapper {
+    bottom: 88px;
+    right: 16px;
+  }
+
+}

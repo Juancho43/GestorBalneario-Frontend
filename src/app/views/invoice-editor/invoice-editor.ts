@@ -5,12 +5,14 @@ import {InvoiceItemsManager} from '../../core/services/Managers/invoice-items-ma
 import {InvoiceItem} from '../../core/model/invoiceItemEntity';
 import {InvoiceAdjustment} from '../../components/invoices/invoice-adjustment/invoice-adjustment';
 import {DeleteInvoiceItemCommand} from '../../core/services/InvoiceHttp/remove-items-http.service';
+import {SideSheet} from '../../components/layout/side-sheet/side-sheet';
 
 @Component({
   selector: 'app-invoice-editor',
   imports: [
     InvoiceItemForm,
-    InvoiceAdjustment
+    InvoiceAdjustment,
+    SideSheet
   ],
   templateUrl: './invoice-editor.html',
   styleUrl: './invoice-editor.scss',

@@ -1,13 +1,6 @@
-<div class="component">
-  <h3>Editar facturas.</h3>
-  <div class="row">
-<!--    @for(invoice of invoices(); track $index){-->
-<!--      <app-invoice-card-->
-<!--        (click)="selectInvoice(invoice)"-->
-<!--        [invoice]="invoice"-->
-<!--      />-->
-<!--    }-->
-  </div>
+<div class="single-layout">
+  <h2>Editar factura</h2>
+
   @if (this.invoice()){
     <app-invoice-adjustment-form
       #editItemForm
@@ -21,4 +14,7 @@
     />
   }
 
+  <app-side-sheet>
+
+  </app-side-sheet>
 </div>

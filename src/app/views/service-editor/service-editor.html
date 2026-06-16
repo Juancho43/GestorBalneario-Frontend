@@ -6,6 +6,7 @@
         (selectedService)="handleSelect($event.id!)"
         (edit)="handleEdit($event)"
         (delete)="handleDelete($event)"
+        (create)="handleFABButton()"
       />
     </section>
   }
@@ -30,8 +31,3 @@
     </section>
   }
 </div>
-<app-fab-button
-  icon="add"
-  label="Nuevo servicio"
-  (touched)="handleFABButton()"
-/>

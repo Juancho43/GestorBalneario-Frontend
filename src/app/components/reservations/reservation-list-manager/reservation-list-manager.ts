@@ -5,13 +5,15 @@ import {ReservationManager} from '../../../core/services/Managers/reservation-ma
 import {ReservationEntity} from '../../../core/model/reservationEntity';
 import {Paginator} from '../../layout/paginator/paginator';
 import {SearchBarData} from '../../../core/Interfaces/SearchInterfaces';
+import {FABButton} from '../../layout/fab-button/fab-button';
 
 @Component({
   selector: 'app-reservation-list-manager',
   imports: [
     ReservationSearcher,
     ReservationList,
-    Paginator
+    Paginator,
+    FABButton
   ],
   templateUrl: './reservation-list-manager.html',
   styleUrl: './reservation-list-manager.scss',
@@ -24,7 +26,7 @@ export class ReservationListManager {
   selectedReservation = output<ReservationEntity>()
   edit = output<ReservationEntity>()
   delete = output<ReservationEntity>()
-
+  create = output();
   protected handleSearch($event: SearchBarData) {
     this.manager.searchQuery.update((p) => ({
       ...p,
