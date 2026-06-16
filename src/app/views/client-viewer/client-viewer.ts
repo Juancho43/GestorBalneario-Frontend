@@ -69,6 +69,7 @@ export class ClientViewer {
       confirmText: 'Eliminar'
     }
     const ref = this.dialog.openDialog(DeleteConfirmation,{
+      ...this.dialog.getConfig(),
       disableClose: true,
       data: data
     });

@@ -1,4 +1,4 @@
-import {Component, computed, inject, output, signal} from '@angular/core';
+import {Component, computed, inject, linkedSignal, output, signal} from '@angular/core';
 import {SearchBar} from '../../layout/search-bar/search-bar';
 import {FilterButton} from '../../layout/filter-button/filter-button';
 import {MatIcon} from '@angular/material/icon';
@@ -6,6 +6,7 @@ import {FormsModule} from '@angular/forms';
 import {ShadowFilter} from '../shadow-filter/shadow-filter';
 import {DialogHelper} from '../../../core/utils/other/dialog-helper';
 import {Filters, SearchBarData} from '../../../core/Interfaces/SearchInterfaces';
+import {emptySearchQuery} from '../../../core/services/other/const';
 
 @Component({
   selector: 'app-shadow-searcher',
@@ -20,9 +21,9 @@ import {Filters, SearchBarData} from '../../../core/Interfaces/SearchInterfaces'
 })
 export class ShadowSearcher {
   private dialog = inject(DialogHelper);
-  filters = signal<Filters | null>(null);
-  searchTerm = signal<string>('');
-  searchQuery = computed<SearchBarData>(()=>({
+  protected filters = linkedSignal<Filters >(()=>emptySearchQuery.search.filters);
+  protected searchTerm = signal<string>('');
+  protected searchQuery = computed<SearchBarData>(()=>({
     filters: this.filters()!,
     query : this.searchTerm(),
   }));

@@ -20,6 +20,7 @@ export class ServiceSearch {
       query: query.search.query?.trim() || '',
       page: query.pagination.page.toString(),
       limit: query.pagination.limit.toString(),
+      type: query.search.filters.type!.trim() || 'All',
       seasonId: seasonId,
       orderBy: query.search.filters.orderBy!.trim() || 'created_at',
       direction: query.search.filters.orderDirection! || 'asc'

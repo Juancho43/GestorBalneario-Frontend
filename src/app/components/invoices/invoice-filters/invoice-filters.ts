@@ -15,7 +15,7 @@ export class InvoiceFilters {
   private dialogRef = inject(MatDialogRef<InvoiceFilters>);
 
   protected stateOptions: FilterOption[] = [
-    { label: 'Creadas', value: 'IssuedState' },
+    { label: 'Emitidas', value: 'IssuedState' },
     { label: 'Pagadas', value: 'PaidState' },
     { label: 'Todas', value: 'All' }
   ];

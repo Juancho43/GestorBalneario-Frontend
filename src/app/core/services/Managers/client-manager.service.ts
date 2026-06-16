@@ -62,6 +62,7 @@ export class ClientManager {
   addClient(client: ClientEntity){
     this.create.create(client).subscribe(r=>{
       this.currentClient.set(r.data!);
+      this.searchResource.reload()
     });
   }
 

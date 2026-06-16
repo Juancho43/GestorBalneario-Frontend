@@ -9,6 +9,20 @@
 
   <section class="filter-options">
     <article>
+      <h4>Tipo</h4>
+      <ul>
+        @for (option of typeOptions; track option.value) {
+          <li>
+            <button
+              (click)="type.set(option.value)"
+              [class.active]="type() === option.value">
+              {{ option.label }}
+            </button>
+          </li>
+        }
+      </ul>
+    </article>
+    <article>
       <h4>Ordenar por</h4>
       <ul>
         @for (option of orderOptions; track option.value) {

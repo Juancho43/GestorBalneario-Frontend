@@ -5,7 +5,7 @@ import {Pipe, PipeTransform} from '@angular/core';
 })
 export class ServiceTypePipe implements PipeTransform {
   transform(value: unknown, ...args: unknown[]): unknown {
-    if(value === 'BOOKING') return 'Reserva'
+    if(value === 'RESERVATION') return 'Reserva'
     if(value === 'DISCOUNT') return 'Descuento'
     if(value === 'RECHARGE') return 'Recargo'
     if(value === 'OTHER') return 'Otro'

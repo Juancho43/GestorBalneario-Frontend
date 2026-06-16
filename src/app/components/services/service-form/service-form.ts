@@ -4,6 +4,7 @@ import {form, FormField, min, required} from '@angular/forms/signals';
 import {FormsModule} from '@angular/forms';
 import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {SelectInput} from '../../layout/select-input/select-input';
+import {ServiceTypePipe} from '../../../core/utils/pipes/service-type-pipe';
 
 @Component({
   selector: 'app-service-form',
@@ -26,11 +27,12 @@ export class ServiceForm {
     price:1,
     type:'OTHER'
   }as ServiceEntity);
+  typePipe = new ServiceTypePipe();
   editMode = linkedSignal(()=>!!this.serviceToEdit());
   serviceForm = form(this.service,s =>{
     required(s.name,{message: 'El nombre es requerido'});
     required(s.price,{message: 'El precio es requerido'});
-    min(s.price,1,{message: 'El precio debe ser positivo'});
+    // min(s.price,1,{message: 'El precio debe ser positivo'});
   });
  allFormErrors = computed(() => {
     const root = this.serviceForm().errors() || [];
@@ -44,5 +46,14 @@ export class ServiceForm {
      this.finalService.emit(this.service())
      this.editMode.set(false)
    }
+  }
+
+  protected handleTypeChange($event: string) {
+    this.service.update(p => {
+      return{
+        ...p,
+        type:$event
+      }
+    })
   }
 }

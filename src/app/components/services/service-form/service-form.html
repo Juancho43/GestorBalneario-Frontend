@@ -15,17 +15,12 @@
     <input matInput type="number" [formField]="serviceForm.price">
   </mat-form-field>
   <app-select-input
-  label="tipo"
-  [options]="types()"
+    label="Tipo"
+    [usePipe]="typePipe"
+    [options]="types()"
+    (selectedOption)="handleTypeChange($event)"
   />
-<!--  <div class="m3-select-field">-->
-<!--    <label>Tipo:</label>-->
-<!--    <select [formField]="serviceForm.type">-->
-<!--      @for(type of types();track $index){-->
-<!--        <option [value]="type">{{type | serviceType}}</option>-->
-<!--      }-->
-<!--    </select>-->
-<!--  </div>-->
+
   @if(serviceForm().touched()){
     @for(error of allFormErrors(); track $index){
       <p class="error">{{error.message}}</p>
