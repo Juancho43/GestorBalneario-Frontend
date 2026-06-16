@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { SeasonClientsDebtHttp } from './season-clients-debt-http';
+import {SeasonClientsDebtHttp} from './season-clients-debt-http';
 
 describe('SeasonClientsDebtHttp', () => {
   let service: SeasonClientsDebtHttp;

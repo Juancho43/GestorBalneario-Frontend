@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { NewSeasonDialog } from './new-season-dialog';
+import {NewSeasonDialog} from './new-season-dialog';
 
 describe('NewSeasonDialog', () => {
   let component: NewSeasonDialog;

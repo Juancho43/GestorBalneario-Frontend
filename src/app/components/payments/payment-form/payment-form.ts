@@ -5,7 +5,7 @@ import {InvoiceEntity} from '../../../core/model/InvoiceEntity';
 import {FormsModule} from '@angular/forms';
 import {PaymentTypePipe} from '../../../core/utils/pipes/payment-type-pipe';
 import {CurrencyPipe} from '@angular/common';
-import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
+import {MatFormField, MatInput} from '@angular/material/input';
 import {SelectInput} from '../../layout/select-input/select-input';
 import {DateInputPicker} from '../../layout/date-input-picker/date-input-picker';
 
@@ -14,11 +14,9 @@ import {DateInputPicker} from '../../layout/date-input-picker/date-input-picker'
   imports: [
     FormField,
     FormsModule,
-    PaymentTypePipe,
     CurrencyPipe,
     MatFormField,
     MatInput,
-    MatLabel,
     SelectInput,
     DateInputPicker
   ],

@@ -1,8 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {
-  MAT_DIALOG_DATA,
-  MatDialogRef,
-} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogRef,} from '@angular/material/dialog';
 import {IDeleteDialogData} from '../../../core/Interfaces/DeleteDialogData';
 import {MatIcon} from '@angular/material/icon';
 

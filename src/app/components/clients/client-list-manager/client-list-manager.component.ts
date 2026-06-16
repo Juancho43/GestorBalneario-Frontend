@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, computed, inject, input, OnDestroy, output} from '@angular/core';
+import {Component, computed, inject, input, OnDestroy, output} from '@angular/core';
 import {ClientList} from "../client-list/client-list";
 import {ClientSearcher} from "../client-searcher/client-searcher";
 import {ClientEntity} from '../../../core/model/clientEntity';

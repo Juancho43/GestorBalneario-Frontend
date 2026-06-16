@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { ExportPaymentReportHtto } from './export-payment-report-http';
+import {ExportPaymentReportHtto} from './export-payment-report-http';
 
 describe('ExportPaymentReportHtto', () => {
   let service: ExportPaymentReportHtto;

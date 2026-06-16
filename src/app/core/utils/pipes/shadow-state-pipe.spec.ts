@@ -1,4 +1,4 @@
-import { ShadowStatePipe } from './shadow-state-pipe';
+import {ShadowStatePipe} from './shadow-state-pipe';
 
 describe('ShadowStatePipe', () => {
   it('create an instance', () => {

@@ -3,10 +3,8 @@ import {SeasonForm} from '../../components/seasons/season-form/season-form';
 import {SeasonEntity} from '../../core/model/SeasonEntity';
 import {FormsModule} from '@angular/forms';
 import {SeasonManager} from '../../core/services/Managers/season-manager';
-import {MatDialog} from '@angular/material/dialog';
 import {IDeleteDialogData} from '../../core/Interfaces/DeleteDialogData';
 import {DeleteConfirmation} from '../../components/layout/delete-confirmation/delete-confirmation';
-import {FABButton} from '../../components/layout/fab-button/fab-button';
 import {OverlayHelper} from '../../core/utils/other/overlay-helper';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {SeasonListManager} from '../../components/seasons/season-list-manager/season-list-manager';
@@ -20,7 +18,6 @@ import {EditSeasonDialog} from '../../components/seasons/edit-season-dialog/edit
   selector: 'app-seasons-editor',
   imports: [
     FormsModule,
-    FABButton,
     SeasonListManager,
     MatIcon,
     JsonPipe

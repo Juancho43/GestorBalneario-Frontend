@@ -1,4 +1,4 @@
-import {Component, computed, input, output} from '@angular/core';
+import {Component, input, output} from '@angular/core';
 import {CurrentSeasonDisplay} from '../../seasons/current-season-display/current-season-display';
 import {MatIcon} from '@angular/material/icon';
 

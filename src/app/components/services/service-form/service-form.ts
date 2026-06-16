@@ -1,6 +1,6 @@
 import {Component, computed, input, linkedSignal, output} from '@angular/core';
 import {ServiceEntity} from '../../../core/model/serviceEntity';
-import {form, FormField, min, required} from '@angular/forms/signals';
+import {form, FormField, required} from '@angular/forms/signals';
 import {FormsModule} from '@angular/forms';
 import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {SelectInput} from '../../layout/select-input/select-input';

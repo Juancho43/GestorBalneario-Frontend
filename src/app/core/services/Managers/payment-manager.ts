@@ -4,8 +4,6 @@ import {PaymentEntity} from '../../model/paymentEntity';
 import {GetPaymentMethods} from '../PaymentHttp/get-payment-methods';
 import {rxResource} from '@angular/core/rxjs-interop';
 import {PaymentsReportHttp} from '../PaymentHttp/payments-report-http';
-import {InvoiceDetails} from '../../../components/invoices/invoice-details/invoice-details';
-import {FabAction} from '../../../components/layout/fab-menu/fab-menu';
 import {ReportQuery} from '../../Interfaces/ReportQuery';
 import {ReportResponse} from '../../Interfaces/ReportResponse';
 

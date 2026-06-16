@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { NewPaymentSideSheet } from './new-payment-side-sheet.component';
+import {NewPaymentSideSheet} from './new-payment-side-sheet.component';
 
 describe('NewPaymentDialog', () => {
   let component: NewPaymentSideSheet;

@@ -1,4 +1,4 @@
-import {Component, computed, inject, linkedSignal, signal} from '@angular/core';
+import {Component, computed, inject, signal} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
 import Menu from './components/layout/menu/menu';
 import {AppBar} from './components/layout/app-bar/app-bar';

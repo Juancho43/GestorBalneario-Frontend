@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { ExportPaymentReportHandlers } from './export-payment-report-handlers';
+import {ExportPaymentReportHandlers} from './export-payment-report-handlers';
 
 describe('ExportPaymentReportHandlers', () => {
   let service: ExportPaymentReportHandlers;

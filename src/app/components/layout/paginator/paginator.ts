@@ -1,4 +1,4 @@
-import {Component, input, output, signal} from '@angular/core';
+import {Component, input, output} from '@angular/core';
 import {PaginationInfo} from '../../../core/Interfaces/SearchInterfaces';
 import {MatIcon} from '@angular/material/icon';
 

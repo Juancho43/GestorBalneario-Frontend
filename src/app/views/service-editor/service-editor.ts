@@ -4,7 +4,6 @@ import {ServiceEntity} from '../../core/model/serviceEntity';
 import {IDeleteDialogData} from '../../core/Interfaces/DeleteDialogData';
 import {DeleteConfirmation} from '../../components/layout/delete-confirmation/delete-confirmation';
 import {ServiceListManager} from '../../components/services/service-list-manager/service-list-manager';
-import {FABButton} from '../../components/layout/fab-button/fab-button';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {MatIcon} from '@angular/material/icon';
 import {JsonPipe} from '@angular/common';
@@ -16,7 +15,6 @@ import {NewServiceDialog} from '../../components/services/new-service-dialog/new
   selector: 'app-service-editor',
   imports: [
     ServiceListManager,
-    FABButton,
     MatIcon,
     JsonPipe
   ],

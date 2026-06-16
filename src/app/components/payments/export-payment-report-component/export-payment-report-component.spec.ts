@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ExportPaymentReportComponent } from './export-payment-report-component';
+import {ExportPaymentReportComponent} from './export-payment-report-component';
 
 describe('ExportPaymentReportComponent', () => {
   let component: ExportPaymentReportComponent;

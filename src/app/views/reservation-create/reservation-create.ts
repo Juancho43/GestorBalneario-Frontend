@@ -3,14 +3,11 @@ import {ReservationForm} from '../../components/reservations/reservation-form/re
 import {ReservationManager} from '../../core/services/Managers/reservation-manager.service';
 import {ShadowMap} from '../../components/shadows/shadow-map/shadow-map';
 import {ShadowManager} from '../../core/services/Managers/shadow-manager.service';
-import {ClientEntity} from '../../core/model/clientEntity';
 import {ClientCard} from '../../components/clients/client-card/client-card';
-import {Dialog} from '@angular/cdk/dialog';
 import {ClientManagerDialog} from '../../components/clients/client-searcher-dialog/client-manager-dialog.component';
 import {ClientManager} from '../../core/services/Managers/client-manager.service';
 import {ReservationEntity} from '../../core/model/reservationEntity';
 import {ShadowCard} from '../../components/shadows/shadow-card/shadow-card';
-import {ShadowEntity} from '../../core/model/shadowEntity';
 import {FABButton} from '../../components/layout/fab-button/fab-button';
 import {SideSheet} from '../../components/layout/side-sheet/side-sheet';
 import {DialogHelper} from '../../core/utils/other/dialog-helper';

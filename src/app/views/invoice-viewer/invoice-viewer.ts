@@ -28,7 +28,6 @@ import {SideSheet} from '../../components/layout/side-sheet/side-sheet';
 export class InvoiceViewer {
   private manager = inject(InvoiceManager);
   private router = inject(Router);
-  private dialog = inject(DialogHelper);
   readonly id = input<string>();
   protected currentInvoice = computed<InvoiceDetailsDTO | undefined>(()=>this.manager.currentInvoiceDetails())
   protected singlePane = signal(false);

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { EditReservationDialog } from './edit-reservation-dialog';
+import {EditReservationDialog} from './edit-reservation-dialog';
 
 describe('EditReservationDialog', () => {
   let component: EditReservationDialog;

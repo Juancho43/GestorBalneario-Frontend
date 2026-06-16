@@ -5,7 +5,6 @@ import {ClientDetails} from '../../components/clients/client-details/client-deta
 import {ClientListManagerComponent} from '../../components/clients/client-list-manager/client-list-manager.component';
 import {DeleteConfirmation} from '../../components/layout/delete-confirmation/delete-confirmation';
 import {IDeleteDialogData} from '../../core/Interfaces/DeleteDialogData';
-import {FABButton} from '../../components/layout/fab-button/fab-button';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {MatIcon} from '@angular/material/icon';
 import {DialogHelper} from '../../core/utils/other/dialog-helper';
@@ -17,7 +16,6 @@ import {NewClientDialog} from '../../components/clients/new-client-dialog/new-cl
   imports: [
     ClientListManagerComponent,
     ClientDetails,
-    FABButton,
     MatIcon,
   ],
   templateUrl: './client-viewer.html',

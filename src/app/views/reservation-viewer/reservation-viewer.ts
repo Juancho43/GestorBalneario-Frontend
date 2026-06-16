@@ -1,7 +1,6 @@
 import {Component, computed, effect, inject, input, signal} from '@angular/core';
 import {ReservationListManager} from '../../components/reservations/reservation-list-manager/reservation-list-manager';
 import {ReservationDetail} from '../../components/reservations/reservation-detail/reservation-detail';
-import {FABButton} from '../../components/layout/fab-button/fab-button';
 import {Router} from '@angular/router';
 import {ReservationManager} from '../../core/services/Managers/reservation-manager.service';
 import {MatIcon} from '@angular/material/icon';
@@ -13,7 +12,6 @@ import {ReservationEntity} from '../../core/model/reservationEntity';
   imports: [
     ReservationListManager,
     ReservationDetail,
-    FABButton,
     MatIcon,
     ReservationDetail,
   ],

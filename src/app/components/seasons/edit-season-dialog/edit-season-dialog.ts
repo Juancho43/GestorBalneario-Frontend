@@ -1,4 +1,4 @@
-import {Component, computed, inject, signal} from '@angular/core';
+import {Component, computed, inject} from '@angular/core';
 import {MatIcon} from '@angular/material/icon';
 import {SeasonForm} from '../season-form/season-form';
 import {MatDialogRef} from '@angular/material/dialog';
