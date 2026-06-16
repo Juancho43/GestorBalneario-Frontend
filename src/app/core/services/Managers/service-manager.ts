@@ -9,6 +9,7 @@ import {DeleteServiceHttp} from '../ServiceHttp/delete-service-http';
 import {GetServiceTypesHttp} from '../ServiceHttp/get-service-types-http';
 import {SearchQuery} from '../../Interfaces/SearchInterfaces';
 import {ServiceSearch} from '../ServiceHttp/service-search';
+import {ServiceDetailsDTO} from '../../Interfaces/Details/ServiceDetailsDTO';
 
 @Injectable({
   providedIn: 'root',
@@ -64,19 +65,23 @@ export class ServiceManager {
   getTypes(){
     return this.serviceTypes();
   }
+  selectedServiceId = signal<null | string>(null);
+  currentServiceDetails = signal<ServiceDetailsDTO | undefined>(undefined)
+
+
   createService(service: ServiceEntity){
     this.createHttp.execute(service).subscribe(r=>
-      this.serviceResource.reload()
+      this.searchResource.reload()
     );
   }
   editService(service: ServiceEntity){
     this.editHttp.execute(service).subscribe(r=>
-      this.serviceResource.reload()
+      this.searchResource.reload()
     );
   }
   deleteService(service: ServiceEntity){
     this.deleteHttp.delete(service.id!).subscribe(r =>
-    this.serviceResource.reload()
+    this.searchResource.reload()
     )
   }
 }

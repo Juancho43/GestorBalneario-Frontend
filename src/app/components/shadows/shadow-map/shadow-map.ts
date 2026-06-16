@@ -14,7 +14,7 @@ import {
 import {CdkDragEnd} from '@angular/cdk/drag-drop';
 import * as fabric from 'fabric';
 import {ShadowEntity} from '../../../core/model/shadowEntity';
-import {ShadowMapHelpers} from '../../../core/utils/shadow-map-helpers';
+import {ShadowMapHelpers} from '../../../core/utils/other/shadow-map-helpers';
 
 export type MapState = 'editing' | 'viewing';
 @Component({

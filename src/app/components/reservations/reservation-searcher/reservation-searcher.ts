@@ -4,7 +4,7 @@ import {MatIcon} from '@angular/material/icon';
 import {FilterButton} from '../../layout/filter-button/filter-button';
 import {ReservationFilters} from '../reservation-filters/reservation-filters';
 import {SearchBar} from '../../layout/search-bar/search-bar';
-import {DialogHelper} from '../../../core/utils/dialog-helper';
+import {DialogHelper} from '../../../core/utils/other/dialog-helper';
 import {Filters, SearchBarData} from '../../../core/Interfaces/SearchInterfaces';
 
 @Component({

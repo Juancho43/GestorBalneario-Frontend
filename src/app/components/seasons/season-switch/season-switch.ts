@@ -4,7 +4,7 @@ import {SeasonEntity} from '../../../core/model/SeasonEntity';
 import {SeasonManager} from '../../../core/services/Managers/season-manager';
 import {MatIcon} from '@angular/material/icon';
 import {MatDialog} from '@angular/material/dialog';
-import {OverlayHelper} from '../../../core/utils/overlay-helper';
+import {OverlayHelper} from '../../../core/utils/other/overlay-helper';
 import {MatTooltip} from '@angular/material/tooltip';
 
 @Component({

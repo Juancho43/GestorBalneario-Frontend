@@ -1,0 +1,8 @@
+
+@if(invoice() !== undefined){
+  <app-payment-form
+    (finalPayment)="handleSubmit($event)"
+    [invoice]="invoice()!"
+    [paymentMethods]="paymentMethods()"/>
+}
+

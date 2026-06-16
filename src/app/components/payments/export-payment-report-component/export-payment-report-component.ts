@@ -3,7 +3,7 @@ import {SelectInput} from '../../layout/select-input/select-input';
 import {ReportForm} from '../report-form/report-form';
 import {PaymentManager} from '../../../core/services/Managers/payment-manager';
 import {ReportQuery} from '../../../core/Interfaces/ReportQuery';
-import {ExportPaymentReportHandlers} from '../../../core/utils/export-payment-report-handlers';
+import {ExportPaymentReportHandlers} from '../../../core/utils/other/export-payment-report-handlers';
 import {ExportPaymentReportHttp} from '../../../core/services/PaymentHttp/export-payment-report-http';
 
 @Component({

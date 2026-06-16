@@ -1,0 +1,14 @@
+<div class="dialog">
+  <section class="header">
+    <div class="headline">
+      <mat-icon class="filter-icon">date_range</mat-icon>
+      <h3>Formulario servicio</h3>
+    </div>
+    <mat-icon class="close-icon" (click)="close()">close</mat-icon>
+  </section>
+  <app-service-form
+    class="form"
+    (finalService)="handleSubmit($event)"
+  />
+
+</div>

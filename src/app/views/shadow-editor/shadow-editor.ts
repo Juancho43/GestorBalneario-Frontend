@@ -10,7 +10,7 @@ import {SeasonManager} from '../../core/services/Managers/season-manager';
 import {FabAction, FABMenu} from '../../components/layout/fab-menu/fab-menu';
 import {Router} from '@angular/router';
 import {SideSheet} from '../../components/layout/side-sheet/side-sheet';
-import {DialogHelper} from '../../core/utils/dialog-helper';
+import {DialogHelper} from '../../core/utils/other/dialog-helper';
 
 @Component({
   selector: 'app-shadow-editor',

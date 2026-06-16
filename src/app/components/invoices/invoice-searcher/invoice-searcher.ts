@@ -3,7 +3,7 @@ import {FilterButton} from '../../layout/filter-button/filter-button';
 import {FormsModule} from '@angular/forms';
 import {SearchBar} from '../../layout/search-bar/search-bar';
 import {MatIcon} from '@angular/material/icon';
-import {DialogHelper} from '../../../core/utils/dialog-helper';
+import {DialogHelper} from '../../../core/utils/other/dialog-helper';
 import {InvoiceFilters} from '../invoice-filters/invoice-filters';
 import {Filters, SearchBarData} from '../../../core/Interfaces/SearchInterfaces';
 

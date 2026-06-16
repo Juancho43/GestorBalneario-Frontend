@@ -1,7 +1,7 @@
 import {Component, computed, inject, signal, ViewChild} from '@angular/core';
 import {SeasonManager} from '../../../core/services/Managers/season-manager';
 import SeasonSwitch from '../season-switch/season-switch';
-import {OverlayHelper} from '../../../core/utils/overlay-helper';
+import {OverlayHelper} from '../../../core/utils/other/overlay-helper';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {MatIcon} from '@angular/material/icon';
 import {MatTooltip} from '@angular/material/tooltip';
@@ -34,7 +34,7 @@ export class CurrentSeasonDisplay {
     if(!this.isOverlayOpen()){
 
       const config = this.overlayHelper.getDropdownConfig(this.overlayOrigin);
-      const ref = this.overlayHelper.open(SeasonSwitch, config);
+      const ref = this.overlayHelper.open(SeasonSwitch,config);
       this.overlayHelper.setRef(ref);
 
       ref.backdropClick().subscribe(()=>{

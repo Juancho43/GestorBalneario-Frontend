@@ -38,7 +38,7 @@ export class OverlayHelper {
             originY: 'bottom',
             overlayX: 'start',
             overlayY: 'top',
-            offsetY: 8 // Pequeño margen para la estética de flotación M3
+            // offsetY: 8 // Pequeño margen para la estética de flotación M3
           },
           // Posición de respaldo si no hay espacio abajo
           {
@@ -46,7 +46,7 @@ export class OverlayHelper {
             originY: 'top',
             overlayX: 'start',
             overlayY: 'bottom',
-            offsetY: -8
+            // offsetY: -8
           }
         ]),
       // Si el usuario hace scroll, el menú recalcula su posición para no separarse del botón

@@ -1,5 +1,9 @@
 @use "../../../core/dialog";
-
+.season-switch {
+  position:absolute;
+  top: 2dvh;
+  right: 16px;
+}
 .season-list {
   list-style: none;
   display: flex;
@@ -38,4 +42,6 @@
   display: flex;
   justify-content: center;
   margin: 0 auto;
+  max-height: 400px;
+  overflow-y: auto;
 }

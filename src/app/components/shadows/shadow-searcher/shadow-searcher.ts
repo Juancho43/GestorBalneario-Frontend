@@ -4,7 +4,7 @@ import {FilterButton} from '../../layout/filter-button/filter-button';
 import {MatIcon} from '@angular/material/icon';
 import {FormsModule} from '@angular/forms';
 import {ShadowFilter} from '../shadow-filter/shadow-filter';
-import {DialogHelper} from '../../../core/utils/dialog-helper';
+import {DialogHelper} from '../../../core/utils/other/dialog-helper';
 import {Filters, SearchBarData} from '../../../core/Interfaces/SearchInterfaces';
 
 @Component({

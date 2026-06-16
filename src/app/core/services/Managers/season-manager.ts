@@ -9,6 +9,7 @@ import {EditSeasonHttp} from '../SeasonHttp/edit-client-http';
 import {DeleteSeasonHttp} from '../SeasonHttp/delete-season-http.service';
 import {SeasonSearch} from '../SeasonHttp/season-search';
 import {SearchQuery} from '../../Interfaces/SearchInterfaces';
+import {SeasonDetailsDTO} from '../../Interfaces/Details/SeasonDetailsDTO';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +25,16 @@ export class SeasonManager {
   private seasonResource = rxResource({
     stream: () => this.getSeason.get()
   })
-
+  season = computed(()=> {
+    return  this.seasonResource.isLoading() && this.seasonResource.error() ? {} as SeasonEntity : this.seasonResource.value()?.data!;
+  });
+  currentSeason = linkedSignal<SeasonEntity>(()=>this.season())
+  private seasonsResource = rxResource({
+    stream: () => this.getSeasonsHttp.get()
+  });
+  seasons = computed(()=> {
+    return this.seasonsResource.isLoading() && this.seasonsResource.error() ? [] : this.seasonsResource.value()!.data!;
+  });
   searchQuery = signal<SearchQuery>({
     pagination: {
       limit: 10,
@@ -44,38 +54,31 @@ export class SeasonManager {
   })
   seasonsToDisplay = computed(()=>
     this.searchResource.isLoading() &&  this.searchResource.error() ? [] : this.searchResource.value()?.data!
-)
-  private seasonsResource = rxResource({
-    stream: () => this.getSeasonsHttp.get()
-  });
-  seasons = computed(()=> {
-    return this.seasonsResource.isLoading() && this.seasonsResource.error() ? [] : this.seasonsResource.value()!.data!;
-  });
-  season = computed(()=> {
-   return  this.seasonResource.isLoading() && this.seasonResource.error() ? {} as SeasonEntity : this.seasonResource.value()?.data!;
-  });
+  )
+  selectedSeasonId = signal<null | string>(null);
+  currentSeasonDetails = signal<SeasonDetailsDTO | undefined>(undefined)
+
   getList(){
     return this.seasons();
   }
-  currentSeason = linkedSignal<SeasonEntity>(()=>this.season())
   createSeason(season: SeasonEntity){
     this.createHttp.execute(season).subscribe(
-      r => this.seasonsResource.reload()
+      r => this.searchResource.reload()
     );
   }
   cloneSeason(season: SeasonEntity){
     this.createHttp.clone({newSeason:season,oldSeasonId:this.currentSeason().id!}).subscribe(
-      r => this.seasonsResource.reload()
+      r => this.searchResource.reload()
     );
   }
   updateSeason(season: SeasonEntity){
     this.editSeasonHttp.update(season).subscribe(
-      r=> this.seasonsResource.reload()
+      r=> this.searchResource.reload()
     );
   }
   deleteSeason(season: SeasonEntity){
     this.deleteSeasonHttp.delete(season.id!).subscribe(
-      r => this.seasonsResource.reload()
+      r => this.searchResource.reload()
     );
   }
   setActive(season: SeasonEntity) {
