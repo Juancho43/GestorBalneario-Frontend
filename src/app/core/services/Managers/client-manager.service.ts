@@ -8,6 +8,7 @@ import {ClientSearchHttp} from '../ClientHttp/client-search-http';
 import {SearchQuery} from '../../Interfaces/SearchInterfaces';
 import {ClientDetailHttp} from '../ClientHttp/client-detail-http';
 import {ClientDetailsDTO} from '../../Interfaces/Details/ClientDetailsDTO';
+import {emptySearchQuery} from '../other/const';
 
 @Injectable({
   providedIn: 'root',
@@ -18,19 +19,7 @@ export class ClientManager {
   private update = inject(EditClientHttp);
   private delete = inject(DeleteClientHttp);
   private getDetailsHttp = inject(ClientDetailHttp);
-  searchQuery = signal<SearchQuery>({
-    pagination: {
-      limit: 10,
-      page:0,
-    },
-    search:{
-      query: '',
-      filters:{
-        orderDirection:'asc',
-        orderBy:'name'
-      }
-    }
-  })
+  searchQuery = signal<SearchQuery>(emptySearchQuery)
 
   searchResource = rxResource({
     params: () => this.searchQuery(),

@@ -9,10 +9,10 @@ import {environment} from '../../../../environments/environment.development';
 })
 export class SeasonClientsDebtHttp {
   private http = inject(HttpClient);
-  private seasonManager = inject(SeasonManager);
-  private currentSeason = computed(()=> this.seasonManager.currentSeason())
+  private currentSeason = inject(SeasonManager);
+  private season =computed(()=> this.currentSeason.currentSeason());
   execute() {
-    const seasonId = this.currentSeason().id!
+    const seasonId = this.season()!.id!;
     return this.http.get<ApiResponse<number>>(`${environment.apiUrl}/season/clients-debt?seasonId=${seasonId}`,);
   }
 }

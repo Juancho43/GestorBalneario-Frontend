@@ -20,9 +20,9 @@ import {Filters, SearchBarData} from '../../../core/Interfaces/SearchInterfaces'
 })
 export class ClientSearcher {
   private dialog = inject(DialogHelper);
-  filters = signal<Filters | null>(null);
-  searchTerm = signal<string>('');
-  searchQuery = computed<SearchBarData>(()=>({
+  protected filters = signal<Filters | null>(null);
+  protected searchTerm = signal<string>('');
+  protected searchQuery = computed<SearchBarData>(()=>({
     filters: this.filters()!,
     query : this.searchTerm(),
   }));

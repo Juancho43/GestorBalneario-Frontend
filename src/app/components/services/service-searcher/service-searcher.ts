@@ -1,4 +1,4 @@
-import {Component, computed, inject, output, signal} from '@angular/core';
+import {Component, computed, inject, linkedSignal, output, signal} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {MatIcon} from '@angular/material/icon';
 import {FilterButton} from '../../layout/filter-button/filter-button';
@@ -6,6 +6,7 @@ import {SearchBar} from '../../layout/search-bar/search-bar';
 import {ServiceFilters} from '../service-filters/service-filters';
 import {DialogHelper} from '../../../core/utils/other/dialog-helper';
 import {Filters, SearchBarData} from '../../../core/Interfaces/SearchInterfaces';
+import {emptySearchQuery} from '../../../core/services/other/const';
 
 @Component({
   selector: 'app-service-searcher',
@@ -20,9 +21,9 @@ import {Filters, SearchBarData} from '../../../core/Interfaces/SearchInterfaces'
 })
 export class ServiceSearcher {
   private dialog = inject(DialogHelper);
-  filters = signal<Filters | null>(null);
-  searchTerm = signal<string>('');
-  searchQuery = computed<SearchBarData>(()=>({
+  protected filters = linkedSignal<Filters>(()=>emptySearchQuery.search.filters);
+  protected searchTerm = signal<string>('');
+  protected searchQuery = computed<SearchBarData>(()=>({
     filters: this.filters()!,
     query : this.searchTerm(),
   }));

@@ -1,19 +1,28 @@
-<div class="app">
-  <app-app-bar
-    [title]="title()"
-    [menuOpen]="menuRail()"
-    (button)="toggleMenu()"
-    (titleTouched)="goHome()"
-  />
-  <app-navigation-bar
-    [isShown]="isMobile()"
-  />
-  <app-menu
-    (closed)="menuRail.set(false)"
-    [isMobile]="isMobile()"
-    [isOpen]="menuRail()"
-  />
-  <div class="main-container">
-    <router-outlet/>
-  </div>
+<div class="app" [class.loading]="isLoading()">
+  @if(isLoading()){
+    <div>
+      <mat-spinner />
+      <p>Cargando...</p>
+    </div>
+  } @else {
+
+    <app-app-bar
+      [title]="title()"
+      [menuOpen]="menuRail()"
+      (button)="toggleMenu()"
+      (titleTouched)="goHome()"
+    />
+    <app-navigation-bar
+      [isShown]="isMobile()"
+    />
+    <app-menu
+      (closed)="menuRail.set(false)"
+      [isMobile]="isMobile()"
+      [isOpen]="menuRail()"
+    />
+    <div class="main-container">
+      <router-outlet/>
+    </div>
+  }
+
 </div>

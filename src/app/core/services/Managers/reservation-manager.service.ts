@@ -8,6 +8,7 @@ import {SearchQuery} from '../../Interfaces/SearchInterfaces';
 import {ReservationSearch} from '../ReservationHttp/reservation-search.service';
 import {GetReservationDetailsHttp} from '../ReservationHttp/get-reservation-details-http';
 import {ReservationDetailsDTO} from '../../Interfaces/Details/ReservationDetailsDTO';
+import {emptySearchQuery} from '../other/const';
 
 @Injectable({
   providedIn: 'root',
@@ -19,19 +20,7 @@ export class ReservationManager {
   private delete = inject(DeleteReservationHttp);
   private getDetailsHttp = inject(GetReservationDetailsHttp);
 
-  searchQuery = signal<SearchQuery>({
-    pagination: {
-      limit: 10,
-      page:0,
-    },
-    search:{
-      query: '',
-      filters:{
-        orderDirection:'asc',
-        state:'All'
-      }
-    }
-  })
+  searchQuery = signal<SearchQuery>(emptySearchQuery)
   searchResource = rxResource({
     params: () => this.searchQuery(),
     stream:({params}) => this.searchHttp.execute(params)

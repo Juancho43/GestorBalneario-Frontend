@@ -10,6 +10,7 @@ import {GetServiceTypesHttp} from '../ServiceHttp/get-service-types-http';
 import {SearchQuery} from '../../Interfaces/SearchInterfaces';
 import {ServiceSearch} from '../ServiceHttp/service-search';
 import {ServiceDetailsDTO} from '../../Interfaces/Details/ServiceDetailsDTO';
+import {emptySearchQuery} from '../other/const';
 
 @Injectable({
   providedIn: 'root',
@@ -26,19 +27,7 @@ export class ServiceManager {
     stream: () => this.serviceTypeHttp.execute()
   })
 
-  searchQuery = signal<SearchQuery>({
-    pagination: {
-      limit: 10,
-      page:0,
-    },
-    search:{
-      query: '',
-      filters:{
-        orderDirection:'asc',
-        orderBy:'description'
-      }
-    }
-  })
+  searchQuery = signal<SearchQuery>(emptySearchQuery);
   searchResource = rxResource({
     params: () => this.searchQuery(),
     stream: ({params}) => this.searchHttp.execute(params)

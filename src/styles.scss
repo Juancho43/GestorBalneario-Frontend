@@ -8,6 +8,9 @@
     calendar-container-text-color:white,
     calendar-container-background-color:rgb(0 97 150),
   ));
+  @include mat.progress-spinner-overrides((
+    active-indicator-color: rgb(0 97 150),
+  ));
 }
 *, *::before, *::after {
   box-sizing: inherit;
@@ -54,6 +57,14 @@ html, body {
   background-color: var(--md-sys-color-surface);
   color: var(--md-sys-color-on-surface);
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.loading{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  height: 100dvh;
+  width: 100dvw;
 }
 app-app-bar {
   grid-column: 1 / -1;

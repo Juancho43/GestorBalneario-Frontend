@@ -1,4 +1,4 @@
-import {Component, computed, inject, output} from '@angular/core';
+import {Component, computed, inject, OnDestroy, output} from '@angular/core';
 import {ServiceSearcher} from '../service-searcher/service-searcher';
 import {ServiceManager} from '../../../core/services/Managers/service-manager';
 import {ServiceEntity} from '../../../core/model/serviceEntity';
@@ -6,6 +6,7 @@ import {ServiceList} from '../service-list/service-list';
 import {SearchBarData} from '../../../core/Interfaces/SearchInterfaces';
 import {Paginator} from '../../layout/paginator/paginator';
 import {FABButton} from '../../layout/fab-button/fab-button';
+import {emptySearchQuery} from '../../../core/services/other/const';
 
 @Component({
   selector: 'app-service-list-manager',
@@ -18,7 +19,7 @@ import {FABButton} from '../../layout/fab-button/fab-button';
   templateUrl: './service-list-manager.html',
   styleUrl: './service-list-manager.scss',
 })
-export class ServiceListManager {
+export class ServiceListManager implements OnDestroy{
   private manager = inject(ServiceManager);
   services = computed(() => this.manager.servicesToDisplay())
   edit = output<ServiceEntity>()
@@ -26,6 +27,9 @@ export class ServiceListManager {
   create = output();
   selectedService = output<ServiceEntity>()
   protected query = computed(()=>this.manager.searchQuery().pagination)
+  ngOnDestroy(): void {
+    this.manager.searchQuery.set(emptySearchQuery);
+  }
   protected handleSearch($event: SearchBarData) {
     this.manager.searchQuery.update((p) => ({
       ...p,

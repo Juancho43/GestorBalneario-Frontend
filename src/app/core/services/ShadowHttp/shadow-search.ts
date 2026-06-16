@@ -1,4 +1,4 @@
-import {inject, Injectable} from '@angular/core';
+import {computed, inject, Injectable} from '@angular/core';
 import {SeasonManager} from '../Managers/season-manager';
 import {HttpClient} from '@angular/common/http';
 import {ApiResponse} from '../../Interfaces/ApiResponse';
@@ -11,10 +11,10 @@ import {SearchQuery} from '../../Interfaces/SearchInterfaces';
 })
 export class ShadowSearch {
   private currentSeason = inject(SeasonManager);
-  private season = this.currentSeason.currentSeason;
+  private season =computed(()=> this.currentSeason.currentSeason());
   private http = inject(HttpClient);
   execute(query: SearchQuery) {
-    const seasonId = this.season().id!;
+    const seasonId = this.season()!.id!;
 
     const params = new URLSearchParams({
       query: query.search.query?.trim() || '',

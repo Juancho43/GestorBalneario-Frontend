@@ -10,6 +10,7 @@ import {DeleteSeasonHttp} from '../SeasonHttp/delete-season-http.service';
 import {SeasonSearch} from '../SeasonHttp/season-search';
 import {SearchQuery} from '../../Interfaces/SearchInterfaces';
 import {SeasonDetailsDTO} from '../../Interfaces/Details/SeasonDetailsDTO';
+import {emptySearchQuery} from '../other/const';
 
 @Injectable({
   providedIn: 'root',
@@ -26,28 +27,16 @@ export class SeasonManager {
     stream: () => this.getSeason.get()
   })
   season = computed(()=> {
-    return  this.seasonResource.isLoading() && this.seasonResource.error() ? {} as SeasonEntity : this.seasonResource.value()?.data!;
+    return  this.seasonResource.isLoading() && this.seasonResource.error() ? undefined : this.seasonResource.value()?.data!;
   });
-  currentSeason = linkedSignal<SeasonEntity>(()=>this.season())
+  currentSeason = linkedSignal(()=>this.season())
   private seasonsResource = rxResource({
     stream: () => this.getSeasonsHttp.get()
   });
   seasons = computed(()=> {
     return this.seasonsResource.isLoading() && this.seasonsResource.error() ? [] : this.seasonsResource.value()!.data!;
   });
-  searchQuery = signal<SearchQuery>({
-    pagination: {
-      limit: 10,
-      page:0,
-    },
-    search:{
-      query: '',
-      filters:{
-        orderDirection:'asc',
-        orderBy:'description'
-      }
-    }
-  })
+  searchQuery = signal<SearchQuery>(emptySearchQuery)
   private searchResource= rxResource({
     params: () => this.searchQuery(),
     stream: ({params}) => this.searchHttp.execute(params)
@@ -67,7 +56,7 @@ export class SeasonManager {
     );
   }
   cloneSeason(season: SeasonEntity){
-    this.createHttp.clone({newSeason:season,oldSeasonId:this.currentSeason().id!}).subscribe(
+    this.createHttp.clone({newSeason:season,oldSeasonId:this.currentSeason()!.id!}).subscribe(
       r => this.searchResource.reload()
     );
   }

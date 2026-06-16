@@ -4,6 +4,7 @@ import {InvoiceDetailHttp} from '../InvoiceHttp/invoice-detail-http';
 import {SearchQuery} from '../../Interfaces/SearchInterfaces';
 import {InvoiceSearch} from '../InvoiceHttp/invoice-search';
 import {InvoiceDetailsDTO} from '../../Interfaces/Details/InvoiceDetailDTO';
+import {emptySearchQuery} from '../other/const';
 
 @Injectable({
   providedIn: 'root',
@@ -12,19 +13,15 @@ export class InvoiceManager {
   private searchHttp = inject(InvoiceSearch)
   private getDetailsHttp = inject(InvoiceDetailHttp);
   searchQuery = signal<SearchQuery>({
-    pagination: {
-      limit: 10,
-      page:0,
-    },
-    search:{
-      query: '',
-      filters:{
-        orderDirection:'asc',
-        orderBy:'i.created_at',
-        state:'All'
+      ...emptySearchQuery,
+      search:{
+        query:'',
+        filters:{
+          orderBy: 'i.created_at'
+        }
       }
     }
-  })
+  )
   searchResource = rxResource({
     params: () => this.searchQuery(),
     stream:({params}) => this.searchHttp.execute(params)

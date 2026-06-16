@@ -1,4 +1,4 @@
-import {inject, Injectable} from '@angular/core';
+import {computed, inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ApiResponse} from '../../Interfaces/ApiResponse';
 import {environment} from '../../../../environments/environment.development';
@@ -11,12 +11,12 @@ import {SearchQuery} from '../../Interfaces/SearchInterfaces';
 })
 export class InvoiceSearch {
   private currentSeason = inject(SeasonManager);
-  private season = this.currentSeason.currentSeason;
+  private season =computed(()=> this.currentSeason.currentSeason());
   private http = inject(HttpClient);
 
   execute(query: SearchQuery) {
-    const seasonId = this.season().id!;
 
+    const seasonId = this.season()!.id!;
     const params = new URLSearchParams({
       query: query.search.query?.trim() || '',
       page: query.pagination.page.toString(),

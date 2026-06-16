@@ -5,7 +5,9 @@
   [list]="shadows()"
   (selectedShadow)="this.selectedShadow.emit($event)"
 />
-<app-paginator
-  [query]="query()"
-  (pageChange)="handlePage($event)"
-/>
+<div class="bottom">
+  <app-paginator
+    (pageChange)="handlePage($event)"
+    [query]="query()"
+  />
+</div>

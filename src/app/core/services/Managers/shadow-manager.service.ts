@@ -10,6 +10,7 @@ import {ShadowSearch} from '../ShadowHttp/shadow-search';
 import {SearchQuery} from '../../Interfaces/SearchInterfaces';
 import {ShadowDetailsDTO} from '../../Interfaces/Details/ShadowDetailsDTO';
 import {GetShadowHistoryHttp} from '../ShadowHttp/get-shadow-history-http';
+import {emptySearchQuery} from '../other/const';
 
 @Injectable({
   providedIn: 'root',
@@ -26,20 +27,8 @@ export class ShadowManager {
   shadowsResource= rxResource({
     stream:()=> this.shadowMap.get()
   })
-  searchQuery = signal<SearchQuery>({
-    pagination: {
-      limit: 10,
-      page:0,
-    },
-    search:{
-      query: '',
-      filters:{
-        type: '',
-        orderDirection:'asc',
-        state:''
-      }
-    }
-  })
+
+  searchQuery = signal<SearchQuery>(emptySearchQuery);
   searchResource = rxResource({
     params: () => this.searchQuery(),
     stream:({params}) => this.searchHttp.execute(params)
