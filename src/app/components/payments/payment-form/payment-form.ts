@@ -6,6 +6,8 @@ import {FormsModule} from '@angular/forms';
 import {PaymentTypePipe} from '../../../core/utils/pipes/payment-type-pipe';
 import {CurrencyPipe} from '@angular/common';
 import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
+import {SelectInput} from '../../layout/select-input/select-input';
+import {DateInputPicker} from '../../layout/date-input-picker/date-input-picker';
 
 @Component({
   selector: 'app-payment-form',
@@ -16,7 +18,9 @@ import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
     CurrencyPipe,
     MatFormField,
     MatInput,
-    MatLabel
+    MatLabel,
+    SelectInput,
+    DateInputPicker
   ],
   templateUrl: './payment-form.html',
   styleUrl: './payment-form.scss',
@@ -44,7 +48,7 @@ export class PaymentForm {
     required(schemaPath.date,{message:'La fecha es requerida'})
     required(schemaPath.invoiceId!, {message:'El pago debe estar asociado a una factura'})
   })
-
+  paymentType =  new PaymentTypePipe();
   allFormErrors = computed(() => {
     const root = this.paymentForm().errors() || [];
     const amount = this.paymentForm.amount().errors() || [];
@@ -62,5 +66,13 @@ export class PaymentForm {
       this.finalPayment.emit(this.payment());
       this.editMode.set(false)
     }
+  }
+
+  protected handlePaymentType($event: string) {
+
+  }
+
+  protected handlePaymentDate($event: string) {
+
   }
 }

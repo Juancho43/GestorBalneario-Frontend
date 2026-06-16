@@ -4,10 +4,11 @@
   } @else {
     <legend>Crear pago</legend>
   }
-  <mat-form-field>
-    <mat-label>Fecha</mat-label>
-    <input matInput type="date" [formField]="paymentForm.date"/>
-  </mat-form-field>
+  <app-date-input-picker
+    label="Fecha del pago"
+    [initialValue]="payment().date"
+    (value)="handlePaymentDate($event)"
+  />
   <mat-form-field>
     <label>Monto</label>
     <input matInput type="number" [formField]="paymentForm.amount"/>
@@ -16,12 +17,13 @@
     <label>Descripcion</label>
     <input matInput type="text" [formField]="paymentForm.description!"/>
   </mat-form-field>
-  <label>Tipo de pago</label>
-  <select [formField]="paymentForm.type">
-    @for (method of paymentMethods();track $index){
-      <option [value]="method"> {{method|paymentType}}</option>
-    }
-  </select>
+  <app-select-input
+    label="Tipo de pago"
+    [usePipe]="paymentType"
+    [options]="paymentMethods()"
+    (selectedOption)="handlePaymentType($event)"
+  />
+
   <mat-form-field>
     <label>Cambio</label>
     <input matInput type="number" [formField]="paymentForm.changeType"/>
@@ -30,17 +32,19 @@
     <label>Factura</label>
     <input matInput type="text" [value]="payment().invoiceId!" readonly/>
   </mat-form-field>
-  <label>Total:</label>
-  <p>{{total() | currency}}</p>
+  <p>SubTotal: {{total() | currency}}</p>
   @if(paymentForm().touched()){
     @for(error of allFormErrors(); track $index){
       <p class="error">{{error.message}}</p>
     }
   }
-  @if (editMode()) {
-    <input type="submit" value="Actualizar">
-  } @else {
-    <input type="submit" value="Crear">
-  }
-  <input type="reset" value="Cancelar" (click)="editMode.set(false)">
+  <div class="form-actions">
+    <button type="reset" (click)="editMode.set(false)" class="button-text">Limpiar Formulario</button>
+    @if (editMode()){
+      <button type="submit" class="button-filled">Actualizar pago</button>
+    }@else{
+      <button type="submit" class="button-filled">Crear pago</button>
+    }
+  </div>
+
 </form>

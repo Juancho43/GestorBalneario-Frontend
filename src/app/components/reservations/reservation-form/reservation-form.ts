@@ -121,10 +121,10 @@ export class ReservationForm {
 
   protected handleServiceChange(event: string) {
     const service =  this.services().find(s => s.name == event);
-    console.log(service);
     if (service) {
       this.reservation.update(prev => ({
         ...prev,
+        serviceId:service.id,
         price: service.price
       }));
     }
