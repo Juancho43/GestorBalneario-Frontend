@@ -1,0 +1,6 @@
+@let data = serviceData();
+<app-service-card [service]="data?.service!"/>
+<p>
+  Facturas
+  {{data?.invoices}}
+</p>

@@ -1,6 +1,5 @@
-import {computed, inject, Injectable, linkedSignal, signal} from '@angular/core';
+import {computed, effect, inject, Injectable, linkedSignal, signal} from '@angular/core';
 import {GetServicesHttp} from '../ServiceHttp/get-services-http';
-import {GetServiceHttp} from '../ServiceHttp/get-service-http';
 import {CreateServiceHttp} from '../ServiceHttp/create-service-http';
 import {rxResource} from '@angular/core/rxjs-interop';
 import {ServiceEntity} from '../../model/serviceEntity';
@@ -11,6 +10,7 @@ import {SearchQuery} from '../../Interfaces/SearchInterfaces';
 import {ServiceSearch} from '../ServiceHttp/service-search';
 import {ServiceDetailsDTO} from '../../Interfaces/Details/ServiceDetailsDTO';
 import {emptySearchQuery} from '../other/const';
+import {ServiceDetailsHttp} from '../ServiceHttp/service-details-http';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +19,7 @@ export class ServiceManager {
   private getServicesHttp = inject(GetServicesHttp);
   private searchHttp = inject(ServiceSearch)
   private createHttp = inject(CreateServiceHttp);
-  private getOne = inject(GetServiceHttp);
+  private getOne = inject(ServiceDetailsHttp);
   private editHttp = inject(EditServiceHttp);
   private deleteHttp = inject(DeleteServiceHttp);
   private serviceTypeHttp = inject(GetServiceTypesHttp);
@@ -57,7 +57,25 @@ export class ServiceManager {
   selectedServiceId = signal<null | string>(null);
   currentServiceDetails = signal<ServiceDetailsDTO | undefined>(undefined)
 
+  constructor() {
+    effect(()=>{
+      this.selectedServiceId()
+      this.getSeasonDetails()
+    })
+  }
 
+  getSeasonDetails(){
+    if(this.selectedServiceId()){
+      const id = this.selectedServiceId()!
+      this.getOne.execute(id).subscribe({
+        next : (r) =>{
+          if(r.data){
+            this.currentServiceDetails.set(r.data)
+          }
+        }
+      })
+    }
+  }
   createService(service: ServiceEntity){
     this.createHttp.execute(service).subscribe(r=>
       this.searchResource.reload()

@@ -23,8 +23,7 @@
             </button>
           }
         </div>
-        <!--      <app-service-details/>-->
-        {{currentService() | json}}
+        <app-service-details [serviceData]="currentService()"/>
       }@else{
         <p>Seleccione un servicio para ver sus detalles</p>
       }

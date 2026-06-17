@@ -4,9 +4,9 @@
     (click)="openSwitcher()"
   >
       @if(this.season()!){
-        @let season = this.season();
+        @let season = this.season()!;
         <h2>
-          @if (!this.season().isActive){
+          @if (!this.season()!.isActive){
             <mat-icon
               fontIcon="history"
               matTooltipClass="tooltip"

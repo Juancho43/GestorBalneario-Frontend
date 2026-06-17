@@ -22,7 +22,7 @@ export default class SeasonSwitch {
   private overlayHelper = inject(OverlayHelper);
   private manager = inject(SeasonManager);
   protected seasons = this.manager.getList()
-  protected currentSeason = computed(()=>this.manager.currentSeason());
+  protected currentSeason = computed(()=>this.manager.currentSeason()!);
   protected setSeason(season: SeasonEntity) {
    this.manager.currentSeason.set(season);
   }

@@ -10,13 +10,15 @@ import {JsonPipe} from '@angular/common';
 import {DialogHelper} from '../../core/utils/other/dialog-helper';
 import {EditServiceDialog} from '../../components/services/edit-service-dialog/edit-service-dialog';
 import {NewServiceDialog} from '../../components/services/new-service-dialog/new-service-dialog';
+import {ServiceDetails} from '../../components/services/service-details/service-details';
 
 @Component({
   selector: 'app-service-editor',
   imports: [
     ServiceListManager,
     MatIcon,
-    JsonPipe
+    JsonPipe,
+    ServiceDetails
   ],
   templateUrl: './service-editor.html',
   styleUrl: './service-editor.scss',
@@ -25,7 +27,7 @@ export class ServiceEditor {
   private manager = inject(ServiceManager);
   private dialog = inject(DialogHelper);
   protected types = computed(()=>this.manager.getTypes())
-  currentService = computed(()=>this.manager.currentService())
+  currentService = computed(()=>this.manager.currentServiceDetails())
 
 
   protected singlePane = signal(false);
@@ -43,7 +45,8 @@ export class ServiceEditor {
   }
 
   protected handleSelect(s: string) {
-    // this.dialog.openDialog(EditServiceDialog,this.dialog.getConfig());
+    this.currentPane.set('detail');
+    this.manager.selectedServiceId.set(s);
   }
 
 

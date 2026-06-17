@@ -1,4 +1,4 @@
-import {computed, inject, Injectable, linkedSignal, signal} from '@angular/core';
+import {computed, effect, inject, Injectable, linkedSignal, signal} from '@angular/core';
 import {SeasonEntity} from '../../model/SeasonEntity';
 import {GetCurrentSeason} from '../SeasonHttp/get-current-season';
 import {rxResource} from '@angular/core/rxjs-interop';
@@ -11,6 +11,7 @@ import {SeasonSearch} from '../SeasonHttp/season-search';
 import {SearchQuery} from '../../Interfaces/SearchInterfaces';
 import {SeasonDetailsDTO} from '../../Interfaces/Details/SeasonDetailsDTO';
 import {emptySearchQuery} from '../other/const';
+import {SeasonDetailsHttp} from '../SeasonHttp/season-details-http';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +24,7 @@ export class SeasonManager {
   private editSeasonHttp = inject(EditSeasonHttp);
   private deleteSeasonHttp = inject(DeleteSeasonHttp);
   private setActiveHttp = inject(SetActiveSeasonHttp);
+  private getDetailsHttp = inject(SeasonDetailsHttp);
   private seasonResource = rxResource({
     stream: () => this.getSeason.get()
   })
@@ -44,9 +46,30 @@ export class SeasonManager {
   seasonsToDisplay = computed(()=>
     this.searchResource.isLoading() &&  this.searchResource.error() ? [] : this.searchResource.value()?.data!
   )
+
   selectedSeasonId = signal<null | string>(null);
   currentSeasonDetails = signal<SeasonDetailsDTO | undefined>(undefined)
 
+
+  constructor() {
+    effect(()=>{
+      this.selectedSeasonId()
+      this.getSeasonDetails()
+    })
+  }
+
+  getSeasonDetails(){
+    if(this.selectedSeasonId()){
+      const id = this.selectedSeasonId()!
+      this.getDetailsHttp.execute(id).subscribe({
+        next : (r) =>{
+          if(r.data){
+            this.currentSeasonDetails.set(r.data)
+          }
+        }
+      })
+    }
+  }
   getList(){
     return this.seasons();
   }

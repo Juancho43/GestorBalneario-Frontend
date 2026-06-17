@@ -21,8 +21,7 @@
             <mat-icon fontIcon="close"/>
           </button>
         }
-<!--        Season Details-->
-        {{currentSeason() | json}}
+         <app-season-details [seasonData]="currentSeason()"/>
       } @else {
         <p>Seleccione una temporada para ver sus detalles</p>
       }

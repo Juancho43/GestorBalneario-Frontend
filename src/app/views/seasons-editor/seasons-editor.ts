@@ -13,6 +13,7 @@ import {JsonPipe} from '@angular/common';
 import {DialogHelper} from '../../core/utils/other/dialog-helper';
 import {NewSeasonDialog} from '../../components/seasons/new-season-dialog/new-season-dialog';
 import {EditSeasonDialog} from '../../components/seasons/edit-season-dialog/edit-season-dialog';
+import {SeasonDetails} from '../../components/seasons/season-details/season-details';
 
 @Component({
   selector: 'app-seasons-editor',
@@ -20,7 +21,8 @@ import {EditSeasonDialog} from '../../components/seasons/edit-season-dialog/edit
     FormsModule,
     SeasonListManager,
     MatIcon,
-    JsonPipe
+    JsonPipe,
+    SeasonDetails
   ],
   templateUrl: './seasons-editor.html',
   styleUrl: './seasons-editor.scss',
@@ -28,10 +30,8 @@ import {EditSeasonDialog} from '../../components/seasons/edit-season-dialog/edit
 export class SeasonsEditor {
   private manager = inject(SeasonManager);
   private dialog = inject(DialogHelper);
-  currentSeason = computed(()=>this.manager.currentSeason());
+  currentSeason = computed(()=>this.manager.currentSeasonDetails());
   @ViewChild('seasonForm') form!: SeasonForm;
-  isOverlayOpen = false;
-  private overlayHelper = inject(OverlayHelper);
   seletedSeason = signal<SeasonEntity | undefined>(undefined);
   formattedSeason = computed(() => {
     const s = this.seletedSeason();
@@ -99,6 +99,7 @@ export class SeasonsEditor {
   }
 
   protected handleSelected($event: SeasonEntity) {
-
+    this.currentPane.set('detail');
+    this.manager.selectedSeasonId.set($event.id!);
   }
 }
